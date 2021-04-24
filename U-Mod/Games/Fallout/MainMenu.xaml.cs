@@ -1,0 +1,91 @@
+﻿using AMGWebsite.Shared.Enums;
+using U_Mod.Enums;
+using U_Mod.Extensions;
+using U_Mod.Helpers;
+using U_Mod.Pages.BaseClasses;
+using System.Linq;
+using System.Windows;
+using Application = System.Windows.Application;
+
+namespace U_Mod.Games.Fallout.Pages
+{
+    /// <summary>
+    /// Interaction logic for MainMenu.xaml
+    /// </summary>
+    public partial class MainMenu : MainMenuBase
+    {
+        #region Public Constructors
+
+        public MainMenu() : base()
+        {
+            InitializeComponent();
+
+            base.ActionButton = this.ActionButton;
+            base.OptionsButton = this.OptionsButton;
+
+            InitComponentState();
+        }
+
+        #endregion Public Constructors
+
+        #region Private Methods
+
+       
+
+        public override void ActionButton_Click(object sender, RoutedEventArgs e)
+        {
+            switch (this.ModState)
+            {
+                case ModState.Install:
+
+                    if (Static.StaticData.UserDataStore.FalloutUserData.On4GbRamPatch)
+                        Navigation.NavigateToPage(PagesEnum.FalloutInstall7_4GBRamPAtch);
+                    else if (Static.StaticData.UserDataStore.FalloutUserData.OnModManagerPage)
+                        Navigation.NavigateToPage(PagesEnum.FalloutInstall8ModManager);
+                    else
+                        Navigation.NavigateToPage(PagesEnum.FalloutInstall2SelectGameFolder);
+                    break;
+
+                case ModState.Play:
+                    PlayGame();
+                    break;
+
+                case ModState.Update:
+
+                    //Auto select all mods requiring update
+
+                    Static.StaticData.UserDataStore.FalloutUserData.SelectedToInstall = Static.StaticData.MasterList.GetModUpdates()
+                        .Select(m => new ModListItem
+                        {
+                            IsDownloaded = false,
+                            IsInstalled = false,
+                            IsDirectDownloadOnly = m.Files.All(f => !string.IsNullOrEmpty(f.DirectDownloadUrl)),
+                            Mod = m
+                        })
+                        .ToList();
+
+                    Static.StaticData.UserDataStore.FalloutUserData.IsUpdating = true;
+                    Static.StaticData.UserDataStore.FalloutUserData.InstallationComplete = false;
+
+                    if (Static.StaticData.UserDataStore.FalloutUserData.SelectedToInstall.Any(m => !m.Mod.IsEssential || ModHelpers.IsNewMod(m.Mod)))
+                    {
+                        //Some mods are new and are optional, so go to mod selection list
+                        Navigation.NavigateToPage(PagesEnum.FalloutInstall4ModsList);
+                    }
+                    else
+                    {
+                        //Nothing to choose from, updates are just updates and/or essential, so go straight to download/process steps.
+                        Navigation.NavigateToPage(PagesEnum.FalloutInstall5DownloadsVideo);
+                    }
+
+                    break;
+            }
+        }
+        public override void OptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Navigation.NavigateToPage(PagesEnum.FalloutOptionsMenu, true);
+        }
+
+        #endregion Private Methods
+    }
+}

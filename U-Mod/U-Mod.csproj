@@ -1,0 +1,75 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <RootNamespace>U_Mod</RootNamespace>
+    <UseWPF>true</UseWPF>
+	<Configurations>Debug;Release;BETA;DEV</Configurations>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEV|AnyCPU'">
+    <Optimize>false</Optimize>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+	<XamlDebuggingInformation>True</XamlDebuggingInformation>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Images\Nexus-Login.png" />
+    <None Remove="Assets\Images\NexusLoader.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="IWshRuntimeLibrary">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>0</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>f935dc20-1cf0-11d0-adb9-00c04fd58a0b</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Mod Installer\Mod Installer\AMGWebsite\Shared\AMGWebsite.Shared.csproj" />
+    <ProjectReference Include="..\..\..\Mod Installer\Mod Installer\Shared\Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Assets\Fallout\" />
+    <Folder Include="MockInstallLocation\AfterMarketGames\AfterMarketGames\" />
+    <Folder Include="MockInstallLocation\Temp\A Brotherhood Renewed-31773-1-1-2-1557803995\sound\fx\Arthmoor\BrotherhoodRenewed\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ByteSize" Version="2.0.0" />
+    <PackageReference Include="DotNetZip" Version="1.15.0" />
+    <PackageReference Include="Gehtsoft.PDFFlowLib" Version="2.1.0" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="3.1.0" />
+    <PackageReference Include="SevenZipExtractor" Version="1.0.15" />
+    <PackageReference Include="SharpCompress" Version="0.28.1" />
+    <PackageReference Include="System.Management" Version="5.0.0" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Images\Nexus-Login.png" />
+    <Resource Include="Assets\Images\NexusLoader.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\Fallout\IniFiles\Fallout.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Fallout\IniFiles\FalloutPrefs.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Fallout\IniFiles\Fallout_default.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

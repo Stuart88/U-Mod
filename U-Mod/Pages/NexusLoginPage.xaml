@@ -1,0 +1,131 @@
+﻿<baseClasses:ModDownloaderBase x:Class="U_Mod.Pages.NexusLoginPage"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:baseClasses="clr-namespace:U_Mod.Pages.BaseClasses"
+                   xmlns:gif="http://wpfanimatedgif.codeplex.com"
+                   mc:Ignorable="d" 
+                   d:DesignHeight="450" d:DesignWidth="800" VerticalAlignment="Stretch">
+    <Grid HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch">
+        <Grid.Background>
+            <ImageBrush />
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="425"/>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Grid.Column="0" 
+            Background="#222222"
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel x:Name="GoBackClickArea" Grid.Row="0" Orientation="Horizontal" 
+                        HorizontalAlignment="Stretch"
+                        PreviewMouseLeftButtonUp="GoBackClickArea_PreviewMouseLeftButtonUp"
+                        Background="Black">
+                <Button x:Name="BackButton" Content="◀" 
+                        Padding="10 0 10 0" 
+                        Margin="10 10 10 10"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Foreground="White"
+                        />
+                <TextBlock Text="Please Log in to the The Nexus" 
+                           Foreground="White" VerticalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+                        Width="420">
+                <Grid x:Name="ApiDetailsGrid">
+                    <Grid.Resources>
+                        <Style x:Key="LoginInput" TargetType="TextBlock">
+                            <Setter Property="Padding" Value="15"/>
+                            <Setter Property="FontSize" Value="16"/>
+                            <Setter Property="Margin" Value="0, 20, 0, 4"/>
+                        </Style>
+                        <Style x:Key="LoginInputLabel" TargetType="TextBlock">
+                            <Setter Property="Margin" Value="0, 20, 0, 4"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontSize" Value="14"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" FontSize="32">
+                        <Run Text="CONNECT TO " Foreground="White" />
+                        <Run Text="NEXUS MODS " Foreground="#d98f40"/>
+                    </TextBlock>
+
+                    <!--<TextBlock Grid.Row="1" Foreground="#919ca7">
+                        <Run Text="You'll need your"/>
+                        <Run x:Name="ForgotPasswordBtn" Text="API Key" FontWeight="Bold" Foreground="#57a5cc"
+                             PreviewMouseLeftButtonUp="GetApiKeyBtn_PreviewMouseLeftButtonUp"/>
+                        <Run Text="to continue" />
+                    </TextBlock>-->
+
+                    <Button x:Name="NexusLoginBtn" Grid.Row="1" Click="NexusLoginBtn_Click" Content="Nexus Login"
+                            HorizontalContentAlignment="Center"
+                            IsEnabled="False"
+                            Opacity="0.7"
+                            Background="#919ca7"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            FontSize="15"
+                            Margin="0,15,0,15"
+                            Padding="7"/>
+
+                    <TextBlock Grid.Row="2" Text="Nexus Connection" />
+                    <TextBlock x:Name="ApiKeyInput" Grid.Row="3"  TextAlignment="Center"/>
+
+
+                    <Button x:Name="InstallBtn" Grid.Row="5" Click="InstallBtn_Click" Content="Install Mods"
+                            HorizontalContentAlignment="Center"
+                            IsEnabled="False"
+                            Opacity="0.7"
+                            Background="#d98f40"
+                            Foreground="White"
+                            FontWeight="Bold"
+                            FontSize="15"
+                            Margin="0,15,0,0"
+                            Padding="7"/>
+
+                    <TextBlock Grid.Row="6" Margin="0,15,0,10" Foreground="White" FontSize="13">
+                        <Run Text="Need an account? " />
+                        <Run x:Name="RegisterBtn" Text="Register here" Foreground="#57a5cc" PreviewMouseLeftButtonUp="RegisterBtn_PreviewMouseLeftButtonUp" />
+                    </TextBlock>
+                </Grid>
+
+                <TextBlock x:Name="NexusStatusText" Foreground="White"  Text="" Margin="20" HorizontalAlignment="Center" FontSize="25" VerticalAlignment="Center" TextAlignment="Center" />
+
+                <Grid x:Name="DownloadProgressGrid" Visibility="Collapsed">
+                    <ProgressBar x:Name="ProcessingProgressBar" VerticalAlignment="Center" IsIndeterminate="false" Maximum="100" Orientation="Horizontal" Minimum="0" Height="30" Width="300"/>
+                    <TextBlock x:Name="InstallingInfo" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" />
+                </Grid>
+                <Grid x:Name="SecondaryProgressGrid" Visibility="Collapsed" Margin="0,20,0,0">
+                    <ProgressBar x:Name="SecondaryProcessingProgressBar" VerticalAlignment="Center" IsIndeterminate="false" Maximum="100" Orientation="Horizontal" Minimum="0" Height="30" Width="300"/>
+                    <TextBlock x:Name="SecondaryInstallingInfo" Foreground="Black" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center"  Width="300"/>
+                </Grid>
+
+                <Image x:Name="LoadingSpinner" Visibility="Collapsed" VerticalAlignment="Center" Width="50" Height="50" Margin="10" HorizontalAlignment="Center" gif:ImageBehavior.AnimatedSource="/Assets/Images/NexusLoader.gif" />
+
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</baseClasses:ModDownloaderBase>
