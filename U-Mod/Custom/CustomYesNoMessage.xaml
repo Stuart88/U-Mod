@@ -23,7 +23,7 @@
                       VerticalAlignment="Stretch"
                       HorizontalAlignment="Stretch"
                       Template="{DynamicResource ScrollViewerControlTemplate}">
-            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Left">
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>

@@ -20,7 +20,7 @@ namespace U_Mod.Helpers
                 GamesEnum.Oblivion => Constants.GameNameOblivion,
                 GamesEnum.Fallout => Constants.GameNameFallout3,
                 GamesEnum.NewVegas => Constants.GameNameNewVegas,
-                _ => throw new NotImplementedException(),
+                _ => "",
             };
         }
 

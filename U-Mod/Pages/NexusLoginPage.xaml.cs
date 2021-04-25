@@ -27,10 +27,10 @@ namespace U_Mod.Pages
             this.DataContext = this;
 
 #if DEBUG
-            this.ApiKey = Constants.ApiKey;
+            this.ApiKey = Constants.NexusApiKey;
 #else
-#endif
             this.ApiKey = "Waiting for connection...";
+#endif
 
             InitializeComponent();
 
@@ -161,6 +161,11 @@ namespace U_Mod.Pages
             Navigation.NavigateToPage(PagesEnum.ModsSelect);
         }
 
+        private void BackBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Navigation.NavigateToPage(PagesEnum.ModsSelect);
+        }
+
         private async void InstallBtn_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(this.ApiKey))
@@ -213,5 +218,7 @@ namespace U_Mod.Pages
         {
             Helpers.ProcessHelpers.OpenInBrowser($"https://www.nexusmods.com/sso?id={this.NexusSocket.Uuid}&application={NexusSocket.ApplicationSlug}");
         }
+
+       
     }
 }

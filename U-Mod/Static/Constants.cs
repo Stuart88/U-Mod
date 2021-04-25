@@ -17,12 +17,10 @@ namespace U_Mod.Static
         public const string OblivionDataFileName = "OblivionModInstallData.json";
         public const string FalloutDataFileName = "FalloutModInstallData.json";
         public static string AppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "U_Mod");
-        public const string AmgKeyPassword = "qazxsw123";
-        public const string OblivionInstallerInfoLink = "https://stuart-aitken.tk/getJson/oblivionInstaller";
         public static string AppDataFilePath = Path.Combine(AppDataFolder, AppDataFileName);
 
 #if DEBUG || DEV
-        public const string ApiKey = "Q0xCME9uNTlUUzd3SUNMbTU2UjlCdHNMeFdHNHZHa1hmWVZ6c1FSZkdtdVhUOEt0SWJOcjNVL295djhRZ2tWWS0tbU5hZnBhd3ZEY04wSDJuNURZWnRMdz09--569d3193df5f017d17a46e085b69e5d16df1c196";
+        public const string NexusApiKey = "Q0xCME9uNTlUUzd3SUNMbTU2UjlCdHNMeFdHNHZHa1hmWVZ6c1FSZkdtdVhUOEt0SWJOcjNVL295djhRZ2tWWS0tbU5hZnBhd3ZEY04wSDJuNURZWnRMdz09--569d3193df5f017d17a46e085b69e5d16df1c196";
 #endif
 
 #endregion Public Fields

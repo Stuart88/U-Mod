@@ -14,7 +14,6 @@ namespace U_Mod.Static
         
 
         public static MasterList MasterList = new MasterList();
-        public static KillswitchInfo KillswitchInfo = new KillswitchInfo();
         public static SoftwareVersion InstallerInfo = new SoftwareVersion();
         public static SystemInfo SystemInfo = new SystemInfo();
         public static UserDataStore UserDataStore = new UserDataStore();

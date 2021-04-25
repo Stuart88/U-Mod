@@ -24,7 +24,7 @@ namespace U_Mod.Helpers
 
         public static void InstallUpdate(string updateLocation)
         {
-            LaunchProcessInGameFolder(updateLocation, "InstallUpdate");
+            LaunchProcess(updateLocation, "InstallUpdate");
         }
 
         public static void LaunchGame()
@@ -100,11 +100,12 @@ namespace U_Mod.Helpers
         {
             try
             {
+                string fileName = Path.Combine(FileHelpers.GetGameFolder(), exeName);
                 Process p = new Process
                 {
                     StartInfo = new ProcessStartInfo
                     {
-                        FileName = Path.Combine(FileHelpers.GetGameFolder(), exeName),
+                        FileName = fileName,
                         UseShellExecute = true,
                         WorkingDirectory = FileHelpers.GetGameFolder(),
                         Arguments = arguments
@@ -119,6 +120,31 @@ namespace U_Mod.Helpers
                 Logging.Logger.LogException(exceptionTitle, e);
             }
         }
+
+        private static void LaunchProcess(string processPath, string exceptionTitle, string arguments = "")
+        {
+            try
+            {
+                Process p = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = processPath,
+                        UseShellExecute = true,
+                        Arguments = arguments
+                    }
+                };
+
+                p.Start();
+            }
+            catch (Exception e)
+            {
+                GeneralHelpers.ShowExceptionMessageBox(e);
+                Logging.Logger.LogException(exceptionTitle, e);
+            }
+        }
+
+
 
         #endregion Private Methods
     }

@@ -10,5 +10,8 @@ namespace U_Mod.Models
     public class SoftwareVersion
     {
         public string Version { get; set; } = Constants.DefaultSoftwareVersion;
+        public string CompareVersion { get; set; } = "1.0.0";
+
+        public bool SoftwareUpToDate => this.Version == this.CompareVersion;
     }
 }

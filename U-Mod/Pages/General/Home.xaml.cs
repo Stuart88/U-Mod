@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using U_Mod.Enums;
+using U_Mod.Helpers;
 
 namespace U_Mod.Pages.General
 {
@@ -23,6 +25,16 @@ namespace U_Mod.Pages.General
         public Home()
         {
             InitializeComponent();
+        }
+
+        private void OptionsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Navigation.NavigateToPage(PagesEnum.Options, true);
+        }
+
+        private void CloseBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

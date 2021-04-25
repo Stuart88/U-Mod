@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,10 +25,24 @@ namespace U_Mod
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        public ObservableCollection<SideMenuOption> SideMenuOptions { get; set; }
-        
+
+        private ObservableCollection<SideMenuOption> _sideMenuOptions { get; set; }
+        public ObservableCollection<SideMenuOption> SideMenuOptions 
+        {
+            get => _sideMenuOptions;
+            set
+            {
+                _sideMenuOptions = value;
+                OnPropertyChanged();
+            }
+        }
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         public enum MenuItem
         {
             Home,
@@ -37,21 +53,30 @@ namespace U_Mod
         public MainWindow()
         {
             StaticData.LoadAppData();
+            StaticData.CurrentGame = GamesEnum.None;
 
             this.SideMenuOptions = new ObservableCollection<SideMenuOption>
             {
                 new SideMenuOption("Home", true, GamesEnum.None, MenuItem.Home),
-                new SideMenuOption("Oblivion", false, GamesEnum.None, MenuItem.Oblivion),
-                new SideMenuOption("Fallout 3", false, GamesEnum.None, MenuItem.Fallout3),
+                new SideMenuOption("Oblivion", false, GamesEnum.Oblivion, MenuItem.Oblivion),
+                new SideMenuOption("Fallout 3", false, GamesEnum.Fallout, MenuItem.Fallout3),
             };
 
             InitializeComponent();
 
             this.SideMenu.ItemsSource = this.SideMenuOptions;
+
+            this.MainContent.Content = Pages.Pages.GetPage(PagesEnum.Home, false);
         }
 
-        public class SideMenuOption
+        public class SideMenuOption :  INotifyPropertyChanged
         {
+            public event PropertyChangedEventHandler? PropertyChanged;
+            protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+
             public SideMenuOption(string name, bool active, GamesEnum game, MenuItem menuItem)
             {
                 this.Name = name;
@@ -61,7 +86,16 @@ namespace U_Mod
             }
             public Image Icon { get; set; }
             public string Name { get; set; }
-            public bool Active { get; set; }
+            private bool _active { get; set; }
+            public bool Active
+            {
+                get => _active;
+                set
+                {
+                    _active = value;
+                    OnPropertyChanged();
+                }
+            }
             public bool Enabled { get; set; }
             public GamesEnum Game { get; set; }
             public MenuItem MenuItem { get; set; }
@@ -71,7 +105,14 @@ namespace U_Mod
         {
             if (((Grid)sender).Tag is MenuItem item)
             {
-                Static.StaticData.CurrentGame = item switch
+                foreach(var opt in this.SideMenuOptions)
+                {
+                    opt.Active = opt.MenuItem == item;
+                }
+
+                OnPropertyChanged(nameof(this.SideMenuOptions));
+                
+                StaticData.CurrentGame = item switch
                 {
                     MenuItem.Home => GamesEnum.None,
                     MenuItem.Oblivion => GamesEnum.Oblivion,
@@ -84,8 +125,8 @@ namespace U_Mod
                 this.MainContent.Content = item switch
                 {
                     MenuItem.Home => Pages.Pages.GetPage(PagesEnum.Home, false),
-                    MenuItem.Oblivion => Pages.Pages.GetPage(PagesEnum.MainMenu, false),
-                    MenuItem.Fallout3 => Pages.Pages.GetPage(PagesEnum.MainMenu, false),
+                    MenuItem.Oblivion => Pages.Pages.GetPage(PagesEnum.MainMenu, true),
+                    MenuItem.Fallout3 => Pages.Pages.GetPage(PagesEnum.MainMenu, true),
                     _ => throw new NotImplementedException(),
                 };
             }

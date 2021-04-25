@@ -12,6 +12,7 @@ using U_Mod.Models;
 using U_Mod.Games.Oblivion.Models;
 using System.Windows.Forms;
 using U_Mod.Helpers.GameSpecific;
+using System.Windows.Media.Imaging;
 
 namespace U_Mod.Pages.General
 {
@@ -52,7 +53,22 @@ namespace U_Mod.Pages.General
         {
             InitializeComponent();
 
+            this.MenuTitle.Text = GeneralHelpers.GetGameName();
+            this.MenuImage.Source = new BitmapImage(new Uri($"/Assets/Images/{GetMenuImageName()}", UriKind.Relative));
+
             InitComponentState();
+        }
+
+        private string GetMenuImageName()
+        {
+            return Static.StaticData.CurrentGame switch
+            {
+                GamesEnum.Oblivion => "menu-oblivion.jpg",
+                GamesEnum.Fallout => "menu-fallout.jpg",
+                GamesEnum.NewVegas => throw new NotImplementedException(),
+                GamesEnum.Unknown => throw new NotImplementedException(),
+                GamesEnum.None => throw new NotImplementedException(),
+            };
         }
 
         internal void InitComponentState()
@@ -165,7 +181,6 @@ namespace U_Mod.Pages.General
                 ModState.Update => "Update",
                 ModState.Play => "Play",
                 _ => throw new NotImplementedException(),
-
             };
 
         }
@@ -228,10 +243,6 @@ namespace U_Mod.Pages.General
             if (!Static.StaticData.UserDataStore.CurrentUserData.InstallationComplete)
             {
                 this.ModState = ModState.Install;
-#if !DEV
-                this.OptionsButton.IsEnabled = false;
-                this.OptionsButton.Opacity = 0.7;
-#endif
             }
             else if (Static.StaticData.MasterList.HasModUpdates())
             {

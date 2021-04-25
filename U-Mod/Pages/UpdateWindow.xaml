@@ -14,7 +14,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="UpdateInfo" Margin="5" Grid.Row="0" TextAlignment="Center" HorizontalAlignment="Center" Text="Downloading"/>
+        <TextBlock x:Name="UpdateInfo" Margin="5" Grid.Row="0" TextAlignment="Center" HorizontalAlignment="Center" Text="Downloading..."/>
         
         <Image x:Name="LoadingSpinner" HorizontalAlignment="Center" Margin="5" Height="50" Width="50" Grid.Row="1" gif:ImageBehavior.AnimatedSource="/Assets/Images/NexusLoader.gif" />
 

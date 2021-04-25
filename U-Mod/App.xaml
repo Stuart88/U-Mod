@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:U_Mod" 
              xmlns:converters="clr-namespace:U_Mod.Converters"
-             StartupUri="MainWindow.xaml">
+             StartupUri="MainWindow.xaml" 
+             ShutdownMode="OnMainWindowClose">
     <Application.Resources>
         <!--Converters-->
         <converters:HideIfTrueConverter x:Key="HideIfTrueConverter"/>
+        <converters:ActiveColourConverter x:Key="ActiveColourConverter"/>
         
         <!--Colours-->
         <SolidColorBrush x:Key="LightGrey">DarkSlateGray</SolidColorBrush>
@@ -26,6 +28,10 @@
         <Style x:Key="ModListBtn" TargetType="Button">
             <Setter Property="Width" Value="70"/>
             <Setter Property="Margin" Value="5,0,5,0"/>
+        </Style>
+        <Style x:Key="MenuBtnStyle" TargetType="Button">
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Margin" Value="0,20,0,0"/>
         </Style>
     </Application.Resources>
 </Application>

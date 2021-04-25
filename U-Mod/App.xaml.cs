@@ -21,7 +21,6 @@ namespace U_Mod
     {
 
 
-        private string Version { get; set; } = "1.0.0";
 
         protected override void OnStartup(StartupEventArgs e)
         {
@@ -43,19 +42,9 @@ namespace U_Mod
 
         public async Task GetMasterList()
         {
-#if DEV
+#if DEV || DEBUG
             //StaticData.MasterList = Helpers.FileHelpers.LoadFile<MasterList>("masterList.json");
             StaticData.MasterList = await Helpers.HttpHelpers.Fetch<MasterList>(Static.Constants.MasterListLink, null);
-#elif DEBUG || BETA
-            try
-            {
-                throw new Exception();
-                StaticData.MasterList = Helpers.FileHelpers.LoadFile<MasterList>("C:\\Users\\saitk\\Programming\\WPF\\Mod Installer\\Mod Installer\\GameHub\\masterListB.json");
-            }
-            catch (Exception e)
-            {
-                StaticData.MasterList = await Helpers.HttpHelpers.Fetch<MasterList>(Static.Constants.MasterListLink, null);
-            }
 #else
             StaticData.MasterList = await Helpers.HttpHelpers.Fetch<MasterList>(Static.Constants.MasterListLink, null);
 #endif
@@ -70,28 +59,10 @@ namespace U_Mod
             TaskScheduler.UnobservedTaskException += (s, e) => Logging.Logger.LogUnhandledException("AppDomain.CurrentDomain.UnhandledException", e.Exception);
         }
 
-        public async Task GetInstallerInfo()
-        {
-            StaticData.KillswitchInfo = await Helpers.HttpHelpers.Fetch<KillswitchInfo>(Constants.OblivionInstallerInfoLink, null);
-
-#if DEBUG || RELEASE
-            StaticData.KillswitchInfo.IsBeta = false;
-#endif
-            //if Version is -1, internet connection must have failed.
-            if (StaticData.KillswitchInfo.Version == -1)
-            {
-                Helpers.GeneralHelpers.ShowMessageBox("This software requires an internet connection to work.");
-                Current.Shutdown();
-                return;
-            }
-
-            StaticData.InstallerInfo = await HttpHelpers.Fetch<SoftwareVersion>(Constants.SoftwareVersionLink, null);
-        }
-
 
         private async void FetchAppVersionAndMasterList()
         {
-            await GetInstallerInfo();
+            StaticData.InstallerInfo = await HttpHelpers.Fetch<SoftwareVersion>(Constants.SoftwareVersionLink, null);
 
 #if DEV
             await GetMasterList();
@@ -103,16 +74,12 @@ namespace U_Mod
                 return;
             }
 
-            if (StaticData.InstallerInfo.Version != this.Version)
+            if (!StaticData.InstallerInfo.SoftwareUpToDate)
             {
-                if (MessageBoxHelpers.OkCancel("You must update Gamehub before continuing", "Please Update", MessageBoxImage.Information))
+                if (MessageBoxHelpers.OkCancel("Software update available. Download now?", "Please Update", MessageBoxImage.Information))
                 {
+                    Application.Current.MainWindow.IsEnabled = false;
                     new UpdateWindow().Show();
-                }
-                else
-                {
-                    Current.Shutdown();
-                    return;
                 }
             }
             else

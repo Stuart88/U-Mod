@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using U_Mod.Enums;
 using U_Mod.Helpers;
 using U_Mod.Models;
+using U_Mod.Static;
 
 namespace U_Mod.Pages.General
 {
@@ -32,12 +33,23 @@ namespace U_Mod.Pages.General
             InitializeComponent();
 
             ReinstallBtn.Content = $"Reinstall {GeneralHelpers.GetGameName()}";
-            ReinstallBtn.IsEnabled = Static.StaticData.UserDataStore.CurrentUserData.InstallationComplete;
+            ReinstallBtn.IsEnabled = Static.StaticData.UserDataStore.CurrentUserData?.InstallationComplete ?? false;
+
+            ReinstallBtn.Visibility = Static.StaticData.CurrentGame == AMGWebsite.Shared.Enums.GamesEnum.None
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+
+            //ErrorLogsBtn.Visibility = Static.StaticData.CurrentGame == AMGWebsite.Shared.Enums.GamesEnum.None
+            //   ? Visibility.Visible
+            //   : Visibility.Collapsed;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Navigation.NavigateToPage(PagesEnum.MainMenu, true);
+            if(Static.StaticData.CurrentGame == AMGWebsite.Shared.Enums.GamesEnum.None)
+                Navigation.NavigateToPage(PagesEnum.Home, true);
+            else
+                Navigation.NavigateToPage(PagesEnum.MainMenu, true);
         }
 
         private void LaunchObmmButton_Click(object sender, RoutedEventArgs e)
@@ -45,6 +57,20 @@ namespace U_Mod.Pages.General
             Tools.LaunchModManager();
         }
 
+        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (StaticData.InstallerInfo.SoftwareUpToDate)
+                GeneralHelpers.ShowMessageBox("Software is up to date!");
+            else
+            {
+                if (MessageBoxHelpers.OkCancel("Software update available. Download now?", "Please Update", MessageBoxImage.Information))
+                {
+                    Application.Current.MainWindow.IsEnabled = false;
+                    new UpdateWindow().Show();
+                }
+            }
+
+        }
 
         private void ReinstallButton_Click(object sender, RoutedEventArgs e)
         {

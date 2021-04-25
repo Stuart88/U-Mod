@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:U_Mod.Custom"
         mc:Ignorable="d"
-        Height="400"
+        Height="300"
         Width="450"
         Title="">
     <Grid x:Name="WindowGrid" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
@@ -22,10 +22,10 @@
                       x:Name="ScrollViewer"
                       VerticalAlignment="Stretch"
                       HorizontalAlignment="Stretch"
-                      Template="{DynamicResource ScrollViewerControlTemplate}">
-            <Grid VerticalAlignment="Stretch" HorizontalAlignment="Left">
+                      >
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <RichTextBox x:Name="MessageTextBlock" 
                            Padding="30"
