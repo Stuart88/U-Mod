@@ -29,7 +29,7 @@
             </Grid.ColumnDefinitions>
       
             <Button x:Name="ActionButton" Grid.Row="1" Grid.RowSpan="3" VerticalAlignment="Center" Grid.Column="1" Click="ActionButton_Click"/>
-            <Button x:Name="OptionsButton" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top"  Click="OptionsButton_Click"/>
+            <Button x:Name="OptionsButton" Grid.Row="3" Grid.Column="1" VerticalAlignment="Top"  Click="OptionsButton_Click">Options</Button>
             <!--<Button x:Name="SupportButton" Grid.Row="2" Grid.Column="1"   Click="SupportButton_Click"/>-->
         </Grid>
     </Grid>

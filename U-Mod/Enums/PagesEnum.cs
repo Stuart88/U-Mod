@@ -30,5 +30,15 @@
         FalloutInstall8ModManager,
         FalloutInstall9PostInstallVid,
         FalloutOptionsMenu,
+
+        // GENERAL
+
+        Options,
+        GameFolderSelect,
+        ModsSelect,
+        DownloadsList,
+        ManualDownload,
+        AutoDownload,
+        PatchAndModManager
     }
 }

@@ -1,4 +1,5 @@
-﻿using AMGWebsite.Shared.Models.ApiModels;
+﻿using AMGWebsite.Shared.Enums;
+using AMGWebsite.Shared.Models.ApiModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,18 +11,9 @@ namespace U_Mod.Models
     public class AppData
     {
         public int SoftwareVersion { get; set; } = 1;
-
         public string OblivionGameFolder { get; set; } = "";
         public string FalloutGameFolder { get; set; } = "";
-
-        public string SoftwareHash { get; set; } = "";
-
-        /// <summary>
-        /// Activation Key! Combined with MachineId
-        /// </summary>
-        public string KernelNumber { get; set; } = "";
-
-        public AmgMember MemberData { get; set; } = new AmgMember();
+        public string FalloutNewVegasGameFolder { get; set; } = "";
         public string NexusLoginToken { get; set; } = "";
         public Guid NexusUuid { get; set; } = Guid.Empty;
     }

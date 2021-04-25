@@ -74,9 +74,9 @@
                 <Run Text="{Binding SystemInfo.RamType}" />
             </TextBlock>
 
-            <!--<TextBlock Grid.Row="6" Grid.Column="0"  Text="DISK: " FontWeight="Bold" />
+            <TextBlock Grid.Row="6" Grid.Column="0"  Text="DISK: " FontWeight="Bold" />
             <TextBlock Grid.Row="6" Grid.Column="1" ></TextBlock>
-            <TextBlock Grid.Row="6" Grid.Column="2"  />-->
+            <TextBlock Grid.Row="6" Grid.Column="2"  />
 
             <Button x:Name="NoButton" Grid.Row="12" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                     Margin="10,30,10,10"

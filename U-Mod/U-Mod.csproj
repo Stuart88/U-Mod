@@ -17,6 +17,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Icons\StatusHelp_16x.png" />
+    <None Remove="Assets\Icons\StatusOK_16x.png" />
+    <None Remove="Assets\Icons\SystemInfo_16x.png" />
     <None Remove="Assets\Images\Nexus-Login.png" />
     <None Remove="Assets\Images\NexusLoader.gif" />
   </ItemGroup>
@@ -40,8 +43,6 @@
 
   <ItemGroup>
     <Folder Include="Assets\Fallout\" />
-    <Folder Include="MockInstallLocation\AfterMarketGames\AfterMarketGames\" />
-    <Folder Include="MockInstallLocation\Temp\A Brotherhood Renewed-31773-1-1-2-1557803995\sound\fx\Arthmoor\BrotherhoodRenewed\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -56,6 +57,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Assets\Icons\StatusHelp_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\StatusOK_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\Icons\SystemInfo_16x.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Images\Nexus-Login.png" />
     <Resource Include="Assets\Images\NexusLoader.gif" />
   </ItemGroup>

@@ -52,6 +52,7 @@ namespace U_Mod.Games.Fallout.Pages
                     {
                         Application.Current.Dispatcher.BeginInvoke((Action)(() =>
                         {
+                            Application.Current.MainWindow.IsEnabled = false;
                             ButtonsArea.Visibility = Visibility.Collapsed;
                             LoadingMessage.Visibility = Visibility.Visible;
                             BackButton.IsEnabled = false;
@@ -78,6 +79,14 @@ namespace U_Mod.Games.Fallout.Pages
                             LoadingMessage.Visibility = Visibility.Collapsed;
                             BackButton.IsEnabled = true;
                             BackButton.Opacity = 1;
+                        }));
+                    }
+                    finally
+                    {
+                        Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+                        {
+                            Application.Current.MainWindow.IsEnabled = true;
+
                         }));
                     }
                 });

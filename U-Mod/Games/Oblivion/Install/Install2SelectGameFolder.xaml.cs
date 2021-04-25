@@ -29,7 +29,7 @@ namespace U_Mod.Games.Oblivion.Pages.Install
         {
             InitializeComponent();
 
-            this.SelectedGameFolder = Static.StaticData.AppData.OblivionGameFolder;
+            this.SelectedGameFolder = FileHelpers.GetGameFolder();
             this.SelectedFolderText.Text = this.SelectedGameFolder.LeftTrimToLength(40);
             SelectedFolderText.Focus();
             SelectedFolderText.CaretIndex = int.MaxValue;
@@ -90,13 +90,13 @@ namespace U_Mod.Games.Oblivion.Pages.Install
             }
 #endif
 
-            // Selected folder exists. Now check for and create AfterMarketGames folder
+            // Selected folder exists. Now check for and create U-Mod folder
 
             DirectoryInfo directory = new DirectoryInfo(this.SelectedGameFolder);
 
-            if (!Directory.Exists(Path.Combine(this.SelectedGameFolder, Static.Constants.AfterMarketGames)))
+            if (!Directory.Exists(Path.Combine(this.SelectedGameFolder, Static.Constants.UMod)))
             {
-                directory.CreateSubdirectory(Static.Constants.AfterMarketGames);
+                directory.CreateSubdirectory(Static.Constants.UMod);
             }
 
             // Now check if user has selected C drive, and warn if this is the first time they've done it
@@ -270,7 +270,7 @@ namespace U_Mod.Games.Oblivion.Pages.Install
 
                 this.SelectedGameFolder = dialog.SelectedPath;
                 SelectedFolderText.Text = dialog.SelectedPath.LeftTrimToLength(40);
-                Static.StaticData.AppData.OblivionGameFolder = dialog.SelectedPath;
+                FileHelpers.SetGameFolder(dialog.SelectedPath);
                 this.Focus();
                 ResetWarningText();
             }

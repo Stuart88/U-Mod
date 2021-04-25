@@ -42,7 +42,7 @@ namespace U_Mod.Games.Oblivion.Pages
                     else if (Static.StaticData.UserDataStore.OblivionUserData.OnModManagerPage)
                         Navigation.NavigateToPage(PagesEnum.OblivionInstall8ModManager);
                     else
-                        Navigation.NavigateToPage(PagesEnum.OblivionInstall2SelectGameFolder);
+                        Navigation.NavigateToPage(PagesEnum.GameFolderSelect, true);
                     break;
 
                 case ModState.Play:
@@ -69,12 +69,14 @@ namespace U_Mod.Games.Oblivion.Pages
                     if (Static.StaticData.UserDataStore.OblivionUserData.SelectedToInstall.Any(m => !m.Mod.IsEssential || ModHelpers.IsNewMod(m.Mod)))
                     {
                         //Some mods are new and are optional, so go to mod selection list
-                        Navigation.NavigateToPage(PagesEnum.OblivionInstall4ModsList);
+                        Navigation.NavigateToPage(PagesEnum.ModsSelect);
                     }
                     else
                     {
                         //Nothing to choose from, updates are just updates and/or essential, so go straight to download/process steps.
-                        Navigation.NavigateToPage(PagesEnum.OblivionInstall5DownloadsVideo);
+                        Navigation.NavigateToPage(PagesEnum.ModsSelect);
+
+                        //NOTE both blocks are now the same. Not sure if this will work out or not..
                     }
 
                     break;
@@ -82,7 +84,7 @@ namespace U_Mod.Games.Oblivion.Pages
         }
         public override void OptionsButton_Click(object sender, RoutedEventArgs e)
         {
-            Navigation.NavigateToPage(PagesEnum.OblivionOptionsMenu, true);
+            Navigation.NavigateToPage(PagesEnum.Options, true);
         }
 
         private async void SupportButton_Click(object sender, RoutedEventArgs e)

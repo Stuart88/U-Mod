@@ -88,9 +88,10 @@
                             FontWeight="Bold"
                             FontSize="15"
                             Margin="0,15,0,15"
+                            Cursor="Hand"
                             Padding="7"/>
 
-                    <TextBlock Grid.Row="2" Text="Nexus Connection" />
+                    <TextBlock Grid.Row="2" Text="Nexus Connection" Foreground="White"/>
                     <TextBlock x:Name="ApiKeyInput" Grid.Row="3"  TextAlignment="Center"/>
 
 

@@ -43,7 +43,7 @@ namespace U_Mod.Games.Fallout.Pages
                     else if (Static.StaticData.UserDataStore.FalloutUserData.OnModManagerPage)
                         Navigation.NavigateToPage(PagesEnum.FalloutInstall8ModManager);
                     else
-                        Navigation.NavigateToPage(PagesEnum.FalloutInstall2SelectGameFolder);
+                        Navigation.NavigateToPage(PagesEnum.GameFolderSelect, true);
                     break;
 
                 case ModState.Play:
@@ -70,12 +70,14 @@ namespace U_Mod.Games.Fallout.Pages
                     if (Static.StaticData.UserDataStore.FalloutUserData.SelectedToInstall.Any(m => !m.Mod.IsEssential || ModHelpers.IsNewMod(m.Mod)))
                     {
                         //Some mods are new and are optional, so go to mod selection list
-                        Navigation.NavigateToPage(PagesEnum.FalloutInstall4ModsList);
+                        Navigation.NavigateToPage(PagesEnum.ModsSelect);
                     }
                     else
                     {
                         //Nothing to choose from, updates are just updates and/or essential, so go straight to download/process steps.
-                        Navigation.NavigateToPage(PagesEnum.FalloutInstall5DownloadsVideo);
+                        Navigation.NavigateToPage(PagesEnum.ModsSelect);
+
+                        //NOTE both blocks are now the same. Not sure if this will work out or not..
                     }
 
                     break;
@@ -83,7 +85,7 @@ namespace U_Mod.Games.Fallout.Pages
         }
         public override void OptionsButton_Click(object sender, RoutedEventArgs e)
         {
-            Navigation.NavigateToPage(PagesEnum.FalloutOptionsMenu, true);
+            Navigation.NavigateToPage(PagesEnum.Options, true);
         }
 
         #endregion Private Methods

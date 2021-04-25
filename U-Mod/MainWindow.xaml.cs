@@ -11,6 +11,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -35,8 +36,6 @@ namespace U_Mod
         public MainWindow()
         {
             StaticData.LoadAppData();
-
-            StaticData.LoadGameData();
 
             this.SideMenuOptions = new ObservableCollection<SideMenuOption>
             {
@@ -79,12 +78,13 @@ namespace U_Mod
                     _ => GamesEnum.None,
                 };
 
+                StaticData.LoadGameData();
 
                 this.MainContent.Content = item switch
                 {
                     MenuItem.Home => throw new NotImplementedException(),
-                    MenuItem.Oblivion => Games.Oblivion.Pages.Pages.GetPage(Enums.PagesEnum.OblivionMainMenu, false),
-                    MenuItem.Fallout3 => Games.Fallout.Pages.Pages.GetPage(Enums.PagesEnum.FalloutMainMenu, false),
+                    MenuItem.Oblivion => U_Mod.Pages.InstallBethesda.Pages.GetPage(Enums.PagesEnum.OblivionMainMenu, false),
+                    MenuItem.Fallout3 => U_Mod.Pages.InstallBethesda.Pages.GetPage(Enums.PagesEnum.FalloutMainMenu, false),
                     _ => throw new NotImplementedException(),
                 };
             }
@@ -92,11 +92,7 @@ namespace U_Mod
 
         public void NavigateToPage(Enums.PagesEnum page, bool refreshInstance = false)
         {
-            this.MainContent.Content = Static.StaticData.CurrentGame switch
-            {
-                GamesEnum.Oblivion => Games.Oblivion.Pages.Pages.GetPage(page, refreshInstance),
-                GamesEnum.Fallout => Games.Fallout.Pages.Pages.GetPage(page, refreshInstance),
-            };
+            this.MainContent.Content = U_Mod.Pages.InstallBethesda.Pages.GetPage(page, refreshInstance);
         }
     }
 }

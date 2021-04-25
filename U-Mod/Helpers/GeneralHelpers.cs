@@ -2,6 +2,7 @@
 using System.Windows;
 using AMGWebsite.Shared;
 using AMGWebsite.Shared.Enums;
+using U_Mod.Enums;
 using U_Mod.Games.Oblivion.Models;
 using U_Mod.Models;
 
@@ -20,6 +21,17 @@ namespace U_Mod.Helpers
                 GamesEnum.NewVegas => Constants.GameNameNewVegas,
                 _ => throw new NotImplementedException(),
             };
+        }
+
+        public static PagesEnum GetMainMenuPageEnumForGame()
+        {
+            return Static.StaticData.CurrentGame switch
+            {
+                GamesEnum.Oblivion => PagesEnum.OblivionMainMenu,
+                GamesEnum.Fallout => PagesEnum.FalloutMainMenu,
+                _ => throw new NotImplementedException()
+            };
+
         }
 
         public static UserDataBase GetUserDataForGame()

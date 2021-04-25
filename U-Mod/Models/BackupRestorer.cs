@@ -26,9 +26,9 @@ namespace U_Mod.Models
 
         public bool RestoreBackupForCurrentGame()
         {
-            string backupZip = "AMGBackup.zip";
+            string backupZip = Constants.UModBackup;
 
-            string zipPath = Path.Combine(FileHelpers.GetGameFolder(), Static.Constants.AfterMarketGames, backupZip);
+            string zipPath = Path.Combine(FileHelpers.GetGameFolder(), Static.Constants.UMod, backupZip);
 
             if (string.IsNullOrEmpty(FileHelpers.GetGameFolder()) || !Directory.Exists(FileHelpers.GetGameFolder()))
             {
@@ -40,7 +40,7 @@ namespace U_Mod.Models
 
                 foreach (var d in gameFolder.EnumerateDirectories())
                 {
-                    if (d.FullName.Contains(Static.Constants.AfterMarketGames))
+                    if (d.FullName.Contains(Static.Constants.UMod))
                         continue;
 
                     d.Delete(true);

@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:U_Mod"
         mc:Ignorable="d"
-        Title="U-Mod" Height="450" Width="800">
+        Title="U-Mod" 
+        Height="450"  
+        Width="600" 
+        MinWidth="500"
+        MinHeight="600">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition x:Name="SideBarCol" Width="100"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ListView x:Name="SideMenu"  Grid.Column="0"  ItemsSource="{Binding Path=SideMenuOptions}" >

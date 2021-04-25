@@ -37,7 +37,7 @@ namespace U_Mod.Helpers
             if (hasPreviousVersion)
             {
                 var previousMod = Static.StaticData.MasterList.GetItemById(previousVersion.Id) as Mod;
-                zipFileLocations = previousMod?.Files.Select(f => Path.Combine(FileHelpers.GetAfterMarketGamesFolder(), f.FileName)).ToList();
+                zipFileLocations = previousMod?.Files.Select(f => Path.Combine(FileHelpers.GetUModFolder(), f.FileName)).ToList();
             }
 
             return hasPreviousVersion;

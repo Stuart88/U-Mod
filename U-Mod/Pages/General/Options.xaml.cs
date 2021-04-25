@@ -1,39 +1,40 @@
-﻿using U_Mod.Enums;
-using U_Mod.Helpers;
-using U_Mod.Models;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using U_Mod.Helpers;
+using U_Mod.Models;
 
-namespace U_Mod.Games.Oblivion.Pages
+namespace U_Mod.Pages.General
 {
     /// <summary>
-    /// Interaction logic for OblivionOptions.xaml
+    /// Interaction logic for Options.xaml
     /// </summary>
-    public partial class OblivionOptions : UserControl
+    public partial class Options : UserControl
     {
-        #region Public Constructors
 
-        public OblivionOptions()
+
+        public Options()
         {
             InitializeComponent();
 
-            if (!Static.StaticData.UserDataStore.CurrentUserData.InstallationComplete)
-            {
-                ReinstallOblivionButton.IsEnabled = false;
-                ReinstallOblivionButton.Opacity = 0.6;
-            }
+            ReinstallBtn.Content = $"Reinstall {GeneralHelpers.GetGameName()}";
         }
-
-        #endregion Public Constructors
-
-        #region Private Methods
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Navigation.NavigateToPage(PagesEnum.OblivionMainMenu, true);
+            Navigation.NavigateToPage(GeneralHelpers.GetMainMenuPageEnumForGame(), true);
         }
 
         private void LaunchObmmButton_Click(object sender, RoutedEventArgs e)
@@ -41,9 +42,10 @@ namespace U_Mod.Games.Oblivion.Pages
             Tools.LaunchModManager();
         }
 
-        private void ReinstallOblivionButton_Click(object sender, RoutedEventArgs e)
+
+        private void ReinstallButton_Click(object sender, RoutedEventArgs e)
         {
-          
+
             Custom.CustomYesNoMessage yesNoMessage = new Custom.CustomYesNoMessage("This will restore your game to vanilla so you can reinstall the mod pack. Are you sure?");
             yesNoMessage.YesClicked += (s, e) =>
             {
@@ -56,8 +58,8 @@ namespace U_Mod.Games.Oblivion.Pages
                             Application.Current.MainWindow.IsEnabled = false;
                             ButtonsArea.Visibility = Visibility.Collapsed;
                             LoadingMessage.Visibility = Visibility.Visible;
-                            BackButton.IsEnabled = false;
-                            BackButton.Opacity = 0.7;
+                            BackBtn.IsEnabled = false;
+                            BackBtn.Opacity = 0.7;
                         }));
 
                         BackupRestorer backupRestorer = new BackupRestorer();
@@ -67,7 +69,7 @@ namespace U_Mod.Games.Oblivion.Pages
                         Application.Current.Dispatcher.BeginInvoke((Action)(() =>
                         {
                             GeneralHelpers.ShowMessageBox($"Game restored.\n\nYou can now perform a clean reinstall.");
-                            Navigation.NavigateToPage(Enums.PagesEnum.OblivionInstall2SelectGameFolder, true);
+                            Navigation.NavigateToPage(Enums.PagesEnum.GameFolderSelect, true);
                         }));
                     }
                     catch (Exception ex)
@@ -78,8 +80,8 @@ namespace U_Mod.Games.Oblivion.Pages
                             GeneralHelpers.ShowMessageBox($"Failed to restore game backup! Cannot continue.\n\nError:{ex.Message}");
                             ButtonsArea.Visibility = Visibility.Visible;
                             LoadingMessage.Visibility = Visibility.Collapsed;
-                            BackButton.IsEnabled = true;
-                            BackButton.Opacity = 1;
+                            BackBtn.IsEnabled = true;
+                            BackBtn.Opacity = 1;
                         }));
                     }
                     finally
@@ -96,22 +98,5 @@ namespace U_Mod.Games.Oblivion.Pages
             };
             yesNoMessage.ShowDialog();
         }
-
-        //private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        //{
-        //    ScrollViewer scv = (ScrollViewer)sender;
-        //    scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
-        //    e.Handled = true;
-        //}
-
-        //private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
-        //{
-        //    TopCirlces.Visibility = e.VerticalOffset < 10 ? Visibility.Hidden : Visibility.Visible;
-        //    BottomCircles.Visibility = e.ExtentHeight - e.VerticalOffset < 400 ? Visibility.Hidden : Visibility.Visible;
-
-        //    e.Handled = true;
-        //}
-
-        #endregion Private Methods
     }
 }

@@ -12,9 +12,6 @@ using System.Windows.Input;
 
 namespace U_Mod.Pages.BaseClasses
 {
-    public static class SelectedMods
-    {
-    }
 
     public class ModListItem : INotifyPropertyChanged
     {
@@ -53,6 +50,8 @@ namespace U_Mod.Pages.BaseClasses
 
         public bool IsInstalled { get; set; }
         public Mod Mod { get; set; }
+
+        public string IsEssentialText => this.Mod.IsEssential ? " (essential)" : "";
 
         #endregion Public Properties
 
@@ -120,7 +119,7 @@ namespace U_Mod.Pages.BaseClasses
                 userData.SelectedToInstall = new List<ModListItem>();
             }
 
-            this.ModData = Static.StaticData.MasterList.GetAvailableModsList(false);
+            this.ModData = Static.StaticData.MasterList.GetAvailableModsList(true);
 
             this.InitModList();
             this.DataContext = this;

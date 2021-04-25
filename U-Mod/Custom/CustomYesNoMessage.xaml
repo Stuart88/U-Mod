@@ -42,8 +42,8 @@
             </Grid>
         </ScrollViewer>
         <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" MinHeight="0">
-            <Button x:Name="NoButton" Click="NoButton_Click"  VerticalAlignment="Top" Margin="10, 10, 10, 50"/>
-            <Button x:Name="YesButton" Click="YesButton_Click"  VerticalAlignment="Top" Margin="10, 10, 10, 50"/>
+            <Button x:Name="NoButton" Click="NoButton_Click"  VerticalAlignment="Top" Margin="10, 10, 10, 50">No</Button>
+            <Button x:Name="YesButton" Click="YesButton_Click"  VerticalAlignment="Top" Margin="10, 10, 10, 50">Yes</Button>
         </StackPanel>
     </Grid>
 </Window>

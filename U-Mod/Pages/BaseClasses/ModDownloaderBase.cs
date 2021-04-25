@@ -18,6 +18,7 @@ using System.Windows.Forms;
 using System.Windows.Threading;
 using Application = System.Windows.Application;
 using UserControl = System.Windows.Controls.UserControl;
+using U_Mod.Static;
 
 namespace U_Mod.Pages.BaseClasses
 {
@@ -62,24 +63,28 @@ namespace U_Mod.Pages.BaseClasses
 
         protected ModDownloaderBase()
         {
-            NextPage = Static.StaticData.CurrentGame switch
-            {
-                GamesEnum.Oblivion => PagesEnum.OblivionInstall7_4GBRamPAtch,
-                GamesEnum.Fallout => PagesEnum.FalloutInstall7_4GBRamPAtch,
-                GamesEnum.NewVegas => throw new NotImplementedException(),
-            };
-            MenuPage = Static.StaticData.CurrentGame switch
-            {
-                GamesEnum.Oblivion => PagesEnum.OblivionMainMenu,
-                GamesEnum.Fallout => PagesEnum.FalloutMainMenu,
-                GamesEnum.NewVegas => throw new NotImplementedException(),
-            };
-            PreviousPage = Static.StaticData.CurrentGame switch
-            {
-                GamesEnum.Oblivion => PagesEnum.OblivionInstall6DownloadsList,
-                GamesEnum.Fallout => PagesEnum.FalloutInstall6DownloadsList,
-                GamesEnum.NewVegas => throw new NotImplementedException(),
-            };
+            //NextPage = Static.StaticData.CurrentGame switch
+            //{
+            //    GamesEnum.Oblivion => PagesEnum.OblivionInstall7_4GBRamPAtch,
+            //    GamesEnum.Fallout => PagesEnum.FalloutInstall7_4GBRamPAtch,
+            //    GamesEnum.NewVegas => throw new NotImplementedException(),
+            //};
+            //MenuPage = Static.StaticData.CurrentGame switch
+            //{
+            //    GamesEnum.Oblivion => PagesEnum.OblivionMainMenu,
+            //    GamesEnum.Fallout => PagesEnum.FalloutMainMenu,
+            //    GamesEnum.NewVegas => throw new NotImplementedException(),
+            //};
+            //PreviousPage = Static.StaticData.CurrentGame switch
+            //{
+            //    GamesEnum.Oblivion => PagesEnum.OblivionInstall6DownloadsList,
+            //    GamesEnum.Fallout => PagesEnum.FalloutInstall6DownloadsList,
+            //    GamesEnum.NewVegas => throw new NotImplementedException(),
+            //};
+
+            MenuPage = GeneralHelpers.GetMainMenuPageEnumForGame();
+            NextPage = PagesEnum.PatchAndModManager;
+            PreviousPage = PagesEnum.DownloadsList;
 
             if (GeneralHelpers.GetUserDataForGame().IsUpdating)
             {
@@ -108,7 +113,7 @@ namespace U_Mod.Pages.BaseClasses
                 {
                     DirectDownloadUrl = s.DirectDownloadUrl,
                     FileName = s.FileName,
-                    DownloadedPath = Path.Combine(FileHelpers.GetAfterMarketGamesFolder(), s.FileName),
+                    DownloadedPath = Path.Combine(FileHelpers.GetUModFolder(), s.FileName),
                     ZipFile = s
                 })
                 .ToList();
@@ -124,7 +129,7 @@ namespace U_Mod.Pages.BaseClasses
                     {
                         DirectDownloadUrl = s.AutoDownloadUrl,
                         FileName = s.FileName,
-                        DownloadedPath = Path.Combine(Helpers.FileHelpers.GetAfterMarketGamesFolder(), s.FileName),
+                        DownloadedPath = Path.Combine(Helpers.FileHelpers.GetUModFolder(), s.FileName),
                         ZipFile = s,
                         IsAutoDownload = true,
                     })
@@ -326,7 +331,7 @@ namespace U_Mod.Pages.BaseClasses
                         debugtrack = 2;
                         this.FinalFilePaths = Static.StaticData.MasterList.GetModListForReinstall()
                             .SelectMany(m => m.Files)
-                            .Select(zip => (Path.Combine(FileHelpers.GetAfterMarketGamesFolder(), zip.FileName), zip))
+                            .Select(zip => (Path.Combine(FileHelpers.GetUModFolder(), zip.FileName), zip))
                             .OrderBy(i => Static.StaticData.MasterList.GetParentMod(i.zip.Id).InstallOrder)
                             .ThenBy(i => i.zip.InstallOrder)
                             .ToList();
@@ -546,16 +551,16 @@ namespace U_Mod.Pages.BaseClasses
                 // If it's update process, need to delete any old downloads that have same file name as
                 // the updates. Otherwise they'll be bypassed when it comes to downloading
 
-                DirectoryInfo amgFolder = new DirectoryInfo(FileHelpers.GetAfterMarketGamesFolder());
+                DirectoryInfo amgFolder = new DirectoryInfo(FileHelpers.GetUModFolder());
 
                 List<string> currentModPaths = Static.StaticData.MasterList.GetFullModsListForGame()
                     .SelectMany(m => m.Files)
-                    .Select(f => Path.Combine(FileHelpers.GetAfterMarketGamesFolder(), f.FileName))
+                    .Select(f => Path.Combine(FileHelpers.GetUModFolder(), f.FileName))
                     .ToList();
 
                 foreach (var f in amgFolder.GetFiles())
                 {
-                    if (f.Name.Contains(Static.StaticData.GetCurrentGameDataFileName()) || f.Name.Contains("AMGBackup.zip"))
+                    if (f.Name.Contains(Static.StaticData.GetCurrentGameDataFileName()) || f.Name.Contains(Constants.UModBackup))
                         continue;
 
                     if (currentModPaths.Any(p => p == f.FullName))
@@ -603,7 +608,7 @@ namespace U_Mod.Pages.BaseClasses
                 }
                 else if (this.ExtractionResults.Any(res => !res.DownloadOk))
                 {
-                    string errorStr = $"The following mods failed to download. Please attempt manual download instead.\n\nCopy the given URLs below into your browser and place each downloaded file in your AfterMarketGames folder: {FileHelpers.GetAfterMarketGamesFolder()}\n\n\n";
+                    string errorStr = $"The following mods failed to download. Please attempt manual download instead.\n\nCopy the given URLs below into your browser and place each downloaded file in your UMod folder: {FileHelpers.GetUModFolder()}\n\n\n";
                     foreach (var res in this.ExtractionResults.Where(res => !res.DownloadOk))
                     {
                         errorStr += $"{res.Message}\n\n\n";
@@ -666,7 +671,7 @@ namespace U_Mod.Pages.BaseClasses
             try
             {
                 string backupZip = "Fallout3ini.zip";
-                string zipPath = Path.Combine(FileHelpers.GetGameFolder(), Static.Constants.AfterMarketGames, backupZip);
+                string zipPath = Path.Combine(FileHelpers.GetGameFolder(), Static.Constants.UMod, backupZip);
 
                 if (!File.Exists(zipPath))
                 {
@@ -708,8 +713,8 @@ namespace U_Mod.Pages.BaseClasses
         {
             try
             {
-                string backupZip = "AMGBackup.zip";
-                string zipPath = Path.Combine(FileHelpers.GetGameFolder(), Static.Constants.AfterMarketGames, backupZip);
+                string backupZip = Constants.UModBackup;
+                string zipPath = Path.Combine(FileHelpers.GetGameFolder(), Static.Constants.UMod, backupZip);
 
                 if (!File.Exists(zipPath))
                 {
@@ -718,7 +723,7 @@ namespace U_Mod.Pages.BaseClasses
                     DirectoryInfo di = new DirectoryInfo(FileHelpers.GetGameFolder());
                     foreach (var d in di.EnumerateDirectories())
                     {
-                        if (d.FullName.Contains(Static.Constants.AfterMarketGames))
+                        if (d.FullName.Contains(Static.Constants.UMod))
                             continue;
 
                         zip.CreateEntryFromDirectory(d.FullName, d.Name);

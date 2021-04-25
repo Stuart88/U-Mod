@@ -57,15 +57,28 @@ namespace U_Mod.Helpers
             LaunchProcessInGameFolder(exeName, $"RunModManager: {GeneralHelpers.GetGameName()}");
         }
 
-        public static void Run4GbPatch()
+        public static void Run4GbPatch(bool withArgs = true)
         {
-            string exeName = Static.StaticData.CurrentGame switch
+            (string exeName, string args) data = Static.StaticData.CurrentGame switch
             {
-                GamesEnum.Oblivion => "4gb patch.exe",
-                GamesEnum.Fallout => "4gb_patch.exe"
+                GamesEnum.Oblivion => ("4gb patch.exe", "Oblivion.exe"),
+                GamesEnum.Fallout => ("4gb_patch.exe", "Fallout3.exe")
             };
 
-            LaunchProcessInGameFolder(exeName, $"Run4GbPatch: {GeneralHelpers.GetGameName()}");
+            var args = withArgs ? data.args : "";
+            
+            LaunchProcessInGameFolder(data.exeName, $"Run4GbPatch: {GeneralHelpers.GetGameName()}", args);
+        }
+
+        public static bool ModManagerInstalled()
+        {
+            string filePath = Static.StaticData.CurrentGame switch
+            {
+                GamesEnum.Oblivion => "OblivionModManager.exe",
+                GamesEnum.Fallout => Path.Combine("GeMM", "fomm.exe")
+            };
+
+            return System.IO.File.Exists(System.IO.Path.Combine(FileHelpers.GetGameFolder(), filePath));
         }
 
         public static void RunModManagerSetup()
@@ -73,7 +86,7 @@ namespace U_Mod.Helpers
             string exeName = Static.StaticData.CurrentGame switch
             {
                 GamesEnum.Oblivion => "obmm_setup.exe",
-                GamesEnum.Fallout => "New FOMM-640-0-13-21.exe"
+                GamesEnum.Fallout => "FOMM-36901-0-13-21.exe"
             };
 
             LaunchProcessInGameFolder(exeName, $"RunModManagerSetup: {GeneralHelpers.GetGameName()}");
@@ -83,7 +96,7 @@ namespace U_Mod.Helpers
 
         #region Private Methods
 
-        private static void LaunchProcessInGameFolder(string exeName, string exceptionTitle)
+        private static void LaunchProcessInGameFolder(string exeName, string exceptionTitle, string arguments = "")
         {
             try
             {
@@ -93,7 +106,8 @@ namespace U_Mod.Helpers
                     {
                         FileName = Path.Combine(FileHelpers.GetGameFolder(), exeName),
                         UseShellExecute = true,
-                        WorkingDirectory = FileHelpers.GetGameFolder()
+                        WorkingDirectory = FileHelpers.GetGameFolder(),
+                        Arguments = arguments
                     }
                 };
 

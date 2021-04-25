@@ -1,0 +1,83 @@
+﻿<Window x:Class="U_Mod.Pages.General.SystemInfoView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:U_Mod.Pages.General"
+      mc:Ignorable="d" 
+        Width="500"
+        Height="450"
+      Title="System Info">
+    
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
+          Margin="0">
+        <Grid.Resources>
+            <Style x:Key="GridHeader" TargetType="TextBlock">
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="Padding" Value="5"/>
+                <Setter Property="Background" Value="CadetBlue"/>
+            </Style>
+            <Style x:Key="GridItem" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="Padding" Value="7,5,7,5"/>
+                <Setter Property="Background" Value="LightGray"/>
+                <Setter Property="TextWrapping" Value="Wrap"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="70"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                   Margin="0,0,0,10"
+                   Padding="20,0,20,0"
+                   FontSize="16"
+                   Width="340"
+                   TextWrapping="Wrap"
+                   HorizontalAlignment="Center"
+                   TextAlignment="Center">
+            The below recommended specs are required for playing some of the more intensive mods
+        </TextBlock>
+
+        <TextBlock Grid.Row="1" Grid.Column="1" Style="{StaticResource GridHeader}">Recommended</TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="2" Style="{StaticResource GridHeader}">Your PC</TextBlock>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource GridItem}">CPU</TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource GridItem}">Graphics</TextBlock>
+        <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource GridItem}">Memory</TextBlock>
+        <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource GridItem}">Disk</TextBlock>
+
+        <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource GridItem}">Intel i5 Quad Core</TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource GridItem}">NVidia GTX 1060</TextBlock>
+        <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource GridItem}">8GB DDR4 or 12GB DDR3</TextBlock>
+        <TextBlock Grid.Row="5" Grid.Column="1" Style="{StaticResource GridItem}" TextAlignment="Center" VerticalAlignment="Stretch"> - </TextBlock>
+
+        <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding SystemInfo.CpuName}"  Style="{StaticResource GridItem}"/>
+        <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding SystemInfo.GpuNames}"  Style="{StaticResource GridItem}"/>
+        <TextBlock Grid.Row="4" Grid.Column="2"  Style="{StaticResource GridItem}">
+            <Run Text="{Binding SystemInfo.TotalMemory}"/>
+            <Run Text="{Binding SystemInfo.RamType}"/>
+        </TextBlock>
+        <TextBlock Grid.Row="5" Grid.Column="2" Text="{Binding SystemInfo.DriveInfo}"  Style="{StaticResource GridItem}"/>
+
+        <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3"
+                x:Name="CloseButton"
+                Click="CloseButton_Click"
+                Margin="0,30,0,0"
+                Width="100">
+            Close
+        </Button>
+    </Grid>
+</Window>

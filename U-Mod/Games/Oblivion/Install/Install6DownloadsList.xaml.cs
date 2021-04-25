@@ -193,7 +193,7 @@ namespace U_Mod.Games.Oblivion.Pages.Install
                 {
                     foreach (var f in m.Mod.Files)
                     {
-                        string filePath = Path.Combine(Static.StaticData.AppData.OblivionGameFolder, Static.Constants.AfterMarketGames, f.FileName);
+                        string filePath = Path.Combine(FileHelpers.GetGameFolder(), Static.Constants.UMod, f.FileName);
                         if (File.Exists(filePath))
                         {
                             if (!this.UrlsDone.Contains(f.ManualDownloadUrl))
@@ -210,7 +210,7 @@ namespace U_Mod.Games.Oblivion.Pages.Install
 
                         bool allDone = m.Mod.Files
                             .Where(file => !string.IsNullOrEmpty(file.ManualDownloadUrl))
-                            .All(file => File.Exists(Path.Combine(Static.StaticData.AppData.OblivionGameFolder, Static.Constants.AfterMarketGames, file.FileName)));
+                            .All(file => File.Exists(Path.Combine(Static.StaticData.AppData.OblivionGameFolder, Static.Constants.UMod, file.FileName)));
 
                         m.IsDownloaded = allDone;
 
@@ -221,7 +221,7 @@ namespace U_Mod.Games.Oblivion.Pages.Install
                 }
 
                 List<ModZipFile> allFiles = this.ListData.SelectMany(d => d.Mod.Files).Where(f => !string.IsNullOrEmpty(f.ManualDownloadUrl)).ToList();
-                if (allFiles.All(f => File.Exists(Path.Combine(Static.StaticData.AppData.OblivionGameFolder, Static.Constants.AfterMarketGames, f.FileName))))
+                if (allFiles.All(f => File.Exists(Path.Combine(Static.StaticData.AppData.OblivionGameFolder, Static.Constants.UMod, f.FileName))))
                 {
                     InstallButton.Opacity = 1;
                     InstallButton.IsEnabled = true;

@@ -32,12 +32,12 @@ namespace U_Mod.Helpers
             }
         }
 
-        public static string GetAfterMarketGamesFolder()
+        public static string GetUModFolder()
         {
             return Static.StaticData.CurrentGame switch
             {
-                GamesEnum.Oblivion => string.IsNullOrEmpty(Static.StaticData.AppData.OblivionGameFolder) ? "" : Path.Combine(Static.StaticData.AppData.OblivionGameFolder, Static.Constants.AfterMarketGames),
-                GamesEnum.Fallout => string.IsNullOrEmpty(Static.StaticData.AppData.FalloutGameFolder) ? "" : Path.Combine(Static.StaticData.AppData.FalloutGameFolder, Static.Constants.AfterMarketGames),
+                GamesEnum.Oblivion => string.IsNullOrEmpty(Static.StaticData.AppData.OblivionGameFolder) ? "" : Path.Combine(Static.StaticData.AppData.OblivionGameFolder, Static.Constants.UMod),
+                GamesEnum.Fallout => string.IsNullOrEmpty(Static.StaticData.AppData.FalloutGameFolder) ? "" : Path.Combine(Static.StaticData.AppData.FalloutGameFolder, Static.Constants.UMod),
                 _ => throw new NotImplementedException()
             };
         }
@@ -81,6 +81,17 @@ namespace U_Mod.Helpers
                 GamesEnum.Fallout => Static.StaticData.AppData.FalloutGameFolder,
                 _ => throw new NotImplementedException()
             };
+        }
+
+        public static void SetGameFolder(string path)
+        {
+            switch (Static.StaticData.CurrentGame)
+            {
+                case GamesEnum.Oblivion: Static.StaticData.AppData.OblivionGameFolder = path; break;
+                case GamesEnum.Fallout: Static.StaticData.AppData.FalloutGameFolder = path; break;
+                case GamesEnum.NewVegas: Static.StaticData.AppData.FalloutNewVegasGameFolder = path; break;
+                default: throw new NotImplementedException($"AppData does not have GameFolder property for {Enum.GetName(typeof(GamesEnum), Static.StaticData.CurrentGame)}.");
+            }
         }
 
         public static bool IsZip(string path)

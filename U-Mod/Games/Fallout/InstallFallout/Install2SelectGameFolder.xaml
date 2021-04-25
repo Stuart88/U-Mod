@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid >
+    <Grid VerticalAlignment="Center">
         <Grid.RowDefinitions>
-            <RowDefinition Height="430" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -17,8 +17,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid x:Name="FilePickerGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center"
-              Width="350" Height="200" Margin="0,150,0,0">
+        <Grid x:Name="FilePickerGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -26,7 +25,7 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0"  
                        
-                       Text="Choose the folder that your game is installed in"
+                       Text="Select the folder Fallout is intstalled in"
                        FontSize="24" HorizontalAlignment="Center"
                        TextWrapping="Wrap"
                        TextAlignment="Center" />
@@ -96,61 +95,31 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.ColumnSpan="4" Width="350"
-                                Margin="17,0,0,0">
-
-                        <Button x:Name="BackButton"
-                             
-                            Click="BackButton_Click"
-                            VerticalAlignment="Bottom" 
-                            HorizontalAlignment="Left"
-                            HorizontalContentAlignment="Left"
-                            Height="35"
-                            Width="105"
-                            Margin="5,23,5,0"
-                 >Back</Button>
-
+                             >
                         <Button x:Name="NextButton"  
                              
                             Click="NextButton_Click"
-                            VerticalAlignment="Top" 
-                            HorizontalAlignment="Left"
-                            HorizontalContentAlignment="Left"
-                            Height="35"
-                            Width="105"
-                            Margin="5,23,5,0"
-                 >Next</Button>
+                            HorizontalContentAlignment="Center"
+                           
+                            Content="Next"
+                 />
                         <Button x:Name="IgnoreButton" 
                             Visibility="Collapsed" 
                              
                             Click="IgnoreButton_Click"
                             VerticalAlignment="Top" 
                             HorizontalAlignment="Left"
-                            HorizontalContentAlignment="Left"
-                            Height="35"
-                            Width="105"
-                            Margin="5,23,5,0">Ignore</Button>
+                            HorizontalContentAlignment="Center"
+                            Content="Ignore"/>
 
-                        <Button x:Name="QuitButton"  
-                             Click="QuitButton_Click"
-               VerticalAlignment="Top" 
-                            HorizontalAlignment="Right"
-                            HorizontalContentAlignment="Right"
-                            Height="35"
-                            Width="45"
-                            Margin="57,23,5,0"
-                                ToolTip="Quit"
-                 >Quit</Button>
+
                     </StackPanel>
-                   
+
                 </Grid>
             </Frame.Content>
         </Frame>
-       
+
     </Grid>
 </UserControl>

@@ -10,17 +10,15 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using U_Mod.Enums;
+using U_Mod.Static;
 using U_Mod.Helpers;
 using U_Mod.Pages.BaseClasses;
-using AmgShared.Models;
 using AMGWebsite.Shared.Models;
+using System.Diagnostics;
 
-namespace U_Mod.Games.Fallout.Pages.InstallFallout
+namespace U_Mod.Pages.InstallBethesda
 {
-    /// <summary>
-    /// Interaction logic for Install6DownloadsList.xaml
-    /// </summary>
-    public partial class Install6DownloadsList : ModDownloaderBase, INotifyPropertyChanged
+    public partial class _3ManualDownload : ModDownloaderBase, INotifyPropertyChanged
     {
         #region Private Fields
 
@@ -64,18 +62,20 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
 
         #region Public Constructors
 
-        public Install6DownloadsList()
+        public _3ManualDownload()
         {
             this.DataContext = this;
 
             ResetItemIndices();
             SortDownloadUrls();
             this.ModsToDownload = this.ModsToDownload.GroupBy(m => m.Mod.Id).Select(g => g.First()).ToList(); // Ensure distinct here. There can be some overlap after selecting mods for update
-            this.ListData = new ObservableCollection<ModListItem>(this.ModsToDownload.OrderBy(i =>i.Index));
+            this.ListData = new ObservableCollection<ModListItem>(this.ModsToDownload.OrderBy(i => i.Index));
 
             InitializeComponent();
 
             CheckForDownloads();
+
+            this.GameName.Text = GeneralHelpers.GetGameName();
 
             this.StopDownloadsCheck = false;
             DispatcherTimer timer = new DispatcherTimer();
@@ -179,7 +179,7 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Navigation.NavigateToPage(PagesEnum.FalloutInstall5DownloadsVideo);
+            Navigation.NavigateToPage(PagesEnum.ModsSelect);
         }
 
         /// <summary>
@@ -193,7 +193,7 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
                 {
                     foreach (var f in m.Mod.Files)
                     {
-                        string filePath = Path.Combine(Static.StaticData.AppData.FalloutGameFolder, Static.Constants.UMod, f.FileName);
+                        string filePath = Path.Combine(FileHelpers.GetGameFolder(), Static.Constants.UMod, f.FileName);
                         if (File.Exists(filePath))
                         {
                             if (!this.UrlsDone.Contains(f.ManualDownloadUrl))
@@ -210,7 +210,7 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
 
                         bool allDone = m.Mod.Files
                             .Where(file => !string.IsNullOrEmpty(file.ManualDownloadUrl))
-                            .All(file => File.Exists(Path.Combine(Static.StaticData.AppData.FalloutGameFolder, Static.Constants.UMod, file.FileName)));
+                            .All(file => File.Exists(Path.Combine(FileHelpers.GetGameFolder(), Static.Constants.UMod, file.FileName)));
 
                         m.IsDownloaded = allDone;
 
@@ -221,7 +221,7 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
                 }
 
                 List<ModZipFile> allFiles = this.ListData.SelectMany(d => d.Mod.Files).Where(f => !string.IsNullOrEmpty(f.ManualDownloadUrl)).ToList();
-                if (allFiles.All(f => File.Exists(Path.Combine(Static.StaticData.AppData.FalloutGameFolder, Static.Constants.UMod, f.FileName))))
+                if (allFiles.All(f => File.Exists(Path.Combine(FileHelpers.GetGameFolder(), Static.Constants.UMod, f.FileName))))
                 {
                     InstallButton.Opacity = 1;
                     InstallButton.IsEnabled = true;
@@ -261,25 +261,9 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
 
         private void QuitButton_Click(object sender, RoutedEventArgs e)
         {
-            Navigation.NavigateToPage(PagesEnum.FalloutMainMenu);
+            Navigation.NavigateToPage(GeneralHelpers.GetMainMenuPageEnumForGame());
         }
 
-       
-
-        private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
-        {
-            ScrollViewer scv = (ScrollViewer)sender;
-            scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
-            e.Handled = true;
-        }
-
-        private void ScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
-        {
-            TopCirlces.Visibility = e.VerticalOffset < 10 ? Visibility.Hidden : Visibility.Visible;
-            BottomCircles.Visibility = e.ExtentHeight - e.VerticalOffset < 400 ? Visibility.Hidden : Visibility.Visible;
-            
-            e.Handled = true;
-        }
 
         /// <summary>
         /// Ensures the set of download Urls is distinct, i.e. mods don't link to a url if another one already has that url.
@@ -299,6 +283,18 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
             }
         }
 
+        public void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            ScrollViewer scv = (ScrollViewer)sender;
+            scv.ScrollToVerticalOffset(scv.VerticalOffset - e.Delta);
+            e.Handled = true;
+        }
+
         #endregion Private Methods
+
+        private void UModFolderLink_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Process.Start("explorer.exe", FileHelpers.GetUModFolder());
+        }
     }
 }

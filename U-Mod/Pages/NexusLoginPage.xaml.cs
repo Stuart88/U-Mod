@@ -158,14 +158,7 @@ namespace U_Mod.Pages
 
         private void GoBackClickArea_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            PagesEnum page = StaticData.CurrentGame switch
-            {
-                GamesEnum.Oblivion => PagesEnum.OblivionInstall5DownloadsVideo,
-                GamesEnum.Fallout => PagesEnum.FalloutInstall5DownloadsVideo,
-                GamesEnum.NewVegas => throw new NotImplementedException(),
-            };
-
-            Navigation.NavigateToPage(page);
+            Navigation.NavigateToPage(PagesEnum.ModsSelect);
         }
 
         private async void InstallBtn_Click(object sender, RoutedEventArgs e)

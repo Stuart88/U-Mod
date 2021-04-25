@@ -1,38 +1,40 @@
-﻿using System;
+﻿using AmgShared.Helpers;
+using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using U_Mod.Enums;
 using U_Mod.Helpers;
-using AmgShared.Helpers;
+using U_Mod.Pages.General;
 using Path = System.IO.Path;
 
-namespace U_Mod.Games.Fallout.Pages.InstallFallout
+namespace U_Mod.Pages.InstallBethesda
 {
     /// <summary>
-    /// Interaction logic for Install2.xaml
+    /// Interaction logic for _1GameFolderSelect.xaml
     /// </summary>
-    public partial class Install2SelectGameFolder : UserControl
+    public partial class _1GameFolderSelect : UserControl
     {
         #region Private Properties
 
         private string SelectedGameFolder { get; set; }
 
-        private bool ShowingCWarning { get; set; }
-
         #endregion Private Properties
 
         #region Public Constructors
 
-        public Install2SelectGameFolder()
+        public _1GameFolderSelect()
         {
             InitializeComponent();
 
-            this.SelectedGameFolder = Static.StaticData.AppData.FalloutGameFolder;
+            this.FolderSelectText_GameName.Text = GeneralHelpers.GetGameName();
+            this.SelectedGameFolder = FileHelpers.GetGameFolder();
             this.SelectedFolderText.Text = this.SelectedGameFolder.LeftTrimToLength(40);
             SelectedFolderText.Focus();
             SelectedFolderText.CaretIndex = int.MaxValue;
+            this.FullInstallCheck.IsChecked = Static.StaticData.UserDataStore.CurrentUserData.CanFullInstall;
             this.Focus();
 
             this.DataContext = this;
@@ -44,15 +46,18 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            if (this.ShowingCWarning)
+            ResetWarningText();
+
+            PagesEnum page = Static.StaticData.CurrentGame switch
             {
-                HideCDriveWarning();
-            }
-            else
-            {
-                ResetWarningText();
-                Navigation.NavigateToPage(PagesEnum.FalloutMainMenu);
-            }
+                AMGWebsite.Shared.Enums.GamesEnum.Oblivion => PagesEnum.OblivionMainMenu,
+                AMGWebsite.Shared.Enums.GamesEnum.Fallout => PagesEnum.FalloutMainMenu,
+                AMGWebsite.Shared.Enums.GamesEnum.NewVegas => throw new NotImplementedException(),
+                AMGWebsite.Shared.Enums.GamesEnum.Unknown => throw new NotImplementedException(),
+                AMGWebsite.Shared.Enums.GamesEnum.None => throw new NotImplementedException(),
+            };
+
+            Navigation.NavigateToPage(page);
         }
 
         private void BrowseButton_Click(object sender, RoutedEventArgs e)
@@ -80,7 +85,6 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
                 return;
             }
 
-
             DirectoryInfo directory = new DirectoryInfo(this.SelectedGameFolder);
 
             if (!Directory.Exists(Path.Combine(this.SelectedGameFolder, Static.Constants.UMod)))
@@ -88,16 +92,7 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
                 directory.CreateSubdirectory(Static.Constants.UMod);
             }
 
-            // Now check if user has selected C drive, and warn if this is the first time they've done it
-
-            if (Path.GetPathRoot(this.SelectedGameFolder) == "C:\\" && !Static.StaticData.UserDataStore.CurrentUserData.IgnoredCDrivecheck)
-            {
-                ShowCDriveWarning();
-            }
-            else
-            {
-                FileCheck2();
-            }
+            FileCheck2();
         }
 
         /// <summary>
@@ -106,20 +101,13 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
         /// </summary>
         private void FileCheck2()
         {
-            if (this.ShowingCWarning)
-            {
-                Static.StaticData.UserDataStore.CurrentUserData.IgnoredCDrivecheck = true;
-            }
-            
+           
             // Check DLC Content
 
             Static.StaticData.UserDataStore.CurrentUserData.HasAllDlc = HasFullDlcList();
 
-            string[] requiredFiles =
-            {
-                Path.Combine(this.SelectedGameFolder,"Fallout3.exe"),
-                Path.Combine(this.SelectedGameFolder, "Data", "Fallout3.esm"),
-            };
+            string[] requiredFiles = this.GetRequiredFilesForGame();
+
             string filesNotFoundStr = "";
 
             foreach (string file in requiredFiles)
@@ -175,7 +163,6 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
 
                         if (dialog.ShowDialog(Application.Current.MainWindow).GetValueOrDefault())
                         {
-
                             if (dialog.FileName.ToLower().EndsWith("steam.exe"))
                             {
                                 FileInfo steamexe = new FileInfo(dialog.FileName);
@@ -187,57 +174,88 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
                                 GeneralHelpers.ShowMessageBox("steam.exe not found!");
                                 return;
                             }
-
                         }
                     }
                 }
             }
 
-            // Finally, add ini files
-            bool inisOk = CopyCustomIniFiles();
-            
-            if (inisOk)
+            bool finalStepOk = true;
+
+            // Game specific steps
+            if (Static.StaticData.CurrentGame == AMGWebsite.Shared.Enums.GamesEnum.Fallout)
+            {
+                finalStepOk = Helpers.GameSpecific.FalloutTools.CopyCustomIniFiles();
+            }
+
+            if (finalStepOk)
             {
                 Static.StaticData.SaveAppData();
-                Navigation.NavigateToPage(PagesEnum.FalloutInstall3PcSpecs);
+                Navigation.NavigateToPage(PagesEnum.ModsSelect, true);
             }
-
         }
 
-        private bool CopyCustomIniFiles()
+        private string[] GetDlcFilesForGame()
         {
-            try
+            switch (Static.StaticData.CurrentGame)
             {
-                FileInfo falloutDefault = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), "Assets/Fallout/IniFiles/Fallout_default.ini"));
-                falloutDefault.CopyTo(Path.Combine(FileHelpers.GetGameFolder(), "Fallout_default.ini"), overwrite: true);
+                case AMGWebsite.Shared.Enums.GamesEnum.Oblivion:
+                    return new string[]
+                    {
+                        "DLCBattlehornCastle.esp",
+                        "DLCFrostcrag.esp",
+                        "DLCHorseArmor.esp",
+                        "DLCMehrunesRazor.esp",
+                        "DLCOrrery.esp",
+                        "DLCSpellTomes.esp",
+                        "DLCThievesDen.esp",
+                        "DLCVileLair.esp",
+                    };
 
-                FileInfo falloutIni = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), "Assets/Fallout/IniFiles/Fallout.ini"));
-                falloutIni.CopyTo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "Fallout3", "Fallout.ini"), overwrite: true);
+                case AMGWebsite.Shared.Enums.GamesEnum.Fallout:
+                    return new string[]
+                    {
+                        "Anchorage.esm",
+                        "BrokenSteel.esm",
+                        "PointLookout.esm",
+                        "ThePitt.esm",
+                        "Zeta.esm",
+                    };
 
-                FileInfo falloutPrefs = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), "Assets/Fallout/IniFiles/FalloutPrefs.ini"));
-                falloutPrefs.CopyTo(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "Fallout3", "FalloutPrefs.ini"), overwrite: true);
-
-                return true;
+                default:
+                    return new string[0];
             }
-            catch (Exception e)
+        }
+
+        private string[] GetRequiredFilesForGame()
+        {
+            switch (Static.StaticData.CurrentGame)
             {
-                Logging.Logger.LogException("CopyCustomIniFiles (Fallout)", e);
-                GeneralHelpers.ShowExceptionMessageBox(e);
-                return false;
+                case AMGWebsite.Shared.Enums.GamesEnum.Oblivion:
+                    return new string[]
+                    {
+                        Path.Combine(this.SelectedGameFolder,"Oblivion.exe"),
+                        Path.Combine(this.SelectedGameFolder, "Data", "DLCShiveringisles.esp"),
+                        Path.Combine(this.SelectedGameFolder, "Data", "Knights.esp"),
+                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "Oblivion", "BlendSettings.ini"),
+                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "Oblivion", "Oblivion.ini"),
+                    };
+
+                case AMGWebsite.Shared.Enums.GamesEnum.Fallout:
+                    return new string[]
+                    {
+                        Path.Combine(this.SelectedGameFolder,"Fallout3.exe"),
+                        Path.Combine(this.SelectedGameFolder, "Data", "Fallout3.esm"),
+                    };
+
+                default:
+                    return new string[0];
             }
         }
 
         private bool HasFullDlcList()
         {
             string dataPath = Path.Combine(this.SelectedGameFolder, "Data");
-            string[] dlcFiles =
-            {
-                "Anchorage.esm",
-                "BrokenSteel.esm",
-                "PointLookout.esm",
-                "ThePitt.esm",
-                "Zeta.esm",
-            };
+            string[] dlcFiles = GetDlcFilesForGame();
             if (Directory.Exists(dataPath))
             {
                 foreach (string f in dlcFiles)
@@ -250,20 +268,6 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
             }
 
             return false;
-        }
-
-        private void HideCDriveWarning()
-        {
-            FilePickerGrid.Visibility = Visibility.Visible;
-            CDriveWarnGrid.Visibility = Visibility.Collapsed;
-            NextButton.Visibility = Visibility.Visible;
-            IgnoreButton.Visibility = Visibility.Collapsed;
-            this.ShowingCWarning = false;
-        }
-
-        private void IgnoreButton_Click(object sender, RoutedEventArgs e)
-        {
-            FileCheck2();
         }
 
         private void NextButton_Click(object sender, RoutedEventArgs e)
@@ -283,18 +287,12 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
 
                 this.SelectedGameFolder = dialog.SelectedPath;
                 SelectedFolderText.Text = dialog.SelectedPath.LeftTrimToLength(40);
-                Static.StaticData.AppData.FalloutGameFolder = dialog.SelectedPath;
+                FileHelpers.SetGameFolder(dialog.SelectedPath);
                 this.Focus();
                 ResetWarningText();
             }
         }
 
-        private void QuitButton_Click(object sender, RoutedEventArgs e)
-        {
-            HideCDriveWarning();
-            ResetWarningText();
-            Navigation.NavigateToPage(PagesEnum.FalloutMainMenu, true);
-        }
 
         private void ResetWarningText()
         {
@@ -305,16 +303,32 @@ namespace U_Mod.Games.Fallout.Pages.InstallFallout
         {
             OpenFileDialog();
         }
-        
-        private void ShowCDriveWarning()
+
+       
+        private void FullInstallCheck_Checked(object sender, RoutedEventArgs e)
         {
-            FilePickerGrid.Visibility = Visibility.Collapsed;
-            CDriveWarnGrid.Visibility = Visibility.Visible;
-            NextButton.Visibility = Visibility.Collapsed;
-            IgnoreButton.Visibility = Visibility.Visible;
-            this.ShowingCWarning = true;
+            Static.StaticData.UserDataStore.CurrentUserData.CanFullInstall = this.FullInstallCheck.IsChecked ?? false;
+            Static.StaticData.SaveAppData();
         }
 
-#endregion Private Methods
+        #endregion Private Methods
+
+        private SystemInfoView SysInfoWindow { get; set; } = new SystemInfoView();
+
+        private void SystemInfoLink_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (Application.Current.Windows.OfType<SystemInfoView>().Any(w => w is SystemInfoView))
+            {
+                Application.Current.Windows.OfType<SystemInfoView>().First(w => w is SystemInfoView).Visibility = Visibility.Visible;
+                Application.Current.Windows.OfType<SystemInfoView>().First(w => w is SystemInfoView).Topmost = true;
+            }
+            else
+            {
+                this.SysInfoWindow = new SystemInfoView();
+                SysInfoWindow.Show();
+            };
+           
+
+        }
     }
 }

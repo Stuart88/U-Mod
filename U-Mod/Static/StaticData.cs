@@ -42,21 +42,13 @@ namespace U_Mod.Static
             {
                 case GamesEnum.Oblivion:
                     toSave = UserDataStore.OblivionUserData;
-#if DEV
-                    savePath = Constants.OblivionDataFileName;
-#else
-                    savePath = Path.Combine(AfterMarketGamesFolder, Constants.OblivionDataFileName);
-#endif
+                    savePath = Path.Combine(UModFolder, Constants.OblivionDataFileName);
                     CompleteSave<Games.Oblivion.Models.UserData>();
                     break;
 
                 case GamesEnum.Fallout:
                     toSave = UserDataStore.FalloutUserData;
-#if DEV
-                    savePath = Constants.FalloutDataFileName;
-#else
-                    savePath = Path.Combine(AfterMarketGamesFolder, Constants.FalloutDataFileName);
-#endif
+                    savePath = Path.Combine(UModFolder, Constants.FalloutDataFileName);
                     CompleteSave<Games.Fallout.Models.UserData>();
                     break;
             }
@@ -64,7 +56,7 @@ namespace U_Mod.Static
             // Save path is null if SaveAppData is called before user has selected their game folder location.
             void CompleteSave<T>() where T : UserDataBase
             {
-                if (toSave != null && (!string.IsNullOrEmpty(AfterMarketGamesFolder)) || isReinstall)
+                if (toSave != null && (!string.IsNullOrEmpty(UModFolder)) || isReinstall)
                 {
                     Helpers.FileHelpers.SaveAsJson<T>(toSave as T, savePath);
                 }
@@ -79,7 +71,7 @@ namespace U_Mod.Static
         }
 
 
-        private static string AfterMarketGamesFolder => Helpers.FileHelpers.GetAfterMarketGamesFolder();
+        private static string UModFolder => Helpers.FileHelpers.GetUModFolder();
 
         /// <summary>
         /// Loads local app data that has been saved to user's device
@@ -105,19 +97,11 @@ namespace U_Mod.Static
             switch (CurrentGame)
             {
                 case GamesEnum.Oblivion:
-#if DEV
-                    UserDataStore.OblivionUserData = Helpers.FileHelpers.LoadFile<U_Mod.Games.Oblivion.Models.UserData>(Constants.OblivionDataFileName);
-#else
-                    UserDataStore.OblivionUserData = Helpers.FileHelpers.LoadFile<U_Mod.Games.Oblivion.Models.UserData>(Path.Combine(AfterMarketGamesFolder, Constants.OblivionDataFileName));
-#endif
+                    UserDataStore.OblivionUserData = Helpers.FileHelpers.LoadFile<U_Mod.Games.Oblivion.Models.UserData>(Path.Combine(UModFolder, Constants.OblivionDataFileName));
                     break;
 
                 case GamesEnum.Fallout:
-#if DEV
-                    UserDataStore.FalloutUserData = Helpers.FileHelpers.LoadFile<U_Mod.Games.Fallout.Models.UserData>(Constants.FalloutDataFileName);
-#else
-                    UserDataStore.FalloutUserData = Helpers.FileHelpers.LoadFile<U_Mod.Games.Fallout.Models.UserData>(Path.Combine(AfterMarketGamesFolder, Constants.FalloutDataFileName));
-#endif
+                    UserDataStore.FalloutUserData = Helpers.FileHelpers.LoadFile<U_Mod.Games.Fallout.Models.UserData>(Path.Combine(UModFolder, Constants.FalloutDataFileName));
                     break;
             }
         }

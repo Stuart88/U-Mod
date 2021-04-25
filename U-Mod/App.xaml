@@ -7,5 +7,25 @@
     <Application.Resources>
         <!--Converters-->
         <converters:HideIfTrueConverter x:Key="HideIfTrueConverter"/>
+        
+        <!--Colours-->
+        <SolidColorBrush x:Key="LightGrey">DarkSlateGray</SolidColorBrush>
+        <SolidColorBrush x:Key="LighterGrey">gray</SolidColorBrush>
+        <SolidColorBrush x:Key="Blue">#3ca4ff</SolidColorBrush>
+
+        <Style x:Key="HyerlinkStyle" TargetType="TextBlock">
+            <Setter Property="TextDecorations" Value="Underline"/>
+            <Setter Property="Foreground" Value="#3ca4ff"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style x:Key="HyerlinkStyle_Run" TargetType="Run">
+            <Setter Property="TextDecorations" Value="Underline"/>
+            <Setter Property="Foreground" Value="#3ca4ff"/>
+            <Setter Property="Cursor" Value="Hand"/>
+        </Style>
+        <Style x:Key="ModListBtn" TargetType="Button">
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Margin" Value="5,0,5,0"/>
+        </Style>
     </Application.Resources>
 </Application>

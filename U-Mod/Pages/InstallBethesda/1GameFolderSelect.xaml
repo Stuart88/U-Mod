@@ -1,0 +1,119 @@
+﻿<UserControl x:Class="U_Mod.Pages.InstallBethesda._1GameFolderSelect"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:U_Mod.Pages.InstallBethesda"
+      mc:Ignorable="d" 
+      >
+
+    <Grid VerticalAlignment="Center" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid x:Name="FilePickerGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Row="0" 
+                       Grid.Column="0" 
+                       Grid.ColumnSpan="2"
+                       HorizontalAlignment="Left"
+                       TextAlignment="Left"
+                       TextWrapping="Wrap"
+                       Margin="0,0,0,10"
+                       Width="300" >
+                <Run>Please select the folder </Run>
+                <Run x:Name="FolderSelectText_GameName"/>
+                <Run> is installed in</Run>
+            </TextBlock>
+            <DockPanel Grid.Row="1" Grid.Column="0">
+                <TextBox  x:Name="SelectedFolderText" HorizontalAlignment="Stretch" TextWrapping="NoWrap"
+                          Background="White"
+                          Padding="2"
+                          BorderThickness="1"
+                          BorderBrush="Black"
+                          Foreground="#444444"
+                          FontWeight="Bold"
+                          IsEnabled="False"
+                          Width="300"
+                          TextAlignment="Left"
+                          MouseDoubleClick="SelectedFolderLabel_MouseDoubleClick"
+                          DockPanel.Dock="Right" />
+            </DockPanel>
+            <Button x:Name="BrowseButton" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center"
+                    Margin="10,0,0,0"
+                    Padding="5,0,5,0"
+                     Click="BrowseButton_Click" >Browse</Button>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                       Foreground="{StaticResource LightGrey}"
+                       FontSize="10">
+                Warning: C drive installations may encounter some game issues
+            </TextBlock>
+            
+            <CheckBox  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" FlowDirection="LeftToRight"
+                       x:Name="FullInstallCheck"
+                       Margin="0,30,10,0"
+                       HorizontalAlignment="Left"
+                       Checked="FullInstallCheck_Checked"
+                       Unchecked="FullInstallCheck_Checked">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock FlowDirection="LeftToRight" Text="Full Install" />
+                </StackPanel>
+            </CheckBox>
+            <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
+                       Foreground="{StaticResource LightGrey}"
+                       FontSize="10">
+                Select this to allow intensive (graphics heavy) mods to be installed
+            </TextBlock>
+            
+            <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="0,10,0,0"
+                  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Assets/Icons/SystemInfo_16x.png" Grid.Column="0"/>
+                <TextBlock x:Name="SystemInfoLink" Style="{StaticResource HyerlinkStyle}" Grid.Column="1"
+                           PreviewMouseLeftButtonDown="SystemInfoLink_PreviewMouseLeftButtonDown">
+                    System Info
+                </TextBlock>
+            </Grid>
+
+        </Grid>
+
+        <Button x:Name="NextButton"   Grid.Row="1" Grid.Column="0" Width="150"
+                Margin="0,40,0,0"
+                 Click="NextButton_Click" >Next</Button>
+
+        <TextBlock x:Name="WarningText"
+                   VerticalAlignment="Bottom"
+                   Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
+                   FontSize="11" 
+                   HorizontalAlignment="Stretch"
+                   Foreground="Red"
+                   
+                   TextWrapping="Wrap"
+                   MinHeight="20"
+                   Margin="0,10,0,0"
+                   TextAlignment="Center" />
+        
+    </Grid>
+</UserControl>

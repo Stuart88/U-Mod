@@ -54,11 +54,11 @@
                 <Button x:Name="LaunchObmmButton" HorizontalAlignment="Center"  
                  Click="LaunchObmmButton_Click"
                         Margin="30"
-                        Height="80"/>
+                        Height="80">Mod Manager</Button>
 
                 <Button x:Name="ReinstallOblivionButton" HorizontalAlignment="Center" 
                  Click="ReinstallOblivionButton_Click"
-                        Height="70"/>
+                        Height="70">Reinstall</Button>
                 
             </StackPanel>
 
@@ -143,7 +143,7 @@
 
             <Button x:Name="BackButton" Grid.Row="4" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" 
                 Margin="0,0,0,70"
-                 Click="BackButton_Click"/>
+                 Click="BackButton_Click">Back</Button>
         </Grid>
 
        

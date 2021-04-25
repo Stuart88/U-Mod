@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="U_Mod.Pages.InstallBethesda._4_PatchAndModManager"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:U_Mod.Pages.InstallBethesda"
+             mc:Ignorable="d" 
+       >
+    <Grid Width="350" Margin="20" Height="500" VerticalAlignment="Center">
+        <Grid.Resources>
+            <Style x:Key="PatchPageHeading" TargetType="TextBlock">
+                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="TextAlignment" Value="Left"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
+                <Setter Property="Foreground" Value="{StaticResource LightGrey}"/>
+            </Style>
+            <Style x:Key="PatchPageText" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="TextAlignment" Value="Left"/>
+                <Setter Property="Foreground" Value="{StaticResource LightGrey}"/>
+            </Style>
+            <Style x:Key="PatchPageBtn" TargetType="Button">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Width" Value="190"/>
+                <Setter Property="Height" Value="25"/>
+            </Style>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextAlignment="Center"
+                   FontWeight="Bold"
+                   TextDecorations="Underline"
+                   FontSize="20"
+                   Margin="0,0,0,10">
+            Nearly Done!
+        </TextBlock>
+        
+        <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource PatchPageHeading}">
+            4GB RAM Patch
+        </TextBlock>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Style="{StaticResource PatchPageText}">
+            Use the 4GB RAM Patch to allow your game to work with more RAM
+        </TextBlock>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2"
+                    Margin="0,0,0,0"
+                    Height="25"
+                    VerticalAlignment="Center">
+            
+            <Button x:Name="RamPatchBtn"
+                    Margin="0,0,5,0"
+                    Style="{StaticResource PatchPageBtn}"
+                Click="RamPatchBtn_Click">
+                Run 4GB Ram Patch
+            </Button>
+            <StackPanel x:Name="_4gbOkInfo" Orientation="Horizontal" Visibility="Collapsed" VerticalAlignment="Center">
+                <Image Source="/Assets/Icons/StatusOK_16x.png" Height="15"/>
+                <TextBlock Text="Done!"
+                       Margin="5,0,0,0"
+                       Foreground="{StaticResource Blue}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Foreground="{StaticResource LighterGrey}">
+            <Run>Advanced users can run the </Run>
+            <Run x:Name="ManualPatchToolLink" Style="{StaticResource HyerlinkStyle_Run}" PreviewMouseLeftButtonDown="ManualPatchToolLink_PreviewMouseLeftButtonDown"> manual patch tool</Run>
+        </TextBlock>
+
+        <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource PatchPageHeading}">
+            Mod Manager
+        </TextBlock>
+
+        <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Style="{StaticResource PatchPageText}">
+            The Mod Manager is required to tell your game how to load the mods that are installed
+        </TextBlock>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
+                    Margin="0,15,0,10">
+
+            <Button x:Name="ModManagerBtn"
+                    Margin="0,0,5,0"
+                     Style="{StaticResource PatchPageBtn}"
+                Click="ModManagerBtn_Click">
+                Install Mod Manager
+            </Button>
+            
+        </StackPanel>
+
+        <TextBlock Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Foreground="{StaticResource LighterGrey}">
+            <Run>For instructions on how to use the Mod Manager, </Run>
+            <Run x:Name="ModManagerInstructionsLink" Style="{StaticResource HyerlinkStyle_Run}"
+                 PreviewMouseLeftButtonDown="ModManagerInstructionsLink_PreviewMouseLeftButtonDown">click here</Run>
+        </TextBlock>
+
+        <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"
+                x:Name="FinishBtn"
+                Click="FinishBtn_Click"
+                Margin="0,0,0,0"
+                Width="100"
+                VerticalAlignment="Center"
+                Padding="2">
+            Finish
+        </Button>
+    </Grid>
+</UserControl>
