@@ -5,13 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using U_Mod.Enums;
+using U_Mod.Pages.InstallBethesda;
 
-namespace U_Mod.Pages.InstallBethesda
+namespace U_Mod.Pages
 {
     public static class Pages
     {
-        private static Lazy<UserControl> _oblivionMenu = new Lazy<UserControl>(() => new Games.Oblivion.Pages.MainMenu());
-        private static Lazy<UserControl> _falloutMenu= new Lazy<UserControl>(() => new Games.Fallout.Pages.MainMenu());
+
+        private static Lazy<UserControl> _mainMenu = new Lazy<UserControl>(() => new General.MainMenu());
+        private static Lazy<UserControl> _home = new Lazy<UserControl>(() => new General.Home());
         private static Lazy<UserControl> _nexusLogin = new Lazy<UserControl>(() => new NexusLoginPage());
         private static Lazy<UserControl> _1GameFolderSelect = new Lazy<UserControl>(() => new _1GameFolderSelect());
         private static Lazy<UserControl> _2ModList = new Lazy<UserControl>(() => new _2ModList());
@@ -24,8 +26,8 @@ namespace U_Mod.Pages.InstallBethesda
 
             return page switch
             {
-                PagesEnum.OblivionMainMenu => !refreshInstance ? _oblivionMenu.Value : new Games.Oblivion.Pages.MainMenu(),
-                PagesEnum.FalloutMainMenu => !refreshInstance ? _falloutMenu.Value : new Games.Fallout.Pages.MainMenu(),
+                PagesEnum.MainMenu => !refreshInstance ? _mainMenu.Value : new General.MainMenu(),
+                PagesEnum.Home => !refreshInstance ? _home.Value : new General.Home(),
                 PagesEnum.GameFolderSelect => !refreshInstance ? _1GameFolderSelect.Value : new _1GameFolderSelect(),
                 PagesEnum.ModsSelect => !refreshInstance ? _2ModList.Value : new _2ModList(),
                 PagesEnum.ManualDownload => !refreshInstance ? _3ManualDownload.Value : new _3ManualDownload(),

@@ -48,16 +48,7 @@ namespace U_Mod.Pages.InstallBethesda
         {
             ResetWarningText();
 
-            PagesEnum page = Static.StaticData.CurrentGame switch
-            {
-                AMGWebsite.Shared.Enums.GamesEnum.Oblivion => PagesEnum.OblivionMainMenu,
-                AMGWebsite.Shared.Enums.GamesEnum.Fallout => PagesEnum.FalloutMainMenu,
-                AMGWebsite.Shared.Enums.GamesEnum.NewVegas => throw new NotImplementedException(),
-                AMGWebsite.Shared.Enums.GamesEnum.Unknown => throw new NotImplementedException(),
-                AMGWebsite.Shared.Enums.GamesEnum.None => throw new NotImplementedException(),
-            };
-
-            Navigation.NavigateToPage(page);
+            Navigation.NavigateToPage(PagesEnum.MainMenu);
         }
 
         private void BrowseButton_Click(object sender, RoutedEventArgs e)

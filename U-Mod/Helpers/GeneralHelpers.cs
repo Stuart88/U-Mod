@@ -4,6 +4,7 @@ using AMGWebsite.Shared;
 using AMGWebsite.Shared.Enums;
 using U_Mod.Enums;
 using U_Mod.Games.Oblivion.Models;
+using U_Mod.Helpers.GameSpecific;
 using U_Mod.Models;
 
 namespace U_Mod.Helpers
@@ -21,17 +22,6 @@ namespace U_Mod.Helpers
                 GamesEnum.NewVegas => Constants.GameNameNewVegas,
                 _ => throw new NotImplementedException(),
             };
-        }
-
-        public static PagesEnum GetMainMenuPageEnumForGame()
-        {
-            return Static.StaticData.CurrentGame switch
-            {
-                GamesEnum.Oblivion => PagesEnum.OblivionMainMenu,
-                GamesEnum.Fallout => PagesEnum.FalloutMainMenu,
-                _ => throw new NotImplementedException()
-            };
-
         }
 
         public static UserDataBase GetUserDataForGame()
@@ -71,7 +61,7 @@ namespace U_Mod.Helpers
             string function = "";
             try
             {
-                OblivionAntiPiracyTool antiPiracyTool = new OblivionAntiPiracyTool();
+                OblivionTools antiPiracyTool = new OblivionTools();
                 function = "EnableAntiPiracyMeasures";
                 antiPiracyTool.EnableAntiPiracyMeasures(out errorMsg);
                 function = "ObseIniFileEnableAntiPiracyEdit";

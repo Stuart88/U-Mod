@@ -1,27 +1,25 @@
 ﻿using AMGWebsite.Shared.Enums;
 using U_Mod.Enums;
 using U_Mod.Extensions;
-using U_Mod.Games.Oblivion.Models;
 using U_Mod.Helpers;
-using U_Mod.Models;
-using System;
+using U_Mod.Pages.BaseClasses;
 using System.Linq;
 using System.Windows;
-using System.Windows.Forms;
 using Application = System.Windows.Application;
-using UserControl = System.Windows.Controls.UserControl;
+using System.Windows.Controls;
+using System;
+using U_Mod.Models;
+using U_Mod.Games.Oblivion.Models;
+using System.Windows.Forms;
+using U_Mod.Helpers.GameSpecific;
 
-namespace U_Mod.Pages.BaseClasses
+namespace U_Mod.Pages.General
 {
-    public partial class MainMenuBase : UserControl
+    /// <summary>
+    /// Interaction logic for MainMenu.xaml
+    /// </summary>
+    public partial class MainMenu : System.Windows.Controls.UserControl
     {
-        #region Internal Fields
-
-        internal System.Windows.Controls.Button ActionButton;
-
-        internal System.Windows.Controls.Button OptionsButton;
-
-        #endregion Internal Fields
 
         #region Private Fields
 
@@ -50,9 +48,11 @@ namespace U_Mod.Pages.BaseClasses
 
         #region Public Constructors
 
-        public MainMenuBase()
+        public MainMenu()
         {
-           
+            InitializeComponent();
+
+            InitComponentState();
         }
 
         internal void InitComponentState()
@@ -64,6 +64,55 @@ namespace U_Mod.Pages.BaseClasses
         #endregion Public Constructors
 
         #region Public Methods
+
+        public void ActionButton_Click(object sender, RoutedEventArgs e)
+        {
+            switch (this.ModState)
+            {
+                case ModState.Install:
+                    Navigation.NavigateToPage(PagesEnum.GameFolderSelect, true);
+                    break;
+                case ModState.Play:
+                    PlayGame();
+                    break;
+
+                case ModState.Update:
+
+                    //Auto select all mods requiring update
+
+                    Static.StaticData.UserDataStore.CurrentUserData.SelectedToInstall = Static.StaticData.MasterList.GetModUpdates()
+                        .Select(m => new ModListItem
+                        {
+                            IsDownloaded = false,
+                            IsInstalled = false,
+                            IsDirectDownloadOnly = m.Files.All(f => !string.IsNullOrEmpty(f.DirectDownloadUrl)),
+                            Mod = m
+                        })
+                        .ToList();
+
+                    Static.StaticData.UserDataStore.CurrentUserData.IsUpdating = true;
+                    Static.StaticData.UserDataStore.CurrentUserData.InstallationComplete = false;
+
+                    if (Static.StaticData.UserDataStore.CurrentUserData.SelectedToInstall.Any(m => !m.Mod.IsEssential || ModHelpers.IsNewMod(m.Mod)))
+                    {
+                        //Some mods are new and are optional, so go to mod selection list
+                        Navigation.NavigateToPage(PagesEnum.ModsSelect);
+                    }
+                    else
+                    {
+                        //Nothing to choose from, updates are just updates and/or essential, so go straight to download/process steps.
+                        Navigation.NavigateToPage(PagesEnum.ModsSelect);
+
+                        //NOTE both blocks are now the same. Not sure if this will work out or not..
+                    }
+
+                    break;
+            }
+        }
+        public void OptionsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Navigation.NavigateToPage(PagesEnum.Options, true);
+        }
 
         public void PlayGame()
         {
@@ -97,7 +146,7 @@ namespace U_Mod.Pages.BaseClasses
                 return;
             }
 
-            
+
         }
 
         #endregion Public Methods
@@ -109,18 +158,6 @@ namespace U_Mod.Pages.BaseClasses
         /// </summary>
         private void AssignActionButtonStyle()
         {
-            ActionButton.Style = (Static.StaticData.CurrentGame, this.ModState) switch
-            {
-                // OBLIVION
-                (GamesEnum.Oblivion, ModState.Install) => Application.Current.Resources["MenuInstallButton"] as Style,
-                (GamesEnum.Oblivion, ModState.Update) => Application.Current.Resources["MenuUpdateButton"] as Style,
-                (GamesEnum.Oblivion, ModState.Play) => Application.Current.Resources["MenuPlayButton"] as Style,
-                // FALLOUT
-                (GamesEnum.Fallout, ModState.Install) => Application.Current.Resources["MenuInstallButtonFallout"] as Style,
-                (GamesEnum.Fallout, ModState.Update) => Application.Current.Resources["MenuUpdateButtonFallout"] as Style,
-                (GamesEnum.Fallout, ModState.Play) => Application.Current.Resources["MenuPlayButtonFallout"] as Style,
-                _ => throw new NotImplementedException(),
-            };
 
             ActionButton.Content = this.ModState switch
             {
@@ -135,7 +172,7 @@ namespace U_Mod.Pages.BaseClasses
 
         private bool CheckSteam()
         {
-            if (!Static.StaticData.UserDataStore.OblivionUserData.IsSteamGame)
+            if (!Static.StaticData.UserDataStore.CurrentUserData.IsSteamGame)
                 return true;
 
             if (!ProcessHelpers.AnyProcessStartsWith("steamwebhelper") && !ProcessHelpers.AnyProcessStartsWith("steam") && !ProcessHelpers.AnyProcessStartsWith("SteamService"))
@@ -157,7 +194,7 @@ namespace U_Mod.Pages.BaseClasses
             {
                 case GamesEnum.Oblivion:
 
-                    OblivionAntiPiracyTool antiPiracyTool = new OblivionAntiPiracyTool();
+                    OblivionTools antiPiracyTool = new OblivionTools();
                     string currentFile = "";
                     try
                     {
@@ -245,8 +282,7 @@ namespace U_Mod.Pages.BaseClasses
             timer.Start();
         }
 
-        public virtual void ActionButton_Click(object sender, RoutedEventArgs e) { }
-        public virtual void OptionsButton_Click(object sender, RoutedEventArgs e) { }
+
         #endregion Private Methods
     }
 }

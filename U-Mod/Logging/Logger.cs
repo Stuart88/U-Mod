@@ -7,7 +7,7 @@ namespace U_Mod.Logging
 {
     public static class Logger
     {
-        private static string ErrorLogFolderPath => Path.Combine(Constants.AppDataFolder, "Logs");
+        public static string ErrorLogFolderPath => Path.Combine(Constants.AppDataFolder, "Logs");
         private static string ErrorLogFilePath => Path.Combine(ErrorLogFolderPath, $"ErrorLog-{DateTime.Now.Date:yyyy-MMM-dd}.txt");
         private static readonly object ThreadLock = new object();
         private static int _retries = 0;

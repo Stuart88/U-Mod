@@ -32,14 +32,14 @@ namespace U_Mod.Pages.InstallBethesda
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             if (Static.StaticData.UserDataStore.CurrentUserData.IsUpdating)
-                Navigation.NavigateToPage(GeneralHelpers.GetMainMenuPageEnumForGame());
+                Navigation.NavigateToPage(PagesEnum.MainMenu, true);
             else
                 Navigation.NavigateToPage(PagesEnum.GameFolderSelect);
         }
 
         private void QuitButton_Click(object sender, RoutedEventArgs e)
         {
-            Navigation.NavigateToPage(GeneralHelpers.GetMainMenuPageEnumForGame());
+            Navigation.NavigateToPage(PagesEnum.MainMenu, true);
         }
 
         private void AutoBtn_Click(object sender, RoutedEventArgs e)

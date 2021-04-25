@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using U_Mod.Enums;
 using U_Mod.Helpers;
 
 namespace U_Mod.Pages.InstallBethesda
@@ -86,7 +87,7 @@ namespace U_Mod.Pages.InstallBethesda
             Static.StaticData.UserDataStore.CurrentUserData.InstallationComplete = true;
             Static.StaticData.UserDataStore.CurrentUserData.IsUpdating = false; // this might have been false anyway, but reset now just in case user was updating.
             UpdateUserData(false);
-            Navigation.NavigateToPage(GeneralHelpers.GetMainMenuPageEnumForGame(), true);
+            Navigation.NavigateToPage(PagesEnum.MainMenu, true);
         }
 
         void UpdateUserData(bool val)

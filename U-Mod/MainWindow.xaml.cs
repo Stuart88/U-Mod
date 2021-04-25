@@ -15,6 +15,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using U_Mod.Enums;
 using U_Mod.Static;
 
 namespace U_Mod
@@ -82,9 +83,9 @@ namespace U_Mod
 
                 this.MainContent.Content = item switch
                 {
-                    MenuItem.Home => throw new NotImplementedException(),
-                    MenuItem.Oblivion => U_Mod.Pages.InstallBethesda.Pages.GetPage(Enums.PagesEnum.OblivionMainMenu, false),
-                    MenuItem.Fallout3 => U_Mod.Pages.InstallBethesda.Pages.GetPage(Enums.PagesEnum.FalloutMainMenu, false),
+                    MenuItem.Home => Pages.Pages.GetPage(PagesEnum.Home, false),
+                    MenuItem.Oblivion => Pages.Pages.GetPage(PagesEnum.MainMenu, false),
+                    MenuItem.Fallout3 => Pages.Pages.GetPage(PagesEnum.MainMenu, false),
                     _ => throw new NotImplementedException(),
                 };
             }
@@ -92,7 +93,7 @@ namespace U_Mod
 
         public void NavigateToPage(Enums.PagesEnum page, bool refreshInstance = false)
         {
-            this.MainContent.Content = U_Mod.Pages.InstallBethesda.Pages.GetPage(page, refreshInstance);
+            this.MainContent.Content = Pages.Pages.GetPage(page, refreshInstance);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using U_Mod.Enums;
 using U_Mod.Helpers;
 using U_Mod.Models;
 
@@ -30,11 +32,12 @@ namespace U_Mod.Pages.General
             InitializeComponent();
 
             ReinstallBtn.Content = $"Reinstall {GeneralHelpers.GetGameName()}";
+            ReinstallBtn.IsEnabled = Static.StaticData.UserDataStore.CurrentUserData.InstallationComplete;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Navigation.NavigateToPage(GeneralHelpers.GetMainMenuPageEnumForGame(), true);
+            Navigation.NavigateToPage(PagesEnum.MainMenu, true);
         }
 
         private void LaunchObmmButton_Click(object sender, RoutedEventArgs e)
@@ -97,6 +100,11 @@ namespace U_Mod.Pages.General
 
             };
             yesNoMessage.ShowDialog();
+        }
+
+        private void ErrorLogsBtn_Click(object sender, RoutedEventArgs e)
+        {
+            Process.Start("explorer.exe", Logging.Logger.ErrorLogFolderPath);
         }
     }
 }

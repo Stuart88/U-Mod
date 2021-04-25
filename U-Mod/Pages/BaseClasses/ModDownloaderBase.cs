@@ -19,6 +19,7 @@ using System.Windows.Threading;
 using Application = System.Windows.Application;
 using UserControl = System.Windows.Controls.UserControl;
 using U_Mod.Static;
+using U_Mod.Helpers.GameSpecific;
 
 namespace U_Mod.Pages.BaseClasses
 {
@@ -82,7 +83,7 @@ namespace U_Mod.Pages.BaseClasses
             //    GamesEnum.NewVegas => throw new NotImplementedException(),
             //};
 
-            MenuPage = GeneralHelpers.GetMainMenuPageEnumForGame();
+            MenuPage = PagesEnum.MainMenu;
             NextPage = PagesEnum.PatchAndModManager;
             PreviousPage = PagesEnum.DownloadsList;
 
@@ -281,25 +282,25 @@ namespace U_Mod.Pages.BaseClasses
             switch (Static.StaticData.CurrentGame)
             {
                 case GamesEnum.Oblivion:
-                    OblivionPostInstallFileEditor oblivionPostInstallFileEditor = new OblivionPostInstallFileEditor();
-                    OblivionAntiPiracyTool oblivionAntiPiracyTool = new OblivionAntiPiracyTool();
+                    OblivionTools oblivionTool = new OblivionTools();
+
                     string stage = "";
                     string currentFile = "";
                     try
                     {
                         stage = "(0)";
-                        oblivionPostInstallFileEditor.PerformFileEdits(out currentFile);
+                        oblivionTool.PerformFileEdits(out currentFile);
                         stage = "(1)";
-                        oblivionAntiPiracyTool.EnableAntiPiracyMeasures(out currentFile);
+                        oblivionTool.EnableAntiPiracyMeasures(out currentFile);
                         stage = "(2)";
-                        oblivionAntiPiracyTool.ObseIniFileEnableAntiPiracyEdit(out currentFile);
+                        oblivionTool.ObseIniFileEnableAntiPiracyEdit(out currentFile);
                         return true;
                     }
                     catch (Exception e)
                     {
                         GeneralHelpers.ShowMessageBox($"Post-install file edits {stage} failed at {currentFile}\n\nError: {AmgShared.Helpers.StringHelpers.ErrorMessage(e)}");
                         Logging.Logger.LogException("PostInstallFileEdits", e);
-                        Navigation.NavigateToPage(Enums.PagesEnum.OblivionMainMenu, true);
+                        Navigation.NavigateToPage(Enums.PagesEnum.MainMenu, true);
                         return false;
                     }
 
@@ -702,7 +703,7 @@ namespace U_Mod.Pages.BaseClasses
                 {
                     Logging.Logger.LogException("ZipFalloutIniFiles", e);
                     GeneralHelpers.ShowMessageBox($"Failed to zip Fallout ini files! Cannot continue.\n\nError:{e.Message}");
-                    Navigation.NavigateToPage(Enums.PagesEnum.FalloutMainMenu, true);
+                    Navigation.NavigateToPage(Enums.PagesEnum.MainMenu, true);
                 });
 
                 return false;

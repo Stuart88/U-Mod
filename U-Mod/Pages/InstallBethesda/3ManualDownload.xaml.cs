@@ -261,7 +261,7 @@ namespace U_Mod.Pages.InstallBethesda
 
         private void QuitButton_Click(object sender, RoutedEventArgs e)
         {
-            Navigation.NavigateToPage(GeneralHelpers.GetMainMenuPageEnumForGame());
+            Navigation.NavigateToPage(PagesEnum.MainMenu, true);
         }
 
 
