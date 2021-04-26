@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using U_Mod.Models;
-using AmgShared.Models;
 using U_Mod.Extensions;
-using AMGWebsite.Shared.Models;
-using AMGWebsite.Shared.Enums;
+using U_Mod.Shared.Models;
+using U_Mod.Shared.Enums;
 
 namespace U_Mod.Helpers
 {

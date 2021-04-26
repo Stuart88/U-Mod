@@ -2,7 +2,6 @@
 using System.IO;
 using System.Windows;
 using U_Mod.Static;
-using AmgShared;
 namespace U_Mod.Logging
 {
     public static class Logger
@@ -19,7 +18,7 @@ namespace U_Mod.Logging
                 lock (ThreadLock)
                 {
 
-                    string log = $"{DateTime.Now:F}\nEXCEPTION:\nGame: {Helpers.GeneralHelpers.GetGameName()}\nFunction: {processName}\nMessage:{AmgShared.Helpers.StringHelpers.ErrorMessage(e)}\nStack Trace:{e.StackTrace}\n\n";
+                    string log = $"{DateTime.Now:F}\nEXCEPTION:\nGame: {Helpers.GeneralHelpers.GetGameName()}\nFunction: {processName}\nMessage:{Shared.Helpers.StringHelpers.ErrorMessage(e)}\nStack Trace:{e.StackTrace}\n\n";
 
                     if (!Directory.Exists(ErrorLogFolderPath))
                         _ = Directory.CreateDirectory(ErrorLogFolderPath);

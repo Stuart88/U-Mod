@@ -16,8 +16,8 @@ namespace U_Mod.Converters
             if (value is bool b)
             {
                 return b 
-                    ? Application.Current.TryFindResource("LightGrey") as SolidColorBrush 
-                    : Application.Current.TryFindResource("LighterGrey") as SolidColorBrush;
+                    ? Application.Current.TryFindResource("MenuItemActive_Background") as SolidColorBrush 
+                    : Application.Current.TryFindResource("MenuItemInactive_Background") as SolidColorBrush;
             }
 
             return Visibility.Visible;

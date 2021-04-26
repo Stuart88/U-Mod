@@ -3,9 +3,8 @@ using System.IO;
 using System.Linq;
 using U_Mod.Games.Oblivion.Models;
 using U_Mod.Models;
-using AmgShared.Models;
-using AMGWebsite.Shared.Models;
-using AMGWebsite.Shared.Enums;
+using U_Mod.Shared.Models;
+using U_Mod.Shared.Enums;
 
 namespace U_Mod.Static
 {

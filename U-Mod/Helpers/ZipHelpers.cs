@@ -4,11 +4,10 @@ using System.IO.Compression;
 using System.Linq;
 using ByteSizeLib;
 using SevenZipExtractor;
-using AmgShared.Helpers;
-using AmgShared.Models;
 using SharpCompress.Archives;
 using SharpCompress.Readers;
-using AMGWebsite.Shared.Models;
+using U_Mod.Shared.Models;
+using U_Mod.Shared.Helpers;
 
 namespace U_Mod.Helpers
 {
@@ -189,7 +188,7 @@ namespace U_Mod.Helpers
             catch (Exception e)
             {
                 Logging.Logger.LogException("VerifiyZip (2)", e);
-                message = AmgShared.Helpers.StringHelpers.ErrorMessage(e);
+                message = Shared.Helpers.StringHelpers.ErrorMessage(e);
                 return false;
             }
         }

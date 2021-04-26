@@ -6,10 +6,9 @@ using System;
 using System.Windows;
 using System.Windows.Input;
 using U_Mod.Static;
-using AMGWebsite.Shared.Models;
+using U_Mod.Shared.Models;
 using System.Threading.Tasks;
 using System.Windows.Media;
-using AMGWebsite.Shared.Enums;
 
 namespace U_Mod.Pages
 {

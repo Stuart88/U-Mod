@@ -11,6 +11,7 @@
     <Grid x:Name="ScrollerGrid" HorizontalAlignment="Center" Margin="20" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -28,21 +29,25 @@
                    Text="Mod List"
                        Margin="0,5,0,5"
                        Padding="5"
-                   TextDecorations="Underline"
                    FontSize="20"
-                       Foreground="White"
                    HorizontalAlignment="Stretch"
-                       Background="Gray"
+                       Background="{StaticResource DarkerBlue}"
                    TextWrapping="Wrap"
                    TextAlignment="Center"/>
-        <ScrollViewer Grid.Row="1"
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
+                   Foreground="{StaticResource LightGrey}">
+            Select the mods you would like to install
+        </TextBlock>
+
+        <ScrollViewer Grid.Row="2"
                       Grid.Column="0"
                       Grid.ColumnSpan="3"
                       x:Name="ScrollViewer"
                       VerticalAlignment="Stretch"
                       HorizontalAlignment="Stretch"
                       PreviewMouseWheel="ScrollViewer_PreviewMouseWheel"
-                      Margin="0,20,0,20">
+                      Margin="0,10,0,20">
             <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -57,7 +62,7 @@
                                       HorizontalAlignment="Left" 
                                       Margin="0,2,0,2" 
                                       PreviewMouseLeftButtonDown="Grid_PreviewMouseLeftButtonDown"
-                                      IsEnabled="{Binding Mod.IsNotEssential}"
+                                      
                                       Width="300">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="35"/>
@@ -81,7 +86,8 @@
                                                HorizontalAlignment="Stretch" 
                                                TextWrapping="Wrap">
                                         <Run Text="{Binding Mod.ModName}" FontSize="13"/>
-                                        <Run Text="{Binding IsEssentialText, Mode=OneWay}" FontSize="10" Foreground="{StaticResource Blue}"/>
+                                        <Run Text="{Binding IsEssentialText, Mode=OneWay}" FontSize="10" />
+                                        <Run Text="{Binding IsInstalledText, Mode=OneWay}" FontSize="10" />
                                 </TextBlock>
                             </Grid>
                         </DataTemplate>
@@ -91,7 +97,7 @@
             </Grid>
         </ScrollViewer>
 
-        <StackPanel Grid.Row="2"
+        <StackPanel Grid.Row="3"
                         Grid.Column="0" Grid.ColumnSpan="4" 
                         Orientation="Horizontal"
                         HorizontalAlignment="Center">
@@ -112,14 +118,14 @@
 
         </StackPanel>
 
-        <TextBlock Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center"
+        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center"
                    Foreground="{StaticResource LightGrey}"
                    Margin="10"
                        FontSize="10">
             Note: Auto Download requires a Nexus Premium account
         </TextBlock>
 
-        <StackPanel   Grid.Row="4"
+        <StackPanel   Grid.Row="5"
                         Grid.Column="0" Grid.ColumnSpan="2" 
                         Orientation="Horizontal"
                       Margin="0,40,0,0"

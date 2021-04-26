@@ -1,6 +1,4 @@
-﻿using AmgShared.Models;
-using AMGWebsite.Shared.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -10,6 +8,7 @@ using System.Windows;
 using U_Mod.Helpers;
 using U_Mod.Models;
 using U_Mod.Pages;
+using U_Mod.Shared.Models;
 using U_Mod.Static;
 
 namespace U_Mod
@@ -19,9 +18,6 @@ namespace U_Mod
     /// </summary>
     public partial class App : Application
     {
-
-
-
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);

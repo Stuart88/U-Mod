@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using U_Mod.Models;
+using U_Mod.Shared.Helpers;
 
 namespace U_Mod.Helpers
 {
@@ -31,7 +32,7 @@ namespace U_Mod.Helpers
             {
                 Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string fullUri = string.Format("{0}?{1}", uri, AmgShared.Helpers.StringHelpers.DictToQueryString(queryDictionary));
+                string fullUri = string.Format("{0}?{1}", uri, Shared.Helpers.StringHelpers.DictToQueryString(queryDictionary));
 
                 string json_data = await Client.GetStringAsync(fullUri);
 
@@ -76,7 +77,7 @@ namespace U_Mod.Helpers
                 Client.DefaultRequestHeaders.Add("apikey", apiKey);
                 Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                string fullUri = string.Format("{0}?{1}", uri, AmgShared.Helpers.StringHelpers.DictToQueryString(queryDictionary));
+                string fullUri = string.Format("{0}?{1}", uri, Shared.Helpers.StringHelpers.DictToQueryString(queryDictionary));
 
                 string json_data = await Client.GetStringAsync(fullUri);
 
@@ -106,41 +107,8 @@ namespace U_Mod.Helpers
                 {
                     Ok = false,
                     Data = new T(),
-                    ErrorMessage = AmgShared.Helpers.StringHelpers.ErrorMessage(e)
+                    ErrorMessage = Shared.Helpers.StringHelpers.ErrorMessage(e)
                 };
-            }
-        }
-
-        public static async Task<T> FetchFromWasabi<T>(string uri, Dictionary<string, string> queryDictionary) where T : new()
-        {
-            try
-            {
-                Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-                string fullUri = string.Format("{0}?{1}", uri, AmgShared.Helpers.StringHelpers.DictToQueryString(queryDictionary));
-
-                string json_data = await Client.GetStringAsync(fullUri);
-
-                if (!string.IsNullOrEmpty(json_data))
-                {
-                    return System.Text.Json.JsonSerializer.Deserialize<T>(json_data);
-                }
-                else
-                {
-                    throw new Exception("No result data!");
-                }
-            }
-            catch (Exception e)
-            {
-                Logging.Logger.LogException("Fetch", e);
-
-                GeneralHelpers.ShowExceptionMessageBox("Mod list failed to download!", e);
-
-                return new T();
-            }
-            finally
-            {
-                Client.DefaultRequestHeaders.Accept.Clear();
             }
         }
 

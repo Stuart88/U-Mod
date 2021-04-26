@@ -10,10 +10,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using U_Mod.Enums;
-using U_Mod.Static;
 using U_Mod.Helpers;
 using U_Mod.Pages.BaseClasses;
-using AMGWebsite.Shared.Models;
+using U_Mod.Shared.Models;
 using System.Diagnostics;
 
 namespace U_Mod.Pages.InstallBethesda

@@ -2,10 +2,9 @@
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using AmgShared.Helpers;
-using AmgShared.Models;
-using AMGWebsite.Shared.Enums;
-using AMGWebsite.Shared.Models;
+using U_Mod.Shared.Enums;
+using U_Mod.Shared.Models;
+using U_Mod.Shared.Helpers;
 
 namespace U_Mod.Helpers
 {
@@ -79,7 +78,7 @@ namespace U_Mod.Helpers
             {
                 GamesEnum.Oblivion => Static.StaticData.AppData.OblivionGameFolder,
                 GamesEnum.Fallout => Static.StaticData.AppData.FalloutGameFolder,
-                _ => throw new NotImplementedException()
+                _ => ""
             };
         }
 

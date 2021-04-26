@@ -1,6 +1,4 @@
-﻿using AmgShared.Models;
-using AMGWebsite.Shared.Models;
-using U_Mod.Extensions;
+﻿using U_Mod.Extensions;
 using U_Mod.Helpers;
 using SevenZipExtractor;
 using SharpCompress.Archives;
@@ -9,6 +7,7 @@ using SharpCompress.Readers;
 using System;
 using System.IO;
 using System.Linq;
+using U_Mod.Shared.Models;
 
 namespace U_Mod.Models
 {

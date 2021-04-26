@@ -1,4 +1,4 @@
-﻿using AMGWebsite.Shared.Models;
+﻿using U_Mod.Shared.Models;
 using U_Mod.Extensions;
 using U_Mod.Helpers;
 using System.Collections.Generic;
@@ -51,7 +51,12 @@ namespace U_Mod.Pages.BaseClasses
         public bool IsInstalled { get; set; }
         public Mod Mod { get; set; }
 
-        public string IsEssentialText => this.Mod.IsEssential ? " (essential)" : "";
+        public string IsEssentialText => (this.Mod.IsEssential && !this.IsInstalled) ? " (essential)" : "";
+        public string IsInstalledText => this.IsInstalled ? " (installed)" : "";
+
+        public bool ShouldDisable => this.Mod.IsEssential || this.IsInstalled;
+
+        public bool IsIntalled => Static.StaticData.UserDataStore.CurrentUserData.InstalledModIds.Any(m => m.Id == this.Mod.Id);
 
         #endregion Public Properties
 
@@ -119,7 +124,7 @@ namespace U_Mod.Pages.BaseClasses
                 userData.SelectedToInstall = new List<ModListItem>();
             }
 
-            this.ModData = Static.StaticData.MasterList.GetAvailableModsList(true);
+            this.ModData = Static.StaticData.MasterList.GetAvailableModsList(true, true);
 
             this.InitModList();
             this.DataContext = this;
@@ -141,9 +146,8 @@ namespace U_Mod.Pages.BaseClasses
             {
                 ModListItem? updating = this.ListData.FirstOrDefault(x => x.Index == index);
 
-                if (updating == null)
+                if (updating == null || updating.ShouldDisable)
                 {
-                    //wtf
                     return;
                 }
 

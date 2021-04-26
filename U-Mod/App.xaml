@@ -4,34 +4,120 @@
              xmlns:local="clr-namespace:U_Mod" 
              xmlns:converters="clr-namespace:U_Mod.Converters"
              StartupUri="MainWindow.xaml" 
-             ShutdownMode="OnMainWindowClose">
+             ShutdownMode="OnMainWindowClose" >
     <Application.Resources>
         <!--Converters-->
         <converters:HideIfTrueConverter x:Key="HideIfTrueConverter"/>
         <converters:ActiveColourConverter x:Key="ActiveColourConverter"/>
         
         <!--Colours-->
-        <SolidColorBrush x:Key="LightGrey">DarkSlateGray</SolidColorBrush>
-        <SolidColorBrush x:Key="LighterGrey">gray</SolidColorBrush>
+        <SolidColorBrush x:Key="LightGrey">white</SolidColorBrush>
+        <SolidColorBrush x:Key="LighterGrey">white</SolidColorBrush>
         <SolidColorBrush x:Key="Blue">#3ca4ff</SolidColorBrush>
+        <SolidColorBrush x:Key="DarkerBlue">#3480eb</SolidColorBrush>
+        <SolidColorBrush x:Key="Green">Green</SolidColorBrush>
+        <SolidColorBrush x:Key="LightGreen">LightGreen</SolidColorBrush>
+        <SolidColorBrush x:Key="Black">#444444</SolidColorBrush>
+        
+        <!--Side Menu -->
+        <SolidColorBrush x:Key="MenuItemActive_Background" Color="#3480eb"/>
+        <SolidColorBrush x:Key="MenuItemInactive_Background" Color="#3ca4ff"/>
 
+        <!--Global-->
+        <Style x:Name="GridStyle" TargetType="Grid">
+            <Setter Property="Background" Value="{StaticResource Blue}"/>
+        </Style>
+        <Style x:Name="ProgressBarStyle" TargetType="ProgressBar">
+            <Setter Property="Background" Value="{StaticResource Blue}"/>
+            <Setter Property="Foreground" Value="{StaticResource LightGreen}"/>
+        </Style>
+        <Style x:Name="ButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource Blue}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="BorderBrush" Value="AntiqueWhite"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid>
+
+                            <TextBlock x:Name="CheckMark" TextAlignment="Left" FontSize="15" VerticalAlignment="Center">
+                                🗹
+                            </TextBlock>
+                            <TextBlock x:Name="UnCheckMark" TextAlignment="Left" FontSize="15"  VerticalAlignment="Center">
+                                ☐
+                            </TextBlock>
+                            <ContentPresenter Margin="18,0,0,0"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Center" />
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked"
+                                Value="True">
+                                <Setter TargetName="CheckMark"
+                                Property="Opacity"
+                                Value="1" />
+                            </Trigger>
+                            <Trigger Property="IsChecked"
+                                Value="False">
+                                <Setter TargetName="CheckMark"
+                                Property="Opacity"
+                                Value="0" />
+                            </Trigger>
+                            <Trigger Property="IsChecked"
+                                Value="False">
+                                <Setter TargetName="UnCheckMark"
+                                Property="Opacity"
+                                Value="1" />
+                            </Trigger>
+                            <Trigger Property="IsChecked"
+                                Value="True">
+                                <Setter TargetName="UnCheckMark"
+                                Property="Opacity"
+                                Value="0" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <!--Local-->
         <Style x:Key="HyerlinkStyle" TargetType="TextBlock">
             <Setter Property="TextDecorations" Value="Underline"/>
-            <Setter Property="Foreground" Value="#3ca4ff"/>
+            <Setter Property="Foreground" Value="DarkBlue"/>
             <Setter Property="Cursor" Value="Hand"/>
         </Style>
         <Style x:Key="HyerlinkStyle_Run" TargetType="Run">
             <Setter Property="TextDecorations" Value="Underline"/>
-            <Setter Property="Foreground" Value="#3ca4ff"/>
             <Setter Property="Cursor" Value="Hand"/>
         </Style>
-        <Style x:Key="ModListBtn" TargetType="Button">
+        <Style BasedOn="{StaticResource {x:Type Button}}" x:Key="ModListBtn" TargetType="Button">
             <Setter Property="Width" Value="70"/>
             <Setter Property="Margin" Value="5,0,5,0"/>
+            
         </Style>
-        <Style x:Key="MenuBtnStyle" TargetType="Button">
+        <Style BasedOn="{StaticResource {x:Type Button}}" x:Key="MenuBtnStyle" TargetType="Button">
             <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Margin" Value="0,20,0,0"/>
             <Setter Property="Margin" Value="0,20,0,0"/>
         </Style>
+        <Style BasedOn="{StaticResource {x:Type Button}}" x:Key="PlainBtnStyle" TargetType="Button">
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Foreground" Value="{StaticResource Black}"/>
+            <Setter Property="Background" Value="LightGray"/>
+        </Style>
+        
+        <!--Templates-->
+      
     </Application.Resources>
 </Application>

@@ -1,6 +1,6 @@
-﻿using AMGWebsite.Shared.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using U_Mod.Shared.Enums;
 
 namespace U_Mod.Helpers
 {
@@ -43,6 +43,7 @@ namespace U_Mod.Helpers
             return $"https://drive.google.com/uc?export=download&id={uriCode}";
         }
 
-#endregion Public Methods
+
+        #endregion Public Methods
     }
 }

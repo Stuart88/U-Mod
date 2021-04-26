@@ -1,5 +1,5 @@
-﻿using AMGWebsite.Shared.Enums;
-using U_Mod.Games;
+﻿using U_Mod.Games;
+using U_Mod.Shared.Enums;
 
 namespace U_Mod.Models
 {

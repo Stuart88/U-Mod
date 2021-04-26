@@ -1,5 +1,4 @@
-﻿using AmgShared.Helpers;
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -9,6 +8,7 @@ using U_Mod.Enums;
 using U_Mod.Helpers;
 using U_Mod.Pages.General;
 using Path = System.IO.Path;
+using U_Mod.Shared.Helpers;
 
 namespace U_Mod.Pages.InstallBethesda
 {
@@ -48,7 +48,7 @@ namespace U_Mod.Pages.InstallBethesda
         {
             ResetWarningText();
 
-            Navigation.NavigateToPage(PagesEnum.MainMenu);
+            Navigation.NavigateToPage(PagesEnum.MainMenu, true);
         }
 
         private void BrowseButton_Click(object sender, RoutedEventArgs e)
@@ -173,7 +173,7 @@ namespace U_Mod.Pages.InstallBethesda
             bool finalStepOk = true;
 
             // Game specific steps
-            if (Static.StaticData.CurrentGame == AMGWebsite.Shared.Enums.GamesEnum.Fallout)
+            if (Static.StaticData.CurrentGame == Shared.Enums.GamesEnum.Fallout)
             {
                 finalStepOk = Helpers.GameSpecific.FalloutTools.CopyCustomIniFiles();
             }
@@ -189,7 +189,7 @@ namespace U_Mod.Pages.InstallBethesda
         {
             switch (Static.StaticData.CurrentGame)
             {
-                case AMGWebsite.Shared.Enums.GamesEnum.Oblivion:
+                case Shared.Enums.GamesEnum.Oblivion:
                     return new string[]
                     {
                         "DLCBattlehornCastle.esp",
@@ -202,7 +202,7 @@ namespace U_Mod.Pages.InstallBethesda
                         "DLCVileLair.esp",
                     };
 
-                case AMGWebsite.Shared.Enums.GamesEnum.Fallout:
+                case Shared.Enums.GamesEnum.Fallout:
                     return new string[]
                     {
                         "Anchorage.esm",
@@ -221,7 +221,7 @@ namespace U_Mod.Pages.InstallBethesda
         {
             switch (Static.StaticData.CurrentGame)
             {
-                case AMGWebsite.Shared.Enums.GamesEnum.Oblivion:
+                case Shared.Enums.GamesEnum.Oblivion:
                     return new string[]
                     {
                         Path.Combine(this.SelectedGameFolder,"Oblivion.exe"),
@@ -231,7 +231,7 @@ namespace U_Mod.Pages.InstallBethesda
                         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "Oblivion", "Oblivion.ini"),
                     };
 
-                case AMGWebsite.Shared.Enums.GamesEnum.Fallout:
+                case Shared.Enums.GamesEnum.Fallout:
                     return new string[]
                     {
                         Path.Combine(this.SelectedGameFolder,"Fallout3.exe"),

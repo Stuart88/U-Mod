@@ -15,9 +15,11 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid x:Name="FilePickerGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" VerticalAlignment="Center" HorizontalAlignment="Center" >
+
+        <Grid x:Name="FilePickerGrid" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -99,21 +101,31 @@
 
         </Grid>
 
-        <Button x:Name="NextButton"   Grid.Row="1" Grid.Column="0" Width="150"
+
+        <Button x:Name="BackBtn" Grid.Row="1" Grid.Column="0" Click="BackButton_Click"
+                Width="150"
                 Margin="0,40,0,0"
+                Height="25"
+                    >Cancel</Button>
+
+        <Button x:Name="NextButton"   Grid.Row="1" Grid.Column="1" 
+                Width="150"
+                Margin="0,40,0,0"
+                 Height="25"
                  Click="NextButton_Click" >Next</Button>
 
         <TextBlock x:Name="WarningText"
-                   VerticalAlignment="Bottom"
-                   Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
-                   FontSize="11" 
+                   Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
+                   FontSize="15" 
                    HorizontalAlignment="Stretch"
-                   Foreground="Red"
-                   
+                   VerticalAlignment="Center"
+                   Foreground="{StaticResource DarkerBlue}"
+                   FontWeight="Bold"
                    TextWrapping="Wrap"
                    MinHeight="20"
                    Margin="0,10,0,0"
                    TextAlignment="Center" />
-        
+
+
     </Grid>
 </UserControl>

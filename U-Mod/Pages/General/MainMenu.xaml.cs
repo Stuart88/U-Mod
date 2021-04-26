@@ -1,15 +1,12 @@
-﻿using AMGWebsite.Shared.Enums;
+﻿using U_Mod.Shared.Enums;
 using U_Mod.Enums;
 using U_Mod.Extensions;
 using U_Mod.Helpers;
 using U_Mod.Pages.BaseClasses;
 using System.Linq;
 using System.Windows;
-using Application = System.Windows.Application;
-using System.Windows.Controls;
 using System;
 using U_Mod.Models;
-using U_Mod.Games.Oblivion.Models;
 using System.Windows.Forms;
 using U_Mod.Helpers.GameSpecific;
 using System.Windows.Media.Imaging;
@@ -157,7 +154,7 @@ namespace U_Mod.Pages.General
             }
             catch (Exception e)
             {
-                GeneralHelpers.ShowMessageBox($"Failed to launch {GeneralHelpers.GetGameName()}!\n\nError: {AmgShared.Helpers.StringHelpers.ErrorMessage(e)}");
+                GeneralHelpers.ShowMessageBox($"Failed to launch {GeneralHelpers.GetGameName()}!\n\nError: {Shared.Helpers.StringHelpers.ErrorMessage(e)}");
                 Logging.Logger.LogException($"PlayGame ({GeneralHelpers.GetGameName()})", e);
                 return;
             }
@@ -226,7 +223,7 @@ namespace U_Mod.Pages.General
                     }
                     catch (Exception e)
                     {
-                        GeneralHelpers.ShowMessageBox($"Game init failed at {currentFile}\n\nError: {AmgShared.Helpers.StringHelpers.ErrorMessage(e)}");
+                        GeneralHelpers.ShowMessageBox($"Game init failed at {currentFile}\n\nError: {Shared.Helpers.StringHelpers.ErrorMessage(e)}");
                         Logging.Logger.LogException("RunAntiPiracy (Oblivion)", e);
                         return;
                     }
@@ -295,5 +292,6 @@ namespace U_Mod.Pages.General
 
 
         #endregion Private Methods
+
     }
 }

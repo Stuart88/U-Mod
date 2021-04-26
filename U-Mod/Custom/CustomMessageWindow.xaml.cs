@@ -1,5 +1,4 @@
-﻿using AMGWebsite.Shared.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +22,8 @@ namespace U_Mod.Custom
         public string MessageText { get; set; }
         public CustomMessageWindow(string message)
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+
             this.MessageText = message;
 
             this.DataContext = this;

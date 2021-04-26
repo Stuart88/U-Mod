@@ -1,7 +1,4 @@
-﻿using AmgShared.Helpers;
-using AMGWebsite.Shared.Enums;
-using AMGWebsite.Shared.Models;
-using U_Mod.Enums;
+﻿using U_Mod.Enums;
 using U_Mod.Extensions;
 using U_Mod.Games.Oblivion.Models;
 using U_Mod.Helpers;
@@ -20,6 +17,9 @@ using Application = System.Windows.Application;
 using UserControl = System.Windows.Controls.UserControl;
 using U_Mod.Static;
 using U_Mod.Helpers.GameSpecific;
+using U_Mod.Shared.Models;
+using U_Mod.Shared.Enums;
+using U_Mod.Shared.Helpers;
 
 namespace U_Mod.Pages.BaseClasses
 {
@@ -298,7 +298,7 @@ namespace U_Mod.Pages.BaseClasses
                     }
                     catch (Exception e)
                     {
-                        GeneralHelpers.ShowMessageBox($"Post-install file edits {stage} failed at {currentFile}\n\nError: {AmgShared.Helpers.StringHelpers.ErrorMessage(e)}");
+                        GeneralHelpers.ShowMessageBox($"Post-install file edits {stage} failed at {currentFile}\n\nError: {Shared.Helpers.StringHelpers.ErrorMessage(e)}");
                         Logging.Logger.LogException("PostInstallFileEdits", e);
                         Navigation.NavigateToPage(Enums.PagesEnum.MainMenu, true);
                         return false;

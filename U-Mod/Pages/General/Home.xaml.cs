@@ -24,6 +24,8 @@ namespace U_Mod.Pages.General
     {
         public Home()
         {
+            Static.StaticData.CurrentGame = Shared.Enums.GamesEnum.None;
+
             InitializeComponent();
         }
 

@@ -37,11 +37,9 @@
                    Text="Manual Download"
                    Margin="0,5,0,5"
                    Padding="5"
-                   TextDecorations="Underline"
                    FontSize="20"
-                   Foreground="White"
                    HorizontalAlignment="Stretch"
-                   Background="Gray"
+                   Background="{StaticResource DarkerBlue}"
                    TextWrapping="Wrap"
                    TextAlignment="Center"/>
             <TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" TextWrapping="Wrap"
@@ -49,9 +47,13 @@
                 <Run>Clicking a list item will open browser tabs containing the required mod download links for the selected mod</Run>
                 <LineBreak/>
                 <LineBreak/>
-                <Run>Files should be saved to the </Run>
+                <Run>Downloaded files should be saved to the </Run>
                 <Run x:Name="GameName"></Run>
+                <LineBreak/>
                 <Run x:Name="UModFolderLink" Style="{StaticResource HyerlinkStyle_Run}" PreviewMouseLeftButtonDown="UModFolderLink_PreviewMouseLeftButtonDown"> U-Mod Folder</Run>
+                <LineBreak/>
+                <LineBreak/>
+                <Run>Items will show as checked when all mod files are downloaded</Run>
             </TextBlock>
 
             <ScrollViewer Grid.Row="2"
@@ -190,7 +192,7 @@
                 </Frame.Content>
             </Frame>
 
-            <Image x:Name="LoadingSpinner" Visibility="Collapsed" VerticalAlignment="Center" Width="50" Height="50" Margin="10" HorizontalAlignment="Center" gif:ImageBehavior.AnimatedSource="/Assets/Images/NexusLoader.gif" />
+            <Image x:Name="LoadingSpinner" Visibility="Collapsed" VerticalAlignment="Center" Width="50" Height="50" Margin="10" HorizontalAlignment="Center" gif:ImageBehavior.AnimatedSource="/Assets/Images/loader-blue.gif" />
 
         </StackPanel>
     </Grid>

@@ -35,18 +35,18 @@ namespace U_Mod.Pages.General
             ReinstallBtn.Content = $"Reinstall {GeneralHelpers.GetGameName()}";
             ReinstallBtn.IsEnabled = Static.StaticData.UserDataStore.CurrentUserData?.InstallationComplete ?? false;
 
-            ReinstallBtn.Visibility = Static.StaticData.CurrentGame == AMGWebsite.Shared.Enums.GamesEnum.None
+            ReinstallBtn.Visibility = Static.StaticData.CurrentGame == Shared.Enums.GamesEnum.None
                 ? Visibility.Collapsed
                 : Visibility.Visible;
 
-            //ErrorLogsBtn.Visibility = Static.StaticData.CurrentGame == AMGWebsite.Shared.Enums.GamesEnum.None
+            //ErrorLogsBtn.Visibility = Static.StaticData.CurrentGame == Shared.Enums.GamesEnum.None
             //   ? Visibility.Visible
             //   : Visibility.Collapsed;
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            if(Static.StaticData.CurrentGame == AMGWebsite.Shared.Enums.GamesEnum.None)
+            if(Static.StaticData.CurrentGame == Shared.Enums.GamesEnum.None)
                 Navigation.NavigateToPage(PagesEnum.Home, true);
             else
                 Navigation.NavigateToPage(PagesEnum.MainMenu, true);

@@ -25,6 +25,8 @@ namespace U_Mod.Pages
     {
         public UpdateWindow()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+
             this.MouseDown += (s, e) =>
             {
                 if (e.LeftButton == MouseButtonState.Pressed)
@@ -33,7 +35,7 @@ namespace U_Mod.Pages
                 }
             };
 
-        InitializeComponent();
+            InitializeComponent();
             BeginUpdate();
         }
 
@@ -82,7 +84,7 @@ namespace U_Mod.Pages
             catch (Exception e)
             {
                 Logging.Logger.LogException("BeginUpdate", e);
-                MessageBox.Show("Update failed! " + AmgShared.Helpers.StringHelpers.ErrorMessage(e));
+                MessageBox.Show("Update failed! " + Shared.Helpers.StringHelpers.ErrorMessage(e));
                 Application.Current.Shutdown();
             }
         }

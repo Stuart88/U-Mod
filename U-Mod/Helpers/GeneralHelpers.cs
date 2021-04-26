@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Windows;
-using AMGWebsite.Shared;
-using AMGWebsite.Shared.Enums;
 using U_Mod.Enums;
 using U_Mod.Games.Oblivion.Models;
 using U_Mod.Helpers.GameSpecific;
 using U_Mod.Models;
+using U_Mod.Shared.Constants;
+using U_Mod.Shared.Enums;
+using U_Mod.Shared.Helpers;
 
 namespace U_Mod.Helpers
 {
@@ -36,14 +37,14 @@ namespace U_Mod.Helpers
 
         public static void ShowExceptionMessageBox(Exception e)
         {
-            string error = AmgShared.Helpers.StringHelpers.ErrorMessage(e);
+            string error = Shared.Helpers.StringHelpers.ErrorMessage(e);
 
             ShowMessageBox(error);
         }
 
         public static void ShowExceptionMessageBox(string openingMessage, Exception e)
         {
-            string error = AmgShared.Helpers.StringHelpers.ErrorMessage(e);
+            string error = Shared.Helpers.StringHelpers.ErrorMessage(e);
 
             ShowMessageBox($"{openingMessage}\n\nError: {error}");
         }

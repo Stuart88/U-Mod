@@ -1,5 +1,5 @@
-﻿using AmgShared.Models;
-using AMGWebsite.Shared.Models;
+﻿
+using U_Mod.Shared.Models;
 
 namespace U_Mod.Models
 {

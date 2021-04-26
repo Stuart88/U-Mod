@@ -1,6 +1,4 @@
-﻿using AMGWebsite.Shared.Enums;
-using AMGWebsite.Shared.Models.ApiModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

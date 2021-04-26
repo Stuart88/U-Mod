@@ -15,19 +15,20 @@
             <ColumnDefinition x:Name="SideBarCol" Width="100"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <ListView x:Name="SideMenu"  Grid.Column="0"  ItemsSource="{Binding Path=SideMenuOptions}" >
+        <ListView x:Name="SideMenu"  Grid.Column="0"  ItemsSource="{Binding Path=SideMenuOptions}" Background="{StaticResource Blue}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Tag="{Binding MenuItem}" PreviewMouseLeftButtonDown="MenuItemClicked" Width="Auto" HorizontalAlignment="Stretch"
-                         Background="{Binding Active, Converter={StaticResource ActiveColourConverter}}"
-                          >
+                    <Grid Tag="{Binding MenuItem}"  Width="Auto" HorizontalAlignment="Stretch" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Width="85" Grid.Row="0" Grid.Column="0" FontSize="16" Text="{Binding Name}"
+                        <Button Width="85" Grid.Row="0" Grid.Column="0" FontSize="16" Content="{Binding Name}"
+                                Tag="{Binding MenuItem}"
+                                Click="MenuItemClicked"
                                    Foreground="White"
-                                   Padding="3"></TextBlock>
-                                       
+                                    Background="{Binding Active, Converter={StaticResource ActiveColourConverter}}"
+                                   Padding="3"/>
+
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

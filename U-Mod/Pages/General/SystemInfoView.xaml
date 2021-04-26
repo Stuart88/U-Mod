@@ -10,7 +10,8 @@
       Title="System Info">
     
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
-          Margin="0">
+          Margin="0"
+          Background="White">
         <Grid.Resources>
             <Style x:Key="GridHeader" TargetType="TextBlock">
                 <Setter Property="FontWeight" Value="Bold"/>
@@ -27,8 +28,8 @@
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="70"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="160"/>
+            <ColumnDefinition MinWidth="180"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -56,13 +57,13 @@
 
         <TextBlock Grid.Row="2" Grid.Column="0" Style="{StaticResource GridItem}">CPU</TextBlock>
         <TextBlock Grid.Row="3" Grid.Column="0" Style="{StaticResource GridItem}">Graphics</TextBlock>
-        <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource GridItem}">Memory</TextBlock>
+        <TextBlock Grid.Row="4" Grid.Column="0" Style="{StaticResource GridItem}">RAM</TextBlock>
         <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource GridItem}">Disk</TextBlock>
 
         <TextBlock Grid.Row="2" Grid.Column="1" Style="{StaticResource GridItem}">Intel i5 Quad Core</TextBlock>
         <TextBlock Grid.Row="3" Grid.Column="1" Style="{StaticResource GridItem}">NVidia GTX 1060</TextBlock>
         <TextBlock Grid.Row="4" Grid.Column="1" Style="{StaticResource GridItem}">8GB DDR4 or 12GB DDR3</TextBlock>
-        <TextBlock Grid.Row="5" Grid.Column="1" Style="{StaticResource GridItem}" TextAlignment="Center" VerticalAlignment="Stretch"> - </TextBlock>
+        <TextBlock Grid.Row="5" Grid.Column="1" Style="{StaticResource GridItem}">Dependent on mods selected</TextBlock>
 
         <TextBlock Grid.Row="2" Grid.Column="2" Text="{Binding SystemInfo.CpuName}"  Style="{StaticResource GridItem}"/>
         <TextBlock Grid.Row="3" Grid.Column="2" Text="{Binding SystemInfo.GpuNames}"  Style="{StaticResource GridItem}"/>
@@ -76,6 +77,7 @@
                 x:Name="CloseButton"
                 Click="CloseButton_Click"
                 Margin="0,30,0,0"
+                Style="{StaticResource PlainBtnStyle}"
                 Width="100">
             Close
         </Button>

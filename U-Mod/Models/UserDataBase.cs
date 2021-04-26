@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using AmgShared.Models;
-using AMGWebsite.Shared.Models;
-using AMGWebsite.Shared.Enums;
 using U_Mod.Pages.BaseClasses;
+using U_Mod.Shared.Enums;
+using U_Mod.Shared.Models;
 
 namespace U_Mod.Models
 {

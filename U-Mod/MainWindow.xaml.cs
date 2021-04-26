@@ -1,5 +1,4 @@
-﻿using AMGWebsite.Shared.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -18,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using U_Mod.Enums;
+using U_Mod.Shared.Enums;
 using U_Mod.Static;
 
 namespace U_Mod
@@ -52,6 +52,8 @@ namespace U_Mod
 
         public MainWindow()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+
             StaticData.LoadAppData();
             StaticData.CurrentGame = GamesEnum.None;
 
@@ -101,9 +103,9 @@ namespace U_Mod
             public MenuItem MenuItem { get; set; }
         }
 
-        private void MenuItemClicked(object sender, MouseButtonEventArgs e)
+        private void MenuItemClicked(object sender, RoutedEventArgs e)
         {
-            if (((Grid)sender).Tag is MenuItem item)
+            if (((Button)sender).Tag is MenuItem item)
             {
                 foreach(var opt in this.SideMenuOptions)
                 {
@@ -136,5 +138,7 @@ namespace U_Mod
         {
             this.MainContent.Content = Pages.Pages.GetPage(page, refreshInstance);
         }
+
+
     }
 }

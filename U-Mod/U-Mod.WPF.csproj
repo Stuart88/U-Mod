@@ -6,7 +6,10 @@
     <RootNamespace>U_Mod</RootNamespace>
     <UseWPF>true</UseWPF>
 	<Configurations>Debug;Release;BETA;DEV</Configurations>
-	<ApplicationIcon>AppIcon.ico</ApplicationIcon>
+	<ApplicationIcon>favicon.ico</ApplicationIcon>
+	<SignAssembly>true</SignAssembly>
+	<AssemblyOriginatorKeyFile>U-Mod-Key-2.pfx</AssemblyOriginatorKeyFile>
+	<DelaySign>false</DelaySign>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEV|AnyCPU'">
@@ -22,10 +25,12 @@
     <None Remove="Assets\Icons\StatusHelp_16x.png" />
     <None Remove="Assets\Icons\StatusOK_16x.png" />
     <None Remove="Assets\Icons\SystemInfo_16x.png" />
+    <None Remove="Assets\Images\loader-blue.gif" />
     <None Remove="Assets\Images\menu-fallout.jpg" />
     <None Remove="Assets\Images\menu-oblivion.jpg" />
     <None Remove="Assets\Images\Nexus-Login.png" />
     <None Remove="Assets\Images\NexusLoader.gif" />
+    <None Remove="Assets\Images\u-mod-logo.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,11 +43,6 @@
       <Isolated>false</Isolated>
       <EmbedInteropTypes>true</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\Mod Installer\Mod Installer\AMGWebsite\Shared\AMGWebsite.Shared.csproj" />
-    <ProjectReference Include="..\..\..\Mod Installer\Mod Installer\Shared\Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -61,6 +61,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\U-Mod.Shared\U-Mod.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Assets\Icons\icons_acid-house.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -73,6 +77,9 @@
     <Resource Include="Assets\Icons\SystemInfo_16x.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Assets\Images\loader-blue.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Images\menu-fallout.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -81,6 +88,9 @@
     </Resource>
     <Resource Include="Assets\Images\Nexus-Login.png" />
     <Resource Include="Assets\Images\NexusLoader.gif" />
+    <Resource Include="Assets\Images\u-mod-logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

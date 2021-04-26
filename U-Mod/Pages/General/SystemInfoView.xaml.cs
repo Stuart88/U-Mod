@@ -25,6 +25,7 @@ namespace U_Mod.Pages.General
 
         public SystemInfoView()
         {
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
             this.DataContext = this;
             this.SystemInfo = Static.StaticData.SystemInfo;
             InitializeComponent();

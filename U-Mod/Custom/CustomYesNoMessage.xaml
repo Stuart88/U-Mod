@@ -8,7 +8,7 @@
         Title="" 
          Height="400"
         Width="450">
-    <Grid x:Name="WindowGrid" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+    <Grid x:Name="WindowGrid" Background="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
           Height="Auto" Width="Auto">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -23,7 +23,7 @@
                       VerticalAlignment="Stretch"
                       HorizontalAlignment="Stretch"
                       Template="{DynamicResource ScrollViewerControlTemplate}">
-            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Background="White">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>

@@ -3,8 +3,7 @@ using U_Mod.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using AMGWebsite.Shared.Models;
-using AMGWebsite.Shared.Enums;
+using U_Mod.Shared.Models;
 using U_Mod.Pages.BaseClasses;
 
 namespace U_Mod.Extensions

@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:U_Mod.Pages.General"
              mc:Ignorable="d" 
             >
-    <Grid Width="200" VerticalAlignment="Center">
+    <Grid Width="250" VerticalAlignment="Center">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition/>
@@ -15,21 +15,20 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         
-        <Image Grid.Row="0" HorizontalAlignment="Center" Margin="20" Source="/Assets/Icons/icons_acid-house.png" Width="150" />
+        <Image Grid.Row="0" HorizontalAlignment="Center" Margin="0" Source="/Assets/Images/u-mod-logo.png" Width="200" />
 
-        <TextBlock Grid.Row="1" TextAlignment="Center" Margin="0,10,0,10" FontWeight="Bold">HELLO!</TextBlock>
+        <TextBlock Grid.Row="1" TextAlignment="Center" Margin="0,10,0,10" FontSize="24" FontWeight="Bold">U-Mod</TextBlock>
 
         <TextBlock Grid.Row="2" TextAlignment="Center" Margin="0,10,0,10"  TextWrapping="Wrap">
-            <Run>This is the first version of Stuart's</Run>
-            <Run FontWeight="Bold"> FREE </Run>
-            <Run> Mod Installer for your favourte Bethesda titles</Run>
+            <Run>Welcome to U-Mod, the new</Run>
+            <Run>Mod Installer for your favourite Bethesda titles</Run>
         </TextBlock>
 
         <TextBlock Grid.Row="3" TextAlignment="Center" TextWrapping="Wrap">
             Select a game from the side menu to get started
         </TextBlock>
 
-        <Button x:Name="OptionsBtn" Grid.Row="4" Height="25"
+        <Button x:Name="OptionsBtn" Grid.Row="4"
                Style="{StaticResource MenuBtnStyle}"
                 Click="OptionsBtn_Click">
             Options
