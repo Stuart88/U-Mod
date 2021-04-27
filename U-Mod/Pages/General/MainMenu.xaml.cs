@@ -83,7 +83,10 @@ namespace U_Mod.Pages.General
             switch (this.ModState)
             {
                 case ModState.Install:
-                    Navigation.NavigateToPage(PagesEnum.GameFolderSelect, true);
+                    if(Static.StaticData.UserDataStore.CurrentUserData.On4GbRamPatch)
+                        Navigation.NavigateToPage(PagesEnum.PatchAndModManager, true);
+                    else
+                        Navigation.NavigateToPage(PagesEnum.GameFolderSelect, true);
                     break;
                 case ModState.Play:
                     PlayGame();

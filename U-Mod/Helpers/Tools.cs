@@ -35,8 +35,6 @@ namespace U_Mod.Helpers
                 ? "OblivionLauncher.exe"
                 : "obse_loader.exe",
                 GamesEnum.Fallout => GeneralHelpers.GetUserDataForGame().IsSteamGame
-                //? "fose_loader.exe.shortcut.lnk"
-                //: "fose_loader.exe.shortcut.lnk",
                 ? "fose_loader.exe"
                 : "fose_loader.exe",
                 GamesEnum.NewVegas => throw new NotImplementedException(),

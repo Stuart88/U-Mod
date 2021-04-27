@@ -30,6 +30,9 @@ namespace U_Mod.Pages.InstallBethesda
         {
             InitializeComponent();
 
+            Static.StaticData.UserDataStore.CurrentUserData.On4GbRamPatch = true;
+            Static.StaticData.SaveAppData();
+
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromMilliseconds(100);
             timer.Tick += (s, e) =>
@@ -62,12 +65,12 @@ namespace U_Mod.Pages.InstallBethesda
 
         private void ManualPatchToolLink_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Tools.Run4GbPatch(false);
+            ProcessHelpers.OpenGameFolder();
         }
 
         private void ModManagerBtn_Click(object sender, RoutedEventArgs e)
         {
-            Tools.RunModManagerSetup();
+            ProcessHelpers.OpenInBrowser("https://www.nexusmods.com/skyrimspecialedition/mods/6194?tab=files");
         }
 
         private void ModManagerInstructionsLink_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -82,18 +85,13 @@ namespace U_Mod.Pages.InstallBethesda
 
         private void EndInstaller()
         {
-
+            Static.StaticData.UserDataStore.CurrentUserData.On4GbRamPatch = false;
             Static.StaticData.UserDataStore.CurrentUserData.GameVersion = Static.StaticData.GetCurrentGame().GameVersion;
             Static.StaticData.UserDataStore.CurrentUserData.InstallationComplete = true;
             Static.StaticData.UserDataStore.CurrentUserData.IsUpdating = false; // this might have been false anyway, but reset now just in case user was updating.
-            UpdateUserData(false);
+            Static.StaticData.SaveAppData();
             Navigation.NavigateToPage(PagesEnum.MainMenu, true);
         }
 
-        void UpdateUserData(bool val)
-        {
-            Static.StaticData.UserDataStore.FalloutUserData.OnFinalPage = val;
-            Static.StaticData.SaveAppData();
-        }
     }
 }

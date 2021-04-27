@@ -1,5 +1,4 @@
-﻿using U_Mod.Games;
-using U_Mod.Shared.Enums;
+﻿using U_Mod.Shared.Enums;
 
 namespace U_Mod.Models
 {
@@ -7,8 +6,8 @@ namespace U_Mod.Models
     {
         #region Public Properties
 
-        public Games.Oblivion.Models.UserData OblivionUserData { get; set; } = new Games.Oblivion.Models.UserData();
-        public Games.Fallout.Models.UserData FalloutUserData { get; set; } = new Games.Fallout.Models.UserData();
+        public UserDataBase OblivionUserData { get; set; } = new UserDataBase();
+        public UserDataBase FalloutUserData { get; set; } = new UserDataBase();
 
         public UserDataBase CurrentUserData => Static.StaticData.CurrentGame switch
         {

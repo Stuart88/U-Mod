@@ -6,7 +6,7 @@ using U_Mod.Shared.Models;
 
 namespace U_Mod.Models
 {
-    public abstract class UserDataBase
+    public class UserDataBase
     {
         public bool IgnoredCDrivecheck { get; set; }
         public bool IsSteamGame { get; set; }
@@ -32,5 +32,9 @@ namespace U_Mod.Models
         public InstallProfileEnum InstallProfile =>
             (this.HasAllDlc ? InstallProfileEnum.AllDlc : InstallProfileEnum.NoDlc) |
             (this.IsSteamGame ? InstallProfileEnum.Steam : InstallProfileEnum.NonSteam);
+
+        public bool On4GbRamPatch { get; set; }
+        public bool OnModManagerPage { get; set; }
+        public bool OnFinalPage { get; set; }
     }
 }

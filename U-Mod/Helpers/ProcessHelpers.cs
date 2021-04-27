@@ -14,6 +14,16 @@ namespace U_Mod.Helpers
             System.Diagnostics.Process.Start(sInfo);
         }
 
+        public static void OpenUModFolder()
+        {
+            Process.Start("explorer.exe", FileHelpers.GetUModFolder());
+        }
+
+        public static void OpenGameFolder()
+        {
+            Process.Start("explorer.exe", FileHelpers.GetGameFolder());
+        }
+
         public static bool ProcessRunning(string processName)
         {
             Process[] pname = Process.GetProcessesByName(processName);

@@ -293,7 +293,7 @@ namespace U_Mod.Pages.InstallBethesda
 
         private void UModFolderLink_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Process.Start("explorer.exe", FileHelpers.GetUModFolder());
+            ProcessHelpers.OpenUModFolder();
         }
     }
 }

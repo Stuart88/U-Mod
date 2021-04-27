@@ -12,12 +12,19 @@
                 <Setter Property="FontWeight" Value="Bold"/>
                 <Setter Property="FontSize" Value="16"/>
                 <Setter Property="TextAlignment" Value="Left"/>
-                <Setter Property="Margin" Value="0,0,0,0"/>
+                <Setter Property="Margin" Value="0,30,0,10"/>
                 <Setter Property="Foreground" Value="{StaticResource LightGrey}"/>
             </Style>
             <Style x:Key="PatchPageText" TargetType="TextBlock">
                 <Setter Property="FontSize" Value="14"/>
                 <Setter Property="TextAlignment" Value="Left"/>
+                <Setter Property="Margin" Value="5,0,0,10"/>
+                <Setter Property="Foreground" Value="{StaticResource LightGrey}"/>
+            </Style>
+            <Style x:Key="PatchPageTextSmall" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="TextAlignment" Value="Left"/>
+                <Setter Property="Margin" Value="0,10,0,10"/>
                 <Setter Property="Foreground" Value="{StaticResource LightGrey}"/>
             </Style>
             <Style BasedOn="{StaticResource {x:Type Button}}" x:Key="PatchPageBtn" TargetType="Button">
@@ -27,16 +34,16 @@
             </Style>
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -46,8 +53,7 @@
         <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" TextAlignment="Center"
                    FontWeight="Bold"
                    TextDecorations="Underline"
-                   FontSize="20"
-                   Margin="0,0,0,10">
+                   FontSize="20">
             Nearly Done!
         </TextBlock>
         
@@ -74,36 +80,39 @@
                 <Image Source="/Assets/Icons/StatusOK_16x.png" Height="15"/>
                 <TextBlock Text="Done!"
                        Margin="5,0,0,0"
-                       Foreground="{StaticResource Blue}"/>
+                       />
             </StackPanel>
         </StackPanel>
 
-        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Foreground="{StaticResource LighterGrey}">
-            <Run>Advanced users can run the </Run>
-            <Run x:Name="ManualPatchToolLink" Style="{StaticResource HyerlinkStyle_Run}" PreviewMouseLeftButtonDown="ManualPatchToolLink_PreviewMouseLeftButtonDown"> manual patch tool</Run>
+        <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Foreground="{StaticResource LighterGrey}" 
+                   Style="{StaticResource PatchPageTextSmall}"
+                   TextWrapping="Wrap">
+            <Run>Advanced users can run the tool manually</Run>
+            <LineBreak/>
+            <Run>from the game folder - </Run>
+            <Run x:Name="ManualPatchToolLink" Style="{StaticResource HyerlinkStyle_Run}" PreviewMouseLeftButtonDown="ManualPatchToolLink_PreviewMouseLeftButtonDown"> click here</Run>
         </TextBlock>
 
         <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource PatchPageHeading}">
-            Mod Manager
+            Mod Organizer 2
         </TextBlock>
 
         <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Style="{StaticResource PatchPageText}">
-            The Mod Manager is required to tell your game how to load the mods that are installed
+            <Run>The Mod Organizer is required to tell your game how to load the mods that are installed. </Run>
         </TextBlock>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2"
-                    Margin="0,15,0,10">
-
+        <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
             <Button x:Name="ModManagerBtn"
                     Margin="0,0,5,0"
                      Style="{StaticResource PatchPageBtn}"
                 Click="ModManagerBtn_Click">
-                Install Mod Manager
+                Download Mod Manager
             </Button>
             
         </StackPanel>
 
-        <TextBlock Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Foreground="{StaticResource LighterGrey}">
+        <TextBlock Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Foreground="{StaticResource LighterGrey}"
+                    Style="{StaticResource PatchPageTextSmall}">
             <Run>For instructions on how to use the Mod Manager, </Run>
             <Run x:Name="ModManagerInstructionsLink" Style="{StaticResource HyerlinkStyle_Run}"
                  PreviewMouseLeftButtonDown="ModManagerInstructionsLink_PreviewMouseLeftButtonDown">click here</Run>
@@ -112,7 +121,7 @@
         <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"
                 x:Name="FinishBtn"
                 Click="FinishBtn_Click"
-                Margin="0,0,0,0"
+                Margin="0,30,0,0"
                 Width="100"
                 VerticalAlignment="Center"
                 Padding="2">

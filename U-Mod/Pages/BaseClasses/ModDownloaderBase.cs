@@ -1,6 +1,5 @@
 ﻿using U_Mod.Enums;
 using U_Mod.Extensions;
-using U_Mod.Games.Oblivion.Models;
 using U_Mod.Helpers;
 using U_Mod.Models;
 using System;
@@ -64,25 +63,7 @@ namespace U_Mod.Pages.BaseClasses
 
         protected ModDownloaderBase()
         {
-            //NextPage = Static.StaticData.CurrentGame switch
-            //{
-            //    GamesEnum.Oblivion => PagesEnum.OblivionInstall7_4GBRamPAtch,
-            //    GamesEnum.Fallout => PagesEnum.FalloutInstall7_4GBRamPAtch,
-            //    GamesEnum.NewVegas => throw new NotImplementedException(),
-            //};
-            //MenuPage = Static.StaticData.CurrentGame switch
-            //{
-            //    GamesEnum.Oblivion => PagesEnum.OblivionMainMenu,
-            //    GamesEnum.Fallout => PagesEnum.FalloutMainMenu,
-            //    GamesEnum.NewVegas => throw new NotImplementedException(),
-            //};
-            //PreviousPage = Static.StaticData.CurrentGame switch
-            //{
-            //    GamesEnum.Oblivion => PagesEnum.OblivionInstall6DownloadsList,
-            //    GamesEnum.Fallout => PagesEnum.FalloutInstall6DownloadsList,
-            //    GamesEnum.NewVegas => throw new NotImplementedException(),
-            //};
-
+           
             MenuPage = PagesEnum.MainMenu;
             NextPage = PagesEnum.PatchAndModManager;
             PreviousPage = PagesEnum.DownloadsList;

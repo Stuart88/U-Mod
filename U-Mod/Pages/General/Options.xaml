@@ -33,7 +33,7 @@
                         Visibility="Collapsed">
             <TextBlock x:Name="UpdateInfo" Margin="5" Grid.Row="0" TextAlignment="Center" HorizontalAlignment="Center" Text="Restoring game backup..."/>
 
-            <Image x:Name="LoadingSpinner" HorizontalAlignment="Center" Margin="5" Height="50" Width="50" Grid.Row="1" gif:ImageBehavior.AnimatedSource="/Assets/Images/loader-blue.gif" />
+            <Image x:Name="LoadingSpinner" HorizontalAlignment="Center" Margin="5" Height="100" Width="100" Grid.Row="1" gif:ImageBehavior.AnimatedSource="/Assets/Images/loader-blue.gif" />
         </StackPanel>
     </Grid>
     

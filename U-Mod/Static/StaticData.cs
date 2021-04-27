@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Linq;
-using U_Mod.Games.Oblivion.Models;
 using U_Mod.Models;
 using U_Mod.Shared.Models;
 using U_Mod.Shared.Enums;
@@ -41,13 +40,13 @@ namespace U_Mod.Static
                 case GamesEnum.Oblivion:
                     toSave = UserDataStore.OblivionUserData;
                     savePath = Path.Combine(UModFolder, Constants.OblivionDataFileName);
-                    CompleteSave<Games.Oblivion.Models.UserData>();
+                    CompleteSave<UserDataBase>();
                     break;
 
                 case GamesEnum.Fallout:
                     toSave = UserDataStore.FalloutUserData;
                     savePath = Path.Combine(UModFolder, Constants.FalloutDataFileName);
-                    CompleteSave<Games.Fallout.Models.UserData>();
+                    CompleteSave<UserDataBase>();
                     break;
             }
 
@@ -95,11 +94,11 @@ namespace U_Mod.Static
             switch (CurrentGame)
             {
                 case GamesEnum.Oblivion:
-                    UserDataStore.OblivionUserData = Helpers.FileHelpers.LoadFile<U_Mod.Games.Oblivion.Models.UserData>(Path.Combine(UModFolder, Constants.OblivionDataFileName));
+                    UserDataStore.OblivionUserData = Helpers.FileHelpers.LoadFile<UserDataBase>(Path.Combine(UModFolder, Constants.OblivionDataFileName));
                     break;
 
                 case GamesEnum.Fallout:
-                    UserDataStore.FalloutUserData = Helpers.FileHelpers.LoadFile<U_Mod.Games.Fallout.Models.UserData>(Path.Combine(UModFolder, Constants.FalloutDataFileName));
+                    UserDataStore.FalloutUserData = Helpers.FileHelpers.LoadFile<UserDataBase>(Path.Combine(UModFolder, Constants.FalloutDataFileName));
                     break;
             }
         }
