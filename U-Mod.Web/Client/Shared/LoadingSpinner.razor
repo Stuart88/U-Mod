@@ -1,0 +1,26 @@
+﻿
+@if (Centred)
+{
+    <div class="text-center">
+        <img class="img-fluid" height="@($"{Height}px")" width="@($"{Width}px")" hidden="@Hidden" src="/images/icons/loader-blue.gif" />
+    </div>
+}
+else
+{
+    <img class="img-fluid" height="@($"{Height}px")" width="@($"{Width}px")" hidden="@Hidden" src="/images/icons/loader-blue.gif" />
+}
+
+
+@code {
+    [Parameter]
+    public int Height { get; set; }
+
+    [Parameter]
+    public int Width { get; set; }
+
+    [Parameter]
+    public bool Hidden { get; set; }
+
+    [Parameter]
+    public bool Centred { get; set; }
+}

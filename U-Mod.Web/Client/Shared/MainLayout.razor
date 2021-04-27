@@ -1,0 +1,21 @@
+﻿@inherits LayoutComponentBase
+@using U_Mod.Shared 
+
+
+<MediaQueryList>
+    <Layout Sider="true">
+        <LayoutSider>
+            <LayoutSiderContent>
+                <NavMenu />
+            </LayoutSiderContent>
+        </LayoutSider>
+        <Layout>
+            <LayoutHeader Fixed="true">
+
+            </LayoutHeader>
+            <LayoutContent>
+                @Body
+            </LayoutContent>
+        </Layout>
+    </Layout>
+</MediaQueryList>

@@ -10,6 +10,7 @@
 	<SignAssembly>true</SignAssembly>
 	<AssemblyOriginatorKeyFile>U-Mod-Key-2.pfx</AssemblyOriginatorKeyFile>
 	<DelaySign>false</DelaySign>
+	<AssemblyName>U-Mod</AssemblyName>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEV|AnyCPU'">

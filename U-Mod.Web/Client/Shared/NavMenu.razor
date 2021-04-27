@@ -1,0 +1,118 @@
+﻿@inject ResizeListener Listener
+@using U_Mod.Client.Helpers
+@implements IDisposable
+@inject NavigationManager NavigationManager
+
+<Bar Mode="BarMode.VerticalPopout"
+     CollapseMode="BarCollapseMode.Small"
+     Breakpoint="Breakpoint.Desktop"
+     NavigationBreakpoint="Breakpoint.Desktop"
+     ThemeContrast="ThemeContrast.Dark"
+     Visible="@_menuVisible">
+    <BarBrand>
+        <BarItem>
+            <BarLink To="">
+                <MenuIcon FileName="u-mod-logo.png" />
+               U-Mod
+            </BarLink>
+        </BarItem>
+
+        <img id="menu-toggle" src="@ServerHelpers.ImageSrcString($"icons/menu.svg")" @onclick="ToggleMenu" hidden="@(!_isSmall)" />
+
+    </BarBrand>
+    <BarMenu>
+        <BarStart>
+            <BarItem>
+                <BarLink To="@Constants.Pages.Index">
+                    <MenuIcon FileName="home.png" />
+                    Home
+                </BarLink>
+            </BarItem>
+            <BarItem>
+                <BarLink To="@Constants.Pages.Installer">
+                    <MenuIcon FileName="installer.png" />
+                    Installer
+                </BarLink>
+            </BarItem>
+            <BarItem>
+                <BarLink To="@Constants.Pages.Oblivion">
+                    <MenuIcon FileName="oblivion-logo.png" />
+                    Oblivion
+                </BarLink>
+            </BarItem>
+            <BarItem>
+                <BarLink To="@Constants.Pages.Fallout3">
+                    <MenuIcon FileName="fallout-logo.png" />
+                    Fallout
+                </BarLink>
+            </BarItem>
+            <BarItem>
+                <BarLink To="@Constants.Pages.Mods">
+                    <MenuIcon FileName="mod-info.png" />
+                    Mod Info
+                </BarLink>
+            </BarItem>
+        </BarStart>
+    </BarMenu>
+</Bar>
+
+<MediaQuery Media="@Breakpoints.SmallDown" @bind-Matches="_isSmall" />
+
+@code{
+
+    private void ToggleMenu()
+    {
+        _menuVisible = !_menuVisible;
+    }
+
+    BrowserWindowSize _browser = new BrowserWindowSize();
+
+
+
+    bool _menuVisible;
+
+    bool _isSmall;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _menuVisible = _isSmall;
+        U_Mod.Client.Helpers.ScreenSizeHelper.SetSmallScreen(_isSmall);
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+
+        if (firstRender)
+        {
+            // Subscribe to the OnResized event. This will do work when the browser is resized.
+            Listener.OnResized += WindowResized;
+        }
+    }
+
+    void IDisposable.Dispose()
+    {
+        // Always use IDisposable in your component to unsubscribe from the event.
+        // Be a good citizen and leave things how you found them.
+        // This way event handlers aren't called when nobody is listening.
+        Listener.OnResized -= WindowResized;
+    }
+
+    // This method will be called when the window resizes.
+    // It is ONLY called when the user stops dragging the window's edge. (It is already throttled to protect your app from perf. nightmares)
+    async void WindowResized(object _, BrowserWindowSize window)
+    {
+        // Get the browsers's width / height
+        _browser = window;
+
+        // Check a media query to see if it was matched. We can do this at any time, but it's best to check on each resize
+        _isSmall = await Listener.MatchMedia(Breakpoints.SmallDown);
+
+        _menuVisible = !_isSmall;
+
+        U_Mod.Client.Helpers.ScreenSizeHelper.SetSmallScreen(_isSmall);
+
+        // We're outside of the component's lifecycle, be sure to let it know it has to re-render.
+        StateHasChanged();
+    }
+
+}

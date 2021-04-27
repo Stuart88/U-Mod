@@ -10,10 +10,10 @@ namespace U_Mod.Static
         public const string UMod = "U-Mod";
         public const string UModBackup = "U-ModBackup.zip";
         public const  string AppDataFileName = "AppData.json";
-        public const string MasterListLink = "https://stuart-aitken.tk/getFile/masterList.json";
-        public const string SoftwareVersionLink = "https://stuart-aitken.tk/getFile/softwareVersion.json";
+        public const string MasterListLink = "https://u-mod.club/Download/GetFile/masterList.json";
+        public const string SoftwareVersionLink = "https://u-mod.club/Download/GetFile/softwareVersion.json";
         public const string DefaultSoftwareVersion = "-1";
-        public const string UpdateUrl = "https://stuart-aitken.tk/getFile/U_Mod-Setup.exe";
+        public const string UpdateUrl = "https://u-mod.club/Download/GetFile/U_Mod-Setup.exe";
         public const string OblivionDataFileName = "OblivionModInstallData.json";
         public const string FalloutDataFileName = "FalloutModInstallData.json";
         public static string AppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "U_Mod");

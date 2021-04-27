@@ -1,0 +1,22 @@
+﻿
+@page "/installer"
+
+<div class="umod-main-body">
+    <h3>Installer</h3>
+
+    <br/>
+    
+    <Button class="btn btn-primary" Clicked="GetInstaller">Get Installer</Button>
+</div>
+
+@code {
+
+    [Inject]
+    IJSRuntime ThisJsRuntime { get; set; }
+
+
+    private async void GetInstaller()
+    {
+        await ThisJsRuntime.InvokeVoidAsync("getFile", "U_Mod-Setup.exe");
+    }
+}

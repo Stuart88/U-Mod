@@ -1,0 +1,276 @@
+﻿
+@page "/mods"
+
+@inject HttpClient Http
+
+<div class="umod-main-body ultra-wide">
+
+    <h3>Mods List</h3>
+
+    <hr />
+    <div style="max-width:350px">
+        <Blazorise.Select Style="margin: 4px auto"
+                          TValue="string" SelectedValue="@selectedGame" SelectedValueChanged="@OnGameSelected">
+
+            <SelectItem Value="@("")"> - Select Game - </SelectItem>
+
+            @foreach (string g in this.Games)
+            {
+                <SelectItem Value="@g">@g</SelectItem>
+            }
+        </Blazorise.Select>
+
+        <TextEdit Style="margin: 4px auto" Text="@modsFilterQuery" TextChanged="@OnFilterQueryChanged"
+                  Placeholder="Filter Mods" />
+        <br />
+
+        <table width="100%">
+            <tr>
+                <td width="40px">
+                    <Tooltip Text="@("(Currently the Gamehub only works\nfor the Steam version)")"
+                             Placement="Placement.Right">
+                        <Blazorise.Icon IconStyle="IconStyle.Regular" Name="IconName.QuestionCircle"></Blazorise.Icon>
+                    </Tooltip>
+                </td>
+                <td>
+                    <Switch TValue="bool" Checked="@IsSteamGame" Disabled="true" CheckedChanged="(e => OnFilterSwitchChanged( SwitchOption.Steam, e))">
+                        Steam Version
+                    </Switch>
+                </td>
+            </tr>
+        </table>
+        <table width="100%">
+            <tr>
+                <td width="40px">
+                    <Tooltip Text="@(GetDlcTooltip())"
+                             Placement="Placement.Right">
+                        <Blazorise.Icon IconStyle="IconStyle.Regular" Name="IconName.QuestionCircle"></Blazorise.Icon>
+                    </Tooltip>
+                </td>
+                <td>
+                    <Switch TValue="bool" Checked="@HasAllDlc" CheckedChanged="(e => OnFilterSwitchChanged( SwitchOption.DLC, e))">
+                        I have all DLC
+                    </Switch>
+                </td>
+            </tr>
+        </table>
+        <table width="100%">
+            <tr>
+                <td width="40px">
+                    <Tooltip Text="@("Min Spec:\n- Intel i5 Quad Core\n- Nvidia GTX 1060\n- 8GB DDR4\n- (or equivalent)")"
+                             Placement="Placement.Right">
+                        <Blazorise.Icon IconStyle="IconStyle.Regular" Name="IconName.QuestionCircle"></Blazorise.Icon>
+                    </Tooltip>
+                </td>
+                <td>
+                    <Switch TValue="bool" Checked="@CanFullInstall" CheckedChanged="(e => OnFilterSwitchChanged( SwitchOption.FullInstall, e))">
+                        My PC meets the minimum spec
+                    </Switch>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <LoadingSpinner Hidden="(MasterList != null)" Centred="true" Height="100" Width="100" />
+
+    <br />
+
+    <div hidden="@(GameMods.Count == 0)">
+
+        <div class="modlistCount">
+            Found: @this.FilteredMods.Count mods
+        </div>
+
+        @foreach (var m in FilteredMods)
+        {
+            <div class="modlistItem">
+                <div class="modlistTitle">
+                    @m.ModName
+                    @if (m.IsEssential)
+                    {
+                        <span class="modlistItemEssential">ESSENTIAL</span>
+                    }
+                </div>
+                <div>
+                    <h6>Total Files: @m.Files.Count</h6>
+                    @foreach (var f in m.Files)
+                    {
+                        <div class="modlistFile">
+                            <div class="modlistFilename">
+                                @f.FileName
+                            </div>
+                            <div class="modlistDownloadLink">
+                                @if (!string.IsNullOrEmpty(f.DirectDownloadUrl))
+                                {
+                                    <Button Type="ButtonType.Link" Target="Target.Blank" To="@f.DirectDownloadUrl" Class="amg-btn">Download</Button>
+                                }
+                                else
+                                {
+                                    <Button Type="ButtonType.Link" Target="Target.Blank" To="@f.ManualDownloadUrl" Class="amg-btn">Download</Button>
+                                }
+                            </div>
+                            <hr />
+                            <div class="modlistFileContents">
+                                <div>
+                                    Extract the following content to:
+                                </div>
+                                <div class="modlistExtractlocation">
+                                    @f.ExtractLocationString($"/(your {this.selectedGame} folder)")
+                                </div>
+                                <ul>
+                                    @foreach (var c in f.Content.OrderBy(c => c.InstallOrder))
+                                    {
+                                        <li class="modlistContentfileName">@c.FileName</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+
+    </div>
+
+    <div hidden="@(GameMods.Count > 0)">
+        @if (string.IsNullOrEmpty(this.selectedGame))
+        {
+            <h4>Please select a game</h4>
+        }
+        else
+        {
+            <h4>No Results!</h4>
+        }
+    </div>
+
+</div>
+
+@code {
+
+
+    U_Mod.Shared.Models.MasterList MasterList { get; set; }
+    U_Mod.Shared.Enums.GamesEnum GameEnum { get; set; }
+    List<string> Games { get; set; } = new List<string>();
+    string selectedGame { get; set; }
+    void OnGameSelected(string g)
+    {
+        selectedGame = g;
+
+        GameEnum = this.MasterList.Games.FirstOrDefault(g => g.GameName == selectedGame)?.Game ?? GamesEnum.Unknown;
+
+        System.Diagnostics.Debug.WriteLine($"Select {g}");
+
+        this.GameMods = this.MasterList.Games
+        .FirstOrDefault(g => g.Game == GameEnum)?
+        .Mods.ToList()
+        ?? new List<Mod>();
+
+        modsFilterQuery = "";
+
+        OnFilterQueryChanged(this.modsFilterQuery);
+    }
+
+    List<Mod> GameMods { get; set; } = new List<Mod>();
+    List<Mod> FilteredMods { get; set; } = new List<Mod>();
+
+    string modsFilterQuery { get; set; }
+    void OnFilterQueryChanged(string q)
+    {
+        modsFilterQuery = q;
+
+        if (string.IsNullOrEmpty(modsFilterQuery))
+        {
+            this.FilteredMods = new List<Mod>(this.GameMods.Where(m => UserCanInstall(m)));
+        }
+        else
+        {
+            this.FilteredMods = this.GameMods.Where(m =>
+            UserCanInstall(m) && m.ModName.ToLower().Contains(q.ToLower()))
+            .OrderByDescending(m => m.ModName.ToLower().StartsWith(q.ToLower()))
+            .ThenByDescending(m => m.ModName.ToLower().Contains(q.ToLower()))
+            .ToList();
+        }
+    }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            BasicHttpResponse<MasterList> resp = await Http.GetFromJsonAsync<BasicHttpResponse<MasterList>>($"Mod/Masterlist");
+
+            this.MasterList = resp.Data;
+
+            this.Games = MasterList.Games.Select(g => g.GameName).ToList();
+
+        }
+        catch (Exception e)
+        {
+            System.Diagnostics.Debug.WriteLine(StringHelpers.ErrorMessage(e));
+        }
+
+        await base.OnInitializedAsync();
+    }
+
+    public bool IsSteamGame { get; set; } = true;
+    public bool HasAllDlc { get; set; } = false;
+    public bool CanFullInstall { get; set; } = true;
+    public InstallProfileEnum InstallProfile =>
+    (this.HasAllDlc ? InstallProfileEnum.AllDlc : InstallProfileEnum.NoDlc) |
+    (this.IsSteamGame ? InstallProfileEnum.Steam : InstallProfileEnum.NonSteam);
+
+    public bool UserCanInstall(Mod m)
+    {
+
+        return (m.IsFullInstallOnly && this.CanFullInstall || !m.IsFullInstallOnly)
+        && ((m.InstallProfile & this.InstallProfile) == this.InstallProfile
+            || (m.InstallProfile & InstallProfileEnum.NoData) == InstallProfileEnum.NoData);
+    }
+
+    void OnFilterSwitchChanged(SwitchOption opt, bool newVal)
+    {
+        switch (opt)
+        {
+            case SwitchOption.Steam:
+                this.IsSteamGame = newVal;
+                break;
+            case SwitchOption.DLC:
+                this.HasAllDlc = newVal;
+                break;
+            case SwitchOption.FullInstall:
+                this.CanFullInstall = newVal;
+                break;
+        }
+
+        //do this to update list
+        OnFilterQueryChanged(this.modsFilterQuery);
+    }
+
+    string GetDlcTooltip()
+    {
+
+        try
+        {
+            if (this.MasterList != null)
+                GameEnum = this.MasterList.Games.FirstOrDefault(g => g.GameName == selectedGame)?.Game ?? GamesEnum.Unknown;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+
+        return GameEnum switch
+        {
+            GamesEnum.Oblivion => " Oblivion DLC:\n- Battlehorn Castle\n- Shivering Isles\n- Knights of the Nine\n- Frost Crag\n- Horse Armor\n- Mehrunes Razor\n- Orrery\n- Spell Tomes\n- Thieves Den\n- Vile Lair",
+            GamesEnum.Fallout => "Fallout DLC:\n- Anchorage.esm\n- BrokenSteel.esm\n- PointLookout.esm\n- ThePitt.esm\n- Zeta.esm",
+            _ => ""
+        };
+    }
+
+    enum SwitchOption
+    {
+        Steam,
+        DLC,
+        FullInstall
+    }
+}
