@@ -66,7 +66,7 @@ namespace U_Mod.Pages.BaseClasses
            
             MenuPage = PagesEnum.MainMenu;
             NextPage = PagesEnum.PatchAndModManager;
-            PreviousPage = PagesEnum.DownloadsList;
+            PreviousPage = PagesEnum.ManualDownload;
 
             if (GeneralHelpers.GetUserDataForGame().IsUpdating)
             {

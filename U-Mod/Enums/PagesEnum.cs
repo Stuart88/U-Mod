@@ -7,7 +7,6 @@
         Options,
         GameFolderSelect,
         ModsSelect,
-        DownloadsList,
         ManualDownload,
         AutoDownload,
         PatchAndModManager

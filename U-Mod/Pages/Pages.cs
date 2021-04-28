@@ -23,20 +23,52 @@ namespace U_Mod.Pages
 
         public static UserControl GetPage(PagesEnum page, bool refreshInstance)
         {
-
-            return page switch
+            switch (page)
             {
-                PagesEnum.MainMenu => !refreshInstance ? _mainMenu.Value : new General.MainMenu(),
-                PagesEnum.Home => !refreshInstance ? _home.Value : new General.Home(),
-                PagesEnum.GameFolderSelect => !refreshInstance ? _1GameFolderSelect.Value : new _1GameFolderSelect(),
-                PagesEnum.ModsSelect => !refreshInstance ? _2ModList.Value : new _2ModList(),
-                PagesEnum.ManualDownload => !refreshInstance ? _3ManualDownload.Value : new _3ManualDownload(),
-                PagesEnum.AutoDownload => !refreshInstance ? _nexusLogin.Value : new NexusLoginPage(),
-                PagesEnum.PatchAndModManager => !refreshInstance ? _4PatchAndModManager.Value : new _4_PatchAndModManager(),
-                PagesEnum.Options => !refreshInstance? _options.Value : new General.Options(),
+                case PagesEnum.MainMenu:
+                    if (refreshInstance)
+                        _mainMenu = new Lazy<UserControl>(() => new General.MainMenu());
+                    return _mainMenu.Value;
 
-                _ => throw new NotImplementedException(),
-            };
+                case PagesEnum.Home:
+                    if (refreshInstance)
+                        _home = new Lazy<UserControl>(() => new General.Home());
+                    return _home.Value;
+
+                case PagesEnum.AutoDownload:
+                    if (refreshInstance)
+                        _nexusLogin = new Lazy<UserControl>(() => new NexusLoginPage());
+                    return _nexusLogin.Value;
+
+                case PagesEnum.GameFolderSelect:
+                    if (refreshInstance)
+                        _1GameFolderSelect = new Lazy<UserControl>(() => new _1GameFolderSelect());
+                    return _1GameFolderSelect.Value;
+
+                case PagesEnum.ModsSelect:
+                    if (refreshInstance)
+                        _2ModList = new Lazy<UserControl>(() => new _2ModList());
+                    return _2ModList.Value;
+
+                case PagesEnum.ManualDownload:
+                    if (refreshInstance)
+                        _3ManualDownload = new Lazy<UserControl>(() => new _3ManualDownload());
+                    return _3ManualDownload.Value;
+
+                case PagesEnum.PatchAndModManager:
+                    if (refreshInstance)
+                        _4PatchAndModManager = new Lazy<UserControl>(() => new _4_PatchAndModManager());
+                    return _4PatchAndModManager.Value;
+
+                case PagesEnum.Options:
+                    if (refreshInstance)
+                        _options = new Lazy<UserControl>(() => new General.Options());
+                    return _options.Value;
+
+                default:
+                    throw new NotImplementedException("Pages.GetPage() - Page not found!");
+            }
+
         }
     }
 }
