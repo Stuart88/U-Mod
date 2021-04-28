@@ -9,9 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevTool", "..\..\Mod Instal
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "U-Mod.Shared", "U-Mod.Shared\U-Mod.Shared.csproj", "{9DCABA3D-FFEC-4F4F-BE3F-75BD31D0B2B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "U-Mod.Web.Server", "U-Mod.Web\Server\U-Mod.Web.Server.csproj", "{27AF2213-21CF-4BA2-99E1-71EC02A03BD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "U-Mod.Web.Server", "U-Mod.Web\Server\U-Mod.Web.Server.csproj", "{27AF2213-21CF-4BA2-99E1-71EC02A03BD7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "U-Mod.Web.Client", "U-Mod.Web\Client\U-Mod.Web.Client.csproj", "{43265025-9E63-4AB9-B4A8-0F6849BB58C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "U-Mod.Web.Client", "U-Mod.Web\Client\U-Mod.Web.Client.csproj", "{43265025-9E63-4AB9-B4A8-0F6849BB58C3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

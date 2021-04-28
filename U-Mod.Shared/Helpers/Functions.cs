@@ -25,22 +25,6 @@ namespace U_Mod.Shared.Helpers
             return id;
         }
 
-        public static string GetNameString(this MembershipType membershipType)
-        {
-            return membershipType switch
-            {
-                MembershipType.None => "None",
-                MembershipType.Basic_Month => "Basic - 1 Month",
-                MembershipType.Basic_HalfYear => "Basic - Half Year",
-                MembershipType.Basic_Year => "Basic - Full Year",
-                MembershipType.Premium_Month => "Premium - 1 Month",
-                MembershipType.Premium_HalfYear => "Premium - Half Year",
-                MembershipType.Premium_Year => "Premium - Full Year",
-                MembershipType.Lifetime => "Lifetime",
-                _ => "None",
-            };
-        }
-
         public static List<T> GetEnumsAsList<T>()
         {
             return Enum.GetValues(typeof(T)).Cast<T>().ToList();

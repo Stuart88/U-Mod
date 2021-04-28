@@ -5,7 +5,7 @@
 
 <div class="umod-main-body ultra-wide">
 
-    <h3>Mods List</h3>
+    <h2>Mods List</h2>
 
     <hr />
     <div style="max-width:350px">
@@ -27,7 +27,7 @@
         <table width="100%">
             <tr>
                 <td width="40px">
-                    <Tooltip Text="@("(Currently the Gamehub only works\nfor the Steam version)")"
+                    <Tooltip Text="@("(Currently the installer only works\nfor the Steam version)")"
                              Placement="Placement.Right">
                         <Blazorise.Icon IconStyle="IconStyle.Regular" Name="IconName.QuestionCircle"></Blazorise.Icon>
                     </Tooltip>
@@ -102,11 +102,11 @@
                             <div class="modlistDownloadLink">
                                 @if (!string.IsNullOrEmpty(f.DirectDownloadUrl))
                                 {
-                                    <Button Type="ButtonType.Link" Target="Target.Blank" To="@f.DirectDownloadUrl" Class="amg-btn">Download</Button>
+                                    <Button Type="ButtonType.Link" Target="Target.Blank" To="@f.DirectDownloadUrl" Class="umod-btn">Download</Button>
                                 }
                                 else
                                 {
-                                    <Button Type="ButtonType.Link" Target="Target.Blank" To="@f.ManualDownloadUrl" Class="amg-btn">Download</Button>
+                                    <Button Type="ButtonType.Link" Target="Target.Blank" To="@f.ManualDownloadUrl" Class="umod-btn">Download</Button>
                                 }
                             </div>
                             <hr />
@@ -263,7 +263,7 @@
         {
             GamesEnum.Oblivion => " Oblivion DLC:\n- Battlehorn Castle\n- Shivering Isles\n- Knights of the Nine\n- Frost Crag\n- Horse Armor\n- Mehrunes Razor\n- Orrery\n- Spell Tomes\n- Thieves Den\n- Vile Lair",
             GamesEnum.Fallout => "Fallout DLC:\n- Anchorage.esm\n- BrokenSteel.esm\n- PointLookout.esm\n- ThePitt.esm\n- Zeta.esm",
-            _ => ""
+            _ => "This tooltip wil show DLC content after\nyou have selected a game\n from the options above"
         };
     }
 

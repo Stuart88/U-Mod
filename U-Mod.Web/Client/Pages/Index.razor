@@ -1,9 +1,33 @@
 ﻿@page "/"
 
-<div class="umod-main-body">    
-    <h1>Hello, world!</h1>
+@inject NavigationManager Navigate
+
+<div class="umod-main-body">
+    <h2>Welcome to U-Mod</h2>
+    <h5>Your mod installing companion.</h5>
+
+    <hr />
+
     
-    Welcome to your new app.
+    <br />
+
+
+    <div class="text-center">
+
+        <div style="max-width:250px;margin:auto;">
+            <Image class="img-fluid" Source="@ServerHelpers.ImageSrcString("/icons/u-mod-logo.png")" />
+        </div>
+        
+        <br />
+        <br />
+
+        <div id="umod-home-menu" class="text-center">
+            <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.Installer))" Class="umod-btn">Installer</Button>
+            <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.Games))" Class="umod-btn">Games</Button>
+            <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.Mods))" Class="umod-btn">Mod Info</Button>
+            <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.Help))" Class="umod-btn">Help</Button>
+        </div>
+    </div>
 </div>
 
 

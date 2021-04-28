@@ -5,12 +5,13 @@
 }
 .modlistItem {
     padding: 1%;
-    background: #4e4e4eee;
+    background: var(--blue);
     transition: background 150ms;
     margin: 10px 0;
+    border: 1px solid white;
 }
     .modlistItem:hover {
-        background: #505050;
+        background: var(--darker-blue);
         transition: background 150ms;
     }
 .modlistTitle {
@@ -19,7 +20,7 @@
 }
 .modlistFile {
     padding: 10px;
-    border: 2px solid grey;
+    border: 2px solid rgb(255 255 255 / 36%);
     margin: 7px 0;
     border-radius: 4px;
 }
@@ -36,11 +37,23 @@
 .modlistFileContents {
 }
 .modlistContentfileName {
-    color: #afafaf;
+    color: white;
     word-break: break-all;
 }
 .modlistItemEssential {
     font-weight: bold;
     font-size: 20px;
     float: right;
+    color: var(--gray-dark);
+}
+
+@media(max-width:767px) {
+    .modlistTitle {
+        font-size: 25px;
+    }
+    .modlistItemEssential {
+        font-size: 13px;
+        float: initial;
+        margin-left: 12px;
+    }
 }

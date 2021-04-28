@@ -1,0 +1,31 @@
+﻿
+@page "/games"
+
+@inject NavigationManager Navigate
+
+<div id="games-page" class="umod-main-body">
+
+    <h2>Games</h2>
+    <hr />
+
+    <div class="text-center">
+        <div>
+            <Image class="img-fluid" Source="@ServerHelpers.ImageSrcString("general/menu-oblivion.jpg")"></Image>
+        </div>
+        <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.Oblivion))" Class="umod-btn">
+            <MenuIcon FileName="oblivion-logo.png"/>
+            Oblivion
+        </Button>
+    </div>
+    <div class="text-center">
+        <div>
+            <Image class="img-fluid" Source="@ServerHelpers.ImageSrcString("general/menu-fallout.jpg")"></Image>
+        </div>
+        <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.Fallout3))" Class="umod-btn">
+            <BasicIcon Class="menu-icon" Colour="IconColour.White" FileName="fallout-logo.svg" />
+            Fallout 3
+        </Button>
+    </div>
+</div>
+
+

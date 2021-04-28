@@ -8,10 +8,26 @@
     --black: #444444
 }
 
+.preview-warning {
+    background: yellow;
+    color: black;
+    font-weight: bold;
+    padding: 5px;
+}
+
 html, body {
     font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, Arial, sans-serif;
     background: var(--blue);
     color: white;
+}
+.svg-white {
+    filter: invert(100%) sepia(0%) saturate(7498%) hue-rotate(98deg) brightness(115%) contrast(101%);
+}
+.svg-blue {
+    filter: invert(63%) sepia(22%) saturate(7196%) hue-rotate(185deg) brightness(101%) contrast(102%);
+}
+.svg-black {
+    filter: invert(0%) sepia(3%) saturate(0%) hue-rotate(282deg) brightness(107%) contrast(100%)
 }
 
 a, .btn-link {
@@ -83,9 +99,9 @@ a, .btn-link {
     width: 50px;
     height: 50px;
     position: fixed;
-    right: 5px;
-    top: 5px;
-    background: #007bff;
+    right: 33px;
+    top: 13px;
+    background: var(--lightgreen);
     border-radius: 10px;
     padding: 3px;
     box-shadow: -1px 2px 6px 1px grey;
@@ -120,9 +136,69 @@ a, .btn-link {
     max-width: 1800px;
 }
 
-@media(max-width:767px){
-    .umod-main-body {
-        min-width: calc(100vw - 65px);
+#installer-page .umod-btn{
+    margin: 25px auto;
+}
+
+.help-title {
+    color: white !important;
+    font-weight: bold;
+    font-size: 25px;
+    text-decoration: underline;
+}
+
+    .help-title a {
+        color: white !important;
     }
 
+.help-text {
+    color: white;
+    font-weight: bold;
+}
+
+.faq-section {
+    color: var(--black);
+}
+
+.faq-title {
+    font-weight: bold;
+    font-size: large;
+    font-style: italic;
+}
+
+.faq-text {
+    margin-top: 25px;
+}
+
+#help-page #help-links-table img {
+    max-width: 100px;
+}
+
+#help-trouble-shooting-section h5 button {
+    width: 100%;
+    text-align: left;
+}
+
+#games-page img{
+    max-width:250px;
+    margin:auto;
+}
+#games-page button {
+    margin: 25px auto;
+}
+
+#umod-home-menu button{
+    margin: 15px auto;
+    display:block;
+}
+
+@media(max-width:767px) {
+    .umod-main-body {
+        min-width: calc(100vw - 65px);
+        padding: 5%;
+    }
+    .mod-installer-screenshot {
+        margin: 0;
+        max-width: 100%;
+    }
 }

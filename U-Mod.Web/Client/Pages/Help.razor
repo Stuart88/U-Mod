@@ -1,0 +1,161 @@
+﻿
+@page "/help"
+
+<div id="help-page" class="umod-main-body">
+
+    <h2>Help</h2>
+    <hr />
+    <Table id="help-links-table" Borderless="true" FullWidth="true">
+        <TableRow>
+            <TableRowCell>
+                <Blazorise.Link To="https://discord.gg/YPkkju67" Target="Target.Blank">
+                    <Blazorise.Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("icons/u-mod-logo.png")" />
+                </Blazorise.Link>
+            </TableRowCell>
+            <TableRowCell>
+                <div>
+                    <div class="help-title">
+                        <Blazorise.Link To="https://discord.gg/sK72MvG" Target="Target.Blank">
+                            U-Mod Discord
+                        </Blazorise.Link>
+                    </div>
+                    <div class="help-text">
+                        Join the U-Mod Discord community for help, chat and all the latest updates
+                    </div>
+                </div>
+            </TableRowCell>
+        </TableRow>
+    </Table>
+
+    <hr />
+
+    <div id="help-trouble-shooting-section">
+        <h4>Troubleshooting</h4>
+
+        <Accordion>
+            <Collapse Visible="@collapse1Visible">
+                <CollapseHeader>
+                    <Heading Size="HeadingSize.Is5">
+                        <Button Clicked="@(()=>collapse1Visible = !collapse1Visible)">
+                            <div class="faq-title">"Access Denied" error during install</div>
+                        </Button>
+                    </Heading>
+                </CollapseHeader>
+                <CollapseBody>
+                    <div class="faq-section">
+                        <div class="faq-text">
+                            This can happen if you do not have access rights to the files and folders where your game is installed, and most commonly occurs when the game
+                            is installed in your C drive, in Program Files.
+                            <br />
+                            <br />
+                            Try running the installer in administrator mode. Right click on the U-Mod icon and select 'Run as administrator'
+                            <br />
+                            If you are accessing it from your Start Menu, you should right click >> More >> Run as administrator
+                        </div>
+                    </div>
+                </CollapseBody>
+            </Collapse>
+            <Collapse Visible="@collapse2Visible">
+                <CollapseHeader>
+                    <Heading Size="HeadingSize.Is5">
+                        <Button Clicked="@(()=>collapse2Visible = !collapse2Visible)">
+                            <div class="faq-title">Manually downloaded mods are not being checked off in the mods list</div>
+                        </Button>
+                    </Heading>
+                </CollapseHeader>
+                <CollapseBody>
+                    <div class="faq-section">
+                        <div class="faq-text">
+                            Ensure the filename of the mod stays the same after download.
+                            <br />
+                            <br />
+                            The mod zipfile name needs to match up against the name it has in the installer's masterlist. You can view mod list information
+                            <Blazorise.Link Target="Target.Blank" To="/modlist">here</Blazorise.Link>.
+                        </div>
+                    </div>
+                </CollapseBody>
+            </Collapse>
+            <Collapse Visible="@collapse3Visible">
+                <CollapseHeader>
+                    <Heading Size="HeadingSize.Is5">
+                        <Button Clicked="@(()=>collapse3Visible = !collapse3Visible)">
+                            <div class="faq-title">Oblivion game crashing on launch</div>
+                        </Button>
+                    </Heading>
+                </CollapseHeader>
+                <CollapseBody>
+                    <div class="faq-section">
+                        <div class="faq-text">
+                            This error most commonly occurs for players who do not have the additional DLC of the core Oblivion game.
+                            <br />
+                            <br />
+                            Try disabling OCO DLC FACES.esp in the Oblivion Mod Organizer.
+                        </div>
+                    </div>
+                </CollapseBody>
+            </Collapse>
+            <Collapse Visible="@collapse4Visible">
+                <CollapseHeader>
+                    <Heading Size="HeadingSize.Is5">
+                        <Button Clicked="@(()=>collapse4Visible = !collapse4Visible)">
+                            <div class="faq-title">Videos not playing in installer</div>
+                        </Button>
+                    </Heading>
+                </CollapseHeader>
+                <CollapseBody>
+                    <div class="faq-section">
+                        <div class="faq-text">
+                            To play videos within the installer, you will need to have
+                            <a href="https://support.microsoft.com/en-us/windows/get-windows-media-player-81718e0d-cfce-25b1-aee3-94596b658287" target="_blank">Windows Media Player</a>
+                            on your system.
+                            <br />
+                            <br />
+                            It is also advisable to install
+                            <a href="https://codecguide.com/download_k-lite_codec_pack_basic.htm" target="_blank">K-Lite Codec Pack</a>,
+                            which ensures your system can play as many media file types as possible.
+                            <br />
+                            <br />
+                            Finally, you can try changing your Windows 10 default video player to Windows Media Player if it
+                            is not set already. Do this by pressing the 'Win' key then type 'default apps' to locate the Default Apps system menu.
+                            From there you can change the default video player.
+                        </div>
+                    </div>
+                </CollapseBody>
+            </Collapse>
+            <Collapse Visible="@collapse5Visible">
+                <CollapseHeader>
+                    <Heading Size="HeadingSize.Is5">
+                        <Button Clicked="@(()=>collapse5Visible = !collapse5Visible)">
+                            <div class="faq-title">Installer says it has no internet connection</div>
+                        </Button>
+                    </Heading>
+                </CollapseHeader>
+                <CollapseBody>
+                    <div class="faq-section">
+                        <div class="faq-text">
+                            This can occur if you have something controlling your internet connection, such as a firewall or antivirus.
+                            <br />
+                            <br />
+                            In particular, it was recently found that BitDefender blocks the installer from making an internet connection. If you
+                            are using BitDefender, try disabling it, or set a rule to allow the installer to connect while BitDefender is running.
+                        </div>
+                    </div>
+                </CollapseBody>
+            </Collapse>
+        </Accordion>
+
+
+
+
+
+
+    </div>
+</div>
+
+@code{
+    bool collapse1Visible = false;
+    bool collapse2Visible = false;
+    bool collapse3Visible = false;
+    bool collapse4Visible = false;
+    bool collapse5Visible = false;
+}

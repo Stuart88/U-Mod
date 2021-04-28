@@ -1,16 +1,71 @@
 ﻿
 @page "/installer"
 
-<div class="umod-main-body">
-    <h3>U-Mod Installer</h3>
+<div id="installer-page" class="umod-main-body">
+    <h2>U-Mod Installer</h2>
+    <hr />
+    <br />
 
-    <br/>
+    <h5>Your mod installing companion</h5>
+
+    <br />
+
+    <div class="preview-warning" style="margin-bottom:30px">
+        <p>
+            <span style="font-size:large">WARNING!</span> The installer is still in preview mode. It works but the current mod list is not complete.
+        </p>
+        <p>
+            If you attempt to use the installer, there is a strong chance your game will not be able to run afterwards
+        </p>
+        <p>
+            If you would like to test the installer, please create a backup of your game files beforehand.
+        </p>
+        <p>
+            (The installer creates a backup automatically, but at this stage it is still recommended to create a manual backup for yourself)
+        </p>
+    </div>
+
+    <p>
+        U-Mod is a simple utility application designed to complete the lengthy and complex task of
+        adding new mods to your favourite Bethesda games.
+    </p>
+
+    <p>
+        Installing mods manually requires meticulous unzipping and transferring of possibly thousands
+        of files, taking several hours with a large risk of making a mistake along the way.
+    </p>
+
+    <p>
+        U-Mod removes the risk and does all the work for you.
+    </p>
+
+    <div class="text-center">
+        <Button class="umod-btn" Clicked="GetInstaller">Download U-Mod</Button>
+    </div>
 
     <div class="text-center">
         <Blazorise.Image Class="img-fluid mod-installer-screenshot" Source="@ServerHelpers.ImageSrcString("general/u-mod-screenshot.png")" />
     </div>
-    
-    <Button class="umod-btn" Clicked="GetInstaller">Get Installer</Button>
+
+    <hr />
+
+    <h5>U-Mod Features</h5>
+
+    <ul>
+        <li>Automatic install your desired mods from our specially curated mod lists</li>
+        <li>Automatic download of mods*</li>
+        <li>Back-up of your original game files, so any problems can easily be reverted back</li>
+    </ul>
+
+    <div class="small">
+        *Automatic download requires a Nexus premium account. If you do not have a Nexus premium account,
+        the installer also offers a manual download option.
+    </div>
+
+    <div class="text-center">
+        <Button class="umod-btn" Clicked="GetInstaller">Download U-Mod</Button>
+    </div>
+
 </div>
 
 @code {
@@ -18,9 +73,13 @@
     [Inject]
     IJSRuntime ThisJsRuntime { get; set; }
 
+    [Inject]
+    IAnalytics Analytics { get; set; }
 
     private async void GetInstaller()
     {
+        await Analytics.TrackEvent("Downloaded U-Mod", U_Mod.Shared.Constants.Constants.InstallerVersion);
         await ThisJsRuntime.InvokeVoidAsync("getFile", "U_Mod-Setup.exe");
     }
+
 }

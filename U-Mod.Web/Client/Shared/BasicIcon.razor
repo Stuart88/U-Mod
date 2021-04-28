@@ -1,0 +1,30 @@
+﻿
+
+
+<img class="@ClassName" src="@ServerHelpers.ImageSrcString($"icons/basic-icons-pack/svg/{FileName}")" />
+
+@code{
+
+    [Parameter]
+    public string FileName { get; set; }
+
+    [Parameter]
+    public string Class { get; set; }
+
+    [Parameter]
+    public IconColour Colour { get; set; }
+
+    private string ClassName { get; set; }
+
+    protected override void OnInitialized()
+    {
+        this.ClassName = this.Class + " " + this.Colour switch
+        {
+            IconColour.White => "svg-white",
+            IconColour.Black => "svg-black",
+            IconColour.Blue => "svg-blue",
+            _ => "svg-white"
+
+        };
+    }
+}

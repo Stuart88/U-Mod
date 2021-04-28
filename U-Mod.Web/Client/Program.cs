@@ -11,6 +11,7 @@ using Blazorise;
 using Blazorise.Bootstrap;
 using Blazorise.Icons.FontAwesome;
 using BlazorPro.BlazorSize;
+using Blazor.Analytics;
 
 namespace U_Mod.Web.Client
 {
@@ -35,7 +36,8 @@ namespace U_Mod.Web.Client
                      BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
                  })
                  .AddScoped<ResizeListener>()
-                 .AddScoped<IMediaQueryService, MediaQueryService>();
+                 .AddScoped<IMediaQueryService, MediaQueryService>()
+                 .AddGoogleAnalytics("G-616RTS520B");
 
             var host = builder.Build();
 
