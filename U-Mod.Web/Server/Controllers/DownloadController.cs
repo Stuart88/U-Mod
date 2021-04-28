@@ -29,7 +29,17 @@ namespace U_Mod.Server.Controllers
         [Route("[action]/{filename}")]
         public IActionResult GetFile([FromRoute] string filename)
         {
-            return File($"downloads/{filename}", System.Net.Mime.MediaTypeNames.Application.Octet);
+            try
+            {
+                if (!System.IO.File.Exists(Path.Combine(_environment.WebRootPath,"downloads",filename)))
+                    return new JsonResult("File not found!");
+
+                return File($"downloads/{filename}", System.Net.Mime.MediaTypeNames.Application.Octet);
+            }
+            catch(Exception e)
+            {
+                return (IActionResult)e;
+            }
         }
     }
 }

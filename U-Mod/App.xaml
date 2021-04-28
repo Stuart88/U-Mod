@@ -35,7 +35,7 @@
             <Setter Property="Background" Value="{StaticResource Blue}"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="FontFamily" Value="Verdana"/>
-            <Setter Property="BorderBrush" Value="AntiqueWhite"/>
+            <Setter Property="BorderBrush" Value="White"/>
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="Foreground" Value="White"/>

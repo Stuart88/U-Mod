@@ -2,11 +2,15 @@
 @page "/installer"
 
 <div class="umod-main-body">
-    <h3>Installer</h3>
+    <h3>U-Mod Installer</h3>
 
     <br/>
+
+    <div class="text-center">
+        <Blazorise.Image Class="img-fluid mod-installer-screenshot" Source="@ServerHelpers.ImageSrcString("general/u-mod-screenshot.png")" />
+    </div>
     
-    <Button class="btn btn-primary" Clicked="GetInstaller">Get Installer</Button>
+    <Button class="umod-btn" Clicked="GetInstaller">Get Installer</Button>
 </div>
 
 @code {

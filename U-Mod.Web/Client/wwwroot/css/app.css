@@ -1,7 +1,17 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+:root {
+    --blue: #3ca4ff;
+    --darker-blue:#3480eb;
+    --green: green;
+    --lightgreen: lightgreen;
+    --black: #444444
+}
+
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Verdana, Geneva, Tahoma, sans-serif, Helvetica, Arial, sans-serif;
+    background: var(--blue);
+    color: white;
 }
 
 a, .btn-link {
@@ -12,6 +22,24 @@ a, .btn-link {
     color: #fff;
     background-color: #1b6ec2;
     border-color: #1861ac;
+}
+
+.umod-btn {
+    background: var(--blue);
+    color: white;
+    border: 1px solid white;
+    width: 150px;
+    height: 34px;
+    padding: 0;
+    border-radius: 1px;
+}
+    .umod-btn:hover {
+        background: white;
+        color: var(--blue);
+    }
+
+.umod-bar-item{
+
 }
 
 .content {
@@ -50,9 +78,7 @@ a, .btn-link {
     }
 
 
-:root {
-    --blue: #3ca4ff
-}
+
 #menu-toggle {
     width: 50px;
     height: 50px;
@@ -78,11 +104,25 @@ a, .btn-link {
     background: var(--blue);
 }
 
-.umod-main-body{
-    padding:5%;
+.umod-main-body {
+    padding: 5% 100px;
     max-width: 1100px;
 }
 
-.ultra-wide{
+.mod-installer-screenshot {
+    border: 2px solid whitesmoke;
+    box-shadow: -3px 5px 28px 3px grey;
+    margin: 2%;
+    max-width: 500px;
+}
+
+.ultra-wide {
     max-width: 1800px;
+}
+
+@media(max-width:767px){
+    .umod-main-body {
+        min-width: calc(100vw - 65px);
+    }
+
 }
