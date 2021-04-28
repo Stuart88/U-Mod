@@ -6,8 +6,8 @@
                    xmlns:baseClasses="clr-namespace:U_Mod.Pages.BaseClasses"
                    xmlns:gif="http://wpfanimatedgif.codeplex.com"
                    mc:Ignorable="d" 
-                   d:DesignHeight="450" d:DesignWidth="800" VerticalAlignment="Stretch">
-    <Grid HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch">
+                  VerticalAlignment="Stretch">
+    <Grid HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" >
         <Grid.Background>
             <ImageBrush />
         </Grid.Background>
@@ -42,7 +42,7 @@
             </StackPanel>
             <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                         Width="420">
-                <Grid x:Name="ApiDetailsGrid">
+                <Grid x:Name="ApiDetailsGrid" Background="Transparent">
                     <Grid.Resources>
                         <Style x:Key="LoginInput" TargetType="TextBlock">
                             <Setter Property="Padding" Value="15"/>
