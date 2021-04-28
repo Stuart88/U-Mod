@@ -12,7 +12,7 @@
             <ImageBrush />
         </Grid.Background>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="425"/>
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -21,6 +21,7 @@
 
         <Grid Grid.Row="0" Grid.Column="0" 
             Background="#222222"
+              
             HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -42,7 +43,8 @@
             </StackPanel>
             <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                         Width="420">
-                <Grid x:Name="ApiDetailsGrid" Background="Transparent">
+                <Grid x:Name="ApiDetailsGrid" Background="Transparent"
+                      Margin="10">
                     <Grid.Resources>
                         <Style x:Key="LoginInput" TargetType="TextBlock">
                             <Setter Property="Padding" Value="15"/>
@@ -68,7 +70,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock Grid.Row="0" FontSize="32">
+                    <TextBlock Grid.Row="0" FontSize="28" TextAlignment="Center">
                         <Run Text="CONNECT TO " Foreground="White" />
                         <Run Text="NEXUS MODS " Foreground="#d98f40"/>
                     </TextBlock>
