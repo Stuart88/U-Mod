@@ -47,6 +47,17 @@
     color: var(--gray-dark);
 }
 
+.modlistCreatorLink {
+    text-align: left;
+    color: var(--yellow);
+    font-size: small;
+    margin-bottom: 5px;
+}
+
+.modlistCreatorLink .hover-pointer:hover{
+    text-decoration:underline;
+}
+
 @media(max-width:767px) {
     .modlistTitle {
         font-size: 25px;

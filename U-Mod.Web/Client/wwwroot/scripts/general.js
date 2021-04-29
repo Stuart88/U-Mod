@@ -9,6 +9,15 @@ window.getFile = function (filename) {
     document.body.removeChild(link);
 }
 
+window.openExternalUrlTab = function (url) {
+    var link = document.createElement('a');
+    link.target = "_blank";
+    link.href = url;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
 function SetAddressBar(title, url) {
     if (typeof (history.pushState) != "undefined") {
         var obj = { Title: title, Url: url };

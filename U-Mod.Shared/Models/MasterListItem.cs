@@ -121,6 +121,9 @@ namespace U_Mod.Shared.Models
     {
         #region Public Properties
 
+        public string CreatedBy { get; set; } = "";
+        public string CreatorUrl { get; set; } = "";
+
         public List<ModZipFile> Files { get; set; } = new List<ModZipFile>();
 
         public int InstallOrder { get; set; } = 0;

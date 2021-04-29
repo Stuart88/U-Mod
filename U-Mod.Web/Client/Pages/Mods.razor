@@ -27,7 +27,7 @@
         <table width="100%">
             <tr>
                 <td width="40px">
-                    <Tooltip Text="@("(Currently the installer only works\nfor the Steam version)")"
+                    <Tooltip Text="@("(Currently the installer only works\nfor Steam games)")"
                              Placement="Placement.Right">
                         <Blazorise.Icon IconStyle="IconStyle.Regular" Name="IconName.QuestionCircle"></Blazorise.Icon>
                     </Tooltip>
@@ -83,51 +83,61 @@
 
         @foreach (var m in FilteredMods)
         {
-            <div class="modlistItem">
-                <div class="modlistTitle">
-                    @m.ModName
-                    @if (m.IsEssential)
-                    {
-                        <span class="modlistItemEssential">ESSENTIAL</span>
-                    }
-                </div>
-                <div>
-                    <h6>Total Files: @m.Files.Count</h6>
-                    @foreach (var f in m.Files)
-                    {
-                        <div class="modlistFile">
-                            <div class="modlistFilename">
-                                @f.FileName
-                            </div>
-                            <div class="modlistDownloadLink">
-                                @if (!string.IsNullOrEmpty(f.DirectDownloadUrl))
-                                {
-                                    <Button Type="ButtonType.Link" Target="Target.Blank" To="@f.DirectDownloadUrl" Class="umod-btn">Download</Button>
-                                }
-                                else
-                                {
-                                    <Button Type="ButtonType.Link" Target="Target.Blank" To="@f.ManualDownloadUrl" Class="umod-btn">Download</Button>
-                                }
-                            </div>
-                            <hr />
-                            <div class="modlistFileContents">
-                                <div>
-                                    Extract the following content to:
-                                </div>
-                                <div class="modlistExtractlocation">
-                                    @f.ExtractLocationString($"/(your {this.selectedGame} folder)")
-                                </div>
-                                <ul>
-                                    @foreach (var c in f.Content.OrderBy(c => c.InstallOrder))
-                                    {
-                                        <li class="modlistContentfileName">@c.FileName</li>
-                                    }
-                                </ul>
-                            </div>
+    <div class="modlistItem">
+        <div class="modlistTitle">
+            @m.ModName
+            @if (m.IsEssential)
+            {
+                <span class="modlistItemEssential">ESSENTIAL</span>
+            }
+        </div>
+        <div class="modlistCreatorLink">
+            @if (!string.IsNullOrEmpty(m.CreatedBy) && !string.IsNullOrEmpty(m.CreatorUrl))
+            {
+                <span class="hover-pointer" @onclick="@(() => OpenLink(@m.CreatorUrl))">Created by: @m.CreatedBy</span>
+            }
+            else if (!string.IsNullOrEmpty(m.CreatedBy))
+            {
+                <span>Created by: @m.CreatedBy</span>
+            }
+        </div>
+        <div>
+            <h6>Total Files: @m.Files.Count</h6>
+            @foreach (var f in m.Files)
+            {
+                <div class="modlistFile">
+                    <div class="modlistFilename">
+                        @f.FileName
+                    </div>
+                    <div class="modlistDownloadLink">
+                        @if (!string.IsNullOrEmpty(f.DirectDownloadUrl))
+                        {
+                            <Button class="umod-btn" Clicked="@(() => OpenLink(f.DirectDownloadUrl))">Download</Button>
+                        }
+                        else
+                        {
+                            <Button class="umod-btn" Clicked="@(() => OpenLink(f.ManualDownloadUrl))">Download</Button>
+                        }
+                    </div>
+                    <hr />
+                    <div class="modlistFileContents">
+                        <div>
+                            Extract the following content to:
                         </div>
-                    }
+                        <div class="modlistExtractlocation">
+                            @f.ExtractLocationString($"/(your {this.selectedGame} folder)")
+                        </div>
+                        <ul>
+                            @foreach (var c in f.Content.OrderBy(c => c.InstallOrder))
+                            {
+                                <li class="modlistContentfileName">@c.FileName</li>
+                            }
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            }
+        </div>
+    </div>
         }
 
     </div>
@@ -263,8 +273,16 @@
         {
             GamesEnum.Oblivion => " Oblivion DLC:\n- Battlehorn Castle\n- Shivering Isles\n- Knights of the Nine\n- Frost Crag\n- Horse Armor\n- Mehrunes Razor\n- Orrery\n- Spell Tomes\n- Thieves Den\n- Vile Lair",
             GamesEnum.Fallout => "Fallout DLC:\n- Anchorage.esm\n- BrokenSteel.esm\n- PointLookout.esm\n- ThePitt.esm\n- Zeta.esm",
-            _ => "This tooltip wil show DLC content after\nyou have selected a game\n from the options above"
+            _ => "This tooltip will show DLC content after\nyou have selected a game\n from the options above"
         };
+    }
+
+    [Inject]
+    IJSRuntime ThisJsRuntime { get; set; }
+
+    private async void OpenLink(string url)
+    {
+        await ThisJsRuntime.InvokeVoidAsync("openExternalUrlTab", url);
     }
 
     enum SwitchOption

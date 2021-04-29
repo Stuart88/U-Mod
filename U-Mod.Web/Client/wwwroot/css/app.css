@@ -5,7 +5,8 @@
     --darker-blue:#3480eb;
     --green: green;
     --lightgreen: lightgreen;
-    --black: #444444
+    --black: #444444;
+    --yellow: #ffc107;
 }
 
 .preview-warning {
@@ -187,9 +188,14 @@ a, .btn-link {
     margin: 25px auto;
 }
 
-#umod-home-menu button{
+#umod-home-menu button {
     margin: 15px auto;
-    display:block;
+    display: block;
+    width: 230px;
+}
+
+.hover-pointer{
+    cursor:pointer;
 }
 
 @media(max-width:767px) {
