@@ -24,7 +24,6 @@ namespace U_Mod
 
             if (ProcessHelpers.ProcessRunning("U-Mod"))
             {
-                //MessageBox.Show("GameHub is already running!");
                 Current.Shutdown();
                 return;
             }
