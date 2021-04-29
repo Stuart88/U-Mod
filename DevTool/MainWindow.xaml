@@ -1,0 +1,153 @@
+﻿<Window x:Class="DevTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DevTool"
+        mc:Ignorable="d"
+        Title="" Height="600" Width="1000">
+    <Grid Background="Gray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Right">
+            <Button HorizontalAlignment="Right" x:Name="NewButton" Content="Clear All" Click="NewButton_Click" Style="{StaticResource TopButton}"/>
+            <Button HorizontalAlignment="Right" x:Name="LoadButton" Content="Load" Click="LoadButton_Click" Style="{StaticResource TopButton}"/>
+            <Button HorizontalAlignment="Right" x:Name="SaveButton" Content="Save" Click="SaveButton_Click" Style="{StaticResource TopButton}"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="1" x:Name="GamesCol" Grid.Column="0" Background="PaleVioletRed">
+            <TextBlock Style="{StaticResource HeaderText}" Text="Games"/>
+            <Button x:Name="AddGameBtn" Content="Add Game" Click="AddGameBtn_Click"/>
+            <StackPanel x:Name="GamesList"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" x:Name="ModsCol" Grid.Column="1" Visibility="Collapsed" Background="DarkOliveGreen">
+            <Grid x:Name="EditGame" HorizontalAlignment="Stretch" Background="PaleVioletRed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Game Name: "/>
+                <ComboBox Grid.Row="0" Grid.Column="1" x:Name="GameNameInput" Tag="GameName" Margin="0,0,20,0"
+                          SelectionChanged="GameNameInput_SelectionChanged">
+                </ComboBox>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Version: "/>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="GameVersionInput" TextChanged="TextChanged" Style="{StaticResource AddItemNameInput}" Tag="GameVersion" Margin="0,0,20,0"/>
+            </Grid>
+            <TextBlock  Style="{StaticResource HeaderText}" Text="Mods"/>
+            <Button x:Name="AddModBtn" Content="Add Mod" Click="AddModBtn_Click"/>
+            <Grid VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBox x:Name="ModsFilterText" TextChanged="TextChanged" Tag="ModsFilter" Grid.Row="0"/>
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" MaxHeight="400">
+                    <StackPanel  x:Name="ModsList"/>
+                </ScrollViewer>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="1" x:Name="FilesCol" Grid.Column="2" Visibility="Collapsed" Background="CadetBlue">
+            <StackPanel  Background="PaleVioletRed"  Height="36"/>
+            <Grid x:Name="EditMod" HorizontalAlignment="Stretch" Background="DarkOliveGreen">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Mod Name: "/>
+                <TextBox Grid.Row="0" Grid.Column="1" x:Name="ModNameInput" TextChanged="TextChanged" Style="{StaticResource AddItemNameInput}" Tag="ModName"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Version: "/>
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="ModVersionInput" InputScope="Number" TextChanged="TextChanged" Style="{StaticResource AddItemNameInput}" Tag="ModVersion"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Creator: "/>
+                <TextBox Grid.Row="2" Grid.Column="1" x:Name="CreatorInput" TextChanged="TextChanged" Style="{StaticResource AddItemNameInput}" Tag="CreatedBy"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Creator URL: "/>
+                <TextBox Grid.Row="3" Grid.Column="1" x:Name="CreatorUrlInput"  TextChanged="TextChanged" Style="{StaticResource AddItemNameInput}" Tag="CreatorUrl"/>
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Essential: "/>
+                <CheckBox Grid.Row="4" Grid.Column="1" x:Name="ModEssentialCheck" Unchecked="ModAttributeChecked" Checked="ModAttributeChecked" Tag="Essential"/>
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Steam: "/>
+                <CheckBox Grid.Row="5" Grid.Column="1" x:Name="ModIsSteamCheck" Unchecked="ModAttributeChecked" Checked="ModAttributeChecked" Tag="Steam"/>
+                <TextBlock Grid.Row="6" Grid.Column="0" Text="Non-Steam: "/>
+                <CheckBox Grid.Row="6" Grid.Column="1" x:Name="ModIsNonSteamCheck" Unchecked="ModAttributeChecked" Checked="ModAttributeChecked" Tag="NonSteam"/>
+                <TextBlock Grid.Row="7" Grid.Column="0" Text="Full Install: "/>
+                <CheckBox Grid.Row="7" Grid.Column="1" x:Name="ModFullInstallCheck" Unchecked="ModAttributeChecked" Checked="ModAttributeChecked" Tag="FullInstall"/>
+                <TextBlock Grid.Row="8" Grid.Column="0" Text="All DLC: "/>
+                <CheckBox Grid.Row="8" Grid.Column="1" x:Name="ModAllDlcCheck" Unchecked="ModAttributeChecked" Checked="ModAttributeChecked" Tag="AllDLC"/>
+                <TextBlock Grid.Row="9" Grid.Column="0" Text="Not All DLC: "/>
+                <CheckBox Grid.Row="9" Grid.Column="1" x:Name="ModNotAllDlcCheck" Unchecked="ModAttributeChecked" Checked="ModAttributeChecked" Tag="NotAllDLC" />
+            </Grid>
+            <TextBlock  Style="{StaticResource HeaderText}" Text="Zip Files"/>
+            <Button x:Name="AddFileBtn" Content="Add File" Click="AddFileBtn_Click"/>
+            <StackPanel x:Name="FilesList"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" x:Name="ContentCol" Grid.Column="3" Visibility="Collapsed" Background="LightGoldenrodYellow">
+            <StackPanel  Background="PaleVioletRed"  Height="36"/>
+            <StackPanel  Background="DarkOliveGreen"  Height="167"/>
+            <Grid x:Name="EditFile"  HorizontalAlignment="Stretch" Background="CadetBlue">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="File Name: "/>
+                <TextBox Grid.Row="0" Grid.Column="1" x:Name="ZipNameInput" TextChanged="TextChanged" Style="{StaticResource AddItemNameInput}" Tag="ZipName"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="File Type: "/>
+                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="ZipFileTypeLabel" FontWeight="Bold"/>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Size in Kb: "/>
+                <TextBox Grid.Row="2" Grid.Column="1" x:Name="FileSizeInput" InputScope="Number" TextChanged="TextChanged" Style="{StaticResource AddItemNameInput}" Tag="FileSize"/>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Manual Download: "/>
+                <TextBox Grid.Row="3" Grid.Column="1" x:Name="ManualDownloadInput" TextChanged="TextChanged" Style="{StaticResource AddItemNameInput}" Tag="ManualDownload"/>
+               
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Direct Download: "/>
+                <TextBox Grid.Row="4" Grid.Column="1" x:Name="DirectDownloadInput" TextChanged="TextChanged" Style="{StaticResource AddItemNameInput}" Tag="DirectDownload"/>
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Extract To: "/>
+                <ComboBox Grid.Row="5" Grid.Column="1" x:Name="ExtractLocationComboBox" 
+                          SelectionChanged="ExtractLocationComboBox_SelectionChanged"
+                          DropDownClosed="ExtractLocationComboBox_DropDownClosed">
+                    <ComboBoxItem Tag="Base">../</ComboBoxItem>
+                    <ComboBoxItem Tag="Data">../Data</ComboBoxItem>
+                    <ComboBoxItem Tag="DataTextures">../Data/Textures</ComboBoxItem>
+                    <ComboBoxItem Tag="DataMeshes">../Data/Meshes</ComboBoxItem>
+                    <ComboBoxItem x:Name="DataObsePlugins" Tag="DataObsePlugins">../Data/OBSE/Plugins</ComboBoxItem>
+                    <ComboBoxItem x:Name="DataFosePlugins" Tag="DataFosePlugins">../Data/FOSE/Plugins</ComboBoxItem>
+                    <ComboBoxItem Tag="DataMenus">../Data/Menus</ComboBoxItem>
+                </ComboBox>
+            </Grid>
+            <TextBlock Style="{StaticResource HeaderText}" Text="File Info" />
+            <Button x:Name="AddContentInfoBtn" Content="Add Content Info" Click="AddContentInfoBtn_Click"/>
+            <StackPanel x:Name="FileContentList"/>
+        </StackPanel>
+
+        
+    </Grid>
+</Window>

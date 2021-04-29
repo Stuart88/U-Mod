@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>UModDevToolKey.snk</AssemblyOriginatorKeyFile>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <Configurations>Debug;Release;BETA;DEV</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\U-Mod\U-Mod\U-Mod.Shared\U-Mod.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
