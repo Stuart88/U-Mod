@@ -1,14 +1,64 @@
 ﻿
 @page "/credits"
 
+@inject HttpClient Http
+
 <div class="umod-main-body">
     <h2>Credits</h2>
     <hr />
     <p>
-        The below list is to give credit for everyone behind U-Mod, including all he creators of the mods themselves.
+        The below data is to give credit for everyone behind U-Mod, including all the creators of the mods themselves.
     </p>
+
+    <h4 style="text-decoration:underline">Programmer</h4>
+    <div><a class="modlistCreatorLink" href="https://stuart-aitken.tk">Stuart Aitken</a></div>
+    <hr />
+
+    <h4 style="text-decoration:underline">Mod List Developer</h4>
+    <div class="modlistCreatorLink">William Bryce Garrison aka <span style="font-style:italic">Sister</span></div>
+    <hr />
+
+    @if (this.MasterList != null)
+    {
+        foreach (var g in this.MasterList.Games)
+        {
+            <h4 style="text-decoration:underline">@g.GameName</h4>
+            <table>
+                @foreach (var m in g.Mods)
+                {
+                    <tr>
+                        <td>@m.ModName</td>
+                        <td>
+                            <a class="modlistCreatorLink" href="@m.CreatorUrl" target="_blank">@m.CreatedBy</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <hr />
+        }
+    }
+
 </div>
 
 @code {
 
+    U_Mod.Shared.Models.MasterList MasterList { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            BasicHttpResponse<MasterList> resp = await Http.GetFromJsonAsync<BasicHttpResponse<MasterList>>($"Mod/Masterlist");
+
+            this.MasterList = resp.Data;
+
+
+        }
+        catch (Exception e)
+        {
+            System.Diagnostics.Debug.WriteLine(StringHelpers.ErrorMessage(e));
+        }
+
+        await base.OnInitializedAsync();
+    }
 }

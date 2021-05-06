@@ -94,11 +94,11 @@
         <div class="modlistCreatorLink">
             @if (!string.IsNullOrEmpty(m.CreatedBy) && !string.IsNullOrEmpty(m.CreatorUrl))
             {
-                <span class="hover-pointer" @onclick="@(() => OpenLink(@m.CreatorUrl))">Created by: @m.CreatedBy</span>
+                <a class="modlistCreatorLink" href="@m.CreatorUrl" target="_blank">Created by: @m.CreatedBy</a>
             }
             else if (!string.IsNullOrEmpty(m.CreatedBy))
             {
-                <span>Created by: @m.CreatedBy</span>
+                <span class="modlistCreatorLink">Created by: @m.CreatedBy</span>
             }
         </div>
         <div>

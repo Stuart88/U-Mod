@@ -47,9 +47,9 @@
     color: var(--gray-dark);
 }
 
-.modlistCreatorLink {
+.modlistCreatorLink{
     text-align: left;
-    color: var(--yellow);
+    color: var(--yellow)!important;
     font-size: small;
     margin-bottom: 5px;
 }

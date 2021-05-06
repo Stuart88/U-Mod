@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\downloads\masterList.json" />
     <Content Remove="wwwroot\downloads\U_Mod-Setup.exe" />
   </ItemGroup>
 
@@ -20,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\downloads\" />
     <Folder Include="wwwroot\images\backgrounds\" />
   </ItemGroup>
 
