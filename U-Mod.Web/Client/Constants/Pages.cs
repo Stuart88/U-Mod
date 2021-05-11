@@ -16,5 +16,6 @@ namespace U_Mod.Web.Client.Constants
         public const string Help = "/help";
         public const string About = "/about";
         public const string Credits = "/credits";
+        public const string Admin = "/admin";
     }
 }

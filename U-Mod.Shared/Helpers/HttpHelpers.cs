@@ -61,7 +61,7 @@ namespace U_Mod.Shared.Helpers
         }
     }
 
-    public class HttpPostHelper<T> : HttpRequestMessage
+    internal class HttpPostHelper<T> : HttpRequestMessage
     {
         public HttpPostHelper(string uri, T obj) : base(HttpMethod.Post, $"{uri}")
         {

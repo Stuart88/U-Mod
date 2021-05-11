@@ -1,0 +1,138 @@
+﻿
+@page "/admin"
+
+@inject HttpClient httpClient;
+
+<div class="umod-main-body">
+    <h2>Admin</h2>
+    <hr />
+    @if (!LoggedIn)
+    {
+        <div style="max-width:300px;">
+            <Field>
+                <FieldLabel>User</FieldLabel>
+                <TextEdit @bind-Text="@Username" Placeholder="Enter username" />
+            </Field>
+            <Field>
+                <FieldLabel>Password</FieldLabel>
+                <TextEdit @bind-Text="@Password" Role="TextRole.Password" Placeholder="Enter password" />
+            </Field>
+        </div>
+        <Blazorise.Button Class="umod-btn" Clicked="OnLogin">Login</Blazorise.Button>
+    }
+    else
+    {
+        <div style="max-width:300px;">
+            <h5>Welcome!</h5>
+            <Field>
+                <FieldLabel>Upload Masterlist</FieldLabel>
+                <FileEdit Changed="@OnFileSelectChanged" Multiple="false" Filter=".json" AutoReset="false" />
+            </Field>
+        </div>
+
+        @if (!string.IsNullOrEmpty(ErrorMessage))
+        {
+            <div style="color:white;font-weight:bold;background-color:red;margin-bottom:40px">
+                @ErrorMessage
+            </div>
+        }
+        <Blazorise.Button Class="umod-btn" Clicked="UploadMasterList">Upload</Blazorise.Button>
+        <br />
+        <br />
+        <Blazorise.Button Class="umod-btn" Clicked="OnLogout">Logout</Blazorise.Button>
+    }
+
+</div>
+
+@code {
+    public bool LoggedIn { get; set; } = false;
+
+    public string Username { get; set; }
+    public string Password { get; set; }
+    public string ErrorMessage { get; set; }
+
+    private void OnLogin()
+    {
+        if (Username == "admin" && Password == "3&W*aex2wt_2Mf-g")
+        {
+            LoggedIn = true;
+            this.StateHasChanged();
+        }
+    }
+
+    private void OnLogout()
+    {
+        Username = "";
+        Password = "";
+        LoggedIn = false;
+        this.StateHasChanged();
+    }
+
+    string fileContent;
+
+    async Task OnFileSelectChanged(FileChangedEventArgs e)
+    {
+        try
+        {
+            foreach (var file in e.Files)
+            {
+                if (file.Size > 10000000)
+                    throw new Exception("File size cannot exceed 10MB!");
+
+                if (file.Type != "application/json")
+                    throw new Exception("Incorrect file type!");
+
+
+                // A stream is going to be the destination stream we're writing to.                
+                using (var stream = new System.IO.MemoryStream())
+                {
+                    // Here we're telling the FileEdit where to write the upload result
+                    await file.WriteToStreamAsync(stream);
+
+                    // Once we reach this line it means the file is fully uploaded.
+                    // In this case we're going to offset to the beginning of file
+                    // so we can read it.
+                    stream.Seek(0, System.IO.SeekOrigin.Begin);
+
+                    // Use the stream reader to read the content of uploaded file,
+                    // in this case we can assume it is a textual file.
+                    using (var reader = new System.IO.StreamReader(stream))
+                    {
+                        fileContent = await reader.ReadToEndAsync();
+                        //Console.WriteLine(fileContent);
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = ex.Message;
+        }
+        finally
+        {
+            this.StateHasChanged();
+        }
+    }
+
+
+    async Task UploadMasterList()
+    {
+        try
+        {
+            ErrorMessage = "";
+            BasicHttpResponse<bool> res =  await U_Mod.Shared.Helpers.HttpExtentions.SendAsync<BasicHttpResponse<bool>, string>(httpClient, "Download/UploadMasterList", fileContent);
+            if (!res.Ok)
+                ErrorMessage = res.Message;
+            else
+                ErrorMessage = "SUCCESS!";
+        }
+        catch(Exception e)
+        {
+            ErrorMessage = e.ToString();
+        }
+        finally
+        {
+            this.StateHasChanged();
+        }
+    }
+}
