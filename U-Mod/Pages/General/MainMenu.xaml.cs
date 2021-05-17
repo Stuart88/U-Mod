@@ -256,7 +256,12 @@ namespace U_Mod.Pages.General
 
         private void WhileGameRunning()
         {
+            System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+            {
+                System.Windows.Application.Current.MainWindow.IsEnabled = false;
+            }));
             ActionButton.IsEnabled = false;
+            OptionsButton.IsEnabled = false;
             timer = new Timer();
             timer.Interval = 100;
             timer.Tick += (s, e) =>
@@ -276,7 +281,12 @@ namespace U_Mod.Pages.General
                         {
                             timer.Stop();
                             timer.Enabled = false;
+                            System.Windows.Application.Current.Dispatcher.BeginInvoke((Action)(() =>
+                            {
+                                System.Windows.Application.Current.MainWindow.IsEnabled = true;
+                            }));
                             ActionButton.IsEnabled = true;
+                            OptionsButton.IsEnabled = true;
                             RunAntiPiracy(true);
                         }
                         else
