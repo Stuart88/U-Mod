@@ -325,7 +325,7 @@ namespace U_Mod.Pages.BaseClasses
                         Application.Current.Dispatcher.BeginInvoke(() =>
                         {
                             debugtrack = 5;
-                            UpdateProgressText("Creating game backup...");
+                            UpdateProgressText("Creating game backup. This might take a while...");
                         });
                         debugtrack = 6;
 

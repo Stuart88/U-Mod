@@ -87,6 +87,7 @@ namespace U_Mod.Pages.General
                             Application.Current.MainWindow.IsEnabled = false;
                             ButtonsArea.Visibility = Visibility.Collapsed;
                             LoadingMessage.Visibility = Visibility.Visible;
+                            LoadingMessages.StartCyclingMessages();
                             BackBtn.IsEnabled = false;
                             BackBtn.Opacity = 0.7;
                         }));
@@ -109,6 +110,7 @@ namespace U_Mod.Pages.General
                             GeneralHelpers.ShowMessageBox($"Failed to restore game backup! Cannot continue.\n\nError:{ex.Message}");
                             ButtonsArea.Visibility = Visibility.Visible;
                             LoadingMessage.Visibility = Visibility.Collapsed;
+                            LoadingMessages.StopCyclingMessages();
                             BackBtn.IsEnabled = true;
                             BackBtn.Opacity = 1;
                         }));

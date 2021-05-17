@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:U_Mod.Pages.General"
-              xmlns:gif="http://wpfanimatedgif.codeplex.com"
+              xmlns:gif="http://wpfanimatedgif.codeplex.com" xmlns:usercontrols="clr-namespace:U_Mod.Pages.UserControls"
              mc:Ignorable="d" >
     <Grid VerticalAlignment="Center" Margin="20">
         <Grid.RowDefinitions>
@@ -31,9 +31,15 @@
                    Grid.ColumnSpan="3" 
                         Margin="0,30,0,0"
                         Visibility="Collapsed">
-            <TextBlock x:Name="UpdateInfo" Margin="5" Grid.Row="0" TextAlignment="Center" HorizontalAlignment="Center" Text="Restoring game backup..."/>
+            <TextBlock x:Name="UpdateInfo" Margin="5"  TextAlignment="Center" HorizontalAlignment="Center">
+                <Run Text="Restoring game backup"/>
+                <LineBreak/>
+                <Run Text="This might take a little while..."/>
+            </TextBlock>
 
-            <Image x:Name="LoadingSpinner" HorizontalAlignment="Center" Margin="5" Height="100" Width="100" Grid.Row="1" gif:ImageBehavior.AnimatedSource="/Assets/Images/loader-blue.gif" />
+            <Image x:Name="LoadingSpinner" HorizontalAlignment="Center" Margin="5" Height="100" Width="100"  gif:ImageBehavior.AnimatedSource="/Assets/Images/loader-blue.gif" />
+
+            <usercontrols:LoadingMessages HorizontalAlignment="Center" Margin="0,15,0,0" x:Name="LoadingMessages" />
         </StackPanel>
     </Grid>
     
