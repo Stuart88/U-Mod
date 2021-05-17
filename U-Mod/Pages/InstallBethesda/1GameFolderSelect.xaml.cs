@@ -30,7 +30,7 @@ namespace U_Mod.Pages.InstallBethesda
             InitializeComponent();
 
             this.FolderSelectText_GameName.Text = GeneralHelpers.GetGameName();
-            this.SelectedGameFolder = FileHelpers.GetGameFolder();
+            this.SelectedGameFolder = Helpers.FileHelpers.GetGameFolder();
             this.SelectedFolderText.Text = this.SelectedGameFolder.LeftTrimToLength(40);
             SelectedFolderText.Focus();
             SelectedFolderText.CaretIndex = int.MaxValue;
@@ -278,7 +278,7 @@ namespace U_Mod.Pages.InstallBethesda
 
                 this.SelectedGameFolder = dialog.SelectedPath;
                 SelectedFolderText.Text = dialog.SelectedPath.LeftTrimToLength(40);
-                FileHelpers.SetGameFolder(dialog.SelectedPath);
+                Helpers.FileHelpers.SetGameFolder(dialog.SelectedPath);
                 this.Focus();
                 ResetWarningText();
             }

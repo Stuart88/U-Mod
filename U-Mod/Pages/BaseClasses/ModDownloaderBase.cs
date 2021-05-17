@@ -95,7 +95,7 @@ namespace U_Mod.Pages.BaseClasses
                 {
                     DirectDownloadUrl = s.DirectDownloadUrl,
                     FileName = s.FileName,
-                    DownloadedPath = Path.Combine(FileHelpers.GetUModFolder(), s.FileName),
+                    DownloadedPath = Path.Combine(Helpers.FileHelpers.GetUModFolder(), s.FileName),
                     ZipFile = s
                 })
                 .ToList();
@@ -313,7 +313,7 @@ namespace U_Mod.Pages.BaseClasses
                         debugtrack = 2;
                         this.FinalFilePaths = Static.StaticData.MasterList.GetModListForReinstall()
                             .SelectMany(m => m.Files)
-                            .Select(zip => (Path.Combine(FileHelpers.GetUModFolder(), zip.FileName), zip))
+                            .Select(zip => (Path.Combine(Helpers.FileHelpers.GetUModFolder(), zip.FileName), zip))
                             .OrderBy(i => Static.StaticData.MasterList.GetParentMod(i.zip.Id).InstallOrder)
                             .ThenBy(i => i.zip.InstallOrder)
                             .ToList();
@@ -458,7 +458,7 @@ namespace U_Mod.Pages.BaseClasses
 
                 try
                 {
-                    DirectoryInfo tempFolder = new DirectoryInfo(FileHelpers.GetFileExtractionTempFolderPath());
+                    DirectoryInfo tempFolder = new DirectoryInfo(Helpers.FileHelpers.GetFileExtractionTempFolderPath());
                     tempFolder.EmptyDirectory();
                 }
                 catch (Exception e)
@@ -533,11 +533,11 @@ namespace U_Mod.Pages.BaseClasses
                 // If it's update process, need to delete any old downloads that have same file name as
                 // the updates. Otherwise they'll be bypassed when it comes to downloading
 
-                DirectoryInfo amgFolder = new DirectoryInfo(FileHelpers.GetUModFolder());
+                DirectoryInfo amgFolder = new DirectoryInfo(Helpers.FileHelpers.GetUModFolder());
 
                 List<string> currentModPaths = Static.StaticData.MasterList.GetFullModsListForGame()
                     .SelectMany(m => m.Files)
-                    .Select(f => Path.Combine(FileHelpers.GetUModFolder(), f.FileName))
+                    .Select(f => Path.Combine(Helpers.FileHelpers.GetUModFolder(), f.FileName))
                     .ToList();
 
                 foreach (var f in amgFolder.GetFiles())
@@ -590,7 +590,7 @@ namespace U_Mod.Pages.BaseClasses
                 }
                 else if (this.ExtractionResults.Any(res => !res.DownloadOk))
                 {
-                    string errorStr = $"The following mods failed to download. Please attempt manual download instead.\n\nCopy the given URLs below into your browser and place each downloaded file in your UMod folder: {FileHelpers.GetUModFolder()}\n\n\n";
+                    string errorStr = $"The following mods failed to download. Please attempt manual download instead.\n\nCopy the given URLs below into your browser and place each downloaded file in your UMod folder: {Helpers.FileHelpers.GetUModFolder()}\n\n\n";
                     foreach (var res in this.ExtractionResults.Where(res => !res.DownloadOk))
                     {
                         errorStr += $"{res.Message}\n\n\n";
@@ -653,7 +653,7 @@ namespace U_Mod.Pages.BaseClasses
             try
             {
                 string backupZip = "Fallout3ini.zip";
-                string zipPath = Path.Combine(FileHelpers.GetGameFolder(), Static.Constants.UMod, backupZip);
+                string zipPath = Path.Combine(Helpers.FileHelpers.GetGameFolder(), Static.Constants.UMod, backupZip);
 
                 if (!File.Exists(zipPath))
                 {
@@ -663,7 +663,7 @@ namespace U_Mod.Pages.BaseClasses
                     {
                         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "Fallout3", "Fallout.ini"),
                         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "Fallout3", "FalloutPrefs.ini"),
-                        Path.Combine(FileHelpers.GetGameFolder(), "Fallout_default.ini")
+                        Path.Combine(Helpers.FileHelpers.GetGameFolder(), "Fallout_default.ini")
                     };
 
                     foreach (string s in iniFiles)
@@ -696,13 +696,13 @@ namespace U_Mod.Pages.BaseClasses
             try
             {
                 string backupZip = Constants.UModBackup;
-                string zipPath = Path.Combine(FileHelpers.GetGameFolder(), Static.Constants.UMod, backupZip);
+                string zipPath = Path.Combine(Helpers.FileHelpers.GetGameFolder(), Static.Constants.UMod, backupZip);
 
                 if (!File.Exists(zipPath))
                 {
                     using ZipArchive zip = ZipFile.Open(zipPath, ZipArchiveMode.Create);
 
-                    DirectoryInfo di = new DirectoryInfo(FileHelpers.GetGameFolder());
+                    DirectoryInfo di = new DirectoryInfo(Helpers.FileHelpers.GetGameFolder());
                     foreach (var d in di.EnumerateDirectories())
                     {
                         if (d.FullName.Contains(Static.Constants.UMod))
