@@ -10,7 +10,6 @@
   <ItemGroup>
     <Content Remove="wwwroot\downloads\masterList.json" />
     <Content Remove="wwwroot\downloads\U_Mod-Setup.exe" />
-    <Content Remove="wwwroot\images\icons\u-mod-logo-2.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,7 +38,6 @@
     <Resource Include="wwwroot\images\icons\menu-oblivion.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="wwwroot\images\icons\u-mod-logo-2.png" />
     <Resource Include="wwwroot\images\icons\u-mod-logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

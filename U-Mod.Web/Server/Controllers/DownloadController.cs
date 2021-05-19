@@ -45,7 +45,7 @@ namespace U_Mod.Server.Controllers
         [HttpPost]
         [AcceptVerbs("POST", "post")]
         [Route("[action]")]
-        public async Task<BasicHttpResponse<bool>> UploadMasterList([FromBody]string masterlistJson)
+        public BasicHttpResponse<bool> UploadMasterList([FromBody]string masterlistJson)
         {
 
             if (!string.IsNullOrEmpty(masterlistJson))
@@ -56,6 +56,7 @@ namespace U_Mod.Server.Controllers
 
                     if (masterList == null || masterList.Games.Count == 0)
                         throw new Exception("Could not parse masterlist data!");
+
 
                     string currentDir = Environment.CurrentDirectory;
                     string appPath = Path.Combine(currentDir, "wwwroot", "downloads");

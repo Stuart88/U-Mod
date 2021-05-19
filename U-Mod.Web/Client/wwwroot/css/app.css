@@ -204,6 +204,70 @@ a, .btn-link {
     cursor:pointer;
 }
 
+.dev-tool-mod-name{
+    padding:2px;
+}
+.dev-tool-mod-name:hover{
+    background: var(--darker-blue);
+    color:white;
+}
+.dev-tool-mod-selected-True{
+    background: var(--darker-blue);
+}
+.dev-tool-selected-mod-area {
+    padding: 2px;
+    background: white;
+    border-radius:6px;
+    box-shadow: initial;
+    font-size: 12px;
+}
+    .dev-tool-selected-mod-area input {
+        font-size: 13px;
+        height: 27px;
+    }
+    .dev-tool-selected-mod-area .custom-select {
+        margin: 4px auto;
+        height: 27px;
+        font-size: 13px;
+        padding: 0 10px;
+    }
+.dev-tool-mod-data-table td {
+    padding: 3px;
+    vertical-align: middle;
+    border-top: none;
+    color: var(--gray-dark);
+}
+.dev-tool-zip-file-name {
+    color: var(--cyan);
+    padding: 2px;
+    border-bottom: 1px solid lightgray;
+}
+    .dev-tool-zip-file-name:hover {
+        background: #dadada;
+    }
+.dev-tool-zip-file-selected-True {
+    background: #dadada;
+}
+.dev-tool-zip-type-unknown{
+    border: 1px solid red;
+}
+.dev-tool-overflow-scroll {
+    overflow-y: auto;
+    height: calc(100vh - 290px);
+}
+.dev-tool-file-contents {
+    padding: 2px;
+}
+#dev-tool-main-area {
+    padding: 10px 0 0 10px;
+    border: 1px solid var(--darker-blue);
+    border-radius: 6px;
+}
+#dev-tool-page .btn-danger {
+    margin: 1px;
+    font-size: 10px;
+    padding: 4px 14px
+}
 @media(max-width:767px) {
     .umod-main-body {
         min-width: calc(100vw - 65px);
