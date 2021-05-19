@@ -43,6 +43,8 @@ namespace U_Mod.Pages.UserControls
             "Priming Rock-It Launcher",
             "Lighting Burnmaster",
             "Feeding Dogmeat",
+            "Caution: Vault Door Opening!",
+
         };
 
         private string[] OblivionMessages = new string[]
@@ -52,7 +54,10 @@ namespace U_Mod.Pages.UserControls
             "Hiring Moth Priests to read the Elder Scrolls",
             "Populating Oblivion with Daedra",
             "Forging the Ring of Burden",
-            "Buying a Blackwood Ring for everybody"
+            "Buying a Blackwood Ring for everybody",
+            "Populating Kvatch",
+            "Preparing Daedric Invasion",
+            "Outfitting Mythic Dawn Agents"
         };
 
         public LoadingMessages()

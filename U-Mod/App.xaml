@@ -13,15 +13,15 @@
         <!--Colours-->
         <SolidColorBrush x:Key="LightGrey">white</SolidColorBrush>
         <SolidColorBrush x:Key="LighterGrey">white</SolidColorBrush>
-        <SolidColorBrush x:Key="Blue">#3ca4ff</SolidColorBrush>
-        <SolidColorBrush x:Key="DarkerBlue">#3480eb</SolidColorBrush>
+        <SolidColorBrush x:Key="Blue">#778b8f</SolidColorBrush>
+        <SolidColorBrush x:Key="DarkerBlue">#5f7073</SolidColorBrush>
         <SolidColorBrush x:Key="Green">Green</SolidColorBrush>
         <SolidColorBrush x:Key="LightGreen">LightGreen</SolidColorBrush>
         <SolidColorBrush x:Key="Black">#444444</SolidColorBrush>
         
         <!--Side Menu -->
-        <SolidColorBrush x:Key="MenuItemActive_Background" Color="#3480eb"/>
-        <SolidColorBrush x:Key="MenuItemInactive_Background" Color="#3ca4ff"/>
+        <SolidColorBrush x:Key="MenuItemActive_Background" Color="#31312a"/>
+        <SolidColorBrush x:Key="MenuItemInactive_Background" Color="#aab7b4"/>
 
         <!--Global-->
         <Style x:Name="GridStyle" TargetType="Grid">

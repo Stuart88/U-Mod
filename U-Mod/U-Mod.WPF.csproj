@@ -52,6 +52,7 @@
     <None Remove="Assets\Images\menu-oblivion.jpg" />
     <None Remove="Assets\Images\Nexus-Login.png" />
     <None Remove="Assets\Images\NexusLoader.gif" />
+    <None Remove="Assets\Images\u-mod-logo-2.png" />
     <None Remove="Assets\Images\u-mod-logo.png" />
     <None Include="..\U-Mod.Web\Server\wwwroot\images\icons\u-mod-logo.png">
       <Pack>True</Pack>
@@ -114,6 +115,9 @@
     </Resource>
     <Resource Include="Assets\Images\Nexus-Login.png" />
     <Resource Include="Assets\Images\NexusLoader.gif" />
+    <Resource Include="Assets\Images\u-mod-logo-2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Assets\Images\u-mod-logo.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>

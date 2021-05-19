@@ -15,7 +15,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         
-        <Image Grid.Row="0" HorizontalAlignment="Center" Margin="0" Source="/Assets/Images/u-mod-logo.png" Width="200" />
+        <Image Grid.Row="0" HorizontalAlignment="Center" Margin="0" Source="/Assets/Images/u-mod-logo-2.png" Width="200" />
 
         <TextBlock Grid.Row="1" TextAlignment="Center" Margin="0,10,0,10" FontSize="24" FontWeight="Bold">U-Mod</TextBlock>
 
