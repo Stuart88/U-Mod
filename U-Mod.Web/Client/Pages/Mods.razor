@@ -62,11 +62,6 @@
                         <Blazorise.Icon IconStyle="IconStyle.Regular" Name="IconName.QuestionCircle"></Blazorise.Icon>
                     </Tooltip>
                 </td>
-                <td>
-                    <Switch TValue="bool" Checked="@CanFullInstall" CheckedChanged="(e => OnFilterSwitchChanged( SwitchOption.FullInstall, e))">
-                        My PC meets the minimum spec
-                    </Switch>
-                </td>
             </tr>
         </table>
     </div>
@@ -224,7 +219,7 @@
 
     public bool IsSteamGame { get; set; } = true;
     public bool HasAllDlc { get; set; } = false;
-    public bool CanFullInstall { get; set; } = true;
+    public bool CanFullInstall { get; set; } = true; // Always true. This is leftover from Levi's installer.
     public InstallProfileEnum InstallProfile =>
     (this.HasAllDlc ? InstallProfileEnum.AllDlc : InstallProfileEnum.NoDlc) |
     (this.IsSteamGame ? InstallProfileEnum.Steam : InstallProfileEnum.NonSteam);
@@ -246,9 +241,6 @@
                 break;
             case SwitchOption.DLC:
                 this.HasAllDlc = newVal;
-                break;
-            case SwitchOption.FullInstall:
-                this.CanFullInstall = newVal;
                 break;
         }
 
