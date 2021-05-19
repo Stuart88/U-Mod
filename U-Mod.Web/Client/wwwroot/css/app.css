@@ -1,12 +1,18 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 :root {
-    --blue: #3ca4ff;
-    --darker-blue:#3480eb;
+    --blue: #778b8f;
+    --darker-blue: #5f7073;
     --green: green;
     --lightgreen: lightgreen;
     --black: #444444;
     --yellow: #ffc107;
+}
+
+/*Blazorise override*/
+.b-bar-vertical-inline.b-bar-dark .b-bar-link.active, .b-bar-vertical-popout.b-bar-dark .b-bar-link.active, .b-bar-vertical-small.b-bar-dark .b-bar-link.active {
+    color: white;
+    background: var(--dark);
 }
 
 .preview-warning {
