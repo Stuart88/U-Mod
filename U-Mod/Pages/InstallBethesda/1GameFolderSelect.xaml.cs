@@ -34,7 +34,6 @@ namespace U_Mod.Pages.InstallBethesda
             this.SelectedFolderText.Text = this.SelectedGameFolder.LeftTrimToLength(40);
             SelectedFolderText.Focus();
             SelectedFolderText.CaretIndex = int.MaxValue;
-            this.FullInstallCheck.IsChecked = Static.StaticData.UserDataStore.CurrentUserData.CanFullInstall;
             this.Focus();
 
             this.DataContext = this;
@@ -293,13 +292,6 @@ namespace U_Mod.Pages.InstallBethesda
         private void SelectedFolderLabel_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             OpenFileDialog();
-        }
-
-       
-        private void FullInstallCheck_Checked(object sender, RoutedEventArgs e)
-        {
-            Static.StaticData.UserDataStore.CurrentUserData.CanFullInstall = this.FullInstallCheck.IsChecked ?? false;
-            Static.StaticData.SaveAppData();
         }
 
         #endregion Private Methods

@@ -11,7 +11,7 @@ namespace U_Mod.Models
         public bool IgnoredCDrivecheck { get; set; }
         public bool IsSteamGame { get; set; }
         public bool HasAllDlc { get; set; }
-        public bool CanFullInstall { get; set; }
+        public bool CanFullInstall { get; set; } = true; // Leftover from Levi installer. In U-Mod, all users can full install
         public List<ModVersionInfo> InstalledModIds { get; set; } = new List<ModVersionInfo>();
         public List<ModVersionInfo> ByPassedModIds { get; set; } = new List<ModVersionInfo>();
         public bool InstallationComplete { get; set; }

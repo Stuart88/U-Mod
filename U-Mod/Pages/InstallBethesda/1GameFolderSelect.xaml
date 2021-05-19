@@ -70,21 +70,7 @@
                 Warning: C drive installations may encounter some game issues
             </TextBlock>
             
-            <CheckBox  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" FlowDirection="LeftToRight"
-                       x:Name="FullInstallCheck"
-                       Margin="0,30,10,0"
-                       HorizontalAlignment="Left"
-                       Checked="FullInstallCheck_Checked"
-                       Unchecked="FullInstallCheck_Checked">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock FlowDirection="LeftToRight" Text="Full Install" />
-                </StackPanel>
-            </CheckBox>
-            <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
-                       Foreground="{StaticResource LightGrey}"
-                       FontSize="10">
-                Select this to allow intensive (graphics heavy) mods to be installed
-            </TextBlock>
+           
             
             <Grid Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="0,10,0,0"
                   >
