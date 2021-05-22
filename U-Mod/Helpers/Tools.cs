@@ -1,7 +1,10 @@
 ﻿using IWshRuntimeLibrary;
+using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using U_Mod.Shared.Enums;
 
 namespace U_Mod.Helpers
@@ -46,13 +49,13 @@ namespace U_Mod.Helpers
 
         public static void LaunchModManager()
         {
-            string exeName = Static.StaticData.CurrentGame switch
+            (string exeName, string args) = Static.StaticData.CurrentGame switch
             {
-                GamesEnum.Oblivion => "OblivionModManager.exe",
-                GamesEnum.Fallout => Path.Combine("GeMM", "fomm.exe")
+                GamesEnum.Oblivion => ("OblivionModManager.exe", ""),
+                GamesEnum.Fallout => (Path.Combine("Mod Organizer 2-6194-2-4-2-1620741202", "Mod Organizer 2-6194-2-4-2-1620741202.exe"), "")
             };
 
-            LaunchProcessInGameFolder(exeName, $"RunModManager: {GeneralHelpers.GetGameName()}");
+            LaunchProcessInGameFolder(exeName, $"RunModManager: {GeneralHelpers.GetGameName()}", args);
         }
 
         public static void Run4GbPatch(bool withArgs = true)
@@ -140,6 +143,22 @@ namespace U_Mod.Helpers
                 GeneralHelpers.ShowExceptionMessageBox(e);
                 Logging.Logger.LogException(exceptionTitle, e);
             }
+        }
+
+        public static bool IsProgramInstalled(string programDisplayName)
+        {
+            foreach (var item in Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall").GetSubKeyNames())
+            {
+
+                object programName = Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\" + item).GetValue("DisplayName");
+
+                Console.WriteLine(programName);
+                if (string.Equals(programName, programDisplayName))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
 

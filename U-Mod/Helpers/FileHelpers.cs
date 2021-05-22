@@ -127,7 +127,7 @@ namespace U_Mod.Helpers
                     File.Move(file, targetFile);
                 }
             }
-            Directory.Delete(source, true);
+            
         }
 
         public static string RemoveFileExtension(string path)

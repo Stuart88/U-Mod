@@ -25,7 +25,8 @@ namespace U_Mod.Pages.InstallBethesda
     /// </summary>
     public partial class _4_PatchAndModManager : UserControl
     {
-        private bool StopChecking { get; set; }
+        private bool PatchInstalled { get; set; }
+        private bool ModManagerInstalled { get; set; }
         public _4_PatchAndModManager()
         {
             InitializeComponent();
@@ -38,7 +39,8 @@ namespace U_Mod.Pages.InstallBethesda
             timer.Tick += (s, e) =>
             {
                 CheckPatchInstalled();
-                if (this.StopChecking)
+                //CheckModManagerInstalled();
+                if (this.PatchInstalled /*&& this.ModManagerInstalled*/)
                     timer.Stop();
             };
             timer.Start();
@@ -51,6 +53,9 @@ namespace U_Mod.Pages.InstallBethesda
 
         private void CheckPatchInstalled()
         {
+            if (this.PatchInstalled)
+                return;
+
             string fileName = Static.StaticData.CurrentGame switch
             {
                 GamesEnum.Oblivion => "Oblivion.exe.Backup",
@@ -59,9 +64,27 @@ namespace U_Mod.Pages.InstallBethesda
             if (File.Exists(System.IO.Path.Combine(FileHelpers.GetGameFolder(), fileName)))
             {
                 _4gbOkInfo.Visibility = Visibility.Visible;
-                this.StopChecking = true;
+                this.PatchInstalled = true;
             }
         }
+
+        //private void CheckModManagerInstalled()
+        //{
+        //    if (this.ModManagerInstalled)
+        //        return;
+
+        //    string programName = Static.StaticData.CurrentGame switch
+        //    {
+        //        GamesEnum.Oblivion => "OBMM",
+        //        GamesEnum.Fallout => "Mod Organizer"
+        //    };
+
+        //    if (Tools.IsProgramInstalled(programName))
+        //    {
+        //        ModOrganizerInstalledInfo.Visibility = Visibility.Visible;
+        //        this.ModManagerInstalled = true;
+        //    }
+        //}
 
         private void ManualPatchToolLink_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
@@ -70,7 +93,8 @@ namespace U_Mod.Pages.InstallBethesda
 
         private void ModManagerBtn_Click(object sender, RoutedEventArgs e)
         {
-            ProcessHelpers.OpenInBrowser("https://www.nexusmods.com/skyrimspecialedition/mods/6194?tab=files");
+            Tools.LaunchModManager();
+            //ProcessHelpers.OpenInBrowser("https://www.nexusmods.com/skyrimspecialedition/mods/6194?tab=files");
         }
 
         private void ModManagerInstructionsLink_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

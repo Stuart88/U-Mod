@@ -51,6 +51,12 @@ namespace U_Mod.Helpers
             return path.EndsWith("zip");
         }
 
+        public static bool IsExe(string path)
+        {
+            return path.EndsWith("exe");
+        }
+
+
         public static ZipFileType GetZipFileType(string path)
         {
             if (Is7Zip(path))
@@ -61,6 +67,9 @@ namespace U_Mod.Helpers
 
             if (IsZip(path))
                 return ZipFileType.Zip;
+
+            if (IsExe(path))
+                return ZipFileType.Exe;
 
             return ZipFileType.Unknown;
         }
@@ -124,14 +133,14 @@ namespace U_Mod.Helpers
                         //this first check accounts for folders in folders, and the rar zip-in-zip situation
                         foreach (var entry in zip.Entries)
                         {
-                            if (modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(entry.FullName.ToLower().Replace('/', '\\'))))
+                            if (modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(entry.FullName.ToLower().Replace('/', '\\')) || c.FileName == "*"))
                             {
                                 message = "";
                                 return true;
                             }
                         }
                         //Now just check against all entries
-                        if (zip.Entries.Any(e => modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(e.Name.ToLower()))))
+                        if (zip.Entries.Any(e => modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(e.Name.ToLower()) || c.FileName == "*")))
                         {
                             message = "";
                             return true;
@@ -153,7 +162,7 @@ namespace U_Mod.Helpers
 
                         while (reader.MoveToNextEntry())
                         {
-                            if (reader.Entry.Key.Replace('/', '\\').Split('\\').Any(e => modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(e.ToLower()))))
+                            if (reader.Entry.Key.Replace('/', '\\').Split('\\').Any(e => modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(e.ToLower()) || c.FileName == "*")))
                             {
                                 message = "";
                                 return true;
@@ -168,7 +177,7 @@ namespace U_Mod.Helpers
                     {
                         message = "On 7z"; 
                         using var archive = new ArchiveFile(zipPath);
-                        if (archive.Entries.Any(e => modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(e.FileName.ToLower()))))
+                        if (archive.Entries.Any(e => modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(e.FileName.ToLower()) || c.FileName == "*")))
                         {
                             message = "";
                             return true;
@@ -179,6 +188,21 @@ namespace U_Mod.Helpers
                             return false;
                         }
                     }
+
+                    case ZipFileType.Exe:
+                        {
+                            message = "On Exe";
+                            if (modZipFile.FileName.Contains("Mod Organizer"))
+                            {
+                                message = "";
+                                return true;
+                            }
+                            else
+                            {
+                                message = "Only allowed exe is Mod Manager";
+                                return false;
+                            }
+                        }
 
                     default:
                         message = "Unknown zip type! (7z)";

@@ -106,9 +106,14 @@
                     Margin="0,0,5,0"
                      Style="{StaticResource PatchPageBtn}"
                 Click="ModManagerBtn_Click">
-                Download Mod Organizer
+                Install Mod Organizer
             </Button>
-            
+            <StackPanel x:Name="ModOrganizerInstalledInfo" Orientation="Horizontal" Visibility="Collapsed" VerticalAlignment="Center">
+                <Image Source="/Assets/Icons/StatusOK_16x.png" Height="15"/>
+                <TextBlock Text="Done!"
+                       Margin="5,0,0,0"
+                       />
+            </StackPanel>
         </StackPanel>
 
         <TextBlock Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Foreground="{StaticResource LighterGrey}"

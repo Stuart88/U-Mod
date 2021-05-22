@@ -160,6 +160,13 @@ namespace U_Mod.Models
             // VS solution root. No idea why. Trying everything.
             try
             {
+                if (ZipHelpers.IsExe(inFile))
+                {
+                    //Nothing to unzip so just move to outDirectory
+                    File.Move(inFile, Path.Combine(outDirectory, Path.GetFileName(inFile)));
+                    return;
+                }
+
                 lock (zipLock)
                 {
                     using var archive = ArchiveFactory.Open(inFile);
@@ -262,11 +269,12 @@ namespace U_Mod.Models
 
             string extractTo = Path.Combine(this.ExtractDirectory, extractionFolderName);
 
-            if (Directory.Exists(extractTo)) //Extraction already done?
-            {
-                this.ExtractResult.Result = FileExtractResultEnum.AlreadyDone;
-                //return true;
-            }
+            //Assuming this is a bad idea because an existing directory does not necessarily mean all required files exist
+            //if (Directory.Exists(extractTo)) //Extraction already done?
+            //{
+            //    this.ExtractResult.Result = FileExtractResultEnum.AlreadyDone;
+            //    //return true;
+            //}
 
             _ = Directory.CreateDirectory(extractTo);
 
@@ -376,6 +384,7 @@ namespace U_Mod.Models
                     string fileName = cleanedFilepath.Split('\\').Last();
                     string targetFilePath = Path.Combine(targetFolder, fileName);
                     MoveFile(Path.Combine(tempExtractedFolder, cleanedFilepath), targetFilePath);
+                    Directory.Delete(tempExtractedFolder, true);
                 }
                 else if (Directory.Exists(tempPath))
                 {
@@ -385,6 +394,7 @@ namespace U_Mod.Models
                     //      we're moving it to Oblivion/Data/Textures ... so get "Textures" from end of tempPath and append to targetFolder path.
                     string targetDirectory = Path.Combine(targetFolder, tempPath.Split('\\').Last());
                     FileHelpers.MoveDirectory(tempPath, targetDirectory);
+                    Directory.Delete(tempPath, true);
                 }
                 else
                 {
@@ -408,7 +418,7 @@ namespace U_Mod.Models
                 }
             }
 
-            Directory.Delete(tempExtractedFolder, true);
+            
         }
 
         #endregion Private Methods

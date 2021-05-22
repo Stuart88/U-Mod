@@ -21,7 +21,8 @@ namespace U_Mod.Shared.Models
         Unknown,
         _7z,
         Zip,
-        Rar
+        Rar,
+        Exe
     }
 
     public class GameItem : ListItemBase

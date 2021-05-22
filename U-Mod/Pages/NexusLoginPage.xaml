@@ -127,11 +127,11 @@
 
                 <TextBlock x:Name="NexusStatusText" Foreground="White"  Text="" Margin="20" HorizontalAlignment="Center" FontSize="25" VerticalAlignment="Center" TextAlignment="Center" />
 
-                <Grid x:Name="DownloadProgressGrid" Visibility="Collapsed">
+                <Grid x:Name="DownloadProgressGrid" Visibility="Collapsed" Background="#222222">
                     <ProgressBar x:Name="ProcessingProgressBar" VerticalAlignment="Center" IsIndeterminate="false" Maximum="100" Orientation="Horizontal" Minimum="0" Height="30" Width="300"/>
                     <TextBlock x:Name="InstallingInfo" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" />
                 </Grid>
-                <Grid x:Name="SecondaryProgressGrid" Visibility="Collapsed" Margin="0,20,0,0">
+                <Grid x:Name="SecondaryProgressGrid" Visibility="Collapsed" Margin="0,20,0,0" Background="#222222">
                     <ProgressBar x:Name="SecondaryProcessingProgressBar" VerticalAlignment="Center" IsIndeterminate="false" Maximum="100" Orientation="Horizontal" Minimum="0" Height="30" Width="300"/>
                     <TextBlock x:Name="SecondaryInstallingInfo" Foreground="Black" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center"  Width="300"/>
                 </Grid>
