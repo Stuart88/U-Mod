@@ -212,7 +212,7 @@
                                         <h5 class="text-dark">
                                             <Blazorise.Button Class="btn btn-success btn-sm"
                                                               Clicked="@(() => {
-                                                                             this.SelectedZipItem.Content.Add(new ModZipContent(this.SelectedZipItem.Id)
+                                                                             this.SelectedZipItem.Content.Insert(0, new ModZipContent(this.SelectedZipItem.Id)
                                                                              {
                                                                                  InstallOrder = this.SelectedZipItem.Content.Count > 0 ? this.SelectedZipItem.Content.Max(c => c.InstallOrder) + 1 : 1
                                                                              });
@@ -226,14 +226,29 @@
                                                 <div class="col-2">
                                                     <strong>Delete</strong>
                                                 </div>
-                                                <div class="col-2">
+                                                <div class="col-3">
                                                     <strong>Install Order</strong>
+                                                    @if (this.SelectedZipItem.Content != null && this.SelectedZipItem.Content.Count > 0)
+                                                    {
+                                                        <Blazorise.Button Type="ButtonType.Button"
+                                                                          Class="btn btn-sm"
+                                                                          Color="Color.Secondary"
+                                                                          Clicked="(() =>
+                                                                               {
+                                                                                   if(this.SelectedZipItem.Content.First().InstallOrder > 1)
+                                                                                       this.SelectedZipItem.Content = this.SelectedZipItem.Content.OrderBy(i => i.InstallOrder).ToList();
+                                                                                   else
+                                                                                       this.SelectedZipItem.Content = this.SelectedZipItem.Content.OrderByDescending(i => i.InstallOrder).ToList();
+                                                                               })">
+                                                            Sort
+                                                        </Blazorise.Button>
+                                                    }
                                                 </div>
-                                                <div class="col-8">
+                                                <div class="col-7">
                                                     <strong>File or Folder name</strong>
                                                 </div>
                                             </div>
-                                            @foreach (var c in this.SelectedZipItem.Content.OrderByDescending(i => i.InstallOrder))
+                                            @foreach (var c in this.SelectedZipItem.Content)
                                             {
                                                 <div class="row">
                                                     <div class="col-2">
