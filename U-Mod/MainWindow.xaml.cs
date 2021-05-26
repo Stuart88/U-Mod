@@ -60,7 +60,7 @@ namespace U_Mod
             this.SideMenuOptions = new ObservableCollection<SideMenuOption>
             {
                 new SideMenuOption("Home", true, GamesEnum.None, MenuItem.Home),
-                new SideMenuOption("Oblivion", false, GamesEnum.Oblivion, MenuItem.Oblivion),
+                //new SideMenuOption("Oblivion", false, GamesEnum.Oblivion, MenuItem.Oblivion),
                 new SideMenuOption("Fallout 3", false, GamesEnum.Fallout, MenuItem.Fallout3),
             };
 
