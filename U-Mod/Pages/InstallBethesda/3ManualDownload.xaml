@@ -172,7 +172,7 @@
                 <Frame.Content>
                     <Grid>
                         <ProgressBar x:Name="ProcessingProgressBar" IsIndeterminate="false" Maximum="100" Orientation="Horizontal" Minimum="0" Height="30" Width="300"/>
-                        <TextBlock x:Name="InstallingInfo" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" 
+                        <TextBlock x:Name="InstallingInfo" HorizontalAlignment="Center" Foreground="{StaticResource Black}" TextWrapping="NoWrap" VerticalAlignment="Center" 
                                    TextAlignment="Center" Width="300"/>
                     </Grid>
                     
@@ -184,7 +184,7 @@
                 <Frame.Content>
                     <Grid x:Name="SecondaryProgressGrid" Visibility="Hidden">
                         <ProgressBar x:Name="SecondaryProcessingProgressBar" IsIndeterminate="false" Maximum="100" Orientation="Horizontal" Minimum="0" Height="30" Width="300"/>
-                        <TextBlock x:Name="SecondaryInstallingInfo" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center"
+                        <TextBlock x:Name="SecondaryInstallingInfo" Foreground="{StaticResource Black}" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center"
                                    
                                   
                                    TextAlignment="Center" Width="300"/>

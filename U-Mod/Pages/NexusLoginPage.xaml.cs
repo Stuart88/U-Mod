@@ -33,6 +33,8 @@ namespace U_Mod.Pages
 
             InitializeComponent();
 
+            this.InstallerGrid.Children.Add(this.LoadingMessages);
+
             NexusSocket = new NexusSocket()
             {
                 Uuid = Guid.NewGuid(),

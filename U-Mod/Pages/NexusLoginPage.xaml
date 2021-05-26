@@ -39,7 +39,9 @@
                 <TextBlock Text="Please Log in to the The Nexus" 
                            Foreground="White" VerticalAlignment="Center"/>
             </StackPanel>
-            <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
+            <StackPanel
+                x:Name="InstallerGrid"
+                Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"
                         Width="420">
                 <Grid x:Name="ApiDetailsGrid" Background="Transparent"
                       Margin="10">
@@ -127,11 +129,11 @@
 
                 <Grid x:Name="DownloadProgressGrid" Visibility="Collapsed" Background="#222222">
                     <ProgressBar x:Name="ProcessingProgressBar" VerticalAlignment="Center" IsIndeterminate="false" Maximum="100" Orientation="Horizontal" Minimum="0" Height="30" Width="300"/>
-                    <TextBlock x:Name="InstallingInfo" Foreground="Black" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" />
+                    <TextBlock x:Name="InstallingInfo" Foreground="{StaticResource Black}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center" />
                 </Grid>
                 <Grid x:Name="SecondaryProgressGrid" Visibility="Collapsed" Margin="0,20,0,0" Background="#222222">
                     <ProgressBar x:Name="SecondaryProcessingProgressBar" VerticalAlignment="Center" IsIndeterminate="false" Maximum="100" Orientation="Horizontal" Minimum="0" Height="30" Width="300"/>
-                    <TextBlock x:Name="SecondaryInstallingInfo" Foreground="Black" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center"  Width="300"/>
+                    <TextBlock x:Name="SecondaryInstallingInfo" Foreground="{StaticResource Black}" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center"  Width="300"/>
                 </Grid>
 
                 <Image x:Name="LoadingSpinner" Visibility="Collapsed" VerticalAlignment="Center" Width="50" Height="50" Margin="10" HorizontalAlignment="Center" gif:ImageBehavior.AnimatedSource="/Assets/Images/NexusLoader.gif" />

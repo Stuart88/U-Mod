@@ -72,6 +72,8 @@ namespace U_Mod.Pages.InstallBethesda
 
             InitializeComponent();
 
+            this.InstallerGrid.Children.Add(this.LoadingMessages);
+
             CheckForDownloads();
 
             this.GameName.Text = GeneralHelpers.GetGameName();

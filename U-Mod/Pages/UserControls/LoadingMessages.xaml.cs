@@ -29,22 +29,26 @@ namespace U_Mod.Pages.UserControls
             "Clearing roach infestations",
             "Decontaminating vault",
             "Bombing Megaton",
+            "Grabbing Lincoln's Repeater",
             "Wasting Capital Wasteland",
             "Making the Grisly Diner a bit more grisly",
             "Making the sewers tepid",
-            "Nuking Nuka-Cola",
+            "Adding Strontium to Nuka-Cola",
             "Abandoning the Abandoned Camp",
             "Curing some ant meat",
             "Adding alpha particles to Mississippi quantum pie",
             "Accidentally irradiating RadAway",
-            "Stimulating stimpacks",
+            "Diluting stimpacks",
             "Stiching jumpsuits",
             "Drawing schematics",
             "Priming Rock-It Launcher",
-            "Lighting Burnmaster",
+            "Freeing Anchorage",
             "Feeding Dogmeat",
-            "Caution: Vault Door Opening!",
-
+            "Opening Vault",
+            "Making bread sandwiches",
+            "Pissing off Mirelurks",
+            "Readying V.A.T.S",
+            "Inhaling jet violently"
         };
 
         private string[] OblivionMessages = new string[]

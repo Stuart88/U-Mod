@@ -19,6 +19,7 @@ using U_Mod.Helpers.GameSpecific;
 using U_Mod.Shared.Models;
 using U_Mod.Shared.Enums;
 using U_Mod.Shared.Helpers;
+using U_Mod.Pages.UserControls;
 
 namespace U_Mod.Pages.BaseClasses
 {
@@ -37,6 +38,11 @@ namespace U_Mod.Pages.BaseClasses
         public List<FileExtractResult> ExtractionResults { get; set; } = new List<FileExtractResult>();
         public int FilesToProcess { get; set; }
         public int FileToAutomaticallyDownload { get; set; }
+        public LoadingMessages LoadingMessages { get; set; } = new LoadingMessages() 
+        { 
+            HorizontalAlignment = System.Windows.HorizontalAlignment.Center, 
+            Visibility = System.Windows.Visibility.Collapsed 
+        };
 
         /// <summary>
         /// The final points where all necessary zip files exist, used in the file extraction stage.
@@ -326,6 +332,8 @@ namespace U_Mod.Pages.BaseClasses
                         {
                             debugtrack = 5;
                             UpdateProgressText("Creating game backup. This might take a while...");
+                            this.LoadingMessages.Visibility = System.Windows.Visibility.Visible;
+                            this.LoadingMessages.StartCyclingMessages();
                         });
                         debugtrack = 6;
 
@@ -729,6 +737,13 @@ namespace U_Mod.Pages.BaseClasses
                 });
 
                 return false;
+            }
+            finally{
+                Application.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    this.LoadingMessages.Visibility = System.Windows.Visibility.Collapsed;
+                    this.LoadingMessages.StopCyclingMessages();
+                });
             }
         }
 
