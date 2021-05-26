@@ -134,5 +134,11 @@ namespace U_Mod.Pages.General
         {
             Process.Start("explorer.exe", Logging.Logger.ErrorLogFolderPath);
         }
+
+        private void UModFolderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            ProcessHelpers.OpenUModFolder();
+        }
+
     }
 }

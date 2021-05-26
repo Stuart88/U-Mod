@@ -20,6 +20,7 @@
         <!--<Button>Launch Mod Manager</Button>-->
         <StackPanel x:Name="ButtonsArea" Orientation="Vertical" Grid.Row="1">
             <Button x:Name="ReinstallBtn"  Click="ReinstallButton_Click" Style="{StaticResource MenuBtnStyle}">Reinstall</Button>
+            <Button x:Name="UModFolderBtn"  Click="UModFolderBtn_Click" Style="{StaticResource MenuBtnStyle}">U-Mod Folder</Button>
             <Button x:Name="ErrorLogsBtn"  Click="ErrorLogsBtn_Click" Style="{StaticResource MenuBtnStyle}">Error Logs</Button>
             <Button x:Name="UpdateBtn"  Click="UpdateButton_Click" Style="{StaticResource MenuBtnStyle}">Update</Button>
             <Button x:Name="BackBtn" Click="BackButton_Click" Style="{StaticResource MenuBtnStyle}">Back</Button>
