@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 
 namespace U_Mod.Helpers
 {
@@ -16,7 +17,10 @@ namespace U_Mod.Helpers
 
         public static void OpenUModFolder()
         {
-            Process.Start("explorer.exe", FileHelpers.GetUModFolder());
+            if (Directory.Exists(FileHelpers.GetUModFolder()))
+                Process.Start("explorer.exe", FileHelpers.GetUModFolder());
+            else
+                GeneralHelpers.ShowMessageBox("U-Mod folder does not yet exist. It will be created after selecting your game folder in the install process");
         }
 
         public static void OpenGameFolder()

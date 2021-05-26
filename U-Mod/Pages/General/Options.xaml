@@ -12,7 +12,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" TextAlignment="Center" 
+        <TextBlock x:Name="Title"
+                   Grid.Row="0" TextAlignment="Center" 
                    TextDecorations="Underline"
                    FontWeight="Bold"
                    FontSize="18">Options</TextBlock>

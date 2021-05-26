@@ -42,6 +42,17 @@ namespace U_Mod.Pages.General
             //ErrorLogsBtn.Visibility = Static.StaticData.CurrentGame == Shared.Enums.GamesEnum.None
             //   ? Visibility.Visible
             //   : Visibility.Collapsed;
+
+            UModFolderBtn.Visibility = Static.StaticData.CurrentGame == Shared.Enums.GamesEnum.None
+                ? Visibility.Collapsed
+                : Visibility.Visible;
+
+            this.Title.Text = StaticData.CurrentGame switch
+            {
+                Shared.Enums.GamesEnum.Oblivion => "Oblivion",
+                Shared.Enums.GamesEnum.Fallout => "Fallout",
+                _ => "",
+            } + " Options";
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
