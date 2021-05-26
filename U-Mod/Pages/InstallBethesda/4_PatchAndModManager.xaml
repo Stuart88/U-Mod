@@ -125,6 +125,7 @@
 
         <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center"
                 x:Name="FinishBtn"
+                IsEnabled="False"
                 Click="FinishBtn_Click"
                 Margin="0,30,0,0"
                 Width="100"

@@ -65,6 +65,7 @@ namespace U_Mod.Pages.InstallBethesda
             {
                 _4gbOkInfo.Visibility = Visibility.Visible;
                 this.PatchInstalled = true;
+                this.FinishBtn.IsEnabled = true;
             }
         }
 
