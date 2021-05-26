@@ -7,10 +7,8 @@
                    xmlns:gif="http://wpfanimatedgif.codeplex.com"
                    mc:Ignorable="d" 
                   VerticalAlignment="Stretch">
-    <Grid HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch" >
-        <Grid.Background>
-            <ImageBrush />
-        </Grid.Background>
+    <Grid HorizontalAlignment="Stretch" Height="Auto" VerticalAlignment="Stretch"  Background="#222222">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
