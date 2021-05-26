@@ -192,7 +192,7 @@
                 </Frame.Content>
             </Frame>
 
-            <Image x:Name="LoadingSpinner" Visibility="Collapsed" VerticalAlignment="Center" Width="50" Height="50" Margin="10" HorizontalAlignment="Center" gif:ImageBehavior.AnimatedSource="/Assets/Images/loader-blue.gif" />
+            <Image x:Name="LoadingSpinner" Visibility="Collapsed" VerticalAlignment="Center" Width="50" Height="50" Margin="10" HorizontalAlignment="Center" gif:ImageBehavior.AnimatedSource="/Assets/Images/loading.gif" />
 
         </StackPanel>
     </Grid>

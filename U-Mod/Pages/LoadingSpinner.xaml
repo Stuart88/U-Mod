@@ -12,7 +12,7 @@
             <RowDefinition/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" VerticalAlignment="Center" Width="50" Height="50" Margin="10" HorizontalAlignment="Center" gif:ImageBehavior.AnimatedSource="/Assets/Images/NexusLoader.gif" />
+        <Image Grid.Row="0" VerticalAlignment="Center" Width="50" Height="50" Margin="10" HorizontalAlignment="Center" gif:ImageBehavior.AnimatedSource="/Assets/Images/loading.gif" />
         <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="White" FontSize="30" FontWeight="Bold" Margin="10" Text="Please wait..."/>
     </Grid>
 </UserControl>

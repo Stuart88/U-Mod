@@ -38,7 +38,7 @@
                 <Run Text="This might take a little while..."/>
             </TextBlock>
 
-            <Image x:Name="LoadingSpinner" HorizontalAlignment="Center" Margin="5" Height="100" Width="100"  gif:ImageBehavior.AnimatedSource="/Assets/Images/loader-blue.gif" />
+            <Image x:Name="LoadingSpinner" HorizontalAlignment="Center" Margin="5" Height="100" Width="100"  gif:ImageBehavior.AnimatedSource="/Assets/Images/loading.gif" />
 
             <usercontrols:LoadingMessages HorizontalAlignment="Center" Margin="0,15,0,0" x:Name="LoadingMessages" />
         </StackPanel>
