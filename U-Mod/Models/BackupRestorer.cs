@@ -30,6 +30,11 @@ namespace U_Mod.Models
 
             string zipPath = Path.Combine(FileHelpers.GetGameFolder(), Static.Constants.UMod, backupZip);
 
+            if (!File.Exists(zipPath))
+            {
+                throw new Exception($"Backup file not found: {zipPath}");
+            }
+
             if (string.IsNullOrEmpty(FileHelpers.GetGameFolder()) || !Directory.Exists(FileHelpers.GetGameFolder()))
             {
                 OnRestoreComplete(null);
