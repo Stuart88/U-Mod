@@ -162,8 +162,8 @@ namespace U_Mod.Models
             {
                 if (ZipHelpers.IsExe(inFile))
                 {
-                    //Nothing to unzip so just move to outDirectory
-                    File.Move(inFile, Path.Combine(outDirectory, Path.GetFileName(inFile)));
+                    //Nothing to unzip so just copy to outDirectory
+                    File.Copy(inFile, Path.Combine(outDirectory, Path.GetFileName(inFile)), true);
                     return;
                 }
 
@@ -417,7 +417,8 @@ namespace U_Mod.Models
                 }
             }
 
-            Directory.Delete(tempExtractedFolder, true);
+            if(Directory.Exists(tempExtractedFolder)) // Might have been deleted or moved already in above processes
+                Directory.Delete(tempExtractedFolder, true);
 
         }
 
