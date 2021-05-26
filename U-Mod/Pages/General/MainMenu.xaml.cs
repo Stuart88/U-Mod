@@ -183,6 +183,17 @@ namespace U_Mod.Pages.General
                 _ => throw new NotImplementedException(),
             };
 
+            if(this.ModState == ModState.Play)
+            {
+                switch (Static.StaticData.CurrentGame)
+                {
+                    case GamesEnum.Fallout:
+                        ActionButton.Visibility = Visibility.Collapsed;
+                        ModOrganizerText.Visibility = Visibility.Visible;
+                        break;
+                }
+            }
+
         }
 
         private bool CheckSteam()
@@ -306,5 +317,9 @@ namespace U_Mod.Pages.General
 
         #endregion Private Methods
 
+        private void ModManagerInstructionsLink_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Tools.OpenModOrganizerHelpInBrowser();
+        }
     }
 }

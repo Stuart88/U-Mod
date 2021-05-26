@@ -29,6 +29,15 @@
 
         <Button x:Name="ActionButton" Grid.Row="2"  Click="ActionButton_Click"
                     Style="{StaticResource MenuBtnStyle}"/>
+        <TextBlock x:Name="ModOrganizerText" Grid.Row="2"
+                   TextAlignment="Center"
+                   Visibility="Collapsed">
+             <Run>Please run this game via the Mod Organizer.</Run>
+            <LineBreak/>
+            <Run x:Name="ModManagerInstructionsLink" Style="{StaticResource HyerlinkStyle_Run}"
+                 PreviewMouseLeftButtonDown="ModManagerInstructionsLink_PreviewMouseLeftButtonDown">Click Here</Run>
+            <Run>for help.</Run>
+        </TextBlock>
         <Button x:Name="OptionsButton" Grid.Row="3" Click="OptionsButton_Click"
                     Style="{StaticResource MenuBtnStyle}">Options</Button>
         <!--<Button x:Name="SupportButton" Grid.Row="2" Grid.Column="1"   Click="SupportButton_Click"/>-->

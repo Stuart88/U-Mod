@@ -58,6 +58,17 @@ namespace U_Mod.Helpers
             LaunchProcessInGameFolder(exeName, $"RunModManager: {GeneralHelpers.GetGameName()}", args);
         }
 
+        public static void OpenModOrganizerHelpInBrowser()
+        {
+            string urlPath = Static.StaticData.CurrentGame switch
+            {
+                GamesEnum.Fallout => "games/fallout-3",
+                GamesEnum.Oblivion => "games/oblivion",
+                _ => ""
+            };
+            ProcessHelpers.OpenInBrowser(Static.Constants.WebsiteUrl + urlPath);
+        }
+
         public static void Run4GbPatch(bool withArgs = true)
         {
             (string exeName, string args) data = Static.StaticData.CurrentGame switch

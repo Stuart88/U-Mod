@@ -94,12 +94,11 @@ namespace U_Mod.Pages.InstallBethesda
         private void ModManagerBtn_Click(object sender, RoutedEventArgs e)
         {
             Tools.LaunchModManager();
-            //ProcessHelpers.OpenInBrowser("https://www.nexusmods.com/skyrimspecialedition/mods/6194?tab=files");
         }
 
         private void ModManagerInstructionsLink_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            Tools.OpenModOrganizerHelpInBrowser();
         }
 
         private void FinishBtn_Click(object sender, RoutedEventArgs e)

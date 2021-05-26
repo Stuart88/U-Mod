@@ -14,6 +14,7 @@ namespace U_Mod.Static
         public const string SoftwareVersionLink = "https://u-mod.club/Download/GetFile/softwareVersion.json";
         public const string DefaultSoftwareVersion = "-1";
         public const string UpdateUrl = "https://u-mod.club/Download/GetFile/U_Mod-Setup.exe";
+        public const string WebsiteUrl = "https://u-mod.club/";
         public const string OblivionDataFileName = "OblivionModInstallData.json";
         public const string FalloutDataFileName = "FalloutModInstallData.json";
         public static string AppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "U_Mod");
