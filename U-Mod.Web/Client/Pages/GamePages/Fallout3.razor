@@ -1,0 +1,65 @@
+﻿
+@page "/games/fallout-3"
+
+<div class="umod-main-body">
+    <h2>Fallout 3</h2>
+    <hr />
+    <h4>Help - The Mod Organizer</h4>
+    <hr />
+    <h5 style="text-decoration:underline">Getting Started</h5>
+    <p>
+        First install the Mod Organizer and follow the wizard for creating a new instance.
+    </p>
+    <p>
+        Click here if you need to download the Mod Organizer: 
+        <Blazorise.Button Type="ButtonType.Link" To="https://www.nexusmods.com/skyrimspecialedition/mods/6194?tab=files" Target="Target.Blank"
+                          Class="btn umod-btn"
+                          Style="width: 230px; padding: 4px 10px;">
+            Download Mod Organizer
+        </Blazorise.Button>
+    </p>
+    <p>
+        The automatic instructions and wizard will guide you through the process of setting up a new instance for Fallout 3.
+    </p>
+    <div class="mod-organizer-step">
+        <p>
+            Once the instance is set up, you should have something similar to the below image:
+        </p>
+
+        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer1.jpg")" />
+    </div>
+    <div class="mod-organizer-step">
+        <p>
+            In the right-hand list of mods, right-click anywhere on the list and select Enable All
+        </p>
+
+        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer2.jpg")" />
+    </div>
+
+    <div class="mod-organizer-step">
+        <p>
+            Next click the 'Sort' button, click 'yes' on the warning that pops up, then close the LOOT window when done.
+        </p>
+        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer3.jpg")" Style="margin-bottom:20px" />
+        <p>
+            If any mods show a red warning icon, you can hover the mouse over the warning to see what's wrong. You may need to join the
+            <Blazorise.Link Style="color:var(--yellow)" To="@U_Mod.Shared.Constants.Constants.DiscordLink" Target="Target.Blank">
+                U-Mod Discord
+            </Blazorise.Link>
+            to get advice on how to fix the issue.
+        </p>
+        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer3-1.jpg")" />
+    </div>
+
+    <div class="mod-organizer-step">
+        <p>
+            Ensure FOSE is selected from the main dropdown, then click on Run.
+        </p>
+
+        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer4.jpg")" />
+    </div>
+</div>
+
+@code {
+
+}

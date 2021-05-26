@@ -23,6 +23,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\downloads\" />
     <Folder Include="wwwroot\images\backgrounds\" />
+    <Folder Include="wwwroot\images\games\fallout\" />
   </ItemGroup>
 
   <ItemGroup>
