@@ -384,7 +384,6 @@ namespace U_Mod.Models
                     string fileName = cleanedFilepath.Split('\\').Last();
                     string targetFilePath = Path.Combine(targetFolder, fileName);
                     MoveFile(Path.Combine(tempExtractedFolder, cleanedFilepath), targetFilePath);
-                    Directory.Delete(tempExtractedFolder, true);
                 }
                 else if (Directory.Exists(tempPath))
                 {
@@ -418,7 +417,8 @@ namespace U_Mod.Models
                 }
             }
 
-            
+            Directory.Delete(tempExtractedFolder, true);
+
         }
 
         #endregion Private Methods
