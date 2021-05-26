@@ -1,6 +1,6 @@
 # U-Mod
 
-**DevTool**: Simple WPF application for curating and update the mod list used by the installer
+**DevTool**: Simple WPF application for curating and updating the mod list used by the installer
 
 **U-Mod.Shared**: Shared resources use across all U-Mod projects
 
