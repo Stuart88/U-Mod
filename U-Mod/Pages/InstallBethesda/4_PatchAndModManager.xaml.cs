@@ -56,10 +56,14 @@ namespace U_Mod.Pages.InstallBethesda
             if (this.PatchInstalled)
                 return;
 
+            if (Static.StaticData.CurrentGame == GamesEnum.None)
+                return;
+
             string fileName = Static.StaticData.CurrentGame switch
             {
                 GamesEnum.Oblivion => "Oblivion.exe.Backup",
-                GamesEnum.Fallout => "Fallout3.exe.Backup"
+                GamesEnum.Fallout => "Fallout3.exe.Backup",
+                _ => ""
             };
             if (File.Exists(System.IO.Path.Combine(FileHelpers.GetGameFolder(), fileName)))
             {
