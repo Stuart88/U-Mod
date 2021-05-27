@@ -77,10 +77,8 @@ namespace U_Mod
                     new UpdateWindow().Show();
                 }
             }
-            else
-            {
-                await GetMasterList();
-            }
+             
+            await GetMasterList();
 #endif
         }
 
