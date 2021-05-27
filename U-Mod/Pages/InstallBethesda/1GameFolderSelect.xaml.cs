@@ -116,58 +116,58 @@ namespace U_Mod.Pages.InstallBethesda
 
             Static.StaticData.UserDataStore.CurrentUserData.IsSteamGame = this.SelectedGameFolder.ToLower().Contains(@"steamapps");
 
-            if (!Static.StaticData.UserDataStore.CurrentUserData.IsSteamGame)
-            {
-                GeneralHelpers.ShowMessageBox("This installer only works for Steam games. U_Mod will be ready for non-Steam in a future update");
-                NextButton.IsEnabled = false;
-                NextButton.Opacity = 0.6;
-                return;
-            }
+            //if (!Static.StaticData.UserDataStore.CurrentUserData.IsSteamGame)
+            //{
+            //    GeneralHelpers.ShowMessageBox("This installer only works for Steam games. U_Mod will be ready for non-Steam in a future update");
+            //    NextButton.IsEnabled = false;
+            //    NextButton.Opacity = 0.6;
+            //    return;
+            //}
 
-            // If so, add steam.exe to game folder
-            if (Static.StaticData.UserDataStore.CurrentUserData.IsSteamGame)
-            {
-                string copyToPath = Path.Combine(this.SelectedGameFolder, "steam.exe");
+            //// If so, add steam.exe to game folder
+            //if (Static.StaticData.UserDataStore.CurrentUserData.IsSteamGame)
+            //{
+            //    string copyToPath = Path.Combine(this.SelectedGameFolder, "steam.exe");
 
-                if (!File.Exists(copyToPath))
-                {
-                    //First check bog standard steam location
-                    if (File.Exists(@"C:\Program Files (x86)\Steam\steam.exe"))
-                    {
-                        FileInfo steamexe = new FileInfo(@"C:\Program Files (x86)\Steam\steam.exe");
-                        steamexe.CopyTo(copyToPath);
-                    }
-                    // else see if steam is running, and if so, try to get its exe path from wherever it is
-                    else if (ProcessHelpers.GetSteamDirectoryFromProcesses(out string steamPath))
-                    {
-                        FileInfo steamexe = new FileInfo(steamPath);
-                        steamexe.CopyTo(copyToPath);
-                    }
-                    // else, couldn't find steam exe path, tell user to run steam and try again, or manually select Steam exe
-                    else
-                    {
-                        GeneralHelpers.ShowMessageBox("Installer cannot detect Steam. Please ensure Steam is running.\n\nIf Steam is already running, you may need to manually select steam.exe from the directory where Steam is installed. You can do this in the next dialog.\n\nYou should look for:\n\n...\\Your Steam Directory\\Steam\\steam.exe");
+            //    if (!File.Exists(copyToPath))
+            //    {
+            //        //First check bog standard steam location
+            //        if (File.Exists(@"C:\Program Files (x86)\Steam\steam.exe"))
+            //        {
+            //            FileInfo steamexe = new FileInfo(@"C:\Program Files (x86)\Steam\steam.exe");
+            //            steamexe.CopyTo(copyToPath);
+            //        }
+            //        // else see if steam is running, and if so, try to get its exe path from wherever it is
+            //        else if (ProcessHelpers.GetSteamDirectoryFromProcesses(out string steamPath))
+            //        {
+            //            FileInfo steamexe = new FileInfo(steamPath);
+            //            steamexe.CopyTo(copyToPath);
+            //        }
+            //        // else, couldn't find steam exe path, tell user to run steam and try again, or manually select Steam exe
+            //        else
+            //        {
+            //            GeneralHelpers.ShowMessageBox("Installer cannot detect Steam. Please ensure Steam is running.\n\nIf Steam is already running, you may need to manually select steam.exe from the directory where Steam is installed. You can do this in the next dialog.\n\nYou should look for:\n\n...\\Your Steam Directory\\Steam\\steam.exe");
 
-                        var dialog = new Ookii.Dialogs.Wpf.VistaOpenFileDialog() { InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) };
-                        dialog.Multiselect = false;
+            //            var dialog = new Ookii.Dialogs.Wpf.VistaOpenFileDialog() { InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles) };
+            //            dialog.Multiselect = false;
 
-                        if (dialog.ShowDialog(Application.Current.MainWindow).GetValueOrDefault())
-                        {
-                            if (dialog.FileName.ToLower().EndsWith("steam.exe"))
-                            {
-                                FileInfo steamexe = new FileInfo(dialog.FileName);
-                                steamexe.CopyTo(copyToPath);
-                                MessageBox.Show("Success!");
-                            }
-                            else
-                            {
-                                GeneralHelpers.ShowMessageBox("steam.exe not found!");
-                                return;
-                            }
-                        }
-                    }
-                }
-            }
+            //            if (dialog.ShowDialog(Application.Current.MainWindow).GetValueOrDefault())
+            //            {
+            //                if (dialog.FileName.ToLower().EndsWith("steam.exe"))
+            //                {
+            //                    FileInfo steamexe = new FileInfo(dialog.FileName);
+            //                    steamexe.CopyTo(copyToPath);
+            //                    MessageBox.Show("Success!");
+            //                }
+            //                else
+            //                {
+            //                    GeneralHelpers.ShowMessageBox("steam.exe not found!");
+            //                    return;
+            //                }
+            //            }
+            //        }
+            //    }
+            //}
 
             bool finalStepOk = true;
 
