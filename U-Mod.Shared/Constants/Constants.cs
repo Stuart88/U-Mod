@@ -6,7 +6,7 @@ namespace U_Mod.Shared.Constants
 {
     public static class Constants
     {
-        public const string InstallerVersion = "1.0.5";
+        public const string InstallerVersion = "1.0.6";
 
         public const string NexusAppSlug = "vortex";
 
