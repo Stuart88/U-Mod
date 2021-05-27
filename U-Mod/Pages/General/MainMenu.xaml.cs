@@ -137,21 +137,8 @@ namespace U_Mod.Pages.General
                 switch (Static.StaticData.CurrentGame)
                 {
                     case GamesEnum.Oblivion:
-                        if (CheckSteam())
-                        {
-                            IniFileEditor.EditIniFilesForGame();
-                            RunAntiPiracy(false);
-                            Tools.LaunchGame();
-                            WhileGameRunning();
-                        }
-                        break;
-
                     case GamesEnum.Fallout:
-                        if (CheckSteam())
-                        {
-                            Tools.LaunchGame();
-                            WhileGameRunning();
-                        }
+                        ProcessHelpers.TryToLaunchModOrganizer();
                         break;
                 }
             }
@@ -188,7 +175,8 @@ namespace U_Mod.Pages.General
                 switch (Static.StaticData.CurrentGame)
                 {
                     case GamesEnum.Fallout:
-                        ActionButton.Visibility = Visibility.Collapsed;
+                    case GamesEnum.Oblivion:
+                        ActionButton.Content = "Launch";
                         ModOrganizerText.Visibility = Visibility.Visible;
                         break;
                 }

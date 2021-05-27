@@ -17,6 +17,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -26,19 +27,19 @@
 
         <TextBlock Grid.Row="1" x:Name="MenuTitle" FontWeight="Bold" FontSize="20" TextAlignment="Center"
                        Margin="0,10,0,10"></TextBlock>
-
-        <Button x:Name="ActionButton" Grid.Row="2"  Click="ActionButton_Click"
-                    Style="{StaticResource MenuBtnStyle}"/>
         <TextBlock x:Name="ModOrganizerText" Grid.Row="2"
                    TextAlignment="Center"
                    Visibility="Collapsed">
-             <Run>Please run this game via the Mod Organizer.</Run>
+             <Run>This game must be launched via the Mod Organizer.</Run>
             <LineBreak/>
             <Run x:Name="ModManagerInstructionsLink" Style="{StaticResource HyerlinkStyle_Run}"
                  PreviewMouseLeftButtonDown="ModManagerInstructionsLink_PreviewMouseLeftButtonDown">Click Here</Run>
             <Run>for help.</Run>
         </TextBlock>
-        <Button x:Name="OptionsButton" Grid.Row="3" Click="OptionsButton_Click"
+
+        <Button x:Name="ActionButton" Grid.Row="3"  Click="ActionButton_Click"
+                    Style="{StaticResource MenuBtnStyle}"/>
+        <Button x:Name="OptionsButton" Grid.Row="4" Click="OptionsButton_Click"
                     Style="{StaticResource MenuBtnStyle}">Options</Button>
         <!--<Button x:Name="SupportButton" Grid.Row="2" Grid.Column="1"   Click="SupportButton_Click"/>-->
     </Grid>
