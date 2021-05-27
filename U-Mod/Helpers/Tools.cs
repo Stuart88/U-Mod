@@ -60,13 +60,7 @@ namespace U_Mod.Helpers
 
         public static void OpenModOrganizerHelpInBrowser()
         {
-            string urlPath = Static.StaticData.CurrentGame switch
-            {
-                GamesEnum.Fallout => "games/fallout-3",
-                GamesEnum.Oblivion => "games/oblivion",
-                _ => ""
-            };
-            ProcessHelpers.OpenInBrowser(Static.Constants.WebsiteUrl + urlPath);
+            ProcessHelpers.OpenInBrowser(Static.Constants.WebsiteUrl + "help/mod-organizer");
         }
 
         public static void Run4GbPatch(bool withArgs = true)

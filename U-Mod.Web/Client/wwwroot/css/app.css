@@ -274,6 +274,31 @@ a, .btn-link {
     background: var(--darker-blue);
     margin-bottom: 30px;
 }
+.mod-organizer-step-list {
+    border: 1px solid var(--black);
+    margin-bottom: 20px;
+    min-width: 220px;
+}
+    .mod-organizer-step-list tbody {
+        color: var(--lightgreen);
+    }
+    .mod-organizer-step-list td, .mod-organizer-step-list th {
+        padding: 5px;
+        border: 1px solid var(--black);
+    }
+    .mod-organizer-step-list thead {
+        background: var(--blue);
+    }
+.mod-organizer-step-list span{
+    font-weight:bold;
+}
+.mod-organizer-info-box {
+    background: rgb(179 215 255 / 29%);
+    padding: 4px 13px;
+    border-radius: 5px;
+    margin: 10px;
+    margin-bottom: 21px;
+}
 @media(max-width:767px) {
     .umod-main-body {
         min-width: calc(100vw - 65px);
