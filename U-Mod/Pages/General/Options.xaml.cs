@@ -49,10 +49,10 @@ namespace U_Mod.Pages.General
 
             this.Title.Text = StaticData.CurrentGame switch
             {
-                Shared.Enums.GamesEnum.Oblivion => "Oblivion",
-                Shared.Enums.GamesEnum.Fallout => "Fallout",
+                Shared.Enums.GamesEnum.Oblivion => "Oblivion ",
+                Shared.Enums.GamesEnum.Fallout => "Fallout ",
                 _ => "",
-            } + " Options";
+            } + "Options";
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
