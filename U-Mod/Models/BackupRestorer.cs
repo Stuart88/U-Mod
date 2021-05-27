@@ -5,6 +5,7 @@ using System.IO;
 using System.IO.Compression;
 using U_Mod.Shared.Models;
 using U_Mod.Shared.Enums;
+using System.Linq;
 
 namespace U_Mod.Models
 {
@@ -37,6 +38,9 @@ namespace U_Mod.Models
 
             if (string.IsNullOrEmpty(FileHelpers.GetGameFolder()) || !Directory.Exists(FileHelpers.GetGameFolder()))
             {
+                if (!CheckReinstallComplete())
+                    return false;
+
                 OnRestoreComplete(null);
             }
             else
@@ -60,6 +64,9 @@ namespace U_Mod.Models
                 }
 
                 ZipFile.ExtractToDirectory(zipPath, FileHelpers.GetGameFolder());
+
+                if (!CheckReinstallComplete())
+                    return false;
 
                 OnRestoreComplete(null);
             }
@@ -100,5 +107,22 @@ namespace U_Mod.Models
         }
 
         #endregion Protected Methods
+
+        private bool CheckReinstallComplete()
+        {
+            DirectoryInfo d = new DirectoryInfo(FileHelpers.GetGameFolder());
+
+            switch (Static.StaticData.CurrentGame)
+            {
+                case GamesEnum.Oblivion:
+                case GamesEnum.Fallout:
+                    //4gb patch creates "...exe.backup" files so check that those are gone
+                    return !d.GetFiles().Any(f => f.FullName.ToLower().Contains("exe.backup"));
+
+                default:
+                    throw new Exception("BackupRestorer.cs - CheckReinstallComplete(). There is no handler for this game!");
+            }
+           
+        }
     }
 }

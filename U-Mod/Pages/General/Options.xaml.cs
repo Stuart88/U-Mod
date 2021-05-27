@@ -91,6 +91,8 @@ namespace U_Mod.Pages.General
             {
                 Thread thread = new Thread(() =>
                 {
+                    bool success = false;
+
                     try
                     {
                         Application.Current.Dispatcher.BeginInvoke((Action)(() =>
@@ -105,13 +107,7 @@ namespace U_Mod.Pages.General
 
                         BackupRestorer backupRestorer = new BackupRestorer();
                         backupRestorer.IsReinstall = true;
-                        _ = backupRestorer.RestoreBackupForCurrentGame();
-
-                        Application.Current.Dispatcher.BeginInvoke((Action)(() =>
-                        {
-                            GeneralHelpers.ShowMessageBox($"Game restored.\n\nYou can now perform a clean reinstall.");
-                            Navigation.NavigateToPage(Enums.PagesEnum.GameFolderSelect, true);
-                        }));
+                        success = backupRestorer.RestoreBackupForCurrentGame();
                     }
                     catch (Exception ex)
                     {
@@ -119,11 +115,6 @@ namespace U_Mod.Pages.General
                         {
                             Logging.Logger.LogException("RestoreOriginalGameData", ex);
                             GeneralHelpers.ShowMessageBox($"Failed to restore game backup! Cannot continue.\n\nError:{ex.Message}");
-                            ButtonsArea.Visibility = Visibility.Visible;
-                            LoadingMessage.Visibility = Visibility.Collapsed;
-                            LoadingMessages.StopCyclingMessages();
-                            BackBtn.IsEnabled = true;
-                            BackBtn.Opacity = 1;
                         }));
                     }
                     finally
@@ -131,7 +122,17 @@ namespace U_Mod.Pages.General
                         Application.Current.Dispatcher.BeginInvoke((Action)(() =>
                         {
                             Application.Current.MainWindow.IsEnabled = true;
+                            ButtonsArea.Visibility = Visibility.Visible;
+                            LoadingMessage.Visibility = Visibility.Collapsed;
+                            LoadingMessages.StopCyclingMessages();
+                            BackBtn.IsEnabled = true;
+                            BackBtn.Opacity = 1;
 
+                            if (success)
+                            {
+                                GeneralHelpers.ShowMessageBox($"Game restored.\n\nYou can now perform a clean reinstall.");
+                                Navigation.NavigateToPage(Enums.PagesEnum.GameFolderSelect, true);
+                            }
                         }));
                     }
                 });
@@ -140,6 +141,8 @@ namespace U_Mod.Pages.General
             };
             yesNoMessage.ShowDialog();
         }
+
+       
 
         private void ErrorLogsBtn_Click(object sender, RoutedEventArgs e)
         {
