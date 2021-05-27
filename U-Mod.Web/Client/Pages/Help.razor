@@ -50,6 +50,7 @@
                             <br />
                             Try running the installer in administrator mode. Right click on the U-Mod icon and select 'Run as administrator'
                             <br />
+                            <br />
                             If you are accessing it from your Start Menu, you should right click >> More >> Run as administrator
                         </div>
                     </div>
@@ -98,34 +99,6 @@
                 <CollapseHeader>
                     <Heading Size="HeadingSize.Is5">
                         <Button Clicked="@(()=>collapse4Visible = !collapse4Visible)">
-                            <div class="faq-title">Videos not playing in installer</div>
-                        </Button>
-                    </Heading>
-                </CollapseHeader>
-                <CollapseBody>
-                    <div class="faq-section">
-                        <div class="faq-text">
-                            To play videos within the installer, you will need to have
-                            <a href="https://support.microsoft.com/en-us/windows/get-windows-media-player-81718e0d-cfce-25b1-aee3-94596b658287" target="_blank">Windows Media Player</a>
-                            on your system.
-                            <br />
-                            <br />
-                            It is also advisable to install
-                            <a href="https://codecguide.com/download_k-lite_codec_pack_basic.htm" target="_blank">K-Lite Codec Pack</a>,
-                            which ensures your system can play as many media file types as possible.
-                            <br />
-                            <br />
-                            Finally, you can try changing your Windows 10 default video player to Windows Media Player if it
-                            is not set already. Do this by pressing the 'Win' key then type 'default apps' to locate the Default Apps system menu.
-                            From there you can change the default video player.
-                        </div>
-                    </div>
-                </CollapseBody>
-            </Collapse>
-            <Collapse Visible="@collapse5Visible">
-                <CollapseHeader>
-                    <Heading Size="HeadingSize.Is5">
-                        <Button Clicked="@(()=>collapse5Visible = !collapse5Visible)">
                             <div class="faq-title">Installer says it has no internet connection</div>
                         </Button>
                     </Heading>
@@ -144,11 +117,6 @@
             </Collapse>
         </Accordion>
 
-
-
-
-
-
     </div>
 </div>
 
@@ -157,5 +125,4 @@
     bool collapse2Visible = false;
     bool collapse3Visible = false;
     bool collapse4Visible = false;
-    bool collapse5Visible = false;
 }
