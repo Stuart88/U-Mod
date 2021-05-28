@@ -1,7 +1,7 @@
 ﻿
 @page "/mods"
 
-@inject HttpClient Http
+@inherits ModListPageBase
 
 <div class="umod-main-body ultra-wide">
 
@@ -55,15 +55,15 @@
             </tr>
         </table>
         @*<table width="100%">
-            <tr>
-                <td width="40px">
-                    <Tooltip Text="@("Min Spec:\n- Intel i5 Quad Core\n- Nvidia GTX 1060\n- 8GB DDR4\n- (or equivalent)")"
-                             Placement="Placement.Right">
-                        <Blazorise.Icon IconStyle="IconStyle.Regular" Name="IconName.QuestionCircle"></Blazorise.Icon>
-                    </Tooltip>
-                </td>
-            </tr>
-        </table>*@
+                <tr>
+                    <td width="40px">
+                        <Tooltip Text="@("Min Spec:\n- Intel i5 Quad Core\n- Nvidia GTX 1060\n- 8GB DDR4\n- (or equivalent)")"
+                                 Placement="Placement.Right">
+                            <Blazorise.Icon IconStyle="IconStyle.Regular" Name="IconName.QuestionCircle"></Blazorise.Icon>
+                        </Tooltip>
+                    </td>
+                </tr>
+            </table>*@
     </div>
 
     <LoadingSpinner Hidden="(MasterList != null)" Centred="true" Height="100" Width="100" />
@@ -78,61 +78,61 @@
 
         @foreach (var m in FilteredMods)
         {
-    <div class="modlistItem">
-        <div class="modlistTitle">
-            @m.ModName
-            @if (m.IsEssential)
-            {
-                <span class="modlistItemEssential">ESSENTIAL</span>
-            }
-        </div>
-        <div class="modlistCreatorLink">
-            @if (!string.IsNullOrEmpty(m.CreatedBy) && !string.IsNullOrEmpty(m.CreatorUrl))
-            {
-                <a class="modlistCreatorLink" href="@m.CreatorUrl" target="_blank">Created by: @m.CreatedBy</a>
-            }
-            else if (!string.IsNullOrEmpty(m.CreatedBy))
-            {
-                <span class="modlistCreatorLink">Created by: @m.CreatedBy</span>
-            }
-        </div>
-        <div>
-            <h6>Total Files: @m.Files.Count</h6>
-            @foreach (var f in m.Files)
-            {
-                <div class="modlistFile">
-                    <div class="modlistFilename">
-                        @f.FileName
-                    </div>
-                    <div class="modlistDownloadLink">
-                        @if (!string.IsNullOrEmpty(f.DirectDownloadUrl))
-                        {
-                            <Button class="umod-btn" Clicked="@(() => OpenLink(f.DirectDownloadUrl))">Download</Button>
-                        }
-                        else
-                        {
-                            <Button class="umod-btn" Clicked="@(() => OpenLink(f.ManualDownloadUrl))">Download</Button>
-                        }
-                    </div>
-                    <hr />
-                    <div class="modlistFileContents">
-                        <div>
-                            Extract the following content to:
-                        </div>
-                        <div class="modlistExtractlocation">
-                            @f.ExtractLocationString($"/(your {this.selectedGame} folder)")
-                        </div>
-                        <ul>
-                            @foreach (var c in f.Content.OrderBy(c => c.InstallOrder))
-                            {
-                                <li class="modlistContentfileName">@c.FileName</li>
-                            }
-                        </ul>
-                    </div>
+            <div class="modlistItem">
+                <div class="modlistTitle">
+                    @m.ModName
+                    @if (m.IsEssential)
+                    {
+                        <span class="modlistItemEssential">ESSENTIAL</span>
+                    }
                 </div>
-            }
-        </div>
-    </div>
+                <div class="modlistCreatorLink">
+                    @if (!string.IsNullOrEmpty(m.CreatedBy) && !string.IsNullOrEmpty(m.CreatorUrl))
+                    {
+                        <a class="modlistCreatorLink" href="@m.CreatorUrl" target="_blank">Created by: @m.CreatedBy</a>
+                    }
+                    else if (!string.IsNullOrEmpty(m.CreatedBy))
+                    {
+                        <span class="modlistCreatorLink">Created by: @m.CreatedBy</span>
+                    }
+                </div>
+                <div>
+                    <h6>Total Files: @m.Files.Count</h6>
+                    @foreach (var f in m.Files)
+                    {
+                        <div class="modlistFile">
+                            <div class="modlistFilename">
+                                @f.FileName
+                            </div>
+                            <div class="modlistDownloadLink">
+                                @if (!string.IsNullOrEmpty(f.DirectDownloadUrl))
+                                {
+                                    <Button class="umod-btn" Clicked="@(() => OpenLink(f.DirectDownloadUrl))">Download</Button>
+                                }
+                                else
+                                {
+                                    <Button class="umod-btn" Clicked="@(() => OpenLink(f.ManualDownloadUrl))">Download</Button>
+                                }
+                            </div>
+                            <hr />
+                            <div class="modlistFileContents">
+                                <div>
+                                    The below file content is extracted to:
+                                </div>
+                                <div class="modlistExtractlocation">
+                                    @f.ExtractLocationString($"/(your {this.selectedGame} folder)")
+                                </div>
+                                <ul>
+                                    @foreach (var c in f.Content.OrderBy(c => c.InstallOrder))
+                                    {
+                                        <li class="modlistContentfileName">@c.FileName</li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
         }
 
     </div>
@@ -153,9 +153,9 @@
 @code {
 
 
-    U_Mod.Shared.Models.MasterList MasterList { get; set; }
+
     U_Mod.Shared.Enums.GamesEnum GameEnum { get; set; }
-    List<string> Games { get; set; } = new List<string>();
+    public List<string> Games { get; set; } = new List<string>();
     string selectedGame { get; set; }
     void OnGameSelected(string g)
     {
@@ -200,12 +200,11 @@
 
     protected override async Task OnInitializedAsync()
     {
+        await base.OnInitializedAsync();
+        
         try
         {
-            BasicHttpResponse<MasterList> resp = await Http.GetFromJsonAsync<BasicHttpResponse<MasterList>>($"Mod/Masterlist");
-
-            this.MasterList = resp.Data;
-
+            
             this.Games = MasterList.Games.Select(g => g.GameName).ToList();
 
         }
@@ -214,7 +213,6 @@
             System.Diagnostics.Debug.WriteLine(StringHelpers.ErrorMessage(e));
         }
 
-        await base.OnInitializedAsync();
     }
 
     public bool IsSteamGame { get; set; } = true;

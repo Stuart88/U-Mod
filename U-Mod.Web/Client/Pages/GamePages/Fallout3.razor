@@ -1,14 +1,40 @@
 ﻿
 @page "/games/fallout-3"
 
+@inherits ModListPageBase
+
 <div class="umod-main-body">
     <h2>Fallout 3</h2>
     <hr />
+    <div>
+        <Image class="img-fluid" Source="@ServerHelpers.ImageSrcString("general/menu-fallout.jpg")" Style="max-width:200px"></Image>
+    </div>
     <p>
-        Nothing here yet!
+        The Fallout 3 mod pack list is below:
     </p>
+    <p>
+        Further details about each mod can be found on the <Blazorise.Link Style="color: var(--yellow) !important;" To="@Constants.Pages.Mods">Mod Info</Blazorise.Link> page.
+    </p>
+    @if (this.MasterList != null && this.MasterList.Games.Any(g => g.Game == GamesEnum.Fallout))
+    {
+        <ul>
+            @foreach (var m in this.MasterList.Games.First(g => g.Game == GamesEnum.Fallout).Mods)
+            {
+                <li>
+                    <div class="game-mod-item">
+                        @m.ModName
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <LoadingSpinner Hidden="false" Centred="false" Height="70" />
+    }
+
+    <hr />
+
 </div>
 
-@code {
 
-}

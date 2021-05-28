@@ -1,7 +1,7 @@
 ﻿
 @page "/credits"
 
-@inject HttpClient Http
+@inherits ModListPageBase
 
 <div class="umod-main-body">
     <h2>Credits</h2>
@@ -42,23 +42,4 @@
 
 @code {
 
-    U_Mod.Shared.Models.MasterList MasterList { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        try
-        {
-            BasicHttpResponse<MasterList> resp = await Http.GetFromJsonAsync<BasicHttpResponse<MasterList>>($"Mod/Masterlist");
-
-            this.MasterList = resp.Data;
-
-
-        }
-        catch (Exception e)
-        {
-            System.Diagnostics.Debug.WriteLine(StringHelpers.ErrorMessage(e));
-        }
-
-        await base.OnInitializedAsync();
-    }
 }

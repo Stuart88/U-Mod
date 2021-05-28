@@ -299,6 +299,9 @@ a, .btn-link {
     margin: 10px;
     margin-bottom: 21px;
 }
+.game-mod-item{
+
+}
 @media(max-width:767px) {
     .umod-main-body {
         min-width: calc(100vw - 65px);
