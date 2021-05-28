@@ -131,7 +131,7 @@ namespace U_Mod.Helpers
             string defaultPath = Path.Combine("C:", "Modding", "MO2", "ModOrganizer.exe"); ;
             if (File.Exists(defaultPath))
             {
-                Process.Start(defaultPath);
+                Tools.LaunchProcess(defaultPath, "TryToLaunchModOrganizer (defaulPath)", null, true);
                 return;
             }
 
@@ -152,7 +152,7 @@ namespace U_Mod.Helpers
                 pathToExe = GetAppPathFromInstallFolders("Mod Organizer");
 
             if (!string.IsNullOrEmpty(pathToExe))
-                Process.Start(pathToExe);
+                Tools.LaunchProcess(pathToExe, "TryToLaunchModOrganizer (pathToExe)", null, true);
             else
                 GeneralHelpers.ShowMessageBox("Cannot find Mod Organizer executable. Please install Mod Organizer, or if it is already installed, please locate Mod Organizer and launch it manually.");
         }

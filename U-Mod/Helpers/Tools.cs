@@ -102,7 +102,7 @@ namespace U_Mod.Helpers
 
         #region Private Methods
 
-        private static void LaunchProcessInGameFolder(string exeName, string exceptionTitle, string arguments = "")
+        private static void LaunchProcessInGameFolder(string exeName, string exceptionTitle, string arguments = "", bool asAdmin = false)
         {
             try
             {
@@ -118,6 +118,9 @@ namespace U_Mod.Helpers
                     }
                 };
 
+                if (asAdmin)
+                    p.StartInfo.Verb = "runas";
+
                 p.Start();
             }
             catch (Exception e)
@@ -127,7 +130,7 @@ namespace U_Mod.Helpers
             }
         }
 
-        private static void LaunchProcess(string processPath, string exceptionTitle, string arguments = "")
+        public static void LaunchProcess(string processPath, string exceptionTitle, string arguments = "", bool asAdmin = false)
         {
             try
             {
@@ -140,6 +143,9 @@ namespace U_Mod.Helpers
                         Arguments = arguments
                     }
                 };
+
+                if (asAdmin)
+                    p.StartInfo.Verb = "runas";
 
                 p.Start();
             }
