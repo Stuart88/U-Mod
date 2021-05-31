@@ -19,5 +19,7 @@ namespace U_Mod.Web.Client.Constants
         public const string Credits = "/credits";
         public const string Admin = "/admin";
         public const string DevTool = "/devtool";
+        public const string Interactive = "/interactive";
+        public const string DodgerGame = "/interactive/dodger-game";
     }
 }
