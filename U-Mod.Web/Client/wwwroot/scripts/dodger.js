@@ -1,10 +1,28 @@
 ﻿
-function gameLoop(timeStamp) {
-    window.requestAnimationFrame(gameLoop);
-    theInstance.invokeMethodAsync('GameLoop', timeStamp);
+
+window.dodgerInitGame = (instance) => {
+    var canvasContainer = document.getElementById('canvasContainer'),
+        canvases = canvasContainer.getElementsByTagName('canvas') || [];
+    window.dodgerGame = {
+        instance: instance,
+        canvas: canvases.length ? canvases[0] : null
+    };
+
+    window.addEventListener("resize", dodgerOnResize);
+    dodgerOnResize();
+
+    window.requestAnimationFrame(dodgerGameLoop);
+};
+
+function dodgerGameLoop(timeStamp) {
+    window.requestAnimationFrame(dodgerGameLoop);
+    dodgerGame.instance.invokeMethodAsync('DodgerGameLoop', timeStamp, dodgerGame.canvas.width, dodgerGame.canvas.height);
 }
 
-window.initGame = (instance) => {
-    window.theInstance = instance;
-    window.requestAnimationFrame(gameLoop);
-};
+function dodgerOnResize() {
+    if (!window.dodgerGame.canvas)
+        return;
+
+    dodgerGame.canvas.width = window.innerWidth;
+    dodgerGame.canvas.height = window.innerHeight;
+}
