@@ -7,13 +7,13 @@
 
 @inject IJSRuntime JsRuntime;
 
-<div class="umod-main-body ultra-wide" style="height:100%">
+<div id="dodger-game-main-body" class="umod-main-body ultra-wide" style="height:100%;padding:20px 100px">
 
     <h2>Dodger</h2>
     <hr />
 
     <img @ref="_spritesheet" hidden src="@ServerHelpers.ImageSrcString("icons/icons_acid-house.png")" />
-    <div id="canvasContainer" style="position: relative; opacity: 1; background-color: black; width: 100%; height: 100%">
+    <div id="canvasContainer" style="position: relative; opacity: 1; background-color: black; width: 100%; height: calc(100vh - 250px)">
         <BECanvas @ref="_canvasReference" ></BECanvas>
     </div>
 </div>

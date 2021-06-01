@@ -23,6 +23,8 @@ function dodgerOnResize() {
     if (!window.dodgerGame.canvas)
         return;
 
-    dodgerGame.canvas.width = window.innerWidth;
-    dodgerGame.canvas.height = window.innerHeight;
+    var container = document.getElementById('canvasContainer');
+
+    dodgerGame.canvas.width = container.offsetWidth;
+    dodgerGame.canvas.height = container.offsetHeight;
 }
