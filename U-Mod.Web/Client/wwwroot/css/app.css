@@ -302,6 +302,17 @@ a, .btn-link {
 .game-mod-item{
 
 }
+.buyMeACoffeeLink > img {
+    width: 570px;
+}
+    .buyMeACoffeeLink > img:hover {
+        transform: scale(1.01);
+        transition: transform 300ms;
+    }
+.buyMeACoffeeCaption{
+    font-size:small;
+    color: var(--grey);
+}
 @media(max-width:767px) {
     .umod-main-body {
         min-width: calc(100vw - 65px);
@@ -311,4 +322,13 @@ a, .btn-link {
         margin: 0;
         max-width: 100%;
     }
+
+    .buyMeACoffeeLink > img {
+        width: 100%;
+    }
+
+        .buyMeACoffeeLink > img:hover {
+            transform: scale(1);
+            transition: transform 300ms;
+        }
 }
