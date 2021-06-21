@@ -226,7 +226,7 @@ namespace U_Mod.Pages.InstallBethesda
                         Path.Combine(this.SelectedGameFolder,"Oblivion.exe"),
                         Path.Combine(this.SelectedGameFolder, "Data", "DLCShiveringisles.esp"),
                         Path.Combine(this.SelectedGameFolder, "Data", "Knights.esp"),
-                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "Oblivion", "BlendSettings.ini"),
+                        //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "Oblivion", "BlendSettings.ini"),
                         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "Oblivion", "Oblivion.ini"),
                     };
 
