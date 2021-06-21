@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\U-Mod\U-Mod\U-Mod.Shared\U-Mod.Shared.csproj" />
+    <ProjectReference Include="..\U-Mod.Shared\U-Mod.Shared.csproj" />
   </ItemGroup>
 
 </Project>

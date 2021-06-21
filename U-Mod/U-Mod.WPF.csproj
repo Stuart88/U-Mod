@@ -140,7 +140,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="call &quot;$(SignToolPath)signtool.exe&quot; sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /f &quot;C:\Users\saitk\Programming\WPF\U-Mod\U-Mod\U-Mod\U-Mod-Key-2.pfx&quot; /p passywordy123  $(TargetPath)" />
+    <Exec Command="call &quot;$(SignToolPath)signtool.exe&quot; sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /f &quot;C:\Users\saitk\Programming\WPF\U-Mod\U-Mod\U-Mod-Key-2.pfx&quot; /p passywordy123  $(TargetPath)" />
   </Target>
 
 </Project>
