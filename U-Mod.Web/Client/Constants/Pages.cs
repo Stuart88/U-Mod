@@ -15,6 +15,7 @@ namespace U_Mod.Web.Client.Constants
         public const string Mods = "/mods";
         public const string Help = "/help";
         public const string ModOrganizer = "/help/mod-organizer";
+        public const string Obmm = "/help/obmm";
         public const string About = "/about";
         public const string Credits = "/credits";
         public const string Admin = "/admin";

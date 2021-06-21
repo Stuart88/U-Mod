@@ -1,12 +1,39 @@
 ﻿
 @page "/games/oblivion"
 
+@inherits ModListPageBase
+
 <div class="umod-main-body">
     <h2>Oblivion</h2>
     <hr />
+    <div>
+        <Image class="img-fluid" Source="@ServerHelpers.ImageSrcString("general/menu-oblivion.jpg")" Style="max-width:200px"></Image>
+    </div>
     <p>
-        Nothing here yet!
+        The Oblivion mod pack list is below:
     </p>
+    <p>
+        Further details about each mod can be found on the <Blazorise.Link Style="color: var(--yellow) !important;" To="@Constants.Pages.Mods">Mod Info</Blazorise.Link> page.
+    </p>
+    @if (this.MasterList != null && this.MasterList.Games.Any(g => g.Game == GamesEnum.Oblivion))
+    {
+        <ul>
+            @foreach (var m in this.MasterList.Games.First(g => g.Game == GamesEnum.Oblivion).Mods)
+            {
+                <li>
+                    <div class="game-mod-item">
+                        @m.ModName
+                    </div>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <LoadingSpinner Hidden="false" Centred="false" Height="70" />
+    }
+
+    <hr />
 </div>
 
 @code {
