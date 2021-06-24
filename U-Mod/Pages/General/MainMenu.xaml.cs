@@ -137,6 +137,8 @@ namespace U_Mod.Pages.General
                 switch (Static.StaticData.CurrentGame)
                 {
                     case GamesEnum.Oblivion:
+                        ProcessHelpers.TryToLaunchOblivionModManager();
+                        break;
                     case GamesEnum.Fallout:
                         ProcessHelpers.TryToLaunchModOrganizer();
                         break;
@@ -182,6 +184,11 @@ namespace U_Mod.Pages.General
                 }
             }
 
+            ModManagerName.Text = Static.StaticData.CurrentGame switch
+            {
+                GamesEnum.Oblivion => Static.Constants.Obmm,
+                _ => Static.Constants.ModOrganizer2,
+            };
         }
 
         private bool CheckSteam()
@@ -307,7 +314,7 @@ namespace U_Mod.Pages.General
 
         private void ModManagerInstructionsLink_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Tools.OpenModOrganizerHelpInBrowser();
+            Tools.OpenModManagerHelpInBrowser();
         }
     }
 }

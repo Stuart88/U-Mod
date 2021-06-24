@@ -51,16 +51,22 @@ namespace U_Mod.Helpers
         {
             (string exeName, string args) = Static.StaticData.CurrentGame switch
             {
-                GamesEnum.Oblivion => ("OblivionModManager.exe", ""),
+                GamesEnum.Oblivion => ("obmm_setup.exe", ""),
                 GamesEnum.Fallout => (Path.Combine("Mod Organizer 2-6194-2-4-2-1620741202", "Mod Organizer 2-6194-2-4-2-1620741202.exe"), "")
             };
 
             LaunchProcessInGameFolder(exeName, $"RunModManager: {GeneralHelpers.GetGameName()}", args);
         }
 
-        public static void OpenModOrganizerHelpInBrowser()
+        public static void OpenModManagerHelpInBrowser()
         {
-            ProcessHelpers.OpenInBrowser(Static.Constants.WebsiteUrl + "help/mod-organizer");
+            string url = Static.StaticData.CurrentGame switch
+            {
+                GamesEnum.Oblivion => "help/obmm",
+                _ => "help/mod-organizer"
+            };
+            
+            ProcessHelpers.OpenInBrowser(Static.Constants.WebsiteUrl + url);
         }
 
         public static void Run4GbPatch(bool withArgs = true)

@@ -24,6 +24,10 @@ namespace U_Mod.Static
         public const string NexusApiKey = "Q0xCME9uNTlUUzd3SUNMbTU2UjlCdHNMeFdHNHZHa1hmWVZ6c1FSZkdtdVhUOEt0SWJOcjNVL295djhRZ2tWWS0tbU5hZnBhd3ZEY04wSDJuNURZWnRMdz09--569d3193df5f017d17a46e085b69e5d16df1c196";
 #endif
 
-#endregion Public Fields
+        #endregion Public Fields
+
+        public const string ModOrganizer2 = "Mod Organizer 2";
+        public const string OblivionModManager = "Oblivion Mod Manager";
+        public const string Obmm = "OBMM";
     }
 }

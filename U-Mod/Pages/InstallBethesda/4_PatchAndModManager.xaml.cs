@@ -17,6 +17,7 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using U_Mod.Enums;
 using U_Mod.Helpers;
+using U_Mod.Static;
 
 namespace U_Mod.Pages.InstallBethesda
 {
@@ -31,6 +32,8 @@ namespace U_Mod.Pages.InstallBethesda
         {
             InitializeComponent();
 
+            SetText();
+
             Static.StaticData.UserDataStore.CurrentUserData.On4GbRamPatch = true;
             Static.StaticData.SaveAppData();
 
@@ -44,6 +47,17 @@ namespace U_Mod.Pages.InstallBethesda
                     timer.Stop();
             };
             timer.Start();
+        }
+
+        private void SetText()
+        {
+
+            (ModManagerTitle.Text, ModManagerInfoName.Text, ModManagerBtnTextName.Text, ModManagerClickHereName.Text) 
+                = Static.StaticData.CurrentGame switch
+            {
+                GamesEnum.Oblivion => (Constants.OblivionModManager, Constants.Obmm, Constants.Obmm, Constants.Obmm),
+                _ => (Constants.ModOrganizer2, Constants.ModOrganizer2, Constants.ModOrganizer2, Constants.ModOrganizer2)
+            };
         }
 
         private void RamPatchBtn_Click(object sender, RoutedEventArgs e)
@@ -103,7 +117,7 @@ namespace U_Mod.Pages.InstallBethesda
 
         private void ModManagerInstructionsLink_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Tools.OpenModOrganizerHelpInBrowser();
+            Tools.OpenModManagerHelpInBrowser();
         }
 
         private void FinishBtn_Click(object sender, RoutedEventArgs e)

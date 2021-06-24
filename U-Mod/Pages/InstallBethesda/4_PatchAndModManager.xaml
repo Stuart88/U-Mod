@@ -93,12 +93,13 @@
             <Run x:Name="ManualPatchToolLink" Style="{StaticResource HyerlinkStyle_Run}" PreviewMouseLeftButtonDown="ManualPatchToolLink_PreviewMouseLeftButtonDown"> click here</Run>
         </TextBlock>
 
-        <TextBlock Grid.Row="5" Grid.Column="0" Style="{StaticResource PatchPageHeading}">
-            Mod Organizer 2
+        <TextBlock x:Name="ModManagerTitle" Grid.Row="5" Grid.Column="0" Style="{StaticResource PatchPageHeading}">
+            
         </TextBlock>
 
         <TextBlock Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" TextWrapping="Wrap" Style="{StaticResource PatchPageText}">
-            <Run>The Mod Organizer is required to tell your game how to load the mods that are installed. </Run>
+            <Run x:Name="ModManagerInfoName"></Run>
+            <Run> is required to tell your game how to load the mods that are installed. </Run>
         </TextBlock>
 
         <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2">
@@ -106,7 +107,10 @@
                     Margin="0,0,5,0"
                      Style="{StaticResource PatchPageBtn}"
                 Click="ModManagerBtn_Click">
-                Install Mod Organizer
+                <TextBlock>
+                    <Run>Install </Run>
+                    <Run x:Name="ModManagerBtnTextName"></Run>
+                </TextBlock>
             </Button>
             <StackPanel x:Name="ModOrganizerInstalledInfo" Orientation="Horizontal" Visibility="Collapsed" VerticalAlignment="Center">
                 <Image Source="/Assets/Icons/StatusOK_16x.png" Height="15"/>
@@ -118,7 +122,8 @@
 
         <TextBlock Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" Foreground="{StaticResource LighterGrey}"
                     Style="{StaticResource PatchPageTextSmall}">
-            <Run>For instructions on how to use the Mod Organizer, </Run>
+            <Run>For instructions on how to use </Run>
+            <Run x:Name="ModManagerClickHereName"></Run><Run>, </Run>
             <Run x:Name="ModManagerInstructionsLink" Style="{StaticResource HyerlinkStyle_Run}"
                  PreviewMouseLeftButtonDown="ModManagerInstructionsLink_PreviewMouseLeftButtonDown">click here</Run>
         </TextBlock>
