@@ -49,12 +49,16 @@ namespace U_Mod.Models
 
                 //Extract to temp directory first.
                 string extractDirName = Path.Combine(FileHelpers.GetGameFolder(), Static.Constants.UMod, "temp-extract");
-                ZipFile.ExtractToDirectory(zipPath, extractDirName);
+                if(!Directory.Exists(extractDirName))
+                    ZipFile.ExtractToDirectory(zipPath, extractDirName);
                 
                 //Then delete all files in game directory
                 foreach (var d in gameFolder.EnumerateDirectories())
                 {
                     if (d.FullName.Contains(Static.Constants.UMod))
+                        continue;
+
+                    if (d.FullName.Contains("Temp"))
                         continue;
 
                     d.Delete(true);
@@ -69,19 +73,25 @@ namespace U_Mod.Models
                 }
 
                 //Then shift from temp folder to game folder
-                DirectoryInfo extractDir = new DirectoryInfo(extractDirName);
-                foreach (var d in extractDir.EnumerateDirectories())
-                {
-                    d.MoveTo(FileHelpers.GetGameFolder());
-                }
+                FileHelpers.MoveDirectory(extractDirName, FileHelpers.GetGameFolder());
+                
+                //DirectoryInfo extractDir = new DirectoryInfo(extractDirName);
+                //foreach (var d in extractDir.EnumerateDirectories())
+                //{
+                //    FileHelpers.MoveDirectory(d.FullName, Path.Combine(FileHelpers.GetGameFolder(), d.Name));
+                //}
 
-                foreach (var f in extractDir.EnumerateFiles())
-                {
-                    f.MoveTo(FileHelpers.GetGameFolder(), true);
-                }
+                //foreach (var f in extractDir.EnumerateFiles())
+                //{
+                //    f.MoveTo(Path.Combine(FileHelpers.GetGameFolder(), f.Name), true);
+                //}
 
                 if (!CheckReinstallComplete())
                     return false;
+
+                //Delete temp-extract directory
+                DirectoryInfo tempExtract = new DirectoryInfo(extractDirName);
+                tempExtract.Delete(true);
 
                 OnRestoreComplete(null);
             }
