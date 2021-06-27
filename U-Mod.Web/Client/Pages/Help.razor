@@ -153,6 +153,23 @@
                     </div>
                 </CollapseBody>
             </Collapse>
+            <Collapse Visible="@collapse5Visible">
+                <CollapseHeader>
+                    <Heading Size="HeadingSize.Is5">
+                        <Button Clicked="@(()=>collapse5Visible = !collapse5Visible)">
+                            <div class="faq-title">Installer mod list is missing entries</div>
+                        </Button>
+                    </Heading>
+                </CollapseHeader>
+                <CollapseBody>
+                    <div class="faq-section">
+                        <div class="faq-text">
+                            This can happen if your game does not meet the requirements for those mods. In particular, 
+                            make sure you have the correct additional DLC installed for your game, because a lot of mods require it.
+                        </div>
+                    </div>
+                </CollapseBody>
+            </Collapse>
         </Accordion>
 
     </div>
@@ -163,4 +180,5 @@
     bool collapse2Visible = false;
     bool collapse3Visible = false;
     bool collapse4Visible = false;
+    bool collapse5Visible = false;
 }
