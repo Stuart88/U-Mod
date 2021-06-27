@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="UpdateWindow" Height="300" Width="300"
         WindowStyle="None">
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center"> 
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch"> 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <TextBlock x:Name="UpdateInfo" Margin="5" Grid.Row="0" TextAlignment="Center" HorizontalAlignment="Center" Text="Downloading..."/>
         
-        <Image x:Name="LoadingSpinner" HorizontalAlignment="Center" Margin="5" Height="50" Width="50" Grid.Row="1" gif:ImageBehavior.AnimatedSource="/Assets/Images/NexusLoader.gif" />
+        <Image x:Name="LoadingSpinner" HorizontalAlignment="Center" Margin="5" Height="50" Width="50" Grid.Row="1" gif:ImageBehavior.AnimatedSource="/Assets/Images/loading.gif" />
 
         <Frame Grid.Row="2" x:Name="UpdateProgressFrme" Visibility="Hidden" Margin="10">
             <Frame.Content>
