@@ -158,6 +158,7 @@ namespace U_Mod.Models
         {
             // Not sure if this lock will help but something somewhere is causing very strange phantom directories and files called "**" to be written to
             // VS solution root. No idea why. Trying everything.
+
             try
             {
                 if (ZipHelpers.IsExe(inFile))
@@ -172,11 +173,11 @@ namespace U_Mod.Models
                     using var archive = ArchiveFactory.Open(inFile);
                     IReader reader = archive.ExtractAllEntries();
                     reader.EntryExtractionProgress += Reader_EntryExtractionProgress;
-
+                    
                     while (reader.MoveToNextEntry())
                     {
                         string targetPath = "";
-
+                        
                         if (!reader.Entry.IsDirectory)
                         {
                             if (ZipHelpers.HasSubDirectory(reader.Entry.Key))
@@ -184,28 +185,39 @@ namespace U_Mod.Models
                                 var subfolders = Path.Combine(outDirectory, reader.Entry.Key.Replace('/', '\\')).Split('\\');
 
                                 targetPath = string.Join('\\', subfolders[..^1]);
+
+                                CheckForDirectory();
+                                reader.WriteEntryToDirectory(targetPath, new ExtractionOptions() { ExtractFullPath = false, Overwrite = true });
                             }
                             else
                             {
                                 targetPath = outDirectory;
+                                CheckForDirectory();
+                                //reader.WriteEntryToFile(targetPath, new ExtractionOptions() { ExtractFullPath = false, Overwrite = true });
+                                reader.WriteEntryTo(Path.Combine(targetPath, reader.Entry.Key));
                             }
-
-                            if (ZipHelpers.HasSubDirectory(reader.Entry.Key) && !Directory.Exists(targetPath))
-                                // If key has '/' it represents a directory, so need to make it.
-                                // Otherwise it's zip root don't make dir
-                                Directory.CreateDirectory(targetPath);
-
-                            reader.WriteEntryToDirectory(targetPath, new ExtractionOptions() { ExtractFullPath = false, Overwrite = true });
+                            
+                            void CheckForDirectory()
+                            {
+                                if (ZipHelpers.HasSubDirectory(reader.Entry.Key) && !Directory.Exists(targetPath))
+                                    // If key has '/' it represents a directory, so need to make it.
+                                    // Otherwise it's zip root don't make dir
+                                    Directory.CreateDirectory(targetPath);
+                            }
                         }
+
                     }
+
                 }
             }
             catch (Exception e)
             {
                 Logging.Logger.LogException("UncompressZip (only worry about this if the next logged exception is UncompressZipFallback!)", e);
+
                 UncompressZipFallback(inFile, outDirectory);
             }
         }
+
 
         /// <summary>
         /// Slower but more reliable unzipper, use as secondary option if the main unzipper fails
