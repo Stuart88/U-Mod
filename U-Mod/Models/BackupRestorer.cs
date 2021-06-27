@@ -47,6 +47,11 @@ namespace U_Mod.Models
             {
                 DirectoryInfo gameFolder = new DirectoryInfo(FileHelpers.GetGameFolder());
 
+                //Extract to temp directory first.
+                string extractDirName = Path.Combine(FileHelpers.GetGameFolder(), Static.Constants.UMod, "temp-extract");
+                ZipFile.ExtractToDirectory(zipPath, extractDirName);
+                
+                //Then delete all files in game directory
                 foreach (var d in gameFolder.EnumerateDirectories())
                 {
                     if (d.FullName.Contains(Static.Constants.UMod))
@@ -63,7 +68,17 @@ namespace U_Mod.Models
                     f.Delete();
                 }
 
-                ZipFile.ExtractToDirectory(zipPath, FileHelpers.GetGameFolder());
+                //Then shift from temp folder to game folder
+                DirectoryInfo extractDir = new DirectoryInfo(extractDirName);
+                foreach (var d in extractDir.EnumerateDirectories())
+                {
+                    d.MoveTo(FileHelpers.GetGameFolder());
+                }
+
+                foreach (var f in extractDir.EnumerateFiles())
+                {
+                    f.MoveTo(FileHelpers.GetGameFolder(), true);
+                }
 
                 if (!CheckReinstallComplete())
                     return false;
