@@ -136,7 +136,7 @@
                     <TextBlock x:Name="SecondaryInstallingInfo" Foreground="{StaticResource Black}" HorizontalAlignment="Center" TextWrapping="NoWrap" VerticalAlignment="Center" TextAlignment="Center"  Width="300"/>
                 </Grid>
 
-                <Image x:Name="LoadingSpinner" Visibility="Collapsed" VerticalAlignment="Center" Width="50" Height="50" Margin="10" HorizontalAlignment="Center" gif:ImageBehavior.AnimatedSource="/Assets/Images/NexusLoader.gif" />
+                <Image x:Name="LoadingSpinner" Visibility="Collapsed" VerticalAlignment="Center" Width="50" Height="50" Margin="10" HorizontalAlignment="Center" gif:ImageBehavior.AnimatedSource="/Assets/Images/loading.gif" />
 
             </StackPanel>
         </Grid>
