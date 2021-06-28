@@ -6,78 +6,82 @@
     <hr />
     <h5 style="text-decoration:underline">Getting Started</h5>
     <p>
-        First install Mod Organizer, launch it and follow the wizard for creating a new instance.
+        First install OBMM and launch it
     </p>
     <p>
-        Click here if you need to download the Mod Organizer: 
-        <Blazorise.Button Type="ButtonType.Link" To="https://www.nexusmods.com/skyrimspecialedition/mods/6194?tab=files" Target="Target.Blank"
+        Click here if you need to download Oblivion Mod Manager:
+        <Blazorise.Button Type="ButtonType.Link" To="https://www.nexusmods.com/oblivion/mods/2097?tab=files&file_id=34275" Target="Target.Blank"
                           Class="btn umod-btn"
                           Style="width: 230px; padding: 4px 10px;">
-            Download Mod Organizer
+            Download OBMM
         </Blazorise.Button>
     </p>
-    <p>
-        The automatic instructions and wizard will guide you through the process of setting up a new instance for your game.
-    </p>
-    <p class="mod-organizer-info-box">
-        If you have already bypassed the instance wizard, you can manully create a new instance by going to:
-        <br />
-        <span style="font-weight:bold">File > Manage Instances... > Create new instance</span>
-    </p>
+
     <div class="mod-organizer-step">
         <p>
-            Once the instance is set up, you should have something similar to the below image, showing the list of mods for your game:
+            With OBMM open, first right-click the list on the left, and select 'Activate all'
         </p>
 
-        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer1.jpg")" />
-    </div>
-    <div class="mod-organizer-step">
-        <p>
-            In the right-hand list of mods, right-click anywhere on the list and select Enable All
-        </p>
-
-        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer2.jpg")" />
+        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/oblivion/obmm-guide1.jpg")" />
     </div>
 
     <div class="mod-organizer-step">
         <p>
-            Next click the 'Sort' button, click 'yes' on the warning that pops up, then close the LOOT window when done.
+            Now look for <span style="color:var(--yellow)">Kvatch Rebuilt Weather Patch.esp</span> and ensure it is NOT ticked.
         </p>
-        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer3.jpg")" Style="margin-bottom:20px" />
-        <p>
-            If any mods show a red warning icon, you can hover the mouse over the warning to see what's wrong. You may need to join the
-            <Blazorise.Link Style="color:var(--yellow)" To="@U_Mod.Shared.Constants.Constants.DiscordLink" Target="Target.Blank">
-                U-Mod Discord
-            </Blazorise.Link>
-            to get advice on how to fix the issue.
-        </p>
-        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer3-1.jpg")" />
+
+        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/oblivion/obmm-guide1-2.jpg")" />
     </div>
 
     <div class="mod-organizer-step">
         <p>
-            From the main dropdown, ensure the correct item is selected, then click on Run.
+            From the buttons on the right, click 'Import/Export' then select 'Import load order' from the list that appears
         </p>
 
-        <h6>Which dropdown item should I choose?</h6>
-
-        <table class="mod-organizer-step-list">
-            <thead>
-                <tr>
-                    <th>Game</th>
-                    <th>Option</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Fallout 3</td>
-                    <td><span>FOSE</span></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer4.jpg")" />
+        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/oblivion/obmm-guide2.jpg")" />
     </div>
+
+
+    <div class="mod-organizer-step">
+        <p>
+            The load order file is added to your Oblivion game folder by U-Mod
+        </p>
+        <p>
+            Look for <span style="color:var(--yellow)">obmm-umod.olod</span> in the Oblivion game folder and select 'Open'
+</p>
+
+        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/oblivion/obmm-guide3.jpg")" />
+    </div>
+
+    <div class="mod-organizer-step">
+        <p>
+            From the buttons on the right, click 'Utilities' then select 'Archive invalidation' from the list that appears
+        </p>
+
+        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/oblivion/obmm-guide4.jpg")" />
+    </div>
+
+
+    <div class="mod-organizer-step">
+        <p>
+            In the window that appears, ensure you have BSA redirection selected, then click 'Update Now'
+        </p>
+        <p>
+            After that is done, you can close the archive invalidation window
+        </p>
+        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/oblivion/obmm-guide5.jpg")" />
+    </div>
+
+    <div class="mod-organizer-step">
+        <p>
+            To launch the game, either:
+        </p>
+        <ol>
+            <li>Close OBMM and launch from Steam as normal, or;</li>
+            <li>Use the 'Launch Oblivion' button in OBMM</li>
+        </ol>
+    </div>
+
 </div>
 
 @code {
