@@ -494,10 +494,10 @@ namespace U_Mod.Pages.BaseClasses
                     }
                     else
                     {
-                        string errorStr = "The following mods failed to install:\n\n\n";
+                        string errorStr = "The following mod files failed to install:\n\n\n";
                         foreach (var res in this.ExtractionResults.Where(res => !res.UnzipOk || !res.TransferOk || !res.DownloadOk))
                         {
-                            errorStr += $"{res.Message}\n\n\n";
+                            errorStr += $"[{res.ModZipFile.FileName}]\nREASON: {res.Message}\n\n\n";
                         }
 
                         GeneralHelpers.ShowMessageBox(errorStr);

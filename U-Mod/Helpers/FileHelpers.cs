@@ -37,7 +37,7 @@ namespace U_Mod.Helpers
             {
                 GamesEnum.Oblivion => string.IsNullOrEmpty(Static.StaticData.AppData.OblivionGameFolder) ? "" : Path.Combine(Static.StaticData.AppData.OblivionGameFolder, Static.Constants.UMod),
                 GamesEnum.Fallout => string.IsNullOrEmpty(Static.StaticData.AppData.FalloutGameFolder) ? "" : Path.Combine(Static.StaticData.AppData.FalloutGameFolder, Static.Constants.UMod),
-                _ => throw new NotImplementedException()
+                _ => ""
             };
         }
 

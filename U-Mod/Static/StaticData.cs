@@ -32,8 +32,8 @@ namespace U_Mod.Static
         {
             Helpers.FileHelpers.SaveAsJson(AppData, Constants.AppDataFilePath);// Save to game hub install folder
 
-            UserDataBase toSave = null;
-            string savePath = "";
+            UserDataBase toSave;
+            string savePath;
 
             switch (CurrentGame)
             {

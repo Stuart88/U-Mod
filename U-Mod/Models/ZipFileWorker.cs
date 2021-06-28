@@ -251,7 +251,12 @@ namespace U_Mod.Models
                             });
                         }
 
-                        entry.Extract(Path.Combine(outDirectory, entry.FileName));
+                        string extractLocation = Path.Combine(outDirectory, entry.FileName);
+
+                        if (File.Exists(extractLocation) || Directory.Exists(extractLocation)) // entries might already exist because this is a fallback method for if main extractor fails partway through
+                            continue;
+                        else
+                            entry.Extract(extractLocation);
                     }
                     catch (Exception e)
                     {

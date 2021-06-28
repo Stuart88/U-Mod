@@ -113,18 +113,21 @@ namespace U_Mod.Models
 
                 StaticData.SaveAppData(this.IsReinstall);
                 
-                switch (Static.StaticData.CurrentGame)
-                {
-                    case GamesEnum.Oblivion:
-                        StaticData.AppData.OblivionGameFolder = "";
-                        break;
 
-                    case GamesEnum.Fallout:
-                        StaticData.AppData.FalloutGameFolder = "";
-                        break;
-                }
+                // BELOW is commented out for now. Surely no need to reset the game folder because the restore puts the game back into the same game folder.
 
-                StaticData.SaveAppData(this.IsReinstall);
+                //switch (Static.StaticData.CurrentGame)
+                //{
+                //    case GamesEnum.Oblivion:
+                //        StaticData.AppData.OblivionGameFolder = "";
+                //        break;
+
+                //    case GamesEnum.Fallout:
+                //        StaticData.AppData.FalloutGameFolder = "";
+                //        break;
+                //}
+
+                //StaticData.SaveAppData(this.IsReinstall);
             }
 
             EventHandler handler = RestoreComplete;
