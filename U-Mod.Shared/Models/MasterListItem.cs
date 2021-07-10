@@ -115,6 +115,26 @@ namespace U_Mod.Shared.Models
             }
         }
 
+        public void AddGameItemFromGameName(string name)
+        {
+            switch (name)
+            {
+                case Constants.Constants.GameNameNewVegas:
+                    this.Games.Add(new GameItem
+                    {
+                        Game = GamesEnum.NewVegas,
+                        GameName = Constants.Constants.GameNameNewVegas,
+                        GameVersion = "1",
+                        Id = Guid.NewGuid(),
+                        Mods = new List<Mod>(),
+                        ParentId = Guid.Empty
+                    });
+                    return;
+                default:
+                    throw new Exception("MasterListItem.cs: AddGameItemFromGameName: Game name unknown!");
+            }
+        }
+
         #endregion Public Methods
     }
 

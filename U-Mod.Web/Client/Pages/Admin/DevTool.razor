@@ -27,28 +27,51 @@
     }
     else
     {
-        <div id="dev-tool-main-area">
-            <h5>Game</h5>
-            <Blazorise.Select Style="margin: 4px auto; width:300px"
-                              TValue="string" SelectedValue="@SelectedGame" SelectedValueChanged="@OnGameSelected">
+<div id="dev-tool-main-area">
+    <table>
+        <tr>
+            <td>
+                <h5>Game</h5>
+            </td>
+            <td>
+                 @if (this.SelectedGameItem != null)
+                 {
+                    <h6>Version - <span>(Changing this will set U-Mod to Update mode for this game!)</span></h6>
+                 }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <Blazorise.Select Style="margin: 4px; width:300px"
+                                  TValue="string" SelectedValue="@SelectedGame" SelectedValueChanged="@OnGameSelected">
 
-                <SelectItem Value="@("")"> - Select Game - </SelectItem>
-
-                @foreach (string g in this.GameNames)
-                {
-                    <SelectItem Value="@g">@g</SelectItem>
-                }
-            </Blazorise.Select>
-            <hr />
-
-            <div class="row">
-                <div class="col-4 dev-tool-overflow-scroll">
-
-                    @if (this.SelectedGameItem != null)
+                    @foreach (string g in this.GameNames)
                     {
-                        <h5>
-                            <Blazorise.Button Class="btn btn-success btn-sm"
-                                              Clicked="@(() =>
+                        <SelectItem Value="@g">@g</SelectItem>
+                    }
+                </Blazorise.Select>
+            </td>
+            <td>
+                @if (this.SelectedGameItem != null)
+                {
+                    <TextEdit Style="margin: 4px; width:300px;"
+                              Text="@this.SelectedGameItem.GameVersion" TextChanged="((e) => { this.SelectedGameItem.GameVersion = e; ShouldSave = true; })"></TextEdit>
+                }
+            </td>
+        </tr>
+    </table>
+    
+    
+    <hr />
+
+    <div class="row">
+        <div class="col-4 dev-tool-overflow-scroll">
+
+            @if (this.SelectedGameItem != null)
+            {
+                <h5>
+                    <Blazorise.Button Class="btn btn-success btn-sm"
+                                      Clicked="@(() =>
                                                          {
                 this.GameMods.Add(new Mod(this.SelectedGameItem.Id) { ModName = "NEW MOD" });
                 this.SelectedMod = this.GameMods.Last();
@@ -56,228 +79,228 @@
                 OnFilterQueryChanged(this.ModsFilterQuery);
                 ShouldSave = true;
             })">Add</Blazorise.Button>
-                            Mods
-                        </h5>
+                    Mods
+                </h5>
+                <TableRow>
+                    <Blazorise.TableRowCell>
+                        <TextEdit Style="margin-left:4px" TextChanged="@OnFilterQueryChanged" Placeholder="Search Mods"></TextEdit>
+                    </Blazorise.TableRowCell>
+                </TableRow>
+                @foreach (var m in this.FilteredMods)
+                {
+                    <div>
+                        <div class="d-inline-block">
+                            <Blazorise.Button Class="btn-danger text-light btn-sm" Clicked="@(() => DeleteMod(m))"> ✘ </Blazorise.Button>
+                        </div>
+                        <div class="d-inline-block dev-tool-mod-name hover-pointer dev-tool-mod-selected-@((this.SelectedMod != null && this.SelectedMod.Id == m.Id) ? "True" : "False")" @onclick="@(() => { this.SelectedMod = m; this.SelectedZipItem = null; })">@m.ModName</div>
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-8 dev-tool-overflow-scroll">
+            @if (this.SelectedMod != null)
+            {
+                <div class="dev-tool-selected-mod-area">
+                    <h5 class="text-dark">Selected Mod</h5>
+                    <Table class="dev-tool-mod-data-table">
                         <TableRow>
+                            <Blazorise.TableRowCell>Mod Name</Blazorise.TableRowCell>
                             <Blazorise.TableRowCell>
-                                <TextEdit Style="margin-left:4px" TextChanged="@OnFilterQueryChanged" Placeholder="Search Mods"></TextEdit>
+                                <TextEdit Text="@this.SelectedMod.ModName" TextChanged="((e) => { this.SelectedMod.ModName = e; ShouldSave = true;})"></TextEdit>
                             </Blazorise.TableRowCell>
                         </TableRow>
-                        @foreach (var m in this.FilteredMods)
-                        {
-                            <div>
-                                <div class="d-inline-block">
-                                    <Blazorise.Button Class="btn-danger text-light btn-sm" Clicked="@(() => DeleteMod(m))"> ✘ </Blazorise.Button>
-                                </div>
-                                <div class="d-inline-block dev-tool-mod-name hover-pointer dev-tool-mod-selected-@((this.SelectedMod != null && this.SelectedMod.Id == m.Id) ? "True" : "False")" @onclick="@(() => { this.SelectedMod = m; this.SelectedZipItem = null; })">@m.ModName</div>
-                            </div>
-                        }
-                    }
-                </div>
-                <div class="col-8 dev-tool-overflow-scroll">
-                    @if (this.SelectedMod != null)
-                    {
-                        <div class="dev-tool-selected-mod-area">
-                            <h5 class="text-dark">Selected Mod</h5>
-                            <Table class="dev-tool-mod-data-table">
-                                <TableRow>
-                                    <Blazorise.TableRowCell>Mod Name</Blazorise.TableRowCell>
-                                    <Blazorise.TableRowCell>
-                                        <TextEdit Text="@this.SelectedMod.ModName" TextChanged="((e) => { this.SelectedMod.ModName = e; ShouldSave = true;})"></TextEdit>
-                                    </Blazorise.TableRowCell>
-                                </TableRow>
-                                <TableRow>
-                                    <Blazorise.TableRowCell>Version</Blazorise.TableRowCell>
-                                    <Blazorise.TableRowCell>
-                                        <TextEdit InputMode="TextInputMode.Numeric" TextChanged="((e) => { this.SelectedMod.Version = int.Parse(e); ShouldSave = true; })" Text="@this.SelectedMod.Version.ToString()"></TextEdit>
-                                    </Blazorise.TableRowCell>
-                                </TableRow>
-                                <TableRow>
-                                    <Blazorise.TableRowCell>Creator</Blazorise.TableRowCell>
-                                    <Blazorise.TableRowCell>
-                                        <TextEdit Text="@this.SelectedMod.CreatedBy" TextChanged="((e) => { this.SelectedMod.CreatedBy = e; ShouldSave = true;})"></TextEdit>
-                                    </Blazorise.TableRowCell>
-                                </TableRow>
-                                <TableRow>
-                                    <Blazorise.TableRowCell>Creator URL</Blazorise.TableRowCell>
-                                    <Blazorise.TableRowCell>
-                                        <TextEdit Text="@this.SelectedMod.CreatorUrl" TextChanged="((e) => { this.SelectedMod.CreatorUrl = e; ShouldSave = true;})"></TextEdit>
-                                    </Blazorise.TableRowCell>
-                                </TableRow>
-                                <TableRow>
-                                    <Blazorise.TableRowCell>
-                                        <Check Checked="@this.SelectedMod.IsEssential" TValue="bool" CheckedChanged="((e) => { this.SelectedMod.IsEssential = e; ShouldSave = true; })">Essential</Check>
-                                    </Blazorise.TableRowCell>
-                                </TableRow>
-                                <TableRow>
-                                    <Blazorise.TableRowCell>
-                                        <Check Checked="@this.SelectedMod.IsSteam" TValue="bool" CheckedChanged="((e) => { this.SelectedMod.IsSteam = e; ShouldSave = true; })">Steam</Check>
-                                    </Blazorise.TableRowCell>
-                                    <Blazorise.TableRowCell>
-                                        <Check Checked="@this.SelectedMod.IsNonSteam" TValue="bool" CheckedChanged="((e) => { this.SelectedMod.IsNonSteam = e; ShouldSave = true; })">Non-Steam</Check>
-                                    </Blazorise.TableRowCell>
-                                </TableRow>
-                                <TableRow>
-                                    <Blazorise.TableRowCell>
-                                        <Check Checked="@this.SelectedMod.IsAllDlcOnly" TValue="bool" CheckedChanged="((e) => { this.SelectedMod.IsAllDlcOnly = e; ShouldSave = true; })">All DLC</Check>
-                                    </Blazorise.TableRowCell>
-                                    <Blazorise.TableRowCell>
-                                        <Check Checked="@this.SelectedMod.IsNotAllDlcOnly" TValue="bool" CheckedChanged="((e) => { this.SelectedMod.IsNotAllDlcOnly = e; ShouldSave = true; })">Not All DLC</Check>
-                                    </Blazorise.TableRowCell>
-                                </TableRow>
-                            </Table>
+                        <TableRow>
+                            <Blazorise.TableRowCell>Version</Blazorise.TableRowCell>
+                            <Blazorise.TableRowCell>
+                                <TextEdit InputMode="TextInputMode.Numeric" TextChanged="((e) => { this.SelectedMod.Version = int.Parse(e); ShouldSave = true; })" Text="@this.SelectedMod.Version.ToString()"></TextEdit>
+                            </Blazorise.TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                            <Blazorise.TableRowCell>Creator</Blazorise.TableRowCell>
+                            <Blazorise.TableRowCell>
+                                <TextEdit Text="@this.SelectedMod.CreatedBy" TextChanged="((e) => { this.SelectedMod.CreatedBy = e; ShouldSave = true;})"></TextEdit>
+                            </Blazorise.TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                            <Blazorise.TableRowCell>Creator URL</Blazorise.TableRowCell>
+                            <Blazorise.TableRowCell>
+                                <TextEdit Text="@this.SelectedMod.CreatorUrl" TextChanged="((e) => { this.SelectedMod.CreatorUrl = e; ShouldSave = true;})"></TextEdit>
+                            </Blazorise.TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                            <Blazorise.TableRowCell>
+                                <Check Checked="@this.SelectedMod.IsEssential" TValue="bool" CheckedChanged="((e) => { this.SelectedMod.IsEssential = e; ShouldSave = true; })">Essential</Check>
+                            </Blazorise.TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                            <Blazorise.TableRowCell>
+                                <Check Checked="@this.SelectedMod.IsSteam" TValue="bool" CheckedChanged="((e) => { this.SelectedMod.IsSteam = e; ShouldSave = true; })">Steam</Check>
+                            </Blazorise.TableRowCell>
+                            <Blazorise.TableRowCell>
+                                <Check Checked="@this.SelectedMod.IsNonSteam" TValue="bool" CheckedChanged="((e) => { this.SelectedMod.IsNonSteam = e; ShouldSave = true; })">Non-Steam</Check>
+                            </Blazorise.TableRowCell>
+                        </TableRow>
+                        <TableRow>
+                            <Blazorise.TableRowCell>
+                                <Check Checked="@this.SelectedMod.IsAllDlcOnly" TValue="bool" CheckedChanged="((e) => { this.SelectedMod.IsAllDlcOnly = e; ShouldSave = true; })">All DLC</Check>
+                            </Blazorise.TableRowCell>
+                            <Blazorise.TableRowCell>
+                                <Check Checked="@this.SelectedMod.IsNotAllDlcOnly" TValue="bool" CheckedChanged="((e) => { this.SelectedMod.IsNotAllDlcOnly = e; ShouldSave = true; })">Not All DLC</Check>
+                            </Blazorise.TableRowCell>
+                        </TableRow>
+                    </Table>
 
-                            <hr />
+                    <hr />
 
-                            <h5 class="text-dark">
-                                <Blazorise.Button Class="btn btn-success btn-sm"
-                                                  Clicked="@(() =>
+                    <h5 class="text-dark">
+                        <Blazorise.Button Class="btn btn-success btn-sm"
+                                          Clicked="@(() =>
                                                                        {
                                                                            this.SelectedMod.Files.Add(new ModZipFile(this.SelectedMod.Id) { FileName = "NEW FILE" });
                                                                            this.SelectedZipItem = this.SelectedMod.Files.Last();
                                                                            ShouldSave = true;
                                                                        })">Add</Blazorise.Button>
-                                Zip Files
-                            </h5>
+                        Zip Files
+                    </h5>
 
-                            <div class="row">
-                                <div class="col-5">
-                                    @foreach (var f in this.SelectedMod.Files)
-                                    {
-                                        <div style="display:flex">
-                                            <div class="d-inline-block align-self-center">
-                                                <Blazorise.Button Class="btn-danger text-light btn-sm" Clicked="@(() => DeleteFile(f))"> ✘ </Blazorise.Button>
-                                            </div>
-                                            <div class="d-inline-block align-self-center dev-tool-zip-file-name hover-pointer dev-tool-zip-file-selected-@((this.SelectedZipItem != null && this.SelectedZipItem.Id == f.Id) ? "True" : "False")" @onclick="@(() => this.SelectedZipItem = f)">@f.FileName</div>
-                                        </div>
-                                    }
+                    <div class="row">
+                        <div class="col-5">
+                            @foreach (var f in this.SelectedMod.Files)
+                            {
+                                <div style="display:flex">
+                                    <div class="d-inline-block align-self-center">
+                                        <Blazorise.Button Class="btn-danger text-light btn-sm" Clicked="@(() => DeleteFile(f))"> ✘ </Blazorise.Button>
+                                    </div>
+                                    <div class="d-inline-block align-self-center dev-tool-zip-file-name hover-pointer dev-tool-zip-file-selected-@((this.SelectedZipItem != null && this.SelectedZipItem.Id == f.Id) ? "True" : "False")" @onclick="@(() => this.SelectedZipItem = f)">@f.FileName</div>
                                 </div>
-                                <div class="col-7">
-                                    @if (this.SelectedZipItem != null)
-                                    {
-                                        <Table class="dev-tool-mod-data-table">
-                                            <TableRow>
-                                                <Blazorise.TableRowCell>File Name</Blazorise.TableRowCell>
-                                                <Blazorise.TableRowCell>
-                                                    <TextEdit Text="@this.SelectedZipItem.FileName" TextChanged="@OnZipFilenameTextChanged"></TextEdit>
-                                                </Blazorise.TableRowCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <Blazorise.TableRowCell>File Type</Blazorise.TableRowCell>
-                                                <Blazorise.TableRowCell>
-                                                    <TextEdit Class="@(this.SelectedZipItem.ZipFileType == ZipFileType.Unknown ? "dev-tool-zip-type-unknown" : "")" Disabled="true" Text="@GetSelectedZipFileTypeText()"></TextEdit>
-                                                </Blazorise.TableRowCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <Blazorise.TableRowCell>Size in Kb</Blazorise.TableRowCell>
-                                                <Blazorise.TableRowCell>
-                                                    <TextEdit InputMode="TextInputMode.Numeric" TextChanged="((e) => { this.SelectedZipItem.SizeinKb = int.Parse(e); ShouldSave = true; })" Text="@this.SelectedZipItem.SizeinKb.ToString()"></TextEdit>
-                                                </Blazorise.TableRowCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <Blazorise.TableRowCell>Manual Download</Blazorise.TableRowCell>
-                                                <Blazorise.TableRowCell>
-                                                    <TextEdit Disabled="@(!string.IsNullOrEmpty(this.SelectedZipItem.DirectDownloadUrl))" Text="@this.SelectedZipItem.ManualDownloadUrl"
-                                                              TextChanged="((e) => { this.SelectedZipItem.ManualDownloadUrl = e; ShouldSave = true; })"></TextEdit>
-                                                </Blazorise.TableRowCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <Blazorise.TableRowCell>Direct Download</Blazorise.TableRowCell>
-                                                <Blazorise.TableRowCell>
-                                                    <TextEdit Disabled="@(!string.IsNullOrEmpty(this.SelectedZipItem.ManualDownloadUrl))" Text="@this.SelectedZipItem.DirectDownloadUrl"
-                                                              TextChanged="((e) => { this.SelectedZipItem.DirectDownloadUrl = e; ShouldSave = true; })"></TextEdit>
-                                                </Blazorise.TableRowCell>
-                                            </TableRow>
-                                            <TableRow>
-                                                <Blazorise.TableRowCell>Extract To</Blazorise.TableRowCell>
-                                                <Blazorise.TableRowCell>
-                                                    <Blazorise.Select Style="margin: 4px auto"
-                                                                      TValue="int" SelectedValue="@((int)this.SelectedZipItem.ExtractLocation)" SelectedValueChanged="((e) => { this.SelectedZipItem.ExtractLocation = (ExtractLocation)e; ShouldSave = true; })">
+                            }
+                        </div>
+                        <div class="col-7">
+                            @if (this.SelectedZipItem != null)
+                            {
+                                <Table class="dev-tool-mod-data-table">
+                                    <TableRow>
+                                        <Blazorise.TableRowCell>File Name</Blazorise.TableRowCell>
+                                        <Blazorise.TableRowCell>
+                                            <TextEdit Text="@this.SelectedZipItem.FileName" TextChanged="@OnZipFilenameTextChanged"></TextEdit>
+                                        </Blazorise.TableRowCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <Blazorise.TableRowCell>File Type</Blazorise.TableRowCell>
+                                        <Blazorise.TableRowCell>
+                                            <TextEdit Class="@(this.SelectedZipItem.ZipFileType == ZipFileType.Unknown ? "dev-tool-zip-type-unknown" : "")" Disabled="true" Text="@GetSelectedZipFileTypeText()"></TextEdit>
+                                        </Blazorise.TableRowCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <Blazorise.TableRowCell>Size in Kb</Blazorise.TableRowCell>
+                                        <Blazorise.TableRowCell>
+                                            <TextEdit InputMode="TextInputMode.Numeric" TextChanged="((e) => { this.SelectedZipItem.SizeinKb = int.Parse(e); ShouldSave = true; })" Text="@this.SelectedZipItem.SizeinKb.ToString()"></TextEdit>
+                                        </Blazorise.TableRowCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <Blazorise.TableRowCell>Manual Download</Blazorise.TableRowCell>
+                                        <Blazorise.TableRowCell>
+                                            <TextEdit Disabled="@(!string.IsNullOrEmpty(this.SelectedZipItem.DirectDownloadUrl))" Text="@this.SelectedZipItem.ManualDownloadUrl"
+                                                      TextChanged="((e) => { this.SelectedZipItem.ManualDownloadUrl = e; ShouldSave = true; })"></TextEdit>
+                                        </Blazorise.TableRowCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <Blazorise.TableRowCell>Direct Download</Blazorise.TableRowCell>
+                                        <Blazorise.TableRowCell>
+                                            <TextEdit Disabled="@(!string.IsNullOrEmpty(this.SelectedZipItem.ManualDownloadUrl))" Text="@this.SelectedZipItem.DirectDownloadUrl"
+                                                      TextChanged="((e) => { this.SelectedZipItem.DirectDownloadUrl = e; ShouldSave = true; })"></TextEdit>
+                                        </Blazorise.TableRowCell>
+                                    </TableRow>
+                                    <TableRow>
+                                        <Blazorise.TableRowCell>Extract To</Blazorise.TableRowCell>
+                                        <Blazorise.TableRowCell>
+                                            <Blazorise.Select Style="margin: 4px auto"
+                                                              TValue="int" SelectedValue="@((int)this.SelectedZipItem.ExtractLocation)" SelectedValueChanged="((e) => { this.SelectedZipItem.ExtractLocation = (ExtractLocation)e; ShouldSave = true; })">
 
-                                                        @{
-                                                            var enumVales = Enum.GetValues<U_Mod.Shared.Models.ExtractLocation>().ToList().FilterForGame(this.GameEnum);
-                                                            foreach (var g in enumVales)
-                                                            {
-                                                                <SelectItem Value="@((int)g)">@GetExtractFolderNameString(g)</SelectItem>
-                                                            }
-                                                        }
+                                                @{
+                                                    var enumVales = Enum.GetValues<U_Mod.Shared.Models.ExtractLocation>().ToList().FilterForGame(this.GameEnum);
+                                                    foreach (var g in enumVales)
+                                                    {
+                                                        <SelectItem Value="@((int)g)">@GetExtractFolderNameString(g)</SelectItem>
+                                                    }
+                                                }
 
-                                                    </Blazorise.Select>
-                                                </Blazorise.TableRowCell>
-                                            </TableRow>
-                                        </Table>
+                                            </Blazorise.Select>
+                                        </Blazorise.TableRowCell>
+                                    </TableRow>
+                                </Table>
 
-                                        <hr />
+                                <hr />
 
-                                        <h5 class="text-dark">
-                                            <Blazorise.Button Class="btn btn-success btn-sm"
-                                                              Clicked="@(() => {
+                                <h5 class="text-dark">
+                                    <Blazorise.Button Class="btn btn-success btn-sm"
+                                                      Clicked="@(() => {
                                                                              this.SelectedZipItem.Content.Insert(0, new ModZipContent(this.SelectedZipItem.Id)
                                                                              {
                                                                                  InstallOrder = this.SelectedZipItem.Content.Count > 0 ? this.SelectedZipItem.Content.Max(c => c.InstallOrder) + 1 : 1
                                                                              });
                                                                              ShouldSave = true;
                                                                          })">Add</Blazorise.Button>
-                                            File Content
-                                        </h5>
+                                    File Content
+                                </h5>
 
-                                        <div class="dev-tool-file-contents">
-                                            <div class="row text-dark">
-                                                <div class="col-2">
-                                                    <strong>Delete</strong>
-                                                </div>
-                                                <div class="col-3">
-                                                    <strong>Install Order</strong>
-                                                    @if (this.SelectedZipItem.Content != null && this.SelectedZipItem.Content.Count > 0)
-                                                    {
-                                                        <Blazorise.Button Type="ButtonType.Button"
-                                                                          Class="btn btn-sm"
-                                                                          Color="Color.Secondary"
-                                                                          Clicked="(() =>
+                                <div class="dev-tool-file-contents">
+                                    <div class="row text-dark">
+                                        <div class="col-2">
+                                            <strong>Delete</strong>
+                                        </div>
+                                        <div class="col-3">
+                                            <strong>Install Order</strong>
+                                            @if (this.SelectedZipItem.Content != null && this.SelectedZipItem.Content.Count > 0)
+                                            {
+                                                <Blazorise.Button Type="ButtonType.Button"
+                                                                  Class="btn btn-sm"
+                                                                  Color="Color.Secondary"
+                                                                  Clicked="(() =>
                                                                                {
                                                                                    if(this.SelectedZipItem.Content.First().InstallOrder > 1)
                                                                                        this.SelectedZipItem.Content = this.SelectedZipItem.Content.OrderBy(i => i.InstallOrder).ToList();
                                                                                    else
                                                                                        this.SelectedZipItem.Content = this.SelectedZipItem.Content.OrderByDescending(i => i.InstallOrder).ToList();
                                                                                })">
-                                                            Sort
-                                                        </Blazorise.Button>
-                                                    }
-                                                </div>
-                                                <div class="col-7">
-                                                    <strong>File or Folder name</strong>
-                                                </div>
-                                            </div>
-                                            @foreach (var c in this.SelectedZipItem.Content)
-                                            {
-                                                <div class="row">
-                                                    <div class="col-2">
-                                                        <Blazorise.Button Class="btn-danger text-light btn-sm" Clicked="@(() => DeleteContentItem(c))"> ✘ </Blazorise.Button>
-                                                    </div>
-                                                    <div class="col-2">
-                                                        <TextEdit InputMode="TextInputMode.Numeric" TextChanged="((e) => { c.InstallOrder = int.Parse(e); ShouldSave = true; })" Text="@c.InstallOrder.ToString()"></TextEdit>
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <TextEdit Text="@c.FileName" TextChanged="((e) => { c.FileName = e; ShouldSave = true; })"></TextEdit>
-                                                    </div>
-                                                </div>
+                                                    Sort
+                                                </Blazorise.Button>
                                             }
+                                        </div>
+                                        <div class="col-7">
+                                            <strong>File or Folder name</strong>
+                                        </div>
+                                    </div>
+                                    @foreach (var c in this.SelectedZipItem.Content)
+                                    {
+                                        <div class="row">
+                                            <div class="col-2">
+                                                <Blazorise.Button Class="btn-danger text-light btn-sm" Clicked="@(() => DeleteContentItem(c))"> ✘ </Blazorise.Button>
+                                            </div>
+                                            <div class="col-2">
+                                                <TextEdit InputMode="TextInputMode.Numeric" TextChanged="((e) => { c.InstallOrder = int.Parse(e); ShouldSave = true; })" Text="@c.InstallOrder.ToString()"></TextEdit>
+                                            </div>
+                                            <div class="col-8">
+                                                <TextEdit Text="@c.FileName" TextChanged="((e) => { c.FileName = e; ShouldSave = true; })"></TextEdit>
+                                            </div>
                                         </div>
                                     }
                                 </div>
-                            </div>
+                            }
                         </div>
-                    }
+                    </div>
                 </div>
-            </div>
+            }
         </div>
+    </div>
+</div>
     }
 </div>
 
 @code {
     public List<string> GameNames { get; set; } = new List<string>
 {
-            "- SELECT -",
+            " - Select Game - ",
             Constants.GameNameOblivion,
             Constants.GameNameFallout3,
             Constants.GameNameNewVegas,
@@ -312,7 +335,7 @@
 
             this.MasterList = resp.Data;
 
-            this.GameNames = MasterList.Games.Select(g => g.GameName).ToList();
+            //this.GameNames = MasterList.Games.Select(g => g.GameName).ToList();
 
             this.Loading = false;
 
@@ -377,6 +400,13 @@
     {
         SelectedGame = g;
         SelectedGameItem = this.MasterList.Games.FirstOrDefault(g => g.GameName == SelectedGame);
+        
+        if (SelectedGameItem == null)
+        {
+            this.MasterList.AddGameItemFromGameName(SelectedGame);
+            SelectedGameItem = this.MasterList.Games.FirstOrDefault(g => g.GameName == SelectedGame);
+        }
+
         GameEnum = SelectedGameItem?.Game ?? GamesEnum.Unknown;
 
         System.Diagnostics.Debug.WriteLine($"Select {g}");
