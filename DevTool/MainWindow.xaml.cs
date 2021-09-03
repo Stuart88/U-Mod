@@ -496,6 +496,7 @@ namespace DevTool
                     break;
 
                 case GamesEnum.Fallout:
+                case GamesEnum.NewVegas:
                     DataFosePlugins.Visibility = Visibility.Visible;
                     DataObsePlugins.Visibility = Visibility.Collapsed;
                     break;

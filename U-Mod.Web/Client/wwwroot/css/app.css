@@ -34,7 +34,7 @@ html, body {
     filter: invert(63%) sepia(22%) saturate(7196%) hue-rotate(185deg) brightness(101%) contrast(102%);
 }
 .svg-black {
-    filter: invert(0%) sepia(3%) saturate(0%) hue-rotate(282deg) brightness(107%) contrast(100%)
+    filter: invert(0%) sepia(3%) saturate(0%) hue-rotate(282deg) brightness(107%) contrast(100%);
 }
 
 a, .btn-link {
@@ -60,6 +60,10 @@ a, .btn-link {
         background: white;
         color: var(--blue);
     }
+        .umod-btn:hover .games-page-cell-icon {
+            /*svg menu icon turns black*/
+            filter: invert(0%) sepia(3%) saturate(0%) hue-rotate(282deg) brightness(107%) contrast(100%);
+        }
 
 .umod-bar-item{
 
@@ -313,6 +317,20 @@ a, .btn-link {
     font-size:small;
     color: var(--grey);
 }
+
+.games-page-area{
+    display:table;
+}
+.games-page-cell {
+    display: table-cell;
+    float: left;
+    margin: 0 10px;
+}
+.games-page-img {
+    height: 250px;
+    width: 250px;
+}
+
 @media(max-width:767px) {
     .umod-main-body {
         min-width: calc(100vw - 65px);

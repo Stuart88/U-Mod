@@ -51,6 +51,7 @@ namespace U_Mod.Pages.General
             {
                 Shared.Enums.GamesEnum.Oblivion => "Oblivion ",
                 Shared.Enums.GamesEnum.Fallout => "Fallout ",
+                Shared.Enums.GamesEnum.NewVegas => "New Vegas ",
                 _ => "",
             } + "Options";
         }

@@ -344,7 +344,10 @@ namespace U_Mod.Pages.BaseClasses
                             // Doing this as a switch as it's cleaner for handling other cases that might be added
                             case GamesEnum.Fallout:
                                 debugtrack = 17;
-                                ZipFalloutIniFiles();
+                                ZipFalloutIniFiles(); 
+                                break;
+                            case GamesEnum.NewVegas:
+                                ZipNewVegasIniFiles();
                                 break;
                         }
 
@@ -692,6 +695,49 @@ namespace U_Mod.Pages.BaseClasses
                 {
                     Logging.Logger.LogException("ZipFalloutIniFiles", e);
                     GeneralHelpers.ShowMessageBox($"Failed to zip Fallout ini files! Cannot continue.\n\nError:{e.Message}");
+                    Navigation.NavigateToPage(Enums.PagesEnum.MainMenu, true);
+                });
+
+                return false;
+            }
+        }
+
+        private bool ZipNewVegasIniFiles()
+        {
+            try
+            {
+                string backupZip = "FalloutNewVegasini.zip";
+                string zipPath = Path.Combine(Helpers.FileHelpers.GetGameFolder(), Static.Constants.UMod, backupZip);
+
+                if (!File.Exists(zipPath))
+                {
+                    using ZipArchive zip = ZipFile.Open(zipPath, ZipArchiveMode.Create);
+
+                    string[] iniFiles = new string[]
+                    {
+                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "FalloutNV", "Fallout.ini"),
+                        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "My Games", "FalloutNV", "FalloutPrefs.ini"),
+                        //Path.Combine(Helpers.FileHelpers.GetGameFolder(), "Fallout_default.ini")
+                    };
+
+                    foreach (string s in iniFiles)
+                    {
+                        FileInfo f = new FileInfo(s);
+                        if (f.Exists)
+                            zip.CreateEntryFromFile(f.FullName, f.Name);
+                        else
+                            throw new Exception($"File does not exist! {f.FullName}");
+                    }
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                Application.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    Logging.Logger.LogException("ZipNewVegasIniFiles", e);
+                    GeneralHelpers.ShowMessageBox($"Failed to zip Fallout New Vegas ini files! Cannot continue.\n\nError:{e.Message}");
                     Navigation.NavigateToPage(Enums.PagesEnum.MainMenu, true);
                 });
 

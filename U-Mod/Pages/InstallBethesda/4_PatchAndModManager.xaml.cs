@@ -56,7 +56,10 @@ namespace U_Mod.Pages.InstallBethesda
                 = Static.StaticData.CurrentGame switch
             {
                 GamesEnum.Oblivion => (Constants.OblivionModManager, Constants.Obmm, Constants.Obmm, Constants.Obmm),
-                _ => (Constants.ModOrganizer2, Constants.ModOrganizer2, Constants.ModOrganizer2, Constants.ModOrganizer2)
+                var x when 
+                    x == GamesEnum.Fallout || 
+                    x == GamesEnum.NewVegas => (Constants.ModOrganizer2, Constants.ModOrganizer2, Constants.ModOrganizer2, Constants.ModOrganizer2),
+                _ => throw new NotImplementedException()
             };
         }
 
@@ -77,6 +80,7 @@ namespace U_Mod.Pages.InstallBethesda
             {
                 GamesEnum.Oblivion => "Oblivion.exe.Backup",
                 GamesEnum.Fallout => "Fallout3.exe.Backup",
+                GamesEnum.NewVegas => "FalloutNV.exe.Backup", 
                 _ => ""
             };
             if (File.Exists(System.IO.Path.Combine(FileHelpers.GetGameFolder(), fileName)))

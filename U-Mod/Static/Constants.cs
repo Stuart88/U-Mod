@@ -17,6 +17,7 @@ namespace U_Mod.Static
         public const string WebsiteUrl = "https://u-mod.club/";
         public const string OblivionDataFileName = "OblivionModInstallData.json";
         public const string FalloutDataFileName = "FalloutModInstallData.json";
+        public const string NewVegasDataFileName = "NewVegasModInstallData.json";
         public static string AppDataFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "U_Mod");
         public static string AppDataFilePath = Path.Combine(AppDataFolder, AppDataFileName);
 

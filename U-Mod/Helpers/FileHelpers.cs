@@ -37,6 +37,7 @@ namespace U_Mod.Helpers
             {
                 GamesEnum.Oblivion => string.IsNullOrEmpty(Static.StaticData.AppData.OblivionGameFolder) ? "" : Path.Combine(Static.StaticData.AppData.OblivionGameFolder, Static.Constants.UMod),
                 GamesEnum.Fallout => string.IsNullOrEmpty(Static.StaticData.AppData.FalloutGameFolder) ? "" : Path.Combine(Static.StaticData.AppData.FalloutGameFolder, Static.Constants.UMod),
+                GamesEnum.NewVegas => string.IsNullOrEmpty(Static.StaticData.AppData.FalloutNewVegasGameFolder) ? "" : Path.Combine(Static.StaticData.AppData.FalloutNewVegasGameFolder, Static.Constants.UMod),
                 _ => ""
             };
         }
@@ -78,6 +79,7 @@ namespace U_Mod.Helpers
             {
                 GamesEnum.Oblivion => Static.StaticData.AppData.OblivionGameFolder,
                 GamesEnum.Fallout => Static.StaticData.AppData.FalloutGameFolder,
+                GamesEnum.NewVegas => Static.StaticData.AppData.FalloutNewVegasGameFolder,
                 _ => ""
             };
         }

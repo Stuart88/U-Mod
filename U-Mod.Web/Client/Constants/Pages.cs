@@ -11,6 +11,7 @@ namespace U_Mod.Web.Client.Constants
         public const string Games = "/games";
         public const string Oblivion = "/games/oblivion";
         public const string Fallout3 = "/games/fallout-3";
+        public const string NewVegas = "/games/new-vegas";
         public const string Installer = "/installer";
         public const string Mods = "/mods";
         public const string Help = "/help";

@@ -37,11 +37,12 @@ namespace U_Mod.Helpers
                 GamesEnum.Oblivion => GeneralHelpers.GetUserDataForGame().IsSteamGame
                 ? "OblivionLauncher.exe"
                 : "obse_loader.exe",
-                GamesEnum.Fallout => GeneralHelpers.GetUserDataForGame().IsSteamGame
+                var x when
+                    x == GamesEnum.Fallout ||
+                    x == GamesEnum.NewVegas => GeneralHelpers.GetUserDataForGame().IsSteamGame
                 ? "fose_loader.exe"
-                : "fose_loader.exe",
-                GamesEnum.NewVegas => throw new NotImplementedException(),
-                GamesEnum.Unknown => throw new NotImplementedException()
+                : "fose_loader.exe", //TODO ??
+                _ => throw new NotImplementedException()
             };
 
             LaunchProcessInGameFolder(exeName, $"LaunchGame: {GeneralHelpers.GetGameName()}");
@@ -52,7 +53,9 @@ namespace U_Mod.Helpers
             (string exeName, string args) = Static.StaticData.CurrentGame switch
             {
                 GamesEnum.Oblivion => ("obmm_setup.exe", ""),
-                GamesEnum.Fallout => (Path.Combine("Mod Organizer 2-6194-2-4-2-1620741202", "Mod Organizer 2-6194-2-4-2-1620741202.exe"), "")
+                var x when
+                    x == GamesEnum.Fallout ||
+                    x == GamesEnum.NewVegas => (Path.Combine("Mod Organizer 2-6194-2-4-2-1620741202", "Mod Organizer 2-6194-2-4-2-1620741202.exe"), "")
             };
 
             LaunchProcessInGameFolder(exeName, $"RunModManager: {GeneralHelpers.GetGameName()}", args);
@@ -74,7 +77,8 @@ namespace U_Mod.Helpers
             (string exeName, string args) data = Static.StaticData.CurrentGame switch
             {
                 GamesEnum.Oblivion => ("4gb patch.exe", "Oblivion.exe"),
-                GamesEnum.Fallout => ("4gb_patch.exe", "Fallout3.exe")
+                GamesEnum.Fallout => ("4gb_patch.exe", "Fallout3.exe"),
+                GamesEnum.NewVegas => ("4gb_patch.exe", "FalloutNV.exe")
             };
 
             var args = withArgs ? data.args : "";
@@ -87,7 +91,9 @@ namespace U_Mod.Helpers
             string filePath = Static.StaticData.CurrentGame switch
             {
                 GamesEnum.Oblivion => "OblivionModManager.exe",
-                GamesEnum.Fallout => Path.Combine("GeMM", "fomm.exe")
+                var x when
+                    x == GamesEnum.Fallout ||
+                    x == GamesEnum.NewVegas => Path.Combine("GeMM", "fomm.exe")
             };
 
             return System.IO.File.Exists(System.IO.Path.Combine(FileHelpers.GetGameFolder(), filePath));
@@ -98,7 +104,9 @@ namespace U_Mod.Helpers
             string exeName = Static.StaticData.CurrentGame switch
             {
                 GamesEnum.Oblivion => "obmm_setup.exe",
-                GamesEnum.Fallout => "FOMM-36901-0-13-21.exe"
+                var x when 
+                    x == GamesEnum.Fallout || 
+                    x == GamesEnum.NewVegas => "FOMM-36901-0-13-21.exe"
             };
 
             LaunchProcessInGameFolder(exeName, $"RunModManagerSetup: {GeneralHelpers.GetGameName()}");

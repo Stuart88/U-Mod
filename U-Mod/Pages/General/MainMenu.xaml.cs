@@ -39,6 +39,7 @@ namespace U_Mod.Pages.General
         {
             GamesEnum.Oblivion => "oblivion",
             GamesEnum.Fallout => "fallout3",
+            GamesEnum.NewVegas => "Fallout NV",
             _ => throw new Exception("No game name found!")
         };
 
@@ -62,7 +63,7 @@ namespace U_Mod.Pages.General
             {
                 GamesEnum.Oblivion => "menu-oblivion.jpg",
                 GamesEnum.Fallout => "menu-fallout.jpg",
-                GamesEnum.NewVegas => throw new NotImplementedException(),
+                GamesEnum.NewVegas => "menu-new-vegas.jpg",
                 GamesEnum.Unknown => throw new NotImplementedException(),
                 GamesEnum.None => throw new NotImplementedException(),
             };
@@ -140,6 +141,7 @@ namespace U_Mod.Pages.General
                         ProcessHelpers.TryToLaunchOblivionModManager();
                         break;
                     case GamesEnum.Fallout:
+                    case GamesEnum.NewVegas:
                         ProcessHelpers.TryToLaunchModOrganizer();
                         break;
                 }
@@ -178,6 +180,7 @@ namespace U_Mod.Pages.General
                 {
                     case GamesEnum.Fallout:
                     case GamesEnum.Oblivion:
+                    case GamesEnum.NewVegas:
                         ActionButton.Content = "Launch";
                         ModOrganizerText.Visibility = Visibility.Visible;
                         break;
@@ -187,7 +190,10 @@ namespace U_Mod.Pages.General
             ModManagerName.Text = Static.StaticData.CurrentGame switch
             {
                 GamesEnum.Oblivion => Static.Constants.Obmm,
-                _ => Static.Constants.ModOrganizer2,
+                var x when
+                    x == GamesEnum.Fallout ||
+                    x == GamesEnum.NewVegas => Static.Constants.ModOrganizer2,
+                _ => throw new NotImplementedException()
             };
         }
 

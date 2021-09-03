@@ -51,6 +51,11 @@ namespace U_Mod.Pages.UserControls
             "Inhaling jet violently"
         };
 
+        private string[] NewVegasMessages = new string[]
+       {
+         // TODO  
+       };
+
         private string[] OblivionMessages = new string[]
         {
             "Performing the ritual of purification",
@@ -77,7 +82,7 @@ namespace U_Mod.Pages.UserControls
             {
                 Shared.Enums.GamesEnum.Oblivion => OblivionMessages[Rand.Next(OblivionMessages.Length)],
                 Shared.Enums.GamesEnum.Fallout => FalloutMessges[Rand.Next(FalloutMessges.Length)],
-                Shared.Enums.GamesEnum.NewVegas => throw new NotImplementedException(),
+                Shared.Enums.GamesEnum.NewVegas => NewVegasMessages[Rand.Next(NewVegasMessages.Length)], 
                 Shared.Enums.GamesEnum.Unknown => throw new NotImplementedException(),
                 Shared.Enums.GamesEnum.None => throw new NotImplementedException(),
                 _ => throw new NotImplementedException(),

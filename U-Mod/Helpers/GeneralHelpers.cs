@@ -30,6 +30,7 @@ namespace U_Mod.Helpers
             {
                 GamesEnum.Oblivion => Static.StaticData.UserDataStore.OblivionUserData,
                 GamesEnum.Fallout => Static.StaticData.UserDataStore.FalloutUserData,
+                GamesEnum.NewVegas => Static.StaticData.UserDataStore.NewVegasUserData,
                 _ => throw new NotImplementedException()
             };
         }

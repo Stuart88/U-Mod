@@ -50,6 +50,7 @@
     <None Remove="Assets\Images\loader-blue.gif" />
     <None Remove="Assets\Images\loading.gif" />
     <None Remove="Assets\Images\menu-fallout.jpg" />
+    <None Remove="Assets\Images\menu-new-vegas.jpg" />
     <None Remove="Assets\Images\menu-oblivion.jpg" />
     <None Remove="Assets\Images\Nexus-Login.png" />
     <None Remove="Assets\Images\NexusLoader.gif" />
@@ -71,6 +72,14 @@
       <Isolated>false</Isolated>
       <EmbedInteropTypes>true</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Images\menu-new-vegas.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

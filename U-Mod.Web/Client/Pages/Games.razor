@@ -8,23 +8,34 @@
     <h2>Games</h2>
     <hr />
 
-    <div class="text-center">
-        <div>
-            <Image class="img-fluid" Source="@ServerHelpers.ImageSrcString("general/menu-oblivion.jpg")"></Image>
+    <div class="games-page-area">
+        <div class="text-center games-page-cell">
+            <div>
+                <Image class="img-fluid games-page-img" Source="@ServerHelpers.ImageSrcString("general/menu-oblivion.jpg")"></Image>
+            </div>
+            <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.Oblivion))" Class="umod-btn">
+                <BasicIcon Class="menu-icon games-page-cell-icon" Colour="IconColour.White" FileName="oblivion-logo-1.svg" />
+                Oblivion
+            </Button>
         </div>
-        <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.Oblivion))" Class="umod-btn">
-            <MenuIcon FileName="oblivion-logo.png"/>
-            Oblivion
-        </Button>
-    </div>
-    <div class="text-center">
-        <div>
-            <Image class="img-fluid" Source="@ServerHelpers.ImageSrcString("general/menu-fallout.jpg")"></Image>
+        <div class="text-center games-page-cell">
+            <div>
+                <Image class="img-fluid games-page-img" Source="@ServerHelpers.ImageSrcString("general/menu-fallout.jpg")"></Image>
+            </div>
+            <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.Fallout3))" Class="umod-btn">
+                <BasicIcon Class="menu-icon games-page-cell-icon" Colour="IconColour.White" FileName="fallout-logo.svg" />
+                Fallout 3
+            </Button>
         </div>
-        <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.Fallout3))" Class="umod-btn">
-            <BasicIcon Class="menu-icon" Colour="IconColour.White" FileName="fallout-logo.svg" />
-            Fallout 3
-        </Button>
+        <div class="text-center games-page-cell">
+            <div>
+                <Image class="img-fluid games-page-img" Source="@ServerHelpers.ImageSrcString("general/menu-new-vegas.jpg")"></Image>
+            </div>
+            <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.NewVegas))" Class="umod-btn">
+                <BasicIcon Class="menu-icon games-page-cell-icon" Colour="IconColour.White" FileName="new-vegas-logo.svg" />
+                New Vegas
+            </Button>
+        </div>
     </div>
 </div>
 

@@ -172,7 +172,7 @@ namespace U_Mod.Pages.InstallBethesda
             bool finalStepOk = true;
 
             // Game specific steps
-            if (Static.StaticData.CurrentGame == Shared.Enums.GamesEnum.Fallout)
+            if (Static.StaticData.CurrentGame == Shared.Enums.GamesEnum.Fallout) // TODO NOT SURE
             {
                 finalStepOk = Helpers.GameSpecific.FalloutTools.CopyCustomIniFiles();
             }
@@ -211,6 +211,19 @@ namespace U_Mod.Pages.InstallBethesda
                         "Zeta.esm",
                     };
 
+                case Shared.Enums.GamesEnum.NewVegas:
+                    return new string[]
+                    {
+                        "CaravanPack.esm",
+                        "ClassicPack.esm",
+                        "DeadMoney.esm",
+                        "GunRunnersArsenal.esm",
+                        "HonestHearts.esm",
+                        "LonesomeRoad.esm",
+                        "MercenaryPack.esm",
+                        "OldWorldBlues.esm",
+                        "TribalPack.esm",
+                    };
                 default:
                     return new string[0];
             }
@@ -237,6 +250,12 @@ namespace U_Mod.Pages.InstallBethesda
                         Path.Combine(this.SelectedGameFolder, "Data", "Fallout3.esm"),
                     };
 
+                case Shared.Enums.GamesEnum.NewVegas:
+                    return new string[]
+                    {
+                        Path.Combine(this.SelectedGameFolder,"FalloutNV.exe"),
+                        Path.Combine(this.SelectedGameFolder, "Data", "FalloutNV.esm"),
+                    };
                 default:
                     return new string[0];
             }

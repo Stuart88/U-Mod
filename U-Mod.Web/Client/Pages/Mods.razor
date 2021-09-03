@@ -201,10 +201,10 @@
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-        
+
         try
         {
-            
+
             this.Games = MasterList.Games.Select(g => g.GameName).ToList();
 
         }
@@ -262,7 +262,8 @@
         return GameEnum switch
         {
             GamesEnum.Oblivion => " Oblivion DLC:\n- Battlehorn Castle\n- Shivering Isles\n- Knights of the Nine\n- Frost Crag\n- Horse Armor\n- Mehrunes Razor\n- Orrery\n- Spell Tomes\n- Thieves Den\n- Vile Lair",
-            GamesEnum.Fallout => "Fallout DLC:\n- Anchorage.esm\n- BrokenSteel.esm\n- PointLookout.esm\n- ThePitt.esm\n- Zeta.esm",
+            GamesEnum.Fallout => "Fallout DLC:\n- Anchorage\n- BrokenSteel\n- PointLookout\n- ThePitt\n- Zeta",
+            GamesEnum.NewVegas => "New Vegas DLC: \n- CaravanPack\n- ClassicPack\n- DeadMoney\n- GunRunnersArsenal\n- HonestHearts\n- LonesomeRoad\n- MercenaryPack\n- OldWorldBlues\n- TribalPack", // TODO DONE?
             _ => "This tooltip will show DLC content after\nyou have selected a game\n from the options above"
         };
     }

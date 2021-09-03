@@ -48,6 +48,12 @@ namespace U_Mod.Static
                     savePath = Path.Combine(UModFolder, Constants.FalloutDataFileName);
                     CompleteSave<UserDataBase>();
                     break;
+
+                case GamesEnum.NewVegas:
+                    toSave = UserDataStore.NewVegasUserData;
+                    savePath = Path.Combine(UModFolder, Constants.NewVegasDataFileName);
+                    CompleteSave<UserDataBase>();
+                    break;
             }
 
             // Save path is null if SaveAppData is called before user has selected their game folder location.
@@ -100,6 +106,10 @@ namespace U_Mod.Static
                 case GamesEnum.Fallout:
                     UserDataStore.FalloutUserData = Helpers.FileHelpers.LoadFile<UserDataBase>(Path.Combine(UModFolder, Constants.FalloutDataFileName));
                     break;
+
+                case GamesEnum.NewVegas:
+                    UserDataStore.NewVegasUserData = Helpers.FileHelpers.LoadFile<UserDataBase>(Path.Combine(UModFolder, Constants.NewVegasDataFileName));
+                    break;
             }
         }
 
@@ -109,6 +119,7 @@ namespace U_Mod.Static
             {
                 GamesEnum.Oblivion => Constants.OblivionDataFileName,
                 GamesEnum.Fallout => Constants.FalloutDataFileName,
+                GamesEnum.NewVegas => Constants.NewVegasDataFileName,
             };
         }
     }

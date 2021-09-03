@@ -144,6 +144,7 @@ namespace U_Mod.Models
             {
                 case GamesEnum.Oblivion:
                 case GamesEnum.Fallout:
+                case GamesEnum.NewVegas:
                     //4gb patch creates "...exe.backup" files so check that those are gone
                     return !d.GetFiles().Any(f => f.FullName.ToLower().Contains("exe.backup"));
 

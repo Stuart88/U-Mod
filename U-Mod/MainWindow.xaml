@@ -8,11 +8,11 @@
         Title="U-Mod" 
         Height="450"  
         Width="600" 
-        MinWidth="500"
+        MinWidth="525"
         MinHeight="600">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition x:Name="SideBarCol" Width="100"/>
+            <ColumnDefinition x:Name="SideBarCol" Width="114"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <ListView x:Name="SideMenu"  Grid.Column="0"  ItemsSource="{Binding Path=SideMenuOptions}" Background="{StaticResource Blue}">
@@ -22,7 +22,7 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
-                        <Button Width="85" Grid.Row="0" Grid.Column="0" FontSize="16" Content="{Binding Name}"
+                        <Button Width="100" Grid.Row="0" Grid.Column="0" FontSize="16" HorizontalAlignment="Center" Content="{Binding Name}"
                                 Tag="{Binding MenuItem}"
                                 Click="MenuItemClicked"
                                    Foreground="White"
@@ -33,7 +33,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ContentControl x:Name="MainContent" Grid.Column="1">
+        <ContentControl x:Name="MainContent" Grid.Column="1" HorizontalAlignment="Center">
             
         </ContentControl>
     </Grid>
