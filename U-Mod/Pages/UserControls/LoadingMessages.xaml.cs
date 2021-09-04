@@ -53,7 +53,8 @@ namespace U_Mod.Pages.UserControls
 
         private string[] NewVegasMessages = new string[]
        {
-         // TODO  
+         "Doing a thing",
+         "Doing another thing"
        };
 
         private string[] OblivionMessages = new string[]

@@ -157,13 +157,12 @@ namespace U_Mod.Helpers
                 GeneralHelpers.ShowMessageBox("Cannot find executable. Please install Oblivion Mod Manager, or if it is already installed, please locate and launch it manually.");
         }
 
-        public static void TryToLaunchModOrganizer()
+        public static string GetModOrganizerExePath()
         {
             string defaultPath = Path.Combine("C:", "Modding", "MO2", "ModOrganizer.exe"); ;
             if (File.Exists(defaultPath))
             {
-                Tools.LaunchProcess(defaultPath, "TryToLaunchModOrganizer (defaulPath)", null, true);
-                return;
+                return defaultPath;
             }
 
             //Mod Organizer not in default install location, so let's desperately try hunting for the app path
@@ -181,6 +180,22 @@ namespace U_Mod.Helpers
 
             if (string.IsNullOrEmpty(pathToExe))
                 pathToExe = GetAppPathFromInstallFolders("Mod Organizer");
+
+            return pathToExe;
+        }
+
+        public static void TryToLaunchModOrganizer()
+        {
+            string defaultPath = Path.Combine("C:", "Modding", "MO2", "ModOrganizer.exe"); ;
+            if (File.Exists(defaultPath))
+            {
+                Tools.LaunchProcess(defaultPath, "TryToLaunchModOrganizer (defaulPath)", null, true);
+                return;
+            }
+
+            //Mod Organizer not in default install location, so let's desperately try hunting for the app path
+
+            string pathToExe = GetModOrganizerExePath();
 
             if (!string.IsNullOrEmpty(pathToExe))
                 Tools.LaunchProcess(pathToExe, "TryToLaunchModOrganizer (pathToExe)", null, true);

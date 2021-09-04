@@ -33,7 +33,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ContentControl x:Name="MainContent" Grid.Column="1" HorizontalAlignment="Center">
+        <ContentControl x:Name="MainContent" Grid.Column="1" HorizontalAlignment="Stretch">
             
         </ContentControl>
     </Grid>

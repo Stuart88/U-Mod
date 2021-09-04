@@ -5,6 +5,7 @@ using System.Text.Json;
 using U_Mod.Shared.Enums;
 using U_Mod.Shared.Models;
 using U_Mod.Shared.Helpers;
+using System.Windows;
 
 namespace U_Mod.Helpers
 {
@@ -143,6 +144,13 @@ namespace U_Mod.Helpers
             {
                 string jsonString = JsonSerializer.Serialize(item);
                 File.WriteAllText(savePath, jsonString);
+            }
+            catch (UnauthorizedAccessException uAe)
+            {
+                var customEx = new Exception(uAe.Message + "\n\nCannot continue. Please restart U-Mod with Administrator privileges.\n\nApp will now close.");
+                GeneralHelpers.ShowExceptionMessageBox(customEx);
+                Logging.Logger.LogException("SaveAsJson - AccessDenied", customEx);
+                Application.Current.Shutdown();
             }
             catch (Exception e)
             {

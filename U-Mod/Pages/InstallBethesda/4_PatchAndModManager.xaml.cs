@@ -42,9 +42,12 @@ namespace U_Mod.Pages.InstallBethesda
             timer.Tick += (s, e) =>
             {
                 CheckPatchInstalled();
-                //CheckModManagerInstalled();
-                if (this.PatchInstalled /*&& this.ModManagerInstalled*/)
+                CheckModManagerInstalled();
+                if (this.PatchInstalled && this.ModManagerInstalled)
+                {
                     timer.Stop();
+                    this.FinishBtn.IsEnabled = true;
+                }
             };
             timer.Start();
         }
@@ -87,27 +90,39 @@ namespace U_Mod.Pages.InstallBethesda
             {
                 _4gbOkInfo.Visibility = Visibility.Visible;
                 this.PatchInstalled = true;
-                this.FinishBtn.IsEnabled = true;
             }
         }
 
-        //private void CheckModManagerInstalled()
-        //{
-        //    if (this.ModManagerInstalled)
-        //        return;
+        private void CheckModManagerInstalled()
+        {
+            if (this.ModManagerInstalled)
+                return;
 
-        //    string programName = Static.StaticData.CurrentGame switch
-        //    {
-        //        GamesEnum.Oblivion => "OBMM",
-        //        GamesEnum.Fallout => "Mod Organizer"
-        //    };
+            string programName = "";
 
-        //    if (Tools.IsProgramInstalled(programName))
-        //    {
-        //        ModOrganizerInstalledInfo.Visibility = Visibility.Visible;
-        //        this.ModManagerInstalled = true;
-        //    }
-        //}
+            switch (StaticData.CurrentGame)
+            {
+                case GamesEnum.Fallout:
+                case GamesEnum.NewVegas:
+                    programName = "Mod Organizer";
+                    break;
+                default:
+                    this.ModManagerInstalled = true;
+                    break;
+            }
+
+            //string programName = Static.StaticData.CurrentGame switch
+            //{
+            //    GamesEnum.Oblivion => "OBMM",
+            //    GamesEnum.Fallout => "Mod Organizer"
+            //};
+
+            if (!string.IsNullOrEmpty(programName) && File.Exists(ProcessHelpers.GetModOrganizerExePath()))
+            {
+                ModOrganizerInstalledInfo.Visibility = Visibility.Visible;
+                this.ModManagerInstalled = true;
+            }
+        }
 
         private void ManualPatchToolLink_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
