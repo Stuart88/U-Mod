@@ -8,7 +8,7 @@
 	<Configurations>Debug;Release;BETA;DEV</Configurations>
 	<ApplicationIcon>favicon.ico</ApplicationIcon>
 	<SignAssembly>true</SignAssembly>
-	<AssemblyOriginatorKeyFile>U-Mod-Key-2.pfx</AssemblyOriginatorKeyFile>
+	<AssemblyOriginatorKeyFile>U-Mod-Key.pfx</AssemblyOriginatorKeyFile>
 	<DelaySign>false</DelaySign>
 	<AssemblyName>U-Mod</AssemblyName>
 	<PackageProjectUrl>https://u-mod.club/</PackageProjectUrl>
@@ -149,7 +149,7 @@
   </ItemGroup>
 
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="call &quot;$(SignToolPath)signtool.exe&quot; sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /f &quot;C:\Users\saitk\Programming\WPF\U-Mod\U-Mod\U-Mod-Key-2.pfx&quot; /p passywordy123  $(TargetPath)" />
+    <Exec Command="call &quot;$(SignToolPath)signtool.exe&quot; sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /f &quot;D:\Programming\WPF\U-Mod\U-Mod\U-Mod\U-Mod-Key.pfx&quot; /p qweqwe  $(TargetPath)" />
   </Target>
 
 </Project>
