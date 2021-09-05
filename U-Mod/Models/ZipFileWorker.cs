@@ -364,7 +364,7 @@ namespace U_Mod.Models
                 // Masterlist entries take the form "folder\subfolder\item.ext"
                 // and some paths contain zips, e.g. "folder\subfolder.zip\item.ext"
                 // So first clean up and convert to useable path
-                string contentFileName = c.FileName.Replace('>', '\\');
+                string contentFileName = c.FileName.Replace('>', '\\').Replace('/','\\');
                 string[] cleaning = contentFileName.Split('\\');
                 string cleanedFilepath = "";
                 for (int i = 0; i < cleaning.Length; i++)

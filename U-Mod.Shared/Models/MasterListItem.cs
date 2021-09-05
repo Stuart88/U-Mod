@@ -14,6 +14,7 @@ namespace U_Mod.Shared.Models
         DataObsePlugins,
         DataMenus,
         DataFosePlugins,
+        DataNvsePlugins,
     }
 
     public enum ZipFileType
@@ -293,6 +294,7 @@ namespace U_Mod.Shared.Models
                 ExtractLocation.DataMeshes => $"{gameName}/Data/Meshes",
                 ExtractLocation.DataObsePlugins => $"{gameName}/Data/OBSE/Plugins",
                 ExtractLocation.DataFosePlugins => $"{gameName}/Data/FOSE/Plugins",
+                ExtractLocation.DataNvsePlugins => $"{gameName}/Data/NVSE/Plugins",
                 ExtractLocation.DataMenus => $"{gameName}/Data/Menu",
                 _ => ""
             };

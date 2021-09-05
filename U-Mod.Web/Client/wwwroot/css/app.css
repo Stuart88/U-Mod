@@ -296,6 +296,9 @@ a, .btn-link {
 .mod-organizer-step-list span{
     font-weight:bold;
 }
+.mod-organizer-step .img-fluid{
+    margin-bottom: 25px;
+}
 .mod-organizer-info-box {
     background: rgb(179 215 255 / 29%);
     padding: 4px 13px;

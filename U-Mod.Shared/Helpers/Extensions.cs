@@ -18,8 +18,12 @@ namespace U_Mod.Shared.Helpers
             switch (game)
             {
                 case GamesEnum.Fallout:
+                    list.Remove(ExtractLocation.DataObsePlugins);
+                    list.Remove(ExtractLocation.DataNvsePlugins);
+                    return list;
                 case GamesEnum.NewVegas:
                     list.Remove(ExtractLocation.DataObsePlugins);
+                    list.Remove(ExtractLocation.DataFosePlugins);
                     return list;
 
                 case GamesEnum.Oblivion:

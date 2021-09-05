@@ -69,6 +69,7 @@ namespace U_Mod.Helpers
                 ExtractLocation.DataMeshes => Path.Combine(GetGameFolder(), "Data", "Meshes"),
                 ExtractLocation.DataObsePlugins => Path.Combine(GetGameFolder(), "Data", "OBSE", "Plugins"),
                 ExtractLocation.DataFosePlugins => Path.Combine(GetGameFolder(), "Data", "FOSE", "Plugins"),
+                ExtractLocation.DataNvsePlugins => Path.Combine(GetGameFolder(), "Data", "NVSE", "Plugins"),
                 ExtractLocation.DataMenus => Path.Combine(GetGameFolder(), "Data", "menus"),
                 _ => throw new ArgumentOutOfRangeException(nameof(extractLocation), extractLocation, null)
             };

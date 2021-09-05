@@ -24,7 +24,7 @@
                   Placeholder="Filter Mods" />
         <br />
 
-        <table width="100%">
+        @*<table width="100%">
             <tr>
                 <td width="40px">
                     <Tooltip Text="@("(Currently the installer only works\nfor Steam games)")"
@@ -38,7 +38,7 @@
                     </Switch>
                 </td>
             </tr>
-        </table>
+        </table>*@
         <table width="100%">
             <tr>
                 <td width="40px">
@@ -216,7 +216,7 @@
     }
 
     public bool IsSteamGame { get; set; } = true;
-    public bool HasAllDlc { get; set; } = false;
+    public bool HasAllDlc { get; set; } = true;
     public bool CanFullInstall { get; set; } = true; // Always true. This is leftover from Levi's installer.
     public InstallProfileEnum InstallProfile =>
     (this.HasAllDlc ? InstallProfileEnum.AllDlc : InstallProfileEnum.NoDlc) |

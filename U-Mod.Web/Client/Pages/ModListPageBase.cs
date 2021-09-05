@@ -27,6 +27,13 @@ namespace U_Mod.Web.Client.Pages
 
                 this.MasterList = resp.Data;
 
+                foreach(var game in this.MasterList.Games)
+                {
+                    game.Mods = game.Mods
+                        .OrderBy(m => m.ModName)
+                        .ToList();
+                }
+
             }
             catch (Exception e)
             {
