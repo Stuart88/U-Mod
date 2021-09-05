@@ -66,7 +66,10 @@ namespace U_Mod.Helpers
             string url = Static.StaticData.CurrentGame switch
             {
                 GamesEnum.Oblivion => "help/obmm",
-                _ => "help/mod-organizer"
+                var x when 
+                    x == GamesEnum.Fallout ||
+                    x == GamesEnum.NewVegas => "help/mod-organizer",
+                _ => throw new NotImplementedException()
             };
             
             ProcessHelpers.OpenInBrowser(Static.Constants.WebsiteUrl + url);
@@ -78,7 +81,7 @@ namespace U_Mod.Helpers
             {
                 GamesEnum.Oblivion => ("4gb patch.exe", "Oblivion.exe"),
                 GamesEnum.Fallout => ("4gb_patch.exe", "Fallout3.exe"),
-                GamesEnum.NewVegas => ("4gb_patch.exe", "FalloutNV.exe")
+                GamesEnum.NewVegas => ("FNVpatch.exe", "FalloutNV.exe")
             };
 
             var args = withArgs ? data.args : "";

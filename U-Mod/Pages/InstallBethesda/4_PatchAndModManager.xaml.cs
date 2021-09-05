@@ -83,12 +83,13 @@ namespace U_Mod.Pages.InstallBethesda
             {
                 GamesEnum.Oblivion => "Oblivion.exe.Backup",
                 GamesEnum.Fallout => "Fallout3.exe.Backup",
-                GamesEnum.NewVegas => "FalloutNV.exe.Backup", 
+                GamesEnum.NewVegas => "FalloutNV_backup.exe", 
                 _ => ""
             };
             if (File.Exists(System.IO.Path.Combine(FileHelpers.GetGameFolder(), fileName)))
             {
                 _4gbOkInfo.Visibility = Visibility.Visible;
+                this.RamPatchBtn.IsEnabled = false;
                 this.PatchInstalled = true;
             }
         }
@@ -120,6 +121,7 @@ namespace U_Mod.Pages.InstallBethesda
             if (!string.IsNullOrEmpty(programName) && File.Exists(ProcessHelpers.GetModOrganizerExePath()))
             {
                 ModOrganizerInstalledInfo.Visibility = Visibility.Visible;
+                this.ModManagerBtn.IsEnabled = false;
                 this.ModManagerInstalled = true;
             }
         }
