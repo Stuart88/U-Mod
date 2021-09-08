@@ -47,10 +47,16 @@ namespace U_Mod.Pages.InstallBethesda
                 {
                     timer.Stop();
                     this.FinishBtn.IsEnabled = true;
+
+                    //Need to reset these because if user reinstalls again, without having closed U-Mod,
+                    //this page will still show 4GB and ModManager installed.
+                    this.PatchInstalled = true;
+                    this.ModManagerInstalled = true;
                 }
             };
             timer.Start();
         }
+
 
         private void SetText()
         {
