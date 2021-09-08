@@ -112,7 +112,7 @@ a, .btn-link {
     position: fixed;
     right: 33px;
     top: 13px;
-    background: var(--lightgreen);
+    background: var(--yellow);
     border-radius: 10px;
     padding: 3px;
     box-shadow: -1px 2px 6px 1px grey;
@@ -334,6 +334,11 @@ a, .btn-link {
     width: 250px;
 }
 
+.home-img-logo {
+    max-width: 250px;
+    margin: auto;
+}
+
 @media(max-width:767px) {
     .umod-main-body {
         min-width: calc(100vw - 65px);
@@ -344,6 +349,10 @@ a, .btn-link {
         max-width: 100%;
     }
 
+    .home-img-logo {
+        max-width: 150px;
+    }
+
     .buyMeACoffeeLink > img {
         width: 100%;
     }
@@ -351,5 +360,28 @@ a, .btn-link {
         .buyMeACoffeeLink > img:hover {
             transform: scale(1);
             transition: transform 300ms;
+        }
+
+    .b-layout-content {
+        margin-top: 65px
+    }
+
+
+    #help-page #help-links-table img {
+        max-width: 55px;
+    }
+    .help-title a {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .help-text {
+        font-weight: normal;
+    }
+    #help-page {
+        padding: 0px 2%;
+    }
+        #help-page .table td, .table td {
+            padding: 0.25rem;
+            vertical-align: middle;
         }
 }
