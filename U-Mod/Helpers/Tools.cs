@@ -75,6 +75,11 @@ namespace U_Mod.Helpers
             ProcessHelpers.OpenInBrowser(Static.Constants.WebsiteUrl + url);
         }
 
+        public static void OpenNewVegasMcmHelpInBrowser()
+        {
+            ProcessHelpers.OpenInBrowser(Static.Constants.WebsiteUrl + "help/mod-organizer/mcm");
+        }
+
         public static void Run4GbPatch(bool withArgs = true)
         {
             (string exeName, string args) data = Static.StaticData.CurrentGame switch

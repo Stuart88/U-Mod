@@ -53,8 +53,23 @@ namespace U_Mod.Pages.UserControls
 
         private string[] NewVegasMessages = new string[]
        {
-         "Doing a thing",
-         "Doing another thing"
+         "Weathing weathered pistol",
+         "Minifying minigun",
+         "Blessing holy frag grenade",
+         "Hanging Nellis Hangars",
+         "Constructing Hoover Dam",
+         "Engoodening Goodsprings",
+         "Building Victor's Shack",
+         "Checking Vaults",
+         "Digging Lucky Jim Mine",
+         "Touring Las Vegas Boulevard",
+         "Calling Doctor Kemp",
+         "Rotting Rotface",
+         "Summoning Aurelius of Phoenix",
+         "Learning a valuable lesson",
+         "Ensuring the house always wins",
+         "Doing it For the Republic",
+         "Laying the Lonesome Road"
        };
 
         private string[] OblivionMessages = new string[]

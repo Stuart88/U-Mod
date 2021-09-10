@@ -6,7 +6,7 @@ namespace U_Mod.Shared.Constants
 {
     public static class Constants
     {
-        public const string InstallerVersion = "1.3.0";
+        public const string InstallerVersion = "1.4.0";
 
         public const string NexusAppSlug = "umod";
 

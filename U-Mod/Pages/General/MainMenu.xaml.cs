@@ -180,12 +180,16 @@ namespace U_Mod.Pages.General
                 {
                     case GamesEnum.Fallout:
                     case GamesEnum.Oblivion:
+                        ShowLaunchButtonAndModOrganizerWarning();
+                        break;
                     case GamesEnum.NewVegas:
-                        ActionButton.Content = "Launch";
-                        ModOrganizerText.Visibility = Visibility.Visible;
+                        ShowLaunchButtonAndModOrganizerWarning();
+                        NewVegasMcMWarning.Visibility = Visibility.Visible;
                         break;
                 }
             }
+
+
 
             ModManagerName.Text = Static.StaticData.CurrentGame switch
             {
@@ -195,6 +199,12 @@ namespace U_Mod.Pages.General
                     x == GamesEnum.NewVegas => Static.Constants.ModOrganizer2,
                 _ => throw new NotImplementedException()
             };
+        }
+
+        private void ShowLaunchButtonAndModOrganizerWarning()
+        {
+            ActionButton.Content = "Launch";
+            ModOrganizerText.Visibility = Visibility.Visible;
         }
 
         private bool CheckSteam()
@@ -321,6 +331,11 @@ namespace U_Mod.Pages.General
         private void ModManagerInstructionsLink_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             Tools.OpenModManagerHelpInBrowser();
+        }
+
+        private void McmInstructionsLink_PreviewMouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            Tools.OpenNewVegasMcmHelpInBrowser();
         }
     }
 }

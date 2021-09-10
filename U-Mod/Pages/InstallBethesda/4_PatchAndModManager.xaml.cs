@@ -26,8 +26,8 @@ namespace U_Mod.Pages.InstallBethesda
     /// </summary>
     public partial class _4_PatchAndModManager : UserControl
     {
-        private bool PatchInstalled { get; set; }
-        private bool ModManagerInstalled { get; set; }
+        private bool PatchInstalled { get; set; } = true;
+        private bool ModManagerInstalled { get; set; } = true;
         public _4_PatchAndModManager()
         {
             InitializeComponent();
@@ -42,7 +42,7 @@ namespace U_Mod.Pages.InstallBethesda
             timer.Tick += (s, e) =>
             {
                 CheckPatchInstalled();
-                CheckModManagerInstalled();
+                //CheckModManagerInstalled();
                 if (this.PatchInstalled && this.ModManagerInstalled)
                 {
                     timer.Stop();
@@ -79,9 +79,6 @@ namespace U_Mod.Pages.InstallBethesda
 
         private void CheckPatchInstalled()
         {
-            if (this.PatchInstalled)
-                return;
-
             if (Static.StaticData.CurrentGame == GamesEnum.None)
                 return;
 

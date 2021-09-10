@@ -18,6 +18,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -38,9 +39,24 @@
             <Run>for help.</Run>
         </TextBlock>
 
-        <Button x:Name="ActionButton" Grid.Row="3"  Click="ActionButton_Click"
+        <TextBlock x:Name="NewVegasMcMWarning" Grid.Row="3" 
+                   TextWrapping="Wrap"
+                    TextAlignment="Center"
+                   Visibility="Collapsed"
+                   MaxWidth="340"
+                   Margin="0,10,0,0">
+            <Run>Please remember to manually add the </Run>
+            <Run FontWeight="Bold" FontStyle="Italic">Mod Configuration Menu</Run>
+            <Run> fomod file via Mod Organizer before running the game</Run>
+            <LineBreak/>
+            <Run x:Name="McmInstructionsLink" Style="{StaticResource HyerlinkStyle_Run}"
+                 PreviewMouseLeftButtonDown="McmInstructionsLink_PreviewMouseLeftButtonDown">Click Here</Run>
+            <Run>for help.</Run>
+        </TextBlock>
+
+        <Button x:Name="ActionButton" Grid.Row="4"  Click="ActionButton_Click"
                     Style="{StaticResource MenuBtnStyle}"/>
-        <Button x:Name="OptionsButton" Grid.Row="4" Click="OptionsButton_Click"
+        <Button x:Name="OptionsButton" Grid.Row="5" Click="OptionsButton_Click"
                     Style="{StaticResource MenuBtnStyle}">Options</Button>
         <!--<Button x:Name="SupportButton" Grid.Row="2" Grid.Column="1"   Click="SupportButton_Click"/>-->
     </Grid>

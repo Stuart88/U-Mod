@@ -7,90 +7,33 @@
     <p>
         First install Mod Organizer, launch it and follow the wizard for creating a new instance.
     </p>
-    <p>
-        Click here if you need to download the Mod Organizer:
-        <Blazorise.Button Type="ButtonType.Link" To="https://www.nexusmods.com/skyrimspecialedition/mods/6194?tab=files" Target="Target.Blank"
-                          Class="btn umod-btn"
-                          Style="width: 230px; padding: 4px 10px;">
-            Download Mod Organizer
-        </Blazorise.Button>
-    </p>
-    <p>
-        The automatic instructions and wizard will guide you through the process of setting up a new instance for your game.
-    </p>
-    <p class="mod-organizer-info-box">
-        If you have already bypassed the instance wizard, you can manully create a new instance by going to:
-        <br />
-        <span style="font-weight:bold">File > Manage Instances... > Create new instance</span>
-    </p>
-    <div class="mod-organizer-step">
+    <div class="mod-organizer-step" style="background: #a04d13;">
+        <h5>
+            FOR NEW VEGAS INSTALLS ONLY
+        </h5>
         <p>
-            Once the instance is set up, you should have something similar to the below image, showing the list of mods for your game:
-        </p>
-
-        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer1.jpg")" />
-    </div>
-
-    <div class="mod-organizer-step">
-        <p>
-            Now ensure archive invalidation is set to Automatic
+            If you are installing mods for New Vegas, you will need to manually add the Mod Configuration Menu.
         </p>
         <p>
-            Do this via Tools > Profiles > Then ensure 'Automatic Archive Invalidation' is checked
+            Do this by clikcing the Install Mod button, then navigate to your New Vegas game folder and select <span style="color:var(--yellow)">The Mod Configuration Menu.fomod</span>
         </p>
 
-        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer1-2.jpg")" />
-    </div>
+        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer1-3.jpg")" />
 
-    <div class="mod-organizer-step">
         <p>
-            In the right-hand list of mods, right-click anywhere on the list and select Enable All
+            In the small window that appears, click Start
         </p>
 
-        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer2.jpg")" />
-    </div>
+        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer1-4.jpg")" />
 
-    <div class="mod-organizer-step">
         <p>
-            Next click the 'Sort' button, click 'yes' on the warning that pops up, then close the LOOT window when done.
+            Finally, click on Install.
         </p>
-        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer3.jpg")" Style="margin-bottom:20px" />
+
+        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer1-5.jpg")" />
+
         <p>
-            If any mods show a red warning icon, you can hover the mouse over the warning to see what's wrong. You may need to join the
-            <Blazorise.Link Style="color:var(--yellow)" To="@U_Mod.Shared.Constants.Constants.DiscordLink" Target="Target.Blank">
-                U-Mod Discord
-            </Blazorise.Link>
-            to get advice on how to fix the issue.
+            <span style="color:var(--yellow)">The Mod Configuration Menu</span> should now appear on the left hand pane in the main Mod Organizer window.
         </p>
-        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer3-1.jpg")" />
-    </div>
-
-    <div class="mod-organizer-step">
-        <p>
-            From the main dropdown, ensure the correct item is selected, then click on Run.
-        </p>
-
-        <h6>Which dropdown item should I choose?</h6>
-
-        <table class="mod-organizer-step-list">
-            <thead>
-                <tr>
-                    <th>Game</th>
-                    <th>Option</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Fallout 3</td>
-                    <td><span>FOSE</span></td>
-                </tr>
-                <tr>
-                    <td>New Vegas</td>
-                    <td><span>NVSE</span></td>
-                </tr>
-            </tbody>
-        </table>
-
-        <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer4.jpg")" />
     </div>
 </div>
