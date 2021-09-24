@@ -36,6 +36,9 @@ html, body {
 .svg-black {
     filter: invert(0%) sepia(3%) saturate(0%) hue-rotate(282deg) brightness(107%) contrast(100%);
 }
+.svg-purple {
+    filter: invert(14%) sepia(100%) saturate(7475%) hue-rotate(287deg) brightness(83%) contrast(110%);
+}
 
 a, .btn-link {
     color: #0366d6;
@@ -65,8 +68,11 @@ a, .btn-link {
             filter: invert(0%) sepia(3%) saturate(0%) hue-rotate(282deg) brightness(107%) contrast(100%);
         }
 
-.umod-bar-item{
+#home-menu-discord-btn:hover .svg-purple {
+    filter: invert(1);
+}
 
+.umod-bar-item {
 }
 
 .content {

@@ -37,6 +37,7 @@ namespace U_Mod.Shared.Enums
     {
         White,
         Black,
-        Blue
+        Blue,
+        Purple
     }
 }

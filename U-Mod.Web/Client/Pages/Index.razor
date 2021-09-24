@@ -25,9 +25,21 @@
             <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.Installer))" Class="umod-btn">Installer</Button>
             <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.Games))" Class="umod-btn">Games</Button>
             <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.Mods))" Class="umod-btn">Mod Info</Button>
+            <Button id="home-menu-discord-btn" Type="ButtonType.Button" Clicked="DiscordLinkClicked" Class="umod-btn">
+                <BasicIcon Class="menu-icon games-page-cell-icon" Colour="IconColour.Purple" FileName="discord.svg"/>
+                Discord
+            </Button>
             <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.Help))" Class="umod-btn">Help</Button>
         </div>
     </div>
 </div>
 
+@code{
+    [Inject]
+    IJSRuntime ThisJsRuntime { get; set; }
 
+    private async void DiscordLinkClicked()
+    {
+        await ThisJsRuntime.InvokeVoidAsync("openExternalUrlTab", U_Mod.Shared.Constants.Constants.DiscordLink);
+    }
+}
