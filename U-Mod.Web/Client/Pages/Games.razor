@@ -36,6 +36,15 @@
                 New Vegas
             </Button>
         </div>
+          <div class="text-center games-page-cell">
+            <div>
+                <Image class="img-fluid games-page-img" Source="@ServerHelpers.ImageSrcString("general/menu-skyrim.jpg")"></Image>
+            </div>
+            <Button Type="ButtonType.Button" Clicked="@(() => Navigate.NavigateTo(Constants.Pages.Skyrim))" Class="umod-btn">
+                <BasicIcon Class="menu-icon games-page-cell-icon" Colour="IconColour.White" FileName="skyrim-logo.svg" />
+                Skyrim
+            </Button>
+        </div>
     </div>
 </div>
 

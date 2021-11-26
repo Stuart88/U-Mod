@@ -22,6 +22,7 @@ namespace U_Mod.Shared.Enums
         Oblivion,
         Fallout,
         NewVegas,
+        Skyrim,
         Unknown,
         None
     }

@@ -13,6 +13,7 @@ namespace U_Mod.Shared.Constants
         public const string GameNameOblivion = "Oblivion";
         public const string GameNameFallout3 = "Fallout 3";
         public const string GameNameNewVegas = "New Vegas";
+        public const string GameNameSkyrim = "Skyrim";
         public const string DiscordLink = "https://discord.gg/hW8PvH4d84";
     }
 

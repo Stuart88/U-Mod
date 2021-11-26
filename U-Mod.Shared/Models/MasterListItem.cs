@@ -131,6 +131,17 @@ namespace U_Mod.Shared.Models
                         ParentId = Guid.Empty
                     });
                     return;
+                case Constants.Constants.GameNameSkyrim:
+                    this.Games.Add(new GameItem
+                    {
+                        Game = GamesEnum.Skyrim,
+                        GameName = Constants.Constants.GameNameSkyrim,
+                        GameVersion = "1",
+                        Id = Guid.NewGuid(),
+                        Mods = new List<Mod>(),
+                        ParentId = Guid.Empty
+                    });
+                    return;
                 default:
                     throw new Exception("MasterListItem.cs: AddGameItemFromGameName: Game name unknown!");
             }
