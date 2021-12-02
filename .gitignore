@@ -352,3 +352,6 @@ AMGWebsite/Server/AmgWebsite.db-wal
 orders_export_1 - Copy.csv
 orders_export_1.csv
 U-Mod.Web/Server/wwwroot/downloads/U_Mod-Setup.exe
+DevTool.backup/
+U-Mod.backup/
+U-Mod.Web/Server.backup/

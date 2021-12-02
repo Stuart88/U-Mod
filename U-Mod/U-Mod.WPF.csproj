@@ -1,47 +1,42 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net5.0-windows</TargetFramework>
+    <TargetFramework>net6.0-windows</TargetFramework>
     <RootNamespace>U_Mod</RootNamespace>
     <UseWPF>true</UseWPF>
-	<Configurations>Debug;Release;BETA;DEV</Configurations>
-	<ApplicationIcon>favicon.ico</ApplicationIcon>
-	<SignAssembly>true</SignAssembly>
-	<AssemblyOriginatorKeyFile>U-Mod-Key.pfx</AssemblyOriginatorKeyFile>
-	<DelaySign>false</DelaySign>
-	<AssemblyName>U-Mod</AssemblyName>
-	<PackageProjectUrl>https://u-mod.club/</PackageProjectUrl>
-	<PackageIcon>u-mod-logo.png</PackageIcon>
+    <Configurations>Debug;Release;BETA;DEV</Configurations>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>U-Mod-Key-2.pfx</AssemblyOriginatorKeyFile>
+    <DelaySign>false</DelaySign>
+    <AssemblyName>U-Mod</AssemblyName>
+    <PackageProjectUrl>https://u-mod.club/</PackageProjectUrl>
+    <PackageIcon>u-mod-logo.png</PackageIcon>
   </PropertyGroup>
-  
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DEV|AnyCPU'">
     <Optimize>false</Optimize>
     <DebugType>portable</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
-	<XamlDebuggingInformation>True</XamlDebuggingInformation>
+    <XamlDebuggingInformation>True</XamlDebuggingInformation>
   </PropertyGroup>
-  
   <PropertyGroup>
-	  <!-- Find Windows Kit path and then SignTool path for the post-build event -->
-	  <WindowsKitsRoot>$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots', 'KitsRoot10', null, RegistryView.Registry32, RegistryView.Default))</WindowsKitsRoot>
-	  <WindowsKitsRoot Condition="'$(WindowsKitsRoot)' == ''">$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots', 'KitsRoot81', null, RegistryView.Registry32, RegistryView.Default))</WindowsKitsRoot>
-	  <WindowsKitsRoot Condition="'$(WindowsKitsRoot)' == ''">$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots', 'KitsRoot', null, RegistryView.Registry32, RegistryView.Default))</WindowsKitsRoot>
-	  <SignToolPath Condition="'$(SignToolPath)' == '' And '$(Platform)' == 'AnyCPU' and Exists('$(WindowsKitsRoot)bin\x64\signtool.exe')">$(WindowsKitsRoot)bin\x64\</SignToolPath>
-	  <SignToolPath Condition="'$(SignToolPath)' == '' And Exists('$(WindowsKitsRoot)bin\$(Platform)\signtool.exe')">$(WindowsKitsRoot)bin\$(Platform)\</SignToolPath>
-	  <SignToolPathBin Condition="'$(SignToolPath)' == ''">$([System.IO.Directory]::GetDirectories('$(WindowsKitsRoot)bin',"10.0.*"))</SignToolPathBin>
-	  <SignToolPathLen Condition="'$(SignToolPathBin)' != ''">$(SignToolPathBin.Split(';').Length)</SignToolPathLen>
-	  <SignToolPathIndex Condition="'$(SignToolPathLen)' != ''">$([MSBuild]::Add(-1, $(SignToolPathLen)))</SignToolPathIndex>
-	  <SignToolPathBase Condition="'$(SignToolPathIndex)' != ''">$(SignToolPathBin.Split(';').GetValue($(SignToolPathIndex)))\</SignToolPathBase>
-	  <SignToolPath Condition="'$(SignToolPath)' == '' And '$(SignToolPathBase)' != '' And '$(Platform)' == 'AnyCPU'">$(SignToolPathBase)x64\</SignToolPath>
-	  <SignToolPath Condition="'$(SignToolPath)' == '' And '$(SignToolPathBase)' != ''">$(SignToolPathBase)$(Platform)\</SignToolPath>
-</PropertyGroup>
-  
+    <!-- Find Windows Kit path and then SignTool path for the post-build event -->
+    <WindowsKitsRoot>$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots', 'KitsRoot10', null, RegistryView.Registry32, RegistryView.Default))</WindowsKitsRoot>
+    <WindowsKitsRoot Condition="'$(WindowsKitsRoot)' == ''">$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots', 'KitsRoot81', null, RegistryView.Registry32, RegistryView.Default))</WindowsKitsRoot>
+    <WindowsKitsRoot Condition="'$(WindowsKitsRoot)' == ''">$([MSBuild]::GetRegistryValueFromView('HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows Kits\Installed Roots', 'KitsRoot', null, RegistryView.Registry32, RegistryView.Default))</WindowsKitsRoot>
+    <SignToolPath Condition="'$(SignToolPath)' == '' And '$(Platform)' == 'AnyCPU' and Exists('$(WindowsKitsRoot)bin\x64\signtool.exe')">$(WindowsKitsRoot)bin\x64\</SignToolPath>
+    <SignToolPath Condition="'$(SignToolPath)' == '' And Exists('$(WindowsKitsRoot)bin\$(Platform)\signtool.exe')">$(WindowsKitsRoot)bin\$(Platform)\</SignToolPath>
+    <SignToolPathBin Condition="'$(SignToolPath)' == ''">$([System.IO.Directory]::GetDirectories('$(WindowsKitsRoot)bin',"10.0.*"))</SignToolPathBin>
+    <SignToolPathLen Condition="'$(SignToolPathBin)' != ''">$(SignToolPathBin.Split(';').Length)</SignToolPathLen>
+    <SignToolPathIndex Condition="'$(SignToolPathLen)' != ''">$([MSBuild]::Add(-1, $(SignToolPathLen)))</SignToolPathIndex>
+    <SignToolPathBase Condition="'$(SignToolPathIndex)' != ''">$(SignToolPathBin.Split(';').GetValue($(SignToolPathIndex)))\</SignToolPathBase>
+    <SignToolPath Condition="'$(SignToolPath)' == '' And '$(SignToolPathBase)' != '' And '$(Platform)' == 'AnyCPU'">$(SignToolPathBase)x64\</SignToolPath>
+    <SignToolPath Condition="'$(SignToolPath)' == '' And '$(SignToolPathBase)' != ''">$(SignToolPathBase)$(Platform)\</SignToolPath>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="Assets\Icons\icons_acid-house.png" />
     <None Remove="Assets\Icons\StatusHelp_16x.png" />
@@ -58,10 +53,10 @@
     <None Remove="Assets\Images\u-mod-logo.png" />
     <None Include="..\U-Mod.Web\Server\wwwroot\images\icons\u-mod-logo.png">
       <Pack>True</Pack>
-      <PackagePath></PackagePath>
+      <PackagePath>
+      </PackagePath>
     </None>
   </ItemGroup>
-
   <ItemGroup>
     <COMReference Include="IWshRuntimeLibrary">
       <WrapperTool>tlbimp</WrapperTool>
@@ -73,7 +68,6 @@
       <EmbedInteropTypes>true</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="Assets\Images\menu-new-vegas.jpg">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -81,26 +75,26 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Assets\Fallout\" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="ByteSize" Version="2.0.0" />
-    <PackageReference Include="DotNetZip" Version="1.15.0" />
-    <PackageReference Include="Gehtsoft.PDFFlowLib" Version="2.1.0" />
-    <PackageReference Include="Ookii.Dialogs.Wpf" Version="3.1.0" />
+    <PackageReference Include="ByteSize" Version="2.1.1" />
+    <PackageReference Include="DotNetZip" Version="1.16.0" />
+    <PackageReference Include="Gehtsoft.PDFFlowLib" Version="2.1.1" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="5.0.0" />
     <PackageReference Include="SevenZipExtractor" Version="1.0.15" />
-    <PackageReference Include="SharpCompress" Version="0.28.1" />
-    <PackageReference Include="System.Management" Version="5.0.0" />
-    <PackageReference Include="WpfAnimatedGif" Version="2.0.0" />
+    <PackageReference Include="SharpCompress" Version="0.30.1" />
+    <PackageReference Include="System.Management" Version="6.0.0" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.256001">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Windows.Compatibility" Version="6.0.0" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\U-Mod.Shared\U-Mod.Shared.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="Assets\Icons\icons_acid-house.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -135,7 +129,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
-
   <ItemGroup>
     <None Update="Assets\Fallout\IniFiles\Fallout.ini">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -147,9 +140,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Exec Command="call &quot;$(SignToolPath)signtool.exe&quot; sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /f &quot;D:\Programming\WPF\U-Mod\U-Mod\U-Mod\U-Mod-Key.pfx&quot; /p qweqwe  $(TargetPath)" />
   </Target>
-
 </Project>

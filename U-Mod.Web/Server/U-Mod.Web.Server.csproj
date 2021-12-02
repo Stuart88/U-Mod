@@ -1,32 +1,30 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>U-Mod.Web.Server</RootNamespace>
     <AssemblyName>$(AssemblyName.Replace(' ', '_'))</AssemblyName>
     <UserSecretsId>454b39a2-e55f-449d-8c7a-56817cbb4dd2</UserSecretsId>
   </PropertyGroup>
-
   <ItemGroup>
     <Content Remove="wwwroot\downloads\masterList.json" />
     <Content Remove="wwwroot\downloads\U_Mod-Setup.exe" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.Server" Version="6.0.0" />
+    <PackageReference Include="Microsoft.DotNet.UpgradeAssistant.Extensions.Default.Analyzers" Version="0.3.256001">
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.0" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Client\U-Mod.Web.Client.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="wwwroot\downloads\" />
     <Folder Include="wwwroot\images\backgrounds\" />
     <Folder Include="wwwroot\images\games\fallout\" />
     <Folder Include="wwwroot\images\games\skyrim\" />
   </ItemGroup>
-
   <ItemGroup>
     <Resource Include="wwwroot\images\icons\icons_acid-house.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -44,6 +42,4 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
-
-
 </Project>
