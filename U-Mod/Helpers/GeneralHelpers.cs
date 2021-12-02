@@ -20,18 +20,8 @@ namespace U_Mod.Helpers
                 GamesEnum.Oblivion => Constants.GameNameOblivion,
                 GamesEnum.Fallout => Constants.GameNameFallout3,
                 GamesEnum.NewVegas => Constants.GameNameNewVegas,
+                GamesEnum.Skyrim => Constants.GameNameSkyrim,
                 _ => "",
-            };
-        }
-
-        public static UserDataBase GetUserDataForGame()
-        {
-            return Static.StaticData.CurrentGame switch
-            {
-                GamesEnum.Oblivion => Static.StaticData.UserDataStore.OblivionUserData,
-                GamesEnum.Fallout => Static.StaticData.UserDataStore.FalloutUserData,
-                GamesEnum.NewVegas => Static.StaticData.UserDataStore.NewVegasUserData,
-                _ => throw new NotImplementedException()
             };
         }
 

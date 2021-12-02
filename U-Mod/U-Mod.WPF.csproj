@@ -47,6 +47,7 @@
     <None Remove="Assets\Images\menu-fallout.jpg" />
     <None Remove="Assets\Images\menu-new-vegas.jpg" />
     <None Remove="Assets\Images\menu-oblivion.jpg" />
+    <None Remove="Assets\Images\menu-skyrim.jpg" />
     <None Remove="Assets\Images\Nexus-Login.png" />
     <None Remove="Assets\Images\NexusLoader.gif" />
     <None Remove="Assets\Images\u-mod-logo-2.png" />
@@ -67,6 +68,13 @@
       <Isolated>false</Isolated>
       <EmbedInteropTypes>true</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\menu-skyrim.jpg">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\Images\menu-new-vegas.jpg">

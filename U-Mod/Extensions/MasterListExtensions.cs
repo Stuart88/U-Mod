@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using U_Mod.Shared.Models;
 using U_Mod.Pages.BaseClasses;
+using System.IO;
 
 namespace U_Mod.Extensions
 {
@@ -14,7 +15,7 @@ namespace U_Mod.Extensions
 
         public static List<Mod> GetAvailableModsList(this MasterList m, bool includeEssential, bool includeInstalled = false)
         {
-            UserDataBase user = Helpers.GeneralHelpers.GetUserDataForGame();
+            UserDataBase user = Static.StaticData.UserDataStore.CurrentUserData;
 
             string gameName = Helpers.GeneralHelpers.GetGameName();
 
@@ -31,7 +32,7 @@ namespace U_Mod.Extensions
 
         public static List<Mod> GetEssentialModsList(this MasterList m, bool includeInstalled = false)
         {
-            UserDataBase user = Helpers.GeneralHelpers.GetUserDataForGame();
+            UserDataBase user = Static.StaticData.UserDataStore.CurrentUserData;
 
             string gameName = Helpers.GeneralHelpers.GetGameName();
 
@@ -123,7 +124,7 @@ namespace U_Mod.Extensions
         /// <returns></returns>
         public static List<Mod> GetModListForReinstall(this MasterList m)
         {
-            UserDataBase user = GeneralHelpers.GetUserDataForGame();
+            UserDataBase user = Static.StaticData.UserDataStore.CurrentUserData;
 
             List<Mod> result = new List<Mod>();
 

@@ -85,6 +85,18 @@ namespace U_Mod.Pages.UserControls
             "Outfitting Mythic Dawn Agents"
         };
 
+        private string[] SkyrimMessages = new string[]
+        {
+            "Making dragons angry",
+            "Sharpening swords",
+            "Casting frost",
+            "Burning trolls",
+            "Awakening dragons",
+            "Herding mammoths",
+            "Stealing sweetrolls"
+        };
+
+
         public LoadingMessages()
         {
             Timer.Tick += CycleMessageText;
@@ -99,6 +111,7 @@ namespace U_Mod.Pages.UserControls
                 Shared.Enums.GamesEnum.Oblivion => OblivionMessages[Rand.Next(OblivionMessages.Length)],
                 Shared.Enums.GamesEnum.Fallout => FalloutMessges[Rand.Next(FalloutMessges.Length)],
                 Shared.Enums.GamesEnum.NewVegas => NewVegasMessages[Rand.Next(NewVegasMessages.Length)], 
+                Shared.Enums.GamesEnum.Skyrim => SkyrimMessages[Rand.Next(SkyrimMessages.Length)],
                 Shared.Enums.GamesEnum.Unknown => throw new NotImplementedException(),
                 Shared.Enums.GamesEnum.None => throw new NotImplementedException(),
                 _ => throw new NotImplementedException(),

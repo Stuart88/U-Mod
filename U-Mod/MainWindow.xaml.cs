@@ -45,7 +45,8 @@ namespace U_Mod
             Home,
             Oblivion,
             Fallout3,
-            NewVegas
+            NewVegas,
+            Skyrim
         }
 
         public MainWindow()
@@ -61,6 +62,7 @@ namespace U_Mod
                 new SideMenuOption("Oblivion", false, GamesEnum.Oblivion, MenuItem.Oblivion),
                 new SideMenuOption("Fallout 3", false, GamesEnum.Fallout, MenuItem.Fallout3),
                 new SideMenuOption("New Vegas", false, GamesEnum.NewVegas, MenuItem.NewVegas),
+                new SideMenuOption("Skyrim", false, GamesEnum.Skyrim, MenuItem.Skyrim),
             };
 
             InitializeComponent();
@@ -193,6 +195,7 @@ namespace U_Mod
                     MenuItem.Oblivion => GamesEnum.Oblivion,
                     MenuItem.Fallout3 => GamesEnum.Fallout,
                     MenuItem.NewVegas => GamesEnum.NewVegas,
+                    MenuItem.Skyrim => GamesEnum.Skyrim,
                     _ => GamesEnum.None,
                 };
 
@@ -204,6 +207,7 @@ namespace U_Mod
                     MenuItem.Oblivion => Pages.Pages.GetPage(PagesEnum.MainMenu, true),
                     MenuItem.Fallout3 => Pages.Pages.GetPage(PagesEnum.MainMenu, true),
                     MenuItem.NewVegas => Pages.Pages.GetPage(PagesEnum.MainMenu, true),
+                    MenuItem.Skyrim => Pages.Pages.GetPage(PagesEnum.MainMenu, true),
                     _ => throw new NotImplementedException(),
                 };
             }

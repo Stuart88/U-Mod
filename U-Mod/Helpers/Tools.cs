@@ -30,24 +30,6 @@ namespace U_Mod.Helpers
             LaunchProcess(updateLocation, "InstallUpdate");
         }
 
-        public static void LaunchGame()
-        {
-            string exeName = Static.StaticData.CurrentGame switch
-            {
-                GamesEnum.Oblivion => GeneralHelpers.GetUserDataForGame().IsSteamGame
-                ? "OblivionLauncher.exe"
-                : "obse_loader.exe",
-                var x when
-                    x == GamesEnum.Fallout ||
-                    x == GamesEnum.NewVegas => GeneralHelpers.GetUserDataForGame().IsSteamGame
-                ? "fose_loader.exe"
-                : "fose_loader.exe", //TODO ??
-                _ => throw new NotImplementedException()
-            };
-
-            LaunchProcessInGameFolder(exeName, $"LaunchGame: {GeneralHelpers.GetGameName()}");
-        }
-
         public static void LaunchModManager()
         {
             (string exeName, string args) = Static.StaticData.CurrentGame switch
@@ -55,6 +37,7 @@ namespace U_Mod.Helpers
                 GamesEnum.Oblivion => ("obmm_setup.exe", ""),
                 var x when
                     x == GamesEnum.Fallout ||
+                    x == GamesEnum.Skyrim ||
                     x == GamesEnum.NewVegas => (Path.Combine("Mod Organizer 2-6194-2-4-2-1620741202", "Mod Organizer 2-6194-2-4-2-1620741202.exe"), "")
             };
 
@@ -68,6 +51,7 @@ namespace U_Mod.Helpers
                 GamesEnum.Oblivion => "help/obmm",
                 var x when 
                     x == GamesEnum.Fallout ||
+                    x == GamesEnum.Skyrim ||
                     x == GamesEnum.NewVegas => "help/mod-organizer",
                 _ => throw new NotImplementedException()
             };
@@ -101,6 +85,7 @@ namespace U_Mod.Helpers
                 GamesEnum.Oblivion => "OblivionModManager.exe",
                 var x when
                     x == GamesEnum.Fallout ||
+                    x == GamesEnum.Skyrim ||
                     x == GamesEnum.NewVegas => Path.Combine("GeMM", "fomm.exe")
             };
 
@@ -113,7 +98,8 @@ namespace U_Mod.Helpers
             {
                 GamesEnum.Oblivion => "obmm_setup.exe",
                 var x when 
-                    x == GamesEnum.Fallout || 
+                    x == GamesEnum.Fallout ||
+                    x == GamesEnum.Skyrim ||
                     x == GamesEnum.NewVegas => "FOMM-36901-0-13-21.exe"
             };
 

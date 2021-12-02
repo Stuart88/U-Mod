@@ -67,6 +67,7 @@ namespace U_Mod.Pages.InstallBethesda
                 GamesEnum.Oblivion => (Constants.OblivionModManager, Constants.Obmm, Constants.Obmm, Constants.Obmm),
                 var x when 
                     x == GamesEnum.Fallout || 
+                    x == GamesEnum.Skyrim ||
                     x == GamesEnum.NewVegas => (Constants.ModOrganizer2, Constants.ModOrganizer2, Constants.ModOrganizer2, Constants.ModOrganizer2),
                 _ => throw new NotImplementedException()
             };
@@ -87,9 +88,10 @@ namespace U_Mod.Pages.InstallBethesda
                 GamesEnum.Oblivion => "Oblivion.exe.Backup",
                 GamesEnum.Fallout => "Fallout3.exe.Backup",
                 GamesEnum.NewVegas => "FalloutNV_backup.exe", 
-                _ => ""
+                GamesEnum.Skyrim => "",
+                _ => throw new Exception("CheckPatchInstalled(): game enum unknown!")
             };
-            if (File.Exists(System.IO.Path.Combine(FileHelpers.GetGameFolder(), fileName)))
+            if (string.IsNullOrEmpty(fileName) || File.Exists(System.IO.Path.Combine(FileHelpers.GetGameFolder(), fileName)))
             {
                 _4gbOkInfo.Visibility = Visibility.Visible;
                 this.RamPatchBtn.IsEnabled = false;

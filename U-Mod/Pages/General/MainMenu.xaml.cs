@@ -40,6 +40,7 @@ namespace U_Mod.Pages.General
             GamesEnum.Oblivion => "oblivion",
             GamesEnum.Fallout => "fallout3",
             GamesEnum.NewVegas => "Fallout NV",
+            GamesEnum.Skyrim => "SkyrimSE",
             _ => throw new Exception("No game name found!")
         };
 
@@ -64,6 +65,7 @@ namespace U_Mod.Pages.General
                 GamesEnum.Oblivion => "menu-oblivion.jpg",
                 GamesEnum.Fallout => "menu-fallout.jpg",
                 GamesEnum.NewVegas => "menu-new-vegas.jpg",
+                GamesEnum.Skyrim => "menu-skyrim.jpg",
                 GamesEnum.Unknown => throw new NotImplementedException(),
                 GamesEnum.None => throw new NotImplementedException(),
             };
@@ -142,6 +144,7 @@ namespace U_Mod.Pages.General
                         break;
                     case GamesEnum.Fallout:
                     case GamesEnum.NewVegas:
+                    case GamesEnum.Skyrim:
                         ProcessHelpers.TryToLaunchModOrganizer();
                         break;
                 }
@@ -180,6 +183,7 @@ namespace U_Mod.Pages.General
                 {
                     case GamesEnum.Fallout:
                     case GamesEnum.Oblivion:
+                    case GamesEnum.Skyrim:
                         ShowLaunchButtonAndModOrganizerWarning();
                         break;
                     case GamesEnum.NewVegas:
@@ -196,6 +200,7 @@ namespace U_Mod.Pages.General
                 GamesEnum.Oblivion => Static.Constants.Obmm,
                 var x when
                     x == GamesEnum.Fallout ||
+                    x == GamesEnum.Skyrim ||
                     x == GamesEnum.NewVegas => Static.Constants.ModOrganizer2,
                 _ => throw new NotImplementedException()
             };
@@ -255,7 +260,7 @@ namespace U_Mod.Pages.General
 
                     break;
 
-                case GamesEnum.Fallout:
+                default:
                     break;
             }
         }

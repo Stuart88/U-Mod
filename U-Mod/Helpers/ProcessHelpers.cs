@@ -159,8 +159,8 @@ namespace U_Mod.Helpers
 
         public static string GetModOrganizerExePath()
         {
-            string defaultPath = Path.Combine("C:", "Modding", "MO2", "ModOrganizer.exe"); ;
-            if (File.Exists(defaultPath))
+            string defaultPath = Path.Combine("C:", "Modding", "MO2", "ModOrganizer.exe");
+            if (File.Exists(defaultPath) && false)
             {
                 return defaultPath;
             }

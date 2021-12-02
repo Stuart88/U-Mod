@@ -39,6 +39,7 @@ namespace U_Mod.Helpers
                 GamesEnum.Oblivion => string.IsNullOrEmpty(Static.StaticData.AppData.OblivionGameFolder) ? "" : Path.Combine(Static.StaticData.AppData.OblivionGameFolder, Static.Constants.UMod),
                 GamesEnum.Fallout => string.IsNullOrEmpty(Static.StaticData.AppData.FalloutGameFolder) ? "" : Path.Combine(Static.StaticData.AppData.FalloutGameFolder, Static.Constants.UMod),
                 GamesEnum.NewVegas => string.IsNullOrEmpty(Static.StaticData.AppData.FalloutNewVegasGameFolder) ? "" : Path.Combine(Static.StaticData.AppData.FalloutNewVegasGameFolder, Static.Constants.UMod),
+                GamesEnum.Skyrim => string.IsNullOrEmpty(Static.StaticData.AppData.SkyrimGameFolder) ? "" : Path.Combine(Static.StaticData.AppData.SkyrimGameFolder, Static.Constants.UMod),
                 _ => ""
             };
         }
@@ -82,6 +83,7 @@ namespace U_Mod.Helpers
                 GamesEnum.Oblivion => Static.StaticData.AppData.OblivionGameFolder,
                 GamesEnum.Fallout => Static.StaticData.AppData.FalloutGameFolder,
                 GamesEnum.NewVegas => Static.StaticData.AppData.FalloutNewVegasGameFolder,
+                GamesEnum.Skyrim => Static.StaticData.AppData.SkyrimGameFolder,
                 _ => ""
             };
         }
@@ -93,6 +95,7 @@ namespace U_Mod.Helpers
                 case GamesEnum.Oblivion: Static.StaticData.AppData.OblivionGameFolder = path; break;
                 case GamesEnum.Fallout: Static.StaticData.AppData.FalloutGameFolder = path; break;
                 case GamesEnum.NewVegas: Static.StaticData.AppData.FalloutNewVegasGameFolder = path; break;
+                case GamesEnum.Skyrim: Static.StaticData.AppData.SkyrimGameFolder = path; break;
                 default: throw new NotImplementedException($"AppData does not have GameFolder property for {Enum.GetName(typeof(GamesEnum), Static.StaticData.CurrentGame)}.");
             }
         }

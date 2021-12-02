@@ -147,9 +147,10 @@ namespace U_Mod.Models
                 case GamesEnum.NewVegas:
                     //4gb patch creates "...exe.backup" files so check that those are gone
                     return !d.GetFiles().Any(f => f.FullName.ToLower().Contains("exe.backup"));
-
+                case GamesEnum.Skyrim:
+                    return !d.GetFiles().Any(f => f.FullName.ToLower().Contains("skse64_loader"));//SKSE should not exist in vanilla versin
                 default:
-                    throw new Exception("BackupRestorer.cs - CheckReinstallComplete(). There is no handler for this game!");
+                    throw new Exception("BackupRestorer.cs - CheckReinstallComplete(). There is no handler for this game!"); 
             }
            
         }

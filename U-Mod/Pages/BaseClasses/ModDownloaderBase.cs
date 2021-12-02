@@ -74,7 +74,7 @@ namespace U_Mod.Pages.BaseClasses
             NextPage = PagesEnum.PatchAndModManager;
             PreviousPage = PagesEnum.ManualDownload;
 
-            if (GeneralHelpers.GetUserDataForGame().IsUpdating)
+            if (Static.StaticData.UserDataStore.CurrentUserData.IsUpdating)
             {
                 this.ModsToDownload = Static.StaticData.UserDataStore.CurrentUserData.SelectedToInstall;
             }
@@ -298,7 +298,7 @@ namespace U_Mod.Pages.BaseClasses
 
         public void ProcessFiles()
         {
-            UserDataBase user = GeneralHelpers.GetUserDataForGame();
+            UserDataBase user = Static.StaticData.UserDataStore.CurrentUserData;
 
             Thread thread = new Thread(() =>
             {

@@ -43,12 +43,19 @@
         <Blazorise.Button Type="ButtonType.Link" Class="umod-btn" To="@Constants.Pages.DevTool">Dev Tool</Blazorise.Button>
         <br />
         <br />
+        <Blazorise.Button Class="umod-btn" Clicked="GetInstallerBeta" >Installer Beta</Blazorise.Button>
+        <br />
+        <br />
         <Blazorise.Button Class="umod-btn" Clicked="OnLogout">Logout</Blazorise.Button>
     }
 
 </div>
 
 @code {
+
+    [Inject]
+    IJSRuntime ThisJsRuntime { get; set; }
+
     public bool LoggedIn { get; set; } = false;
 
     public string Username { get; set; }
@@ -140,5 +147,10 @@
         {
             this.StateHasChanged();
         }
+    }
+
+    async void GetInstallerBeta()
+    {
+        await ThisJsRuntime.InvokeVoidAsync("getFile", "U_Mod-Beta.zip");
     }
 }

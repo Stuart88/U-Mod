@@ -12,6 +12,7 @@ namespace U_Mod.Models
         public string OblivionGameFolder { get; set; } = "";
         public string FalloutGameFolder { get; set; } = "";
         public string FalloutNewVegasGameFolder { get; set; } = "";
+        public string SkyrimGameFolder { get; set; } = "";
         public string NexusLoginToken { get; set; } = "";
         public Guid NexusUuid { get; set; } = Guid.Empty;
     }

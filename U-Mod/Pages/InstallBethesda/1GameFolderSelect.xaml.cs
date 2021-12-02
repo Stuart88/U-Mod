@@ -172,7 +172,7 @@ namespace U_Mod.Pages.InstallBethesda
             bool finalStepOk = true;
 
             // Game specific steps
-            if (Static.StaticData.CurrentGame == Shared.Enums.GamesEnum.Fallout) // TODO NOT SURE
+            if (Static.StaticData.CurrentGame == Shared.Enums.GamesEnum.Fallout) 
             {
                 finalStepOk = Helpers.GameSpecific.FalloutTools.CopyCustomIniFiles();
             }
@@ -226,6 +226,7 @@ namespace U_Mod.Pages.InstallBethesda
                     };
                 default:
                     return new string[0];
+                    //TODO Skyrim DLC required? Anniversary edition?
             }
         }
 
@@ -256,6 +257,14 @@ namespace U_Mod.Pages.InstallBethesda
                         Path.Combine(this.SelectedGameFolder,"FalloutNV.exe"),
                         Path.Combine(this.SelectedGameFolder, "Data", "FalloutNV.esm"),
                     };
+
+                case Shared.Enums.GamesEnum.Skyrim:
+                    return new string[]
+                    {
+                        Path.Combine(this.SelectedGameFolder,"SkyrimSE.exe"),
+                        Path.Combine(this.SelectedGameFolder, "Data", "Skyrim.esm"),
+                    };
+
                 default:
                     return new string[0];
             }

@@ -13,7 +13,7 @@ namespace U_Mod.Helpers
 {
     public static class ModHelpers
     {
-        private static UserDataBase User => GeneralHelpers.GetUserDataForGame();
+        private static UserDataBase User => Static.StaticData.UserDataStore.CurrentUserData;
         public static bool IsInstalled(Mod m)
         {
             return User.InstalledModIds.Any(mod => mod.Id == m.Id && mod.Version == m.Version);
@@ -66,16 +66,13 @@ namespace U_Mod.Helpers
         /// <returns></returns>
         public static bool IsUpdate(Mod mod)
         {
-            var user = GeneralHelpers.GetUserDataForGame();
-            return user.InstalledModIds.Any(intalledMod => intalledMod.Id == mod.Id && intalledMod.Version != mod.Version);
+            return User.InstalledModIds.Any(intalledMod => intalledMod.Id == mod.Id && intalledMod.Version != mod.Version);
         }
 
         public static bool UserCanInstall(Mod m)
         {
-            UserDataBase u = GeneralHelpers.GetUserDataForGame();
-
-            return (m.IsFullInstallOnly && u.CanFullInstall || !m.IsFullInstallOnly)
-            && ((m.InstallProfile & u.InstallProfile) == u.InstallProfile
+            return (m.IsFullInstallOnly && User.CanFullInstall || !m.IsFullInstallOnly)
+            && ((m.InstallProfile & User.InstallProfile) == User.InstallProfile
                 || (m.InstallProfile & InstallProfileEnum.NoData) == InstallProfileEnum.NoData);
         }
 
