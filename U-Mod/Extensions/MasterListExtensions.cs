@@ -1,4 +1,4 @@
-﻿using U_Mod.Helpers;
+using U_Mod.Helpers;
 using U_Mod.Models;
 using System;
 using System.Collections.Generic;
