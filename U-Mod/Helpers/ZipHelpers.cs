@@ -133,14 +133,14 @@ namespace U_Mod.Helpers
                         //this first check accounts for folders in folders, and the rar zip-in-zip situation
                         foreach (var entry in zip.Entries)
                         {
-                            if (modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(entry.FullName.ToLower().Replace('/', '\\')) || c.FileName == "*"))
+                            if (modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(entry.FullName.ToLower().Replace('/', '\\')) || c.FileName.EndsWith("*")))
                             {
                                 message = "";
                                 return true;
                             }
                         }
                         //Now just check against all entries
-                        if (zip.Entries.Any(e => modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(e.Name.ToLower()) || c.FileName == "*")))
+                        if (zip.Entries.Any(e => modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(e.Name.ToLower()) || c.FileName.EndsWith("*"))))
                         {
                             message = "";
                             return true;
@@ -162,7 +162,7 @@ namespace U_Mod.Helpers
 
                         while (reader.MoveToNextEntry())
                         {
-                            if (reader.Entry.Key.Replace('/', '\\').Split('\\').Any(e => modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(e.ToLower()) || c.FileName == "*")))
+                            if (reader.Entry.Key.Replace('/', '\\').Split('\\').Any(e => modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(e.ToLower()) || c.FileName.EndsWith("*"))))
                             {
                                 message = "";
                                 return true;
@@ -177,7 +177,7 @@ namespace U_Mod.Helpers
                     {
                         message = "On 7z"; 
                         using var archive = new ArchiveFile(zipPath);
-                        if (archive.Entries.Any(e => modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(e.FileName.ToLower()) || c.FileName == "*")))
+                        if (archive.Entries.Any(e => modZipFile.Content.Any(c => c.FileName.ToLower().StartsWith(e.FileName.ToLower()) || c.FileName.EndsWith("*"))))
                         {
                             message = "";
                             return true;

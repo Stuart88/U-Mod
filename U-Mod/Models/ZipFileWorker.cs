@@ -372,7 +372,7 @@ namespace U_Mod.Models
                     cleaning[i] = cleaning[i].Trim();
                     cleanedFilepath = Path.Combine(cleanedFilepath, cleaning[i]);
 
-                    //May need to unzip another zip file along the way..
+                    // May need to unzip another zip file along the way..
                     // e.g. if extraction location is folder/zippedFolder.zip/otherFolder/file.ext
                     if (FileHelpers.IsZip(cleanedFilepath))
                     {
@@ -402,7 +402,7 @@ namespace U_Mod.Models
                     string targetFilePath = Path.Combine(targetFolder, fileName);
                     MoveFile(Path.Combine(tempExtractedFolder, cleanedFilepath), targetFilePath);
                 }
-                else if (tempPath.EndsWith("\\*"))
+                else if (tempPath.EndsWith("\\*") || tempPath.EndsWith("**"))
                 {
                     // it's a folder marked to take all from within
                     tempPath = tempPath.Substring(0, tempPath.Length - 2);
@@ -411,6 +411,11 @@ namespace U_Mod.Models
                     {
                         string targetDirectory = Path.Combine(targetFolder, dir.Name);
                         MoveDirectory(dir.FullName, targetDirectory);
+                    }
+                    foreach (var file in di.GetFiles())
+                    {
+                        string targetDirectory = Path.Combine(targetFolder, file.Name);
+                        MoveFile(file.FullName, targetDirectory);
                     }
                 }
                 else if (Directory.Exists(tempPath))
