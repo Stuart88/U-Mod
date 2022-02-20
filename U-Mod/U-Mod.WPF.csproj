@@ -6,7 +6,7 @@
     <UseWPF>true</UseWPF>
     <Configurations>Debug;Release;BETA;DEV</Configurations>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>U-Mod-Key-2.pfx</AssemblyOriginatorKeyFile>
     <DelaySign>false</DelaySign>
     <AssemblyName>U-Mod</AssemblyName>

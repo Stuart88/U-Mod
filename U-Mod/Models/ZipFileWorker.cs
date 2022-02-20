@@ -402,15 +402,24 @@ namespace U_Mod.Models
                     string targetFilePath = Path.Combine(targetFolder, fileName);
                     MoveFile(Path.Combine(tempExtractedFolder, cleanedFilepath), targetFilePath);
                 }
+                else if (tempPath.EndsWith("\\*"))
+                {
+                    // it's a folder marked to take all from within
+                    tempPath = tempPath.Substring(0, tempPath.Length - 2);
+                    DirectoryInfo di = new DirectoryInfo(tempPath);
+                    foreach(var dir in di.GetDirectories())
+                    {
+                        string targetDirectory = Path.Combine(targetFolder, dir.Name);
+                        MoveDirectory(dir.FullName, targetDirectory);
+                    }
+                }
                 else if (Directory.Exists(tempPath))
                 {
                     // it's a folder
-
                     //e.g.  if tempPath is folder/subFolder/Textures
                     //      we're moving it to Oblivion/Data/Textures ... so get "Textures" from end of tempPath and append to targetFolder path.
                     string targetDirectory = Path.Combine(targetFolder, tempPath.Split('\\').Last());
-                    FileHelpers.MoveDirectory(tempPath, targetDirectory);
-                    Directory.Delete(tempPath, true);
+                    MoveDirectory(tempPath, targetDirectory);
                 }
                 else
                 {
@@ -418,6 +427,13 @@ namespace U_Mod.Models
                     this.ExtractResult.Result = FileExtractResultEnum.Fail;
                     this.ExtractResult.Message = $"Given path is not a known file or directory! {tempPath}";
                     return;
+                }
+
+                void MoveDirectory(string _tempPath, string _tagetDirectory)
+                {
+                    
+                    FileHelpers.MoveDirectory(_tempPath, _tagetDirectory);
+                    Directory.Delete(_tempPath, true);
                 }
 
                 void MoveFile(string source, string target)
