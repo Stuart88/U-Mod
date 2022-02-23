@@ -125,7 +125,8 @@
                                 <ul>
                                     @foreach (var c in f.Content.OrderBy(c => c.InstallOrder))
                                     {
-                                        <li class="modlistContentfileName">@c.FileName</li>
+                                        string allContents = "[all contents]";
+                                        <li class="modlistContentfileName">@c.FileName.Replace("**", allContents).Replace("*", allContents)</li>
                                     }
                                 </ul>
                             </div>
