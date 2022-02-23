@@ -521,7 +521,10 @@ namespace U_Mod.Pages.BaseClasses
             foreach (var m in this.ModsToDownload)
             {
                 if (m.Mod.Files.All(f => !string.IsNullOrEmpty(f.DirectDownloadUrl)))
+                {
                     m.Index = int.MaxValue; // these are collapsed in XAML view, so put to end of list...
+                    m.IsDirectDownloadOnly = true;
+                }
                 else
                     m.Index = ++index;
             }
