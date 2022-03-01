@@ -13,5 +13,17 @@ namespace U_Mod.Shared.Helpers
         {
             return Enum.GetValues(typeof(T)).Cast<T>().ToList();
         }
+
+        public static string GetGameName(GamesEnum game)
+        {
+            return game switch
+            {
+                GamesEnum.Oblivion => Constants.Constants.GameNameOblivion,
+                GamesEnum.Fallout => Constants.Constants.GameNameFallout3,
+                GamesEnum.NewVegas => Constants.Constants.GameNameNewVegas,
+                GamesEnum.Skyrim => Constants.Constants.GameNameSkyrim,
+                _ => "",
+            };
+        }
     }
 }

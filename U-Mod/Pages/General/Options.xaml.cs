@@ -33,7 +33,7 @@ namespace U_Mod.Pages.General
             InitializeComponent();
 
             ReinstallBtn.Content = $"Reinstall {GeneralHelpers.GetGameName()}";
-            ReinstallBtn.IsEnabled = Static.StaticData.UserDataStore.CurrentUserData?.InstallationComplete ?? false;
+            ReinstallBtn.IsEnabled = Static.StaticData.UserDataStore.CurrentUserData.InstalledModIds.Count > 0;
 
             ReinstallBtn.Visibility = Static.StaticData.CurrentGame == Shared.Enums.GamesEnum.None
                 ? Visibility.Collapsed

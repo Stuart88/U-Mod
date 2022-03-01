@@ -1,10 +1,27 @@
 ﻿
+@page "/help/mod-organizer/{GameOption:int}"
 @page "/help/mod-organizer"
 
 <div class="umod-main-body">
     <h2>Help - Mod Organizer 2</h2>
     <hr />
     <h5 style="text-decoration:underline">Getting Started</h5>
+    <p>
+        Instructions for:
+        <Select TValue=GamesEnum @bind-SelectedValue=this.SelectedGame Style="max-width:300px">
+            <SelectItem Value=GamesEnum.None> - Select Game - </SelectItem>
+            <SelectItem Value=GamesEnum.Fallout> Fallout 3</SelectItem>
+            <SelectItem Value=GamesEnum.NewVegas> New Vegas </SelectItem>
+            <SelectItem Value=GamesEnum.Skyrim> Skyrim </SelectItem>
+        </Select>
+    </p>
+
+    <hr/>
+
+
+    @if(this.SelectedGame != GamesEnum.None)
+    {
+    <h3>@U_Mod.Shared.Helpers.Functions.GetGameName(this.SelectedGame)</h3>
     <p>
         First install Mod Organizer, launch it and follow the wizard for creating a new instance.
     </p>
@@ -32,18 +49,23 @@
         <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer1.jpg")" />
     </div>
 
-    <div class="mod-organizer-step">
+        @if(this.SelectedGame != GamesEnum.Skyrim)
+        {
+             <div class="mod-organizer-step">
         <p>
             Now ensure archive invalidation is set to Automatic
         </p>
         <p>
-            Do this via Tools > Profiles > Then ensure 'Automatic Archive Invalidation' is checked
+            Do this via Tools > Profiles > then ensure 'Automatic Archive Invalidation' is checked
         </p>
 
         <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer1-2.jpg")" />
     </div>
+        }
 
-    <div class="mod-organizer-step" style="background: #a04d13;" id="mcm-help">
+        @if(this.SelectedGame == GamesEnum.NewVegas)
+        {
+             <div class="mod-organizer-step" style="background: #a04d13;" id="mcm-help">
         <h5>
             FOR NEW VEGAS INSTALLS ONLY
         </h5>
@@ -72,6 +94,7 @@
             <span style="color:var(--yellow)">The Mod Configuration Menu</span> should now appear on the left hand pane in the main Mod Organizer window.
         </p>
     </div>
+        }
 
     <div class="mod-organizer-step">
         <p>
@@ -122,25 +145,57 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Fallout 3</td>
-                    <td><span>FOSE</span></td>
-                </tr>
-                <tr>
-                    <td>New Vegas</td>
-                    <td><span>NVSE</span></td>
-                </tr>
-                 <tr>
-                    <td>Skyrim</td>
-                    <td><span>SKSE</span></td>
-                </tr>
-            </tbody>
+                @if(this.SelectedGame == GamesEnum.Fallout)
+                {
+                    <tr>
+                        <td>Fallout 3</td>
+                        <td><span>FOSE</span></td>
+                    </tr>
+                }
+                @if(this.SelectedGame == GamesEnum.NewVegas)
+                {
+                    <tr>
+                        <td>New Vegas</td>
+                        <td><span>NVSE</span></td>
+                    </tr>
+                }
+                @if(this.SelectedGame == GamesEnum.Skyrim)
+                {
+                    <tr>
+                        <td>Skyrim</td>
+                        <td><span>SKSE</span></td>
+                    </tr>
+                }
+                </tbody>
         </table>
 
         <Image Class="img-fluid" Source="@ServerHelpers.ImageSrcString("games/fallout/mod-organizer4.jpg")" />
     </div>
+    }
 </div>
 
 @code {
 
+    [Parameter]
+    public int GameOption { get; set; } = (int)GamesEnum.None;
+
+    private GamesEnum SelectedGame { get; set; } = GamesEnum.None;
+
+    private int[] AvailableOptions { get; set; } = new int[] 
+    { 
+        (int)GamesEnum.None, 
+        (int)GamesEnum.Fallout, 
+        (int)GamesEnum.NewVegas, 
+        (int)GamesEnum.Skyrim 
+    };
+
+    protected override void OnParametersSet()
+    {
+
+        this.SelectedGame = !this.AvailableOptions.Contains(this.GameOption)
+            ? GamesEnum.None
+            :(GamesEnum)this.GameOption;
+
+        base.OnParametersSet();
+    }
 }

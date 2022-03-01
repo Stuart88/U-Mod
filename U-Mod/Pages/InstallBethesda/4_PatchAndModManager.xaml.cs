@@ -96,6 +96,9 @@ namespace U_Mod.Pages.InstallBethesda
                 _4gbOkInfo.Visibility = Visibility.Visible;
                 this.RamPatchBtn.IsEnabled = false;
                 this.PatchInstalled = true;
+
+                Static.StaticData.UserDataStore.CurrentUserData.On4GbRamPatch = true;
+                Static.StaticData.SaveAppData();
             }
         }
 

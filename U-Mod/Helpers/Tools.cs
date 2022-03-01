@@ -52,7 +52,7 @@ namespace U_Mod.Helpers
                 var x when 
                     x == GamesEnum.Fallout ||
                     x == GamesEnum.Skyrim ||
-                    x == GamesEnum.NewVegas => "help/mod-organizer",
+                    x == GamesEnum.NewVegas => $"help/mod-organizer/{(int)x}",
                 _ => throw new NotImplementedException()
             };
             
