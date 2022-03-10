@@ -39,10 +39,10 @@
                 </td>
             </tr>
         </table>*@
-        <table width="100%">
+       @* <table width="100%">
             <tr>
                 <td width="40px">
-                    <Tooltip Text="@(GetDlcTooltip())"
+                    <Tooltip Text="@DlcTooltip" 
                              Placement="TooltipPlacement.Right">
                         <Blazorise.Icon IconStyle="IconStyle.Regular" Name="IconName.QuestionCircle"></Blazorise.Icon>
                     </Tooltip>
@@ -53,7 +53,7 @@
                     </Switch>
                 </td>
             </tr>
-        </table>
+        </table>*@
         @*<table width="100%">
                 <tr>
                     <td width="40px">
@@ -158,6 +158,7 @@
     U_Mod.Shared.Enums.GamesEnum GameEnum { get; set; }
     public List<string> Games { get; set; } = new List<string>();
     string selectedGame { get; set; }
+    string DlcTooltip => GetDlcTooltip();
     void OnGameSelected(string g)
     {
         selectedGame = g;
@@ -167,9 +168,9 @@
         System.Diagnostics.Debug.WriteLine($"Select {g}");
 
         this.GameMods = this.MasterList.Games
-        .FirstOrDefault(g => g.Game == GameEnum)?
-        .Mods.ToList()
-        ?? new List<Mod>();
+                            .FirstOrDefault(g => g.Game == GameEnum)?
+                            .Mods.ToList() 
+                            ?? new List<Mod>();
 
         modsFilterQuery = "";
 
@@ -259,7 +260,7 @@
         {
             Console.WriteLine(e);
         }
-
+        
         return GameEnum switch
         {
             GamesEnum.Oblivion => " Oblivion DLC:\n- Battlehorn Castle\n- Shivering Isles\n- Knights of the Nine\n- Frost Crag\n- Horse Armor\n- Mehrunes Razor\n- Orrery\n- Spell Tomes\n- Thieves Den\n- Vile Lair",
